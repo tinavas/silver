@@ -5,6 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
+		"cartalyst/sentry": "2.1.*",
 		"laravel/framework": "4.2.*"
 	},
 	"autoload": {
