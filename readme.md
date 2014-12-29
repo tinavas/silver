@@ -1,7 +1,7 @@
-## Silver Design Billing and Monitoring
+# Silver Design Billing and Monitoring
 
 
-#Steps
+##Steps
 <ul>
 <li>1.) run composer install in cmd</li>
 <li>2.) run install.bat (one time running only)</li>
@@ -11,12 +11,12 @@
 </ul>
 Mga alagad, dito natin ilalagay ung mga tasks natin for this project. :))
 
-#Roles:
+##Roles:
 
-# Architect 
+## Architect 
 
 Taga gawa ng quotation saka taga approve ng quotation ng kapwa nya architect
 
-# Manager 
+## Manager 
 
 Nakakapag download ng quotation para ibigay sa client
