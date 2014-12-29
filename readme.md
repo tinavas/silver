@@ -1,8 +1,17 @@
 ## Silver Design Billing and Monitoring
 
+
+#Steps
+
+1.) run composer install in cmd
+2.) run install.bat (one time running only)
+3.) open mysql to check usernames
+4.) password on all user accounts is "test"
+5.) go develop the fucking shit
+
 Mga alagad, dito natin ilalagay ung mga tasks natin for this project. :))
 
-Roles:
+#Roles:
 
 # Architect 
 
@@ -10,4 +19,4 @@ Taga gawa ng quotation saka taga approve ng quotation ng kapwa nya architect
 
 # Manager 
 
-nakakapag download ng quotation para ibigay sa client
+Nakakapag download ng quotation para ibigay sa client
