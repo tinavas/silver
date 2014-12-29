@@ -11,11 +11,5 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
-Route::get('/index',function()
-{
-	return View::make('index');
-});
+Route::get('/','LoginController@showLogin');
+Route::get('/index','LoginController@showLogin');
