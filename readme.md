@@ -2,13 +2,13 @@
 
 
 #Steps
-
-1.) run composer install in cmd
-2.) run install.bat (one time running only)
-3.) open mysql to check usernames
-4.) password on all user accounts is "test"
-5.) go develop the fucking shit
-
+<ul>
+<li>1.) run composer install in cmd</li>
+<li>2.) run install.bat (one time running only)</li>
+<li>3.) open mysql to check usernames</li>
+<li>4.) password on all user accounts is "test"</li>
+<li>5.) go develop the fucking shit</li>
+</ul>
 Mga alagad, dito natin ilalagay ung mga tasks natin for this project. :))
 
 #Roles:
