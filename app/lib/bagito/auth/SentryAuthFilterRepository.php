@@ -1,8 +1,8 @@
-<?php namespace Bagito\Auth\AuthFilter;
+<?php namespace Bagito\Auth;
 
 use Sentry;
 
-class AuthFilterImpl implements AuthFilter{
+class AuthFilterImpl implements AuthFilterRepository{
 	public function architect()
 	{
 		if(Sentry::check())
