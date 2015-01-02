@@ -5,6 +5,9 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
+		"cartalyst/sentry": "2.1.*",
+		 "fzaninotto/faker": "1.5.*@dev",
+		"way/generators" : "~2.0",
 		"laravel/framework": "4.2.*"
 	},
 	"autoload": {
@@ -14,7 +17,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"app/lib"
 		]
 	},
 	"scripts": {

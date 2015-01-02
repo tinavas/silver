@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -47,3 +48,16 @@
     </script>
 </body>
 </html>
+=======
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	@yield('head')
+</head>
+<body>
+	@yield('content')
+	
+</body>
+</html>
+>>>>>>> 32d4b13d9db7c5018df242b107b70cbb2c97fc40
