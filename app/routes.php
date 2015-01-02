@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', function()
+$template = 'template';
+Route::get('/', function() use ($template)
 {
-	return View::make('hello');
+	View::name($template, 'template');
+	$layout = View::of('template');
+	return $layout->nest('content', 'template');
 });
