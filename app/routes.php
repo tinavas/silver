@@ -12,6 +12,9 @@
 */
 
 
+Route::get('/','LoginController@showLogin');
+Route::get('/index','LoginController@showLogin');
+
 $template = 'template';
 Route::get('/', function() use ($template)
 {
@@ -19,7 +22,3 @@ Route::get('/', function() use ($template)
 	$layout = View::of('template');
 	return $layout->nest('content', 'template');
 });
-
-Route::get('/','LoginController@showLogin');
-Route::get('/index','LoginController@showLogin');
-
