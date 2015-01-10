@@ -17,6 +17,16 @@
     <section class="header">
         <div class="head-container">
             <ul>
+                <li><a href="#">Message</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-wrap">
+        <div class="sidenavigation">
+            <ul>
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Users</a></li>
                 <li><a href="#">Materials</a></li>
@@ -24,13 +34,12 @@
                 <li><a href="#">Returns</a></li>
                 <li><a href="#">Inventory</a></li>
                 <li><a href="#">Archives</a></li>
-                <li><a href="#">Account</a></li>
             </ul>
         </div>
-    </section>
-
-    <section class="content-wrap">
-        
+        <div class="main-content-wrap">
+            <h4><span></span><a href="#">Create New User</a></h4>
+            <div class="main-content"></div>
+        </div>
     </section>
     
     <section class="footer">

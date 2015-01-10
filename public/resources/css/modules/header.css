@@ -1,6 +1,0 @@
-section.header .head-container { background-color: #1a1919; }
-section.header .head-container:after { content: ' '; display: block; clear: both; }
-section.header .head-container ul { list-style: none; color: #fff; margin: 0;}
-section.header .head-container ul > li { float: left; padding: 10px 20px; border-right: 1px solid #373737}
-section.header .head-container ul > li:last-child { float: right; border: none;}
-section.header .head-container ul > li > a {color: #fff; text-transform: uppercase;}
