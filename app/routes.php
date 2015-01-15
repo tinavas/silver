@@ -12,8 +12,8 @@
 */
 
 
-Route::get('/','LoginController@showLogin');
-Route::get('/index','LoginController@showLogin');
+Route::get('/login','LoginController@showLogin');
+Route::get('/login','LoginController@showLogin');
 
 $template = 'template';
 Route::get('/', function() use ($template)
