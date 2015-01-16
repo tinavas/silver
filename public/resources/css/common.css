@@ -1,0 +1,23 @@
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.view-box {
+    background: #FFF;
+    padding: 0.9375rem;
+    -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+    -o-box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+}
+
+.view-box table {
+    margin: 0 auto;
+    width:100%;
+    border: 0; 
+}
+
+a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button {
+    font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

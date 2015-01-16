@@ -9,47 +9,88 @@
     <title>Silver Design</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
+   <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+   {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
+    {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
-
+    @yield('head')
 </head>
-<body>
-    <section class="header">
-        <div class="head-container">
-            <ul>
-                <li><a href="#">Message</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
-    </section>
+<body>  
+            <div class="medium-2 column no-padding left">
+              <div class="user-info-container">
+                  <div class="avatar-container">
+                    {{HTML::image('resources/images/Pic.jpg');}}
+                  </div>
+                   <h6 class="title name no-margin">
+                        <strong>Patrick James G. Lim</strong>
+                    </h6>
 
-    <section class="content-wrap">
-        <div class="sidenavigation">
-            <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Users</a></li>
-                <li><a href="#">Materials</a></li>
-                <li><a href="#">Purchasing</a></li>
-                <li><a href="#">Returns</a></li>
-                <li><a href="#">Inventory</a></li>
-                <li><a href="#">Archives</a></li>
-            </ul>
-        </div>
-        <div class="main-content-wrap">
-            <h4><span></span><a href="#">Create New User</a></h4>
-            <div class="main-content"></div>
-        </div>
-    </section>
-    
-    <section class="footer">
+                    <h6 class="title user-type no-margin">
+                        Administrator
+                    </h6>
+              </div>
+              
+               <div class="sidenav-container">
+                   
+                    <ul class="side-nav">
+                      <li>
+                          <a href="#">
+                          <i class="fa fa-pie-chart fa-2x"></i> 
+                          <span class="title">Dashboard</span>
+                          </a>
+                      </li>
+                      <li>
+                      <a href="#">
+                          <i class="fa fa-user fa-2x"></i> 
+                          <span class="title">Users</span>
+                          </a>
+                      </li>
+                      <li><a href="#">
+                      <i class="fa fa-building fa-2x"> </i> 
+                          <span class="title">Projects</span>
+                      </a>
+                      </li>
+                    </ul>
+            
+               </div>
+                
+            </div>
+            
+            <div class="medium-10 column no-padding right">
+                
+                <a href="#" class="icon logout">
+                    <i class="fa fa-power-off"></i>
+                </a>
+                 <a href="#" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
+                <a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>
+                </a>
+                
+            </div>
+            
+        <!-- Main Content Goes Here --> 
+        <section class="content">
+            <div class="medium-10 column">
+                @yield('content')
+            </div>
+        </section>     
+        <!-- End of Main Content -->
         
-    </section>
+    <div class="row">
+        <section class="footer">
+        
+        </section>
+    </div>
+    
+
+    
+    
 
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/jquery.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.js')}}
+    
     
     <script>
         $(document).foundation();

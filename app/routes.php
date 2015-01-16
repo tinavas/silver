@@ -14,7 +14,6 @@
 
 Route::get('/login','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
-
 $template = 'template';
 Route::get('/', function() use ($template)
 {
@@ -22,3 +21,5 @@ Route::get('/', function() use ($template)
 	$layout = View::of('template');
 	return $layout->nest('content', 'template');
 });
+
+Route::get('admin/users', function(){return View::make('admin.users.view');});

@@ -1,0 +1,141 @@
+body, html {
+  height: 100%;
+}
+
+body {
+    background: #f0f0f0;
+}
+
+.no-margin {
+    margin: 0;
+}
+/* LEFT */
+.left {
+    background: #1B1B1B;
+    height:100%;
+}
+.user-info-container {
+background: #446CB3;
+    height: 84px;
+}
+
+.left .name {
+    padding-top: 10px;
+}
+.left .title {
+    font-size: 14px !important;
+    color: #fff;
+}
+
+.avatar-container {
+    max-width: 64px;
+    margin: 10px;
+    float:left;
+    -webkit-border-radius: 32px;
+    -moz-border-radius: 32px;
+    -o-border-radius: 32px;
+    border-radius: 32px;
+    overflow: hidden;
+}
+    
+.header .title{
+    margin-bottom: 0;
+}
+
+.side-nav li:hover {
+    background:#2b2b2b;
+    border-left: 5px solid #dc8545;
+    -webkit-transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -o-transition: ease 0.3s;
+    transition: ease 0.3s;
+}
+
+.side-nav li:hover a i, .side-nav li:hover a .title {
+    color: #FFF;
+    -webkit-transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -o-transition: ease 0.3s;
+    transition: ease 0.3s;
+}
+.side-nav li a {
+    position:relative;
+    
+}
+
+.side-nav li a i {
+    color: #a8a8a8;
+}
+
+.side-nav li a .title {
+    position: absolute;
+    left:60px;
+    top:20px;
+    color: #a8a8a8;
+}
+/* RIGHT */
+
+.right {
+    background: #FFF;
+    height: 84px;
+}
+
+.right i{
+    text-align: center;
+    font-size: 32px;
+    padding: 26px 15px;
+    float: right;
+    color: #8f8f8f;
+    -webkit-transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -o-transition: ease 0.3s;
+    transition: ease 0.3s;
+}
+
+.right i:hover {
+    color: #2b2b2b;
+    transform: translateY(-10px);
+}
+
+.right a i h6 {
+    background: #446CB3;
+    padding: 5px;
+    font-size: 12px;
+    color: #fff;
+    opacity: 0;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -o-transition: ease 0.3s;
+    transition: ease 0.3s;
+}
+
+.right a:hover i h6 {
+    opacity: 1;
+    
+}
+
+i.fa.fa-gears{
+    padding-right:30px;
+}
+
+i.fa.fa-power-off {
+    background: #c93f3f;
+    color: #FFF;
+    transform:none;
+    -webkit-transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -o-transition: ease 0.3s;
+    transition: ease 0.3s;
+    padding: 26px 25px;
+}
+
+i.fa.fa-power-off:hover {
+    background: #ad3737;
+}
+
+/* NAVIGATION LEFT*/
+
