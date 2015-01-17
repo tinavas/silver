@@ -11,15 +11,12 @@
 |
 */
 
-
+/* Login Controller */
+Route::get('/','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
-Route::get('/login','LoginController@showLogin');
-$template = 'template';
-Route::get('/', function() use ($template)
-{
-	View::name($template, 'template');
-	$layout = View::of('template');
-	return $layout->nest('content', 'template');
-});
+Route::post('/login','LoginController@login');
 
-Route::get('admin/users', function(){return View::make('admin.users.view');});
+/* Admin Controller */
+//Additional route. para lang pogi
+Route::get('/admin','UserController@index');
+Route::resource('/admin/users', 'UserController@index');

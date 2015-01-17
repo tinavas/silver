@@ -7,6 +7,6 @@ class LoginController extends BaseController{
 	}
 
 	public function login(){
-		
+		return Redirect::to('/admin');
 	}
 }
