@@ -48,7 +48,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	switch($code)
+	/*switch($code)
 	{
 		case 403:
 			return Response::view('errors.unauthorized',array(), 403);
@@ -59,7 +59,7 @@ App::error(function(Exception $exception, $code)
 		default:
 			return Response::view('errors.default',array(), $code);
 
-	}
+	}*/
 });
 
 /*

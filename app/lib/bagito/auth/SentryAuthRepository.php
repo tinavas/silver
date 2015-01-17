@@ -18,10 +18,8 @@ class SentryAuthRepository implements  AuthRepository{
 	*/
 
 	public function authenticate($username, $password){
-		$user = Sentry::authenticate(
-					'username' => $username,
-					'password' => $password
-				);
+		$credentials = array('username' => $username, 'password' => $password);
+		$user = Sentry::authenticate($credentials);
 		return $user;
 	}
 

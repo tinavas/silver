@@ -13,5 +13,9 @@
 		{{Form::password('password')}}
 		{{Form::submit('Login')}}
 	{{Form::close()}}
+
+	@if(Session::has('errorMessage'))
+		<span class = "error">{{Session::get('errorMessage')}} </span>
+	@endif
 </body>
 </html>
