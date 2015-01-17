@@ -1,0 +1,38 @@
+.gender label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 50px;
+    margin-right:10px;
+    font-size:18px;
+}
+
+.gender input[type="radio"] {
+    display: none;
+}
+
+.gender label::before {
+     
+    content: "";  
+    display: inline-block;  
+  
+    width: 32px;  
+    height: 32px;  
+  
+    margin-right: 10px;  
+    position: absolute;  
+    left: 0;  
+    bottombottom: 1px;  
+    background-color: #aaa;  
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+    border-radius: 16px;  
+  
+}
+
+.gender input[type=radio]:checked + label:before {  
+    content: "\2022";  
+    color: #f3f3f3;  
+    font-size:80px;  
+    text-align: center;  
+    line-height: 28px;  
+}  

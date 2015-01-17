@@ -17,7 +17,7 @@
     @yield('head')
 </head>
 <body>  
-            <div class="medium-2 column no-padding left">
+            <div class="medium-2 column no-padding left-side">
               <div class="user-info-container">
                   <div class="avatar-container">
                     {{HTML::image('resources/images/Pic.jpg');}}
@@ -57,7 +57,7 @@
                 
             </div>
             
-            <div class="medium-10 column no-padding right">
+            <div class="medium-10 column no-padding right-side">
                 
                 <a href="#" class="icon logout">
                     <i class="fa fa-power-off"></i>
@@ -70,7 +70,7 @@
             
         <!-- Main Content Goes Here --> 
         <section class="content">
-            <div class="medium-10 column">
+            <div class="medium-10 column content">
                 @yield('content')
             </div>
         </section>     

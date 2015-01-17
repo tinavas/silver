@@ -1,0 +1,54 @@
+.search-user-container {
+    margin-top: 40px;
+    background: #F9690E;
+}
+
+.search-user-container .medium-1, i {
+    padding:10px 5px;
+    color: #FFF;
+}
+
+.search-users {
+    background: #F9690E !important;
+    color: #FFF !important;
+    border: none !important;
+    border-bottom: 1px solid #FFF !important;
+    
+}
+
+input.search-users {
+    box-shadow: none;
+margin-top: 15px;
+}
+
+.search-users:focus {
+    box-shadow: none !important;
+}
+
+.create-user-container a {
+    float:right;
+    margin:50px 0 0 0;
+}
+
+
+.view-box table thead th{
+    text-align: center;
+}
+.view-box table tbody tr td a i{
+    -webkit-transition: ease 0.2s;
+    -moz-transition: ease 0.2s;
+    -o-transition: ease 0.2s;
+    transition: ease 0.2s;
+}
+
+.view-box table tbody tr td a i:hover {
+    transform:scale(0.8);
+}
+
+.view-box table tbody tr td a i.fa-pencil {
+    color: #d66214;
+}
+
+.view-box table tbody tr td a i.fa-trash {
+    color: #dc4545;
+}

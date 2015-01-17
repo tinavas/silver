@@ -18,6 +18,22 @@
     border: 0; 
 }
 
-a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button {
+.view-header {
+    background: #F9690E;
+    padding:10px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: #FFF;
+}
+
+.submit {
+    margin-top: 30px;
+}
+
+.content {
+    background: #f0f0f0;
+}
+
+a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button, label {
     font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

@@ -1,16 +1,17 @@
 body, html {
   height: 100%;
+   
 }
 
 body {
-    background: #f0f0f0;
+ background: #1B1B1B;
 }
 
 .no-margin {
     margin: 0;
 }
 /* LEFT */
-.left {
+.left-side {
     background: #1B1B1B;
     height:100%;
 }
@@ -19,10 +20,10 @@ background: #446CB3;
     height: 84px;
 }
 
-.left .name {
+.left-side .name {
     padding-top: 10px;
 }
-.left .title {
+.left-side .title {
     font-size: 14px !important;
     color: #fff;
 }
@@ -75,12 +76,12 @@ background: #446CB3;
 }
 /* RIGHT */
 
-.right {
+.right-side {
     background: #FFF;
     height: 84px;
 }
 
-.right i{
+.right-side i{
     text-align: center;
     font-size: 32px;
     padding: 26px 15px;
@@ -92,12 +93,12 @@ background: #446CB3;
     transition: ease 0.3s;
 }
 
-.right i:hover {
+.right-side i:hover {
     color: #2b2b2b;
     transform: translateY(-10px);
 }
 
-.right a i h6 {
+.right-side a i h6 {
     background: #446CB3;
     padding: 5px;
     font-size: 12px;
@@ -113,7 +114,7 @@ background: #446CB3;
     transition: ease 0.3s;
 }
 
-.right a:hover i h6 {
+.right-side a:hover i h6 {
     opacity: 1;
     
 }

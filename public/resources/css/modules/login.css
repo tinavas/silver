@@ -1,1 +1,40 @@
 /* LOGIN CSS */
+
+body {
+    background: url('../../images/login-bg.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.logo {
+    max-width: 312px;
+}
+
+.form-container {
+    background: #1b1b1b;
+    padding:20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    
+}
+
+.form-container label {
+    color: #FFF;
+    font-size: 18px;
+}
+
+.form-container .button {
+    margin-top:10px;
+    margin-bottom:0;
+}

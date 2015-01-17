@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('head')
-{{HTML::style('resources/css/modules/users-view.css');}}
+{{HTML::style('resources/css/modules/users/users-view.css');}}
 @endsection
 
 @section('content')

@@ -20,3 +20,4 @@ Route::post('/login','LoginController@login');
 //Additional route. para lang pogi
 Route::get('/admin','UserController@index');
 Route::resource('/admin/users', 'UserController@index');
+Route::get('/admin/users/create','UserController@create');
