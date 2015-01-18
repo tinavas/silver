@@ -8,18 +8,18 @@
 
 <div class="row">
     <div class="medium-12 column">
-        <div class="medium-5 column search-user-container no-padding">
+        <div class="medium-5 column search-box-container no-padding">
               <div class="medium-1 column no-padding">
                <i class="fa fa-search fa-2x"> </i>   
               </div>
             
             <div class="medium-11 column">
-             {{Form::text('search-users','', array('class' => 'search-users'));}}    
+             {{Form::text('search-box','', array('class' => 'search-box'));}}    
             </div>  
            
         </div>
         
-        <div class="medium-7 column create-user-container no-padding">
+        <div class="medium-7 column create-new-container no-padding">
             <a href="#" class="small button"><i class="fa fa-plus"></i> Create New User</a>
         </div>
         

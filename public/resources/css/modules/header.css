@@ -138,5 +138,7 @@ i.fa.fa-power-off:hover {
     background: #ad3737;
 }
 
-/* NAVIGATION LEFT*/
 
+.content {
+    height:auto;
+}
