@@ -41,14 +41,14 @@
                           </a>
                       </li>
                       <li>
-                      <a href="#">
+                          <a href = "{{url('/admin')}}">
                           <i class="fa fa-user fa-2x"></i> 
                           <span class="title">Users</span>
                           </a>
                       </li>
-                      <li><a href="#">
+                      <li><a href="{{url('/admin/projects')}}">
                       <i class="fa fa-building fa-2x"> </i> 
-                          <span class="title">Projects</span>
+                          <span class="title">Projects</span> 
                       </a>
                       </li>
                     </ul>

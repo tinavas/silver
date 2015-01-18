@@ -20,7 +20,7 @@
         </div>
         
         <div class="medium-7 column create-new-container no-padding">
-            <a href="#" class="small button"><i class="fa fa-plus"></i> Create New User</a>
+            <a href="{{url('admin/users/create')}}" class="small button"><i class="fa fa-plus"></i> Create New User</a>
         </div>
         
         <div class="medium-12 column view-box">
