@@ -1,6 +1,15 @@
 <?php
 
+use Bagito\Storage\ProjectRepository as Project;
+
 class ProjectController extends \BaseController {
+
+	private $pages = 10;
+
+	public function __construct(Project $project)
+	{
+		$this->project = $project;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +18,8 @@ class ProjectController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('admin.projects.view');
+		$projects = $this->project->paginate($this->pages);
+		return View::make('admin.projects.view',compact('projects'));
 	}
 
 

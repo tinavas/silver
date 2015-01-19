@@ -39,85 +39,23 @@
                     </tr>
                   </thead>
                   <tbody>
+                   
+                   @foreach($projects as $project)
                     <tr>
-                      <td>00001</td>
-                      <td><a href="#">E-Games</a></td>
-                      <td>Pulilan, Bulacan</td>
-                      <td>1,000,000 PHP</td>
-                      <td>3</td>
-                      <td>March 21, 2015</td>
-                      <td>Approved</td>
+                      <td>{{str_pad($project->id, 5, "0", STR_PAD_LEFT)}}</td>
+                      <td>{{$project->title}}</td>
+                      <td>{{$project->location}}</td>
+                      <td>{{number_format($project->budget,2)}}</td>
+                      <td></td>
+                      <td>{{$project->deadline}}</td>
+                      <td></td>
                       <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
-                      <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-trash fa-2x"></i>
+                        <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}">
+                                <i class="fa fa-pencil fa-2x"></i>
                           </a>
                       </td>
                     </tr>
-
-                    <tr>
-                      <td>00002</td>
-                      <td><a href="#">E-Games</a></td>
-                      <td>Marilao, Bulacan</td>
-                      <td>1,320,100 PHP</td>
-                      <td>2</td>
-                      <td>May 28, 2015</td>
-                      <td>Pending</td>
-                      <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
-                      <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-trash fa-2x"></i>
-                          </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>00003</td>
-                      <td><a href="">E-Games</a></td>
-                      <td>Taytay, Rizal</td>
-                      <td>3,000,000 PHP</td>
-                      <td>4</td>
-                      <td>April 09, 2015</td>
-                      <td>On hold</td>
-                      <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
-                      <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-trash fa-2x"></i>
-                          </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>00004</td>
-                      <td><a href="#">E-Games</a></td>
-                      <td>Lipa, Batangas</td>
-                      <td>4,449,288 PHP</td>
-                      <td>5</td>
-                      <td>September 05, 2015</td>
-                      <td>Approved</td>
-                      <td>
-                          <a href="user/edit/">
-                              <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
-                      <td>
-                        <a href="user/edit/">
-                            <i class="fa fa-trash fa-2x"></i>
-                        </a>
-                      </td>
-                    </tr>
+                   @endforeach
 
                   </tbody>
             </table>

@@ -118,6 +118,4 @@ class UserController extends \BaseController {
 		$users = $this->user->search($keyword,$this->pages);
 		return View::make('admin.users.view', compact('users'))->with('repo',$this->user)->with('keyword', $keyword);
 	}
-
-
 }

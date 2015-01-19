@@ -37,7 +37,7 @@ class EloquentUserRepository implements UserRepository
 					"password" => $inputs['password'],
 					"address" => $inputs['address'],
 					"contact_number" => $inputs['contactno'],
-					"gender" => $inputs['gender'],
+					"gender" => $inputs['gender'] == "male" ? 1 : 0,
 					"first_name" => $inputs['firstname'],
 					"last_name" => $inputs['lastname'],
 					"middle_initial" => $inputs['middlename'],
@@ -60,7 +60,7 @@ class EloquentUserRepository implements UserRepository
 
 			$user->address =  $inputs['address'];
 			$user->contact_number = $inputs['contactno'];
-			$user->gender = $inputs['gender'];
+			$user->gender = $inputs['gender'] == "Male" ? 1 : 0;
 			$user->first_name = $inputs['firstname'];
 			$user->last_name = $inputs['lastname'];
 			$user->middle_initial = $inputs['middlename'];

@@ -53,11 +53,6 @@
                                 <i class="fa fa-pencil fa-2x"></i>
                           </a>
                         </td>
-                         <td>
-                          <a href="admin/users/delete">
-                              <i class="fa fa-trash fa-2x"></i>
-                          </a>
-                        </td>
                       </tr>
                    @endforeach
                   </tbody>
