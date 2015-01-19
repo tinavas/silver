@@ -105,14 +105,14 @@
                  {{Form::email('email','',array('class'=> 'email'))}}
              </div>
          </div>
-         <div class="row">
+         <!--<div class="row">
              <div class="medium-2 column">
                  {{Form::label('username','Username', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
                  {{Form::text('username','',array('class'=> 'username'))}}
              </div>
-         </div>
+         </div>-->
          <div class="row">
              <div class="medium-2 column">
                  {{Form::label('password','Passsword', array('class' => 'inline right'))}}

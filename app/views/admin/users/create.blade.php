@@ -10,7 +10,7 @@
     <div class="medium-10 large-centered column personal-info-container">
         <h4 class="view-header"><i class="fa fa-user"></i> User Information</h4>
         <div class="view-box">
-            {{Form::open(array('url' => '/'))}}
+            {{Form::open(array('url' => '/admin/users'))}}
          <div class="row">
              <div class="medium-2 column">
                 {{Form::label('lastname','Last Name', array('class' => 'inline right'))}}
@@ -50,7 +50,7 @@
                  {{Form::label('gender','Gender', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column gender">
-                 {{Form::radio('gender','male',false,['id'=>'male'])}}
+                 {{Form::radio('gender','male',false,['id'=>'male', 'checked' => 'true'])}}
                  
                  {{Form::label('male','Male')}}
                  {{Form::radio('gender','female',false,['id'=>'female'])}}

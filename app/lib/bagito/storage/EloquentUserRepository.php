@@ -1,0 +1,99 @@
+<?php namespace Bagito\Storage;
+
+use Sentry;
+use User;
+
+class EloquentUserRepository implements UserRepository
+{
+
+	public function find($id)
+	{
+		return User::find($id);
+	}
+
+	public function all()
+	{
+		return User::all();
+	}
+
+	public function create($inputs)
+	{
+		try {
+			if($inputs['group'] == 'Administrator')
+			{
+				$role = Sentry::findGroupByName('Administrator');
+			}
+			else if($inputs['group'] == 'Secretary')
+			{
+				$role = Sentry::findGroupByName('Secretary');
+			}
+			else
+			{
+				$role = Sentry::findGroupByName('Architect');
+			}
+			/*Add user to group*/
+			$user = Sentry::createUser([
+					"email" => $inputs['email'],
+					"password" => $inputs['password'],
+					"address" => $inputs['address'],
+					"contact_number" => $inputs['contact_number'],
+					"gender" => $inputs['gender'],
+					"first_name" => $inputs['first_name'],
+					"last_name" => $inputs['last_name'],
+					"middle_initial" => $inputs['middle_initial'],
+					'activated' => true
+				]);
+			$user->addGroup($role);
+		} catch (Cartalyst\Sentry\Users\UserExistsException $e) {
+			throw new Exception('User Already Exists');
+		}
+		
+		return $user;
+	}
+
+	public function update($id, $inputs)
+	{
+		try 
+		{
+			//get the goddamn user using sentry
+			$user = Sentry::findUserById($id);
+
+			$user->email = $inputs['email'];
+			$user->password = $inputs['password'];
+			$user->address =  $inputs['address'];
+			$user->contact_number = $inputs['contact_number'];
+			$user->gender = $inputs['gender'];
+			$user->first_name = $inputs['gender'];
+			$user->last_name = $inputs['last_name'];
+			$user->middle_initial = $inputs['middle_initial'];
+			
+			$user->save();
+		} 
+		catch (Cartalyst\Sentry\Users\UserExistsException $e) 
+		{
+			throw new Exception('User Already Exists');
+		} 
+		catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+		{
+			throw new Exception('User not found');
+		}
+
+		return $user;
+	}
+
+	public function getRole($id)
+	{
+		try 
+		{	
+			$user = Sentry::findUserByID($id);
+			return $user->getGroups()[0];
+		} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+			throw new Exception('User was not found');
+		}
+	}
+
+	public function paginate($pages)
+	{
+		return User::paginate($pages);
+	}
+}

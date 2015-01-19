@@ -18,11 +18,11 @@
     <div class="row">
         <div class="medium-5 column large-centered form-container">
           {{Form::open(array('url' => '/login'))}}
-		    {{Form::label('username','Username')}}
-		    {{Form::text('username','',array('class'=> 'username'))}}
-		    {{Form::label('password','Password')}}
- {{Form::password('password','',array('class'=>'password'))}}
-		    {{Form::submit('LOGIN', array('class'=>'expand button'))}}
+    		    {{Form::label('email','Email')}}
+    		    {{Form::email('email','',array('class'=> 'username'))}}
+    		    {{Form::label('password','Password')}}
+            {{Form::password('password','',array('class'=>'password'))}}
+    		    {{Form::submit('LOGIN', array('class'=>'expand button'))}}
 	       {{Form::close()}} 
 	       
         @if(Session::has('errorMessage'))

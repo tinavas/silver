@@ -15,5 +15,12 @@ class GroupDatabaseSeeder extends Seeder{
 				'archi' => 1
 			)
 		));
+
+		$group = Sentry::createGroup(array(
+			'name' => 'Secretary',
+			'permissions' => array(
+				'secre' => 1
+			)
+		));
 	}
 }

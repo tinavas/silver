@@ -37,52 +37,30 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>2010 01 31032</td>
-                      <td>Lim</td>
-                      <td>Patrick James</td>
-                      <td>Administrator</td>
-                      <td>0936 9876 970</td>
-                      <td>patrickjames_lim@yahoo.com</td>
-                      <td><a href="user/edit/"><i class="fa fa-pencil fa-2x"></i></a></td>
-                      <td><a href="user/edit/"><i class="fa fa-trash fa-2x"></i></a></td>
-                    </tr>
-
-                    <tr>
-                      <td>2010 01 31032</td>
-                      <td>Lim</td>
-                      <td>Patrick James</td>
-                      <td>Administrator</td>
-                      <td>0936 9876 970</td>
-                      <td>patrickjames_lim@yahoo.com</td>
-                      <td><a href="user/edit/"><i class="fa fa-pencil fa-2x"></i></a></td>
-                      <td><a href="user/edit/"><i class="fa fa-trash fa-2x"></i></a></td>
-                    </tr>
-
-                    <tr>
-                      <td>2010 01 31032</td>
-                      <td>Lim</td>
-                      <td>Patrick James</td>
-                      <td>Administrator</td>
-                      <td>0936 9876 970</td>
-                      <td>patrickjames_lim@yahoo.com</td>
-                      <td><a href="user/edit/"><i class="fa fa-pencil fa-2x"></i></a></td>
-                      <td><a href="user/edit/"><i class="fa fa-trash fa-2x"></i></a></td>
-                    </tr>
-
-                    <tr>
-                      <td>2010 01 31032</td>
-                      <td>Lim</td>
-                      <td>Patrick James</td>
-                      <td>Administrator</td>
-                      <td>0936 9876 970</td>
-                      <td>patrickjames_lim@yahoo.com</td>
-                      <td><a href="user/edit/"><i class="fa fa-pencil fa-2x"></i></a></td>
-                      <td><a href="user/edit/"><i class="fa fa-trash fa-2x"></i></a></td>
-                    </tr>
-
+                   @foreach($users as $user)
+                      <tr>
+                        <td>{{str_pad($user->id,8,"0",STR_PAD_LEFT)}}</td>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->first_name}}</td>
+                        <td>{{$repo->getRole($user->id)->name}}</td>
+                        <td>{{$user->contact_number}}</td>
+                        <td>{{$user->email}}</td>
+                        <td> 
+                          <a href="url('admin/users/edit')">
+                                <i class="fa fa-pencil fa-2x"></i>
+                          </a>
+                        </td>
+                         <td>
+                          <a href="admin/users/delete">
+                              <i class="fa fa-trash fa-2x"></i>
+                          </a>
+                        </td>
+                      </tr>
+                   @endforeach
                   </tbody>
             </table>
+
+            {{$users->links()}}
         </div>
     </div>
     

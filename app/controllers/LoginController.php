@@ -1,5 +1,6 @@
 <?php
 use Bagito\Auth\AuthRepository as Auth;
+use Bagito\Utilities\BagitoException as BagitoException;
 
 class LoginController extends BaseController{
 
@@ -15,17 +16,19 @@ class LoginController extends BaseController{
 
 	public function login()
 	{
-		$username = Input::get('username');
+		$username = Input::get('email');
 		$password = Input::get('password');
 		try 
 		{
-			$this->auth->authenticate($username, $password);	
+			$response = $this->auth->authenticate($username, $password);
 		} 
-		catch (Exception $e)
+		catch (Exception $e) 
 		{
 			Session::flash('errorMessage',$e->getMessage());
-			return Redirect::back();
-		}
+			return View::make('index');
+		}	
+
+		
 		return Redirect::to('/admin');
 	}
 }

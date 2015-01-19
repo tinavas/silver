@@ -1,6 +1,15 @@
 <?php
 
+use Bagito\Storage\UserRepository as User;
+
 class UserController extends \BaseController {
+
+	private $pages = 6;
+
+	public function __construct(User $user)
+	{
+		$this->user = $user;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +18,8 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('admin.users.view');
+		$users = $this->user->paginate($this->pages);
+		return View::make('admin.users.view', compact('users'))->with('repo',$this->user);
 	}
 
 
