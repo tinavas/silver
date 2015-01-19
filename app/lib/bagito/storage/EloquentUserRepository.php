@@ -19,11 +19,11 @@ class EloquentUserRepository implements UserRepository
 	public function create($inputs)
 	{
 		try {
-			if($inputs['group'] == 0)
+			if($inputs['role'] == 0)
 			{
 				$role = Sentry::findGroupByName('Administrator');
 			}
-			else if($inputs['group'] == 2)
+			else if($inputs['role'] == 2)
 			{
 				$role = Sentry::findGroupByName('Secretary');
 			}
@@ -58,22 +58,20 @@ class EloquentUserRepository implements UserRepository
 			//get the goddamn user using sentry
 			$user = Sentry::findUserById($id);
 
-			$user->email = $inputs['email'];
-			$user->password = $inputs['password'];
 			$user->address =  $inputs['address'];
 			$user->contact_number = $inputs['contactno'];
 			$user->gender = $inputs['gender'];
 			$user->first_name = $inputs['firstname'];
 			$user->last_name = $inputs['lastname'];
-			$user->middle_initial = $inputs['middleinitial'];
+			$user->middle_initial = $inputs['middlename'];
 			
 			$user->save();
 		} 
-		catch (Cartalyst\Sentry\Users\UserExistsException $e) 
+		catch (\Cartalyst\Sentry\Users\UserExistsException $e) 
 		{
 			throw new Exception('User Already Exists');
 		} 
-		catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+		catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
 		{
 			throw new Exception('User not found');
 		}
@@ -95,5 +93,12 @@ class EloquentUserRepository implements UserRepository
 	public function paginate($pages)
 	{
 		return User::paginate($pages);
+	}
+
+	public function search($keyword,$pages)
+	{
+		return User::where('first_name', 'LIKE' , "%$keyword%")
+					->orWhere('last_name', 'LIKE', "%$keyword%")
+					->orWhere('email','LIKE',"%$keyword%")->paginate($pages);
 	}
 }

@@ -18,14 +18,14 @@
                 </span>
             @endif
         <div class="view-box">
-            {{Form::open(array('url' => '/admin/users','method' => 'POST'))}}
+            {{Form::model($user, array('url' => '/admin/users/' . $user->id,'method' => 'put'))}}
          <div class="row">
              <div class="medium-2 column">
                 {{Form::label('lastname','Last Name', array('class' => 'inline right'))}}
              </div>
              
              <div class="medium-10 column">
-                  {{Form::text('lastname','',array('class'=> 'lastname'))}}
+                  {{Form::text('lastname',$user->last_name,array('class'=> 'lastname'))}}
              </div>
          </div>
          
@@ -34,7 +34,7 @@
                  {{Form::label('firstname','First Name', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('firstname','',array('class'=> 'lastname'))}}
+                 {{Form::text('firstname',$user->first_name,array('class'=> 'lastname'))}}
              </div>
          </div>
          <div class="row">
@@ -42,7 +42,7 @@
                  {{Form::label('middlename','Middle Name', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('middlename','',array('class'=> 'lastname'))}}
+                 {{Form::text('middlename',$user->middle_initial,array('class'=> 'lastname'))}}
              </div>
          </div>
          <div class="row">
@@ -65,7 +65,7 @@
                  {{Form::label('contactno','Contact No.', array('class' => 'right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('contactno','',array('class'=> 'contactno'))}}
+                 {{Form::text('contactno',$user->contact_number,array('class'=> 'contactno'))}}
              </div>
          </div>
          
@@ -74,7 +74,7 @@
                  {{Form::label('address','Address', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('address','',array('class'=> 'address'))}}
+                 {{Form::text('address',$user->address,array('class'=> 'address'))}}
              </div>
          </div>    
         </div>
@@ -82,51 +82,6 @@
     </div>
 
 </div>
-
-<div class="row">
-    <div class="medium-10 large-centered column account-info-container">
-        <h4 class="view-header"><i class="fa fa-lock"></i> Account Information</h4>
-         <div class="view-box">
-             <div class="row">
-             <div class="medium-2 column">
-                {{Form::label('role','User Type', array('class' => 'inline right'))}}
-             </div>
-             
-             <div class="medium-10 column">
-                 {{ Form::select('role', ['Administrator', 'Architect', 'Secretary']) }}
-             </div>
-         </div>
-         
-         <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('email','Email', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                 {{Form::email('email','',array('class'=> 'email'))}}
-             </div>
-         </div>
-         <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('password','Passsword', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                 {{Form::password('password','',array('class'=> 'password'))}}
-             </div>
-         </div>
-         
-        <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('password_confirmation','Repeat Passsword', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                 {{Form::password('password_confirmation','',array('class'=> 'rppassword'))}}
-             </div>
-         </div>
-         </div>
-         
-         
-        {{Form::submit('Create New User', array('class'=>'right button submit'))}}
-	       {{Form::close()}} 
-    </div>
-</div>
+                 {{Form::submit('Update Information', array('class'=>'right button submit'))}}
+            {{Form::close()}} 
 @endsection

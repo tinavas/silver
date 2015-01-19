@@ -19,7 +19,7 @@ class UserController extends \BaseController {
 	public function index()
 	{
 		$users = $this->user->paginate($this->pages);
-		return View::make('admin.users.view', compact('users'))->with('repo',$this->user);
+		return View::make('admin.users.view', compact('users'))->with('repo',$this->user)->with('keyword', '');
 	}
 
 
@@ -45,16 +45,19 @@ class UserController extends \BaseController {
 		$rules = array(
 			'firstname' => 'required',
 			'lastname' => 'required',
+			'middlename' => 'required',
 			'gender' => 'required',
 			'email' => 'required|unique:users,email',
 			'contactno' => 'required',
 			'address' => 'required',
-			'role' => 'required'
+			'role' => 'required',
+			'password' => 'required|confirmed'
 		);
 
 		$validator = Validator::make(Input::all(),$rules);
 		if($validator->fails())
 		{
+			Input::flashExcept('password','gender');
 			return Redirect::back()->withErrors($validator);
 		}
 		else
@@ -64,19 +67,6 @@ class UserController extends \BaseController {
 		}
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -85,7 +75,8 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = $this->user->find($id);
+		return View::make('admin.users.edit',compact('user'));
 	}
 
 
@@ -97,19 +88,35 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		/*validation*/
+		$rules = array(
+			'firstname' => 'required',
+			'lastname' => 'required',
+			'middlename' => 'required',
+			'gender' => 'required',
+			'contactno' => 'required',
+			'address' => 'required',
+		);
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			Input::flashExcept('password','gender');
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$this->user->update($id, Input::all());
+			return Redirect::to('admin/users');
+		}
 	}
 
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
+	public function search()
 	{
-		//
+		$keyword = Input::get('keyword');
+		$users = $this->user->search($keyword,$this->pages);
+		return View::make('admin.users.view', compact('users'))->with('repo',$this->user)->with('keyword', $keyword);
 	}
 
 

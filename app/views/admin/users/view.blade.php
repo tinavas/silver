@@ -14,7 +14,10 @@
               </div>
             
             <div class="medium-11 column">
-             {{Form::text('search-box','', array('class' => 'search-box'));}}    
+            {{Form::open(['method' => 'get', 'url' => '/admin/users/search/user'])}}
+              {{Form::text('keyword','', array('class' => 'search-box'));}}
+              {{Form::submit('Submit',['style' => 'display:none'])}}    
+            {{Form::close()}}
             </div>  
            
         </div>
@@ -46,7 +49,7 @@
                         <td>{{$user->contact_number}}</td>
                         <td>{{$user->email}}</td>
                         <td> 
-                          <a href="url('admin/users/edit')">
+                          <a href="{{URL::to('admin/users/' . $user->id . '/edit')}}">
                                 <i class="fa fa-pencil fa-2x"></i>
                           </a>
                         </td>
@@ -59,8 +62,11 @@
                    @endforeach
                   </tbody>
             </table>
+            {{$users->appends(['keyword' => $keyword])->links()}}
 
-            {{$users->links()}}
+            @if($keyword != '')
+              {{HTML::link('/admin/users','Back',['class' => 'left button'])}}
+            @endif
         </div>
     </div>
     
