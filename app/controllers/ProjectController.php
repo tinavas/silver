@@ -42,6 +42,23 @@ class ProjectController extends \BaseController {
 	public function store()
 	{
 		//
+		$rules = array(
+			'code' => 'required',
+			'title' => 'required',
+			'description' => 'required',
+			'location' => 'required',
+			'budget' => 'numeric|required',
+			'deadline' => 'date|required'
+		);
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+
+		$this->project->create(Input::all());
+		return Redirect::to('admin/projects');
 	}
 
 
@@ -66,6 +83,8 @@ class ProjectController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$project = $this->project->find($id);
+		return View::make('admin.projects.edit',compact('project'));
 	}
 
 
@@ -78,6 +97,22 @@ class ProjectController extends \BaseController {
 	public function update($id)
 	{
 		//
+		$rules = array(
+			'title' => 'required',
+			'description' => 'required',
+			'location' => 'required',
+			'budget' => 'numeric|required',
+			'deadline' => 'date|required'
+		);
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+
+		$this->project->update($id, Input::all());
+		return Redirect::to('admin/projects');
 	}
 
 

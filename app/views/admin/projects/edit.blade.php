@@ -19,14 +19,14 @@
         @endif
 
         <div class="view-box">
-            {{Form::open(array('url' => '/admin/projects','method' => 'POST'))}}
+            {{Form::model($project, array('url' => '/admin/projects/' . $project->id,'method' => 'put'))}}
          <div class="row">
              <div class="medium-2 column">
                 {{Form::label('code','Code', array('class' => 'inline right'))}}
              </div>
              
              <div class="medium-10 column">
-                  {{Form::text('code','',array('class'=> 'lastname'))}}
+                  {{Form::text('code',$project->code,array('class'=> 'lastname'))}}
              </div>
          </div>
          
@@ -35,7 +35,7 @@
                  {{Form::label('title','Title', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('title','',array('class'=> 'lastname'))}}
+                 {{Form::text('title',$project->title,array('class'=> 'lastname'))}}
              </div>
          </div>
          <div class="row">
@@ -43,7 +43,7 @@
                  {{Form::label('description','Description', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('description','',array('class'=> 'lastname'))}}
+                 {{Form::text('description',$project->description,array('class'=> 'lastname'))}}
              </div>
          </div>
          <div class="row">
@@ -51,7 +51,7 @@
                  {{Form::label('location','Location', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('location','',array('class'=> 'lastname'))}}
+                 {{Form::text('location',$project->location,array('class'=> 'lastname'))}}
              </div>
          </div>
          
@@ -60,7 +60,7 @@
                  {{Form::label('budget','Budget', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 {{Form::text('budget','',array('class'=> 'lastname'))}}
+                 {{Form::text('budget',$project->budget,array('class'=> 'lastname'))}}
              </div>
          </div>
          
@@ -80,7 +80,7 @@
 
 <div class="row">
     <div class="medium-10 large-centered column account-info-container"> 
-        {{Form::submit('Create New Project', array('class'=>'right button submit'))}}
+        {{Form::submit('Update Project', array('class'=>'right button submit'))}}
         {{Form::close()}} 
     </div>
 </div>

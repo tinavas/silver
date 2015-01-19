@@ -21,7 +21,7 @@
         </div>
         
         <div class="medium-7 column create-new-container no-padding">
-            <a href="#" class="small button"><i class="fa fa-plus"></i> Create New Project</a>
+            <a href="{{URL::to('admin/projects/create')}}" class="small button"><i class="fa fa-plus"></i> Create New Project</a>
         </div>
         
         <div class="medium-12 column view-box">
