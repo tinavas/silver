@@ -25,23 +25,23 @@ class SentryAuthRepository implements  AuthRepository{
 		{
 			$user = Sentry::authenticate($credentials);
 		} 
-		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+		catch (\Cartalyst\Sentry\Users\LoginRequiredException $e)
 		{
 		  	throw new BagitoException('Login field is required.');
 		}
-		catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+		catch (\Cartalyst\Sentry\Users\PasswordRequiredException $e)
 		{
 		    throw new BagitoException('Password field is required.');
 		}
-		catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
+		catch (\Cartalyst\Sentry\Users\WrongPasswordException $e)
 		{
 		    throw new BagitoException('Wrong password, try again.');
 		}
-		catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+		catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
 		{
 		    throw new BagitoException('User was not found.');
 		}
-		catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
+		catch (\Cartalyst\Sentry\Users\UserNotActivatedException $e)
 		{
 		    throw new BagitoException('User is not activated.');
 		}

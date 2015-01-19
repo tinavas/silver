@@ -9,8 +9,16 @@
 <div class="row">
     <div class="medium-10 large-centered column personal-info-container">
         <h4 class="view-header"><i class="fa fa-user"></i> User Information</h4>
+         
+             @if($errors->has())
+                <span class = "error">
+                    @foreach($errors->all() as $error)
+                            {{$error}} <br>
+                     @endforeach
+                </span>
+            @endif
         <div class="view-box">
-            {{Form::open(array('url' => '/admin/users'))}}
+            {{Form::open(array('url' => '/admin/users','method' => 'POST'))}}
          <div class="row">
              <div class="medium-2 column">
                 {{Form::label('lastname','Last Name', array('class' => 'inline right'))}}
@@ -35,14 +43,6 @@
              </div>
              <div class="medium-10 column">
                  {{Form::text('middlename','',array('class'=> 'lastname'))}}
-             </div>
-         </div>
-         <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('birthday','Birthday', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                 <input type="date" name="birthday" class="birthday">
              </div>
          </div>
          <div class="row">
@@ -89,11 +89,11 @@
          <div class="view-box">
              <div class="row">
              <div class="medium-2 column">
-                {{Form::label('usertype','User Type', array('class' => 'inline right'))}}
+                {{Form::label('role','User Type', array('class' => 'inline right'))}}
              </div>
              
              <div class="medium-10 column">
-                 {{ Form::select('usertype', ['Administrator', 'Architect', 'Secretary']) }}
+                 {{ Form::select('role', ['Administrator', 'Architect', 'Secretary']) }}
              </div>
          </div>
          
@@ -103,14 +103,6 @@
              </div>
              <div class="medium-10 column">
                  {{Form::email('email','',array('class'=> 'email'))}}
-             </div>
-         </div>
-         <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('username','Username', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                 {{Form::text('username','',array('class'=> 'username'))}}
              </div>
          </div>
          <div class="row">
@@ -133,7 +125,7 @@
          </div>
          
          
-         {{Form::submit('Create New User', array('class'=>'right button submit'))}}
+        {{Form::submit('Create New User', array('class'=>'right button submit'))}}
 	       {{Form::close()}} 
     </div>
 </div>

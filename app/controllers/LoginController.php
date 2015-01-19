@@ -22,13 +22,11 @@ class LoginController extends BaseController{
 		{
 			$response = $this->auth->authenticate($username, $password);
 		} 
-		catch (Exception $e) 
+		catch (BagitoException $e) 
 		{
 			Session::flash('errorMessage',$e->getMessage());
 			return View::make('index');
 		}	
-
-		
 		return Redirect::to('/admin');
 	}
 }

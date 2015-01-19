@@ -19,11 +19,11 @@ class EloquentUserRepository implements UserRepository
 	public function create($inputs)
 	{
 		try {
-			if($inputs['group'] == 'Administrator')
+			if($inputs['group'] == 0)
 			{
 				$role = Sentry::findGroupByName('Administrator');
 			}
-			else if($inputs['group'] == 'Secretary')
+			else if($inputs['group'] == 2)
 			{
 				$role = Sentry::findGroupByName('Secretary');
 			}
@@ -36,11 +36,11 @@ class EloquentUserRepository implements UserRepository
 					"email" => $inputs['email'],
 					"password" => $inputs['password'],
 					"address" => $inputs['address'],
-					"contact_number" => $inputs['contact_number'],
+					"contact_number" => $inputs['contactno'],
 					"gender" => $inputs['gender'],
-					"first_name" => $inputs['first_name'],
-					"last_name" => $inputs['last_name'],
-					"middle_initial" => $inputs['middle_initial'],
+					"first_name" => $inputs['firstname'],
+					"last_name" => $inputs['lastname'],
+					"middle_initial" => $inputs['middlename'],
 					'activated' => true
 				]);
 			$user->addGroup($role);
@@ -61,11 +61,11 @@ class EloquentUserRepository implements UserRepository
 			$user->email = $inputs['email'];
 			$user->password = $inputs['password'];
 			$user->address =  $inputs['address'];
-			$user->contact_number = $inputs['contact_number'];
+			$user->contact_number = $inputs['contactno'];
 			$user->gender = $inputs['gender'];
-			$user->first_name = $inputs['gender'];
-			$user->last_name = $inputs['last_name'];
-			$user->middle_initial = $inputs['middle_initial'];
+			$user->first_name = $inputs['firstname'];
+			$user->last_name = $inputs['lastname'];
+			$user->middle_initial = $inputs['middleinitial'];
 			
 			$user->save();
 		} 

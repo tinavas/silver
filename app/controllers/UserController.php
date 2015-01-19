@@ -41,7 +41,27 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		/*validation*/
+		$rules = array(
+			'firstname' => 'required',
+			'lastname' => 'required',
+			'gender' => 'required',
+			'email' => 'required|unique:users,email',
+			'contactno' => 'required',
+			'address' => 'required',
+			'role' => 'required'
+		);
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$this->user->create(Input::all());
+			return Redirect::to('admin/users');
+		}
 	}
 
 
