@@ -51,4 +51,9 @@ class EloquentProjectRepository implements ProjectRepository
 						->orWhere('description', 'LIKE', "%$keyword%")
 						->orWhere('location', 'LIKE', "")->paginate($pages);
 	}
+
+	public function getNumberOfSubscribers($id)
+	{
+		return Project::find($id)->users()->count();
+	}
 }

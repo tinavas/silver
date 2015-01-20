@@ -46,7 +46,7 @@
                       <td>{{$project->title}}</td>
                       <td>{{$project->location}}</td>
                       <td>{{number_format($project->budget,2)}}</td>
-                      <td></td>
+                      <td>{{$projectRepo->getNumberOfSubscribers($project->id)}}</td>
                       <td>{{$project->deadline}}</td>
                       <td></td>
                       <td>

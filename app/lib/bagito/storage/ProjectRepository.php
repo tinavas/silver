@@ -13,4 +13,6 @@ interface ProjectRepository
 	public function paginate($number);
 
 	public function search($keyword,$pages);
+
+	public function getNumberOfSubscribers($id);
 }
