@@ -48,7 +48,17 @@
                       <td>{{number_format($project->budget,2)}}</td>
                       <td>{{$projectRepo->getNumberOfSubscribers($project->id)}}</td>
                       <td>{{$project->deadline}}</td>
-                      <td></td>
+                      <td>
+                        @if($project->status == 0)
+                          Pending
+                        @elseif($project->status == 1)
+                          Approved
+                        @elseif($project->status == -1)
+                          Cancelled
+                        @else
+                          Done
+                        @endif
+                      </td>
                       <td>
                         <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}">
                                 <i class="fa fa-pencil fa-2x"></i>
