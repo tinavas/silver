@@ -1,0 +1,34 @@
+.content { height: auto;}
+
+#projects .search-box-container {
+    margin-top: 56px;
+    background: #F9690E;
+}
+
+#projects .search-box-container > .medium-1, i {
+    padding: 8px 5px;
+    color: #FFF;
+}
+
+#projects .search-box {
+    background: #F9690E;
+    color: #FFF;
+    border: none;
+    border-bottom: 1px solid #FFF ;
+    
+}
+
+#projects input.search-box {
+    box-shadow: none;
+	margin: 3px 0 0;
+}
+
+#projects .search-box:focus {
+    box-shadow: none !important;
+}
+
+#projects .view-box .create-new-container a.create-collab {
+    float: right;
+    margin-top: 59px;
+    padding: 8px 20px;
+}

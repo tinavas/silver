@@ -24,3 +24,11 @@ Route::get('/admin/users/search/user','UserController@search');
 
 Route::resource('/admin/projects', 'ProjectController');
 Route::get('/admin/projects/search/project','ProjectController@search');
+
+$template = 'template';
+Route::get('/admin/quotation/create', function() use ($template)
+{
+	View::name($template, 'admin.quotation.create');
+	$layout = View::of('admin.quotation.create');
+	return $layout->nest('content', 'admin.quotation.create');
+});

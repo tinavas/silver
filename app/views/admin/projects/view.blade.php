@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    
+    <section class="projects">
     <div class="row">
       <div class="medium-12 column">
         <div class="medium-5 column search-box-container no-padding">
@@ -66,7 +66,7 @@
                         <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}">
                                 <i class="fa fa-pencil fa-2x"></i>Edit
                          </a>
-                        <a href="">
+                        <a href="{{URL::to('admin/projects/' . $project->id)}}">
                            <i class="fa fa-eye"></i>View
                         </a>
                       </td>
@@ -80,7 +80,7 @@
               {{HTML::link('/admin/projects','Back',['class' => 'left button'])}}
             @endif
         </div>
+      </div>
     </div>
-    
-</div>
+  </section>
 @endsection

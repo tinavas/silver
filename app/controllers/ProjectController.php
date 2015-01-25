@@ -70,7 +70,8 @@ class ProjectController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$project = $this->project->find($id);
+		return View::make('admin.projects.show',compact('project'));
 	}
 
 

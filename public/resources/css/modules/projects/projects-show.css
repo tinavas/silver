@@ -1,0 +1,12 @@
+.content {height: auto;}
+
+div.projects .view-box { margin: 30px 0;}
+
+div.projects .proj-func > a { float: left; padding: 3px 12px 3px 5px; margin-right: 25px;}
+div.projects .proj-func::after { content: ' '; display: block; clear: both;}
+
+div.projects .view-box .project-collab-container,
+div.projects .view-box .quotation-container { padding: 20px 0;}
+
+div.projects .view-box .table-title > h4 { width: 10em; margin: 0; display: inline-block;}
+div.projects .view-box .proj-btn-container > a {padding: 3px 12px 3px 5px; margin: 0;}

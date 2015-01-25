@@ -1,10 +1,11 @@
 @extends('template')
 
 @section('head')
-{{HTML::style('resources/css/modules/users/users-create.css');}}
+{{HTML::style('resources/css/modules/projects/projects-create.css');}}
 @endsection
 
 @section('content')
+
 
 <div class="row">
     <div class="medium-10 large-centered column personal-info-container">
@@ -83,4 +84,5 @@
         {{Form::close()}} 
     </div>
 </div>
+
 @endsection
