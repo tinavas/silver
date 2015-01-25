@@ -23,3 +23,19 @@ Route::resource('/admin/users', 'UserController');
 Route::get('/admin/users/search/user','UserController@search');
 
 Route::resource('/admin/projects', 'ProjectController');
+
+
+
+
+
+
+
+/*this block is for no controller or resources. Viewing of design*/
+$template = 'template';
+Route::get('/admin/quotation/create', function() use ($template)
+{
+	View::name($template, 'admin.quotation.create');
+	$layout = View::of('admin.quotation.create');
+	return $layout->nest('content', 'admin.quotation.create');
+});
+/*END*/
