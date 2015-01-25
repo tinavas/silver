@@ -15,7 +15,10 @@
               </div>
             
             <div class="medium-11 column">
-             {{Form::text('search-users','', array('class' => 'search-box'));}}    
+            {{Form::open(['method' => 'get', 'url' => '/admin/project/search/project'])}}
+              {{Form::text('search-users','', array('class' => 'search-box'))}}
+              {{Form::submit('Submit',['style' => 'display:none'])}}
+            {{Form::close()}}    
             </div>  
            
         </div>
@@ -66,9 +69,12 @@
                       </td>
                     </tr>
                    @endforeach
-
                   </tbody>
             </table>
+            {{$projects->appends(['keyword' => $keyword])->links()}}
+            @if($keyword != '')
+              {{HTML::link('/admin/projects','Back',['class' => 'left button'])}}
+            @endif
         </div>
     </div>
     

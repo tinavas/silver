@@ -19,7 +19,7 @@ class ProjectController extends \BaseController {
 	public function index()
 	{
 		$projects = $this->project->paginate($this->pages);
-		return View::make('admin.projects.view',compact('projects'))->with('projectRepo', $this->project);
+		return View::make('admin.projects.view',compact('projects'))->with('projectRepo', $this->project)->with('keyword','');
 	}
 
 
