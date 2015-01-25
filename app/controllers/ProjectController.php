@@ -71,6 +71,7 @@ class ProjectController extends \BaseController {
 	public function show($id)
 	{
 		//
+		return View::make('admin.projects.show');
 	}
 
 
