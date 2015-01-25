@@ -8,7 +8,7 @@
 @section('content')
     
     <div class="row">
-    <div class="medium-12 column">
+      <div class="medium-12 column">
         <div class="medium-5 column search-box-container no-padding">
               <div class="medium-1 column no-padding">
                <i class="fa fa-search fa-2x"> </i>   
