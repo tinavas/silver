@@ -77,7 +77,7 @@
     </div>
 
 </div>
-
+<!--
 <div class="row" id="projects">
     <div class="medium-10 large-centered column personal-info-container">
         <h4 class="view-header"><i class="fa fa-building"></i> Project Collaborators</h4>
@@ -94,7 +94,7 @@
                     {{Form::text('search-collaborators','', array('class' => 'search-box'));}}    
                 </div>
             </div>
-
+            
             <div class="medium-7 column create-new-container no-padding">
                 <a href="{{URL::to('admin/projects/create')}}" class="small button create-collab"><i class="fa fa-plus"></i> Add Collaborator</a>
             </div>
@@ -125,10 +125,11 @@
                     </tr>
                   </tbody>
             </table>
+            
         </div>
     </div>
 </div>
-
+!-->
 <div class="row">
     <div class="medium-10 large-centered column account-info-container"> 
         {{Form::submit('Create New Project', array('class'=>'right button submit'))}}

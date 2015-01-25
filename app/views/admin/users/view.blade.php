@@ -50,7 +50,7 @@
                         <td>{{$user->email}}</td>
                         <td> 
                           <a href="{{URL::to('admin/users/' . $user->id . '/edit')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
+                                <i class="fa fa-pencil fa-2x"></i>Edit
                           </a>
                         </td>
                       </tr>

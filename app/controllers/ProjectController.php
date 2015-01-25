@@ -19,7 +19,7 @@ class ProjectController extends \BaseController {
 	public function index()
 	{
 		$projects = $this->project->paginate($this->pages);
-		return View::make('admin.projects.view',compact('projects'))->with('projectRepo', $this->project)->with('keyword','');
+		return View::make('admin.projects.view',compact('projects'))->with('repo', $this->project)->with('keyword','');
 	}
 
 
@@ -125,6 +125,13 @@ class ProjectController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function search()
+	{
+		$keyword = Input::get('keyword');
+		$projects = $this->project->search($keyword,$this->pages);
+		return View::make('admin.projects.view', compact('projects'))->with('repo',$this->project)->with('keyword', $keyword);
 	}
 
 

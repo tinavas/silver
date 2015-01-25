@@ -15,8 +15,8 @@
               </div>
             
             <div class="medium-11 column">
-            {{Form::open(['method' => 'get', 'url' => '/admin/project/search/project'])}}
-              {{Form::text('search-users','', array('class' => 'search-box'))}}
+            {{Form::open(['method' => 'get', 'url' => '/admin/projects/search/project'])}}
+              {{Form::text('keyword','', array('class' => 'search-box'))}}
               {{Form::submit('Submit',['style' => 'display:none'])}}
             {{Form::close()}}    
             </div>  
@@ -49,7 +49,7 @@
                       <td>{{$project->title}}</td>
                       <td>{{$project->location}}</td>
                       <td>{{number_format($project->budget,2)}}</td>
-                      <td>{{$projectRepo->getNumberOfSubscribers($project->id)}}</td>
+                      <td>{{$repo->getNumberOfSubscribers($project->id)}}</td>
                       <td>{{$project->deadline}}</td>
                       <td>
                         @if($project->status == 0)
@@ -64,14 +64,18 @@
                       </td>
                       <td>
                         <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
-                          </a>
+                                <i class="fa fa-pencil fa-2x"></i>Edit
+                         </a>
+                        <a href="">
+                           <i class="fa fa-eye"></i>View
+                        </a>
                       </td>
                     </tr>
                    @endforeach
                   </tbody>
             </table>
             {{$projects->appends(['keyword' => $keyword])->links()}}
+
             @if($keyword != '')
               {{HTML::link('/admin/projects','Back',['class' => 'left button'])}}
             @endif

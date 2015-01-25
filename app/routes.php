@@ -23,3 +23,4 @@ Route::resource('/admin/users', 'UserController');
 Route::get('/admin/users/search/user','UserController@search');
 
 Route::resource('/admin/projects', 'ProjectController');
+Route::get('/admin/projects/search/project','ProjectController@search');
