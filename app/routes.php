@@ -24,6 +24,7 @@ Route::get('/admin/users/search/user','UserController@search');
 
 Route::resource('/admin/projects', 'ProjectController');
 Route::get('/admin/projects/search/project','ProjectController@search');
+Route::get('/admin/projects/add/users','ProjectController@addUser');
 
 $template = 'template';
 Route::get('/admin/quotation/create', function() use ($template)

@@ -90,7 +90,8 @@
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.js')}}
-    
+    {{HTML::script('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js')}}
+    {{HTML::script('resources/js/uni.script.js')}}
     
     <script>
         $(document).foundation();

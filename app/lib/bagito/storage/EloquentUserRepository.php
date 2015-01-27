@@ -2,6 +2,7 @@
 
 use Sentry;
 use User;
+use UserGroup;
 
 class EloquentUserRepository implements UserRepository
 {
@@ -100,5 +101,17 @@ class EloquentUserRepository implements UserRepository
 		return User::where('first_name', 'LIKE' , "%$keyword%")
 					->orWhere('last_name', 'LIKE', "%$keyword%")
 					->orWhere('email','LIKE',"%$keyword%")->paginate($pages);
+	}
+
+	public function getAllArchitects()
+	{
+		$results =  UserGroup::where('group_id' , '=' , 2)->get();
+		$ids = array();
+		foreach($results as $result)
+		{
+			array_push($ids,$result->user_id);
+		}
+
+		return User::whereIn('id', $ids)->get();
 	}
 }

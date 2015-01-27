@@ -1,14 +1,16 @@
 <?php
 
 use Bagito\Storage\ProjectRepository as Project;
+use Bagito\Storage\UserRepository as User;
 
 class ProjectController extends \BaseController {
 
 	private $pages = 10;
 
-	public function __construct(Project $project)
+	public function __construct(Project $project, User $user)
 	{
 		$this->project = $project;
+		$this->user = $user;
 	}
 
 	/**
@@ -135,5 +137,15 @@ class ProjectController extends \BaseController {
 		return View::make('admin.projects.view', compact('projects'))->with('repo',$this->project)->with('keyword', $keyword);
 	}
 
+	public function addUser()
+	{
+		$users = $this->user->getAllArchitects();
+		return View::make('admin.projects.add-user-to-projects', compact('users'));
 
+	}
+
+	public function storeUserToProject()
+	{
+
+	}
 }

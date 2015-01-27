@@ -12,7 +12,7 @@
         <div class="project-desc">
              <h3>{{$project->title}}</h3>
              <h5>{{'Project ID: ' . $project->id}}</h5>
-              @if($project->status == 0)
+             @if($project->status == 0)
                 <h6>Status: Pending<h6>
              @elseif($project->status == 1)
                 <h6>Status: Approved</h6>
@@ -21,7 +21,8 @@
              @else
                 <h6>Status: Done</h6>
              @endif
-            <h6>{{$project->location}}</h6>
+            <h6>Location: {{$project->location}}</h6>
+            <h6>Description: {{$project->description}}</h6>
             <h6>Date Created: {{date('F j, Y, g:i a',strtotime($project->created_at))}}</h6>
         </div>
         <div class="proj-func">
@@ -30,7 +31,7 @@
         <h4 class="view-header"><i class="fa fa-building"></i> Project Collaborators</h4>
         <div class="project-collab-container table-title">
             <div class="proj-btn-container right">
-                <a href="" class="small button create-quot"><i class="fa fa-plus"></i>Add New Collaborators</a>
+                <a href="{{URL::to('admin/projects/add/users')}}" class="small button create-quot"><i class="fa fa-plus"></i>Add New Collaborator</a>
             </div>
             <table>
                   <thead>
