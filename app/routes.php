@@ -26,6 +26,7 @@ Route::resource('/admin/projects', 'ProjectController');
 Route::get('/admin/projects/search/project','ProjectController@search');
 Route::get('/admin/projects/add/users','ProjectController@addUser');
 
+/* for design */
 $template = 'template';
 Route::get('/admin/quotation/create', function() use ($template)
 {
@@ -33,3 +34,20 @@ Route::get('/admin/quotation/create', function() use ($template)
 	$layout = View::of('admin.quotation.create');
 	return $layout->nest('content', 'admin.quotation.create');
 });
+
+$archtemplate = 'architecttemplate';
+Route::get('/architect/create', function() use ($archtemplate)
+{
+	View::name($archtemplate, 'architect.quotation.create');
+	$layout = View::of('architect.quotation.create');
+	return $layout->nest('content', 'architect.quotation.create');
+});
+
+Route::get('/architect/index', function() use ($archtemplate)
+{
+	View::name($archtemplate, 'architect.quotation.index');
+	$layout = View::of('architect.quotation.index');
+	return $layout->nest('content', 'architect.quotation.index');
+});
+
+/* END */
