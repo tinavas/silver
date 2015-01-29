@@ -20,13 +20,27 @@ class LoginController extends BaseController{
 		$password = Input::get('password');
 		try 
 		{
-			$response = $this->auth->authenticate($username, $password);
+			$user = $this->auth->authenticate($username, $password);
 		} 
 		catch (BagitoException $e) 
 		{
 			Session::flash('errorMessage',$e->getMessage());
 			return View::make('index');
 		}	
-		return Redirect::to('/admin');
+
+		if($this->auth->getCurrentUserGroup($user)->name == "Administrator")
+		{
+			return Redirect::to('/admin');
+		}
+		else
+		{
+			return Redirect::to('/architect');
+		}
+	}
+
+	public function logout()
+	{
+		$this->auth->logout();
+		return Redirect::to('/');
 	}
 }

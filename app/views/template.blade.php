@@ -60,7 +60,7 @@
             
             <div class="medium-10 column no-padding right-side">
                 
-                <a href="#" class="icon logout">
+                <a href="{{URL::to('/logout')}}" class="icon logout">
                     <i class="fa fa-power-off"></i>
                 </a>
                  <a href="#" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>

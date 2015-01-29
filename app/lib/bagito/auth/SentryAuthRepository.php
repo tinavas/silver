@@ -79,7 +79,7 @@ class SentryAuthRepository implements  AuthRepository{
 
 	public function getCurrentUserGroup(){
 		$user = Sentry::getUser();
-		return $user->getGroups();
+		return $user->getGroups()[0];
 	}
 
 	/**
