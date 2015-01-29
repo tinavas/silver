@@ -64,10 +64,10 @@
                       </td>
                       <td>
                         <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}">
-                                <i class="fa fa-pencil fa-2x"></i>Edit
+                                <i class="fa fa-pencil fa-2x"></i>
                          </a>
                         <a href="{{URL::to('admin/projects/' . $project->id)}}">
-                           <i class="fa fa-eye"></i>View
+                           <i class="fa fa-icon-eye-open fa-2x"></i>View
                         </a>
                       </td>
                     </tr>

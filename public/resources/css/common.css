@@ -79,7 +79,7 @@ margin-top: 15px;
     transform:scale(0.8);
 }
 
-.view-box table tbody tr td a i.fa-pencil {
+.view-box table tbody tr td a i.fa-pencil, .view-box table tbody tr td a i.fa-eye {
     color: #d66214;
 }
 
@@ -99,3 +99,6 @@ a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button, label {
     font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+
+div.quotation-container { height: 0; transition: 0.5; -webkit-transition: 0.5; -moz-transition: 0.5; overflow: hidden; }
+div.dropdown {height: 100%;}

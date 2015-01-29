@@ -18,7 +18,7 @@
                     <th>Location</th>
                     <th>Budget</th>
                     <th>Deadline</th>
-                    <th colspan="2">Actions</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -27,17 +27,17 @@
                     <td>Bagito Express Building</td>
                     <td>sa PUSO mo!!</td>
                     <td>1,000,000</td>
-                    <th>2015-01-15</th>
+                    <td>2015-01-15</td>
                     <td>
-                      <a href="{{URL::to('')}}">
-                              <i class="fa fa-pencil fa-2x"></i>
-                        </a>
+                      <a href="#">
+                        <i class="fa fa-eye fa-2x div-toggle"></i>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
           </table>
         </div>
-        <div class="quotation-container table-title">
+        <div class="quotation-container table-title div-drop">
             <h4>Quotations</h4>
             <table>
                   <thead>
@@ -49,7 +49,7 @@
                       <th>Name</th>
                       <th>Contact No.</th>
                       <th>Email</th>
-                      <th colspan="2">Actions</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
