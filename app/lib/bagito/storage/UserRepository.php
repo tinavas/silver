@@ -17,4 +17,5 @@ interface UserRepository{
 	public function search($keyword,$pages);
 
 	public function getAllArchitects();
+
 }

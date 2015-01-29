@@ -16,4 +16,12 @@ interface ProjectRepository
 
 	public function getNumberOfSubscribers($id);
 
+	public function getSubscribers($projectId);
+
+	public function getNonSubscribers($projectId);
+
+	public function addUser($userId, $projectId);
+
+	public function removeUser($userId, $projectId);
+
 }

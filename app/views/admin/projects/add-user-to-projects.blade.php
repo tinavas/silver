@@ -29,7 +29,7 @@
                         <td>{{$user->contact_number}}</td>
                         <td>{{$user->email}}</td>
                         <td> 
-                          <a href="{{URL::to('admin/users/' . $user->id . '/edit')}}">
+                          <a href="{{URL::to('admin/project/' . $project_id .'/user/' . $user->id)}}">
                           Add
                           </a>
                         </td>

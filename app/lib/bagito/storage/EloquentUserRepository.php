@@ -112,6 +112,15 @@ class EloquentUserRepository implements UserRepository
 			array_push($ids,$result->user_id);
 		}
 
-		return User::whereIn('id', $ids)->get();
+		if(count($ids) != 0)
+		{
+			$users = User::whereIn('id', $ids)->get();
+		}
+		else
+		{
+			$users = null;
+		}
+
+		return  $users;
 	}
 }

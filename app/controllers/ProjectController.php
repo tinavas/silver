@@ -73,7 +73,8 @@ class ProjectController extends \BaseController {
 	public function show($id)
 	{
 		$project = $this->project->find($id);
-		return View::make('admin.projects.show',compact('project'));
+		$users = $this->project->getSubscribers($id);
+		return View::make('admin.projects.show',compact('project'))->with('users',$users->get());
 	}
 
 
@@ -137,15 +138,22 @@ class ProjectController extends \BaseController {
 		return View::make('admin.projects.view', compact('projects'))->with('repo',$this->project)->with('keyword', $keyword);
 	}
 
-	public function addUser()
+	public function addUser($projectId)
 	{
-		$users = $this->user->getAllArchitects();
-		return View::make('admin.projects.add-user-to-projects', compact('users'));
+		$users = $this->project->getNonSubscribers($projectId);
+		return View::make('admin.projects.add-user-to-projects', compact('users'))->with('project_id', $projectId);
 
 	}
 
-	public function storeUserToProject()
+	public function storeUserToProject($projectId, $userId)
 	{
+		$this->project->addUser($userId, $projectId);
+		return Redirect::to('admin/projects/' . $projectId);
+	}
 
+	public function removeUser($projectId, $userId)
+	{
+		$this->project->removeUser($userId,$projectId);
+		return Redirect::back();
 	}
 }

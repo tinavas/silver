@@ -31,31 +31,34 @@
         <h4 class="view-header"><i class="fa fa-building"></i> Project Collaborators</h4>
         <div class="project-collab-container table-title">
             <div class="proj-btn-container right">
-                <a href="{{URL::to('admin/projects/add/users')}}" class="small button create-quot"><i class="fa fa-plus"></i>Add New Collaborator</a>
+                <a href="{{URL::to('admin/projects/add/users/' . $project->id)}}" class="small button create-quot"><i class="fa fa-plus"></i>Add New Collaborator</a>
             </div>
-            <table>
+            <table> 
                   <thead>
-                    <tr>
+                  <tr>
                       <th>Last Name</th>
                       <th>First Name</th>
                       <th>Middle Name</th>
                       <th>Contact No.</th>
                       <th>Email</th>
-                      <th colspan="2">Actions</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Turingan</td>
-                      <td>Joshua</td>
-                      <td>Baluyot</td>
-                      <td>09054005755</td>
-                      <th>turingan.joshua@gmail.com</th>
-                      <td>
-                        <a href="{{URL::to('')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
+                  @if(!is_null($users))
+                    @foreach($users as $user)
+                      <tr>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->first_name}}</td>
+                        <td>{{$user->middle_initial}}</td>
+                        <td>{{$user->contact_number}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>
+                          <a href="{{URL::to('/admin/project/' . $project->id . '/user/' . $user->id . '/delete')}}">Remove</a>
+                        </td>
+                      </tr>
+                    @endforeach
+                  @endif
                     </tr>
                   </tbody>
             </table>

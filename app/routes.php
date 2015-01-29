@@ -24,7 +24,9 @@ Route::get('/admin/users/search/user','UserController@search');
 
 Route::resource('/admin/projects', 'ProjectController');
 Route::get('/admin/projects/search/project','ProjectController@search');
-Route::get('/admin/projects/add/users','ProjectController@addUser');
+Route::get('/admin/projects/add/users/{id}','ProjectController@addUser');
+Route::get('/admin/project/{projectId}/user/{userId}','ProjectController@storeUserToProject');
+Route::get('/admin/project/{projectId}/user/{userId}/delete','ProjectController@removeUser');
 
 /* for design */
 $template = 'template';
