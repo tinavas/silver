@@ -36,7 +36,7 @@
                     <ul class="side-nav">
                       <li><a href="{{url('')}}">
                       <i class="fa fa-building fa-2x"> </i> 
-                          <span class="title">Quotation</span> 
+                          <span class="title">Projects</span> 
                       </a>
                       </li>
                     </ul>
