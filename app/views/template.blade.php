@@ -21,7 +21,7 @@
             <div class="medium-2 column no-padding left-side">
               <div class="user-info-container">
                   <div class="avatar-container">
-                    {{HTML::image('resources/images/Pic.jpg');}}
+                    {{HTML::image('resources/images/no-image.jpg');}}
                   </div>
                    <h6 class="title name no-margin">
                         <strong>Patrick James G. Lim</strong>
