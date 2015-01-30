@@ -83,6 +83,7 @@
         </section>
     </div>
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/jquery.js')}}
+    {{HTML::script('resources/libraries/jqueryui/js/jquery.ui.datepicker.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.js')}}

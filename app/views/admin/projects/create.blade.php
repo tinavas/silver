@@ -70,7 +70,7 @@
                  {{Form::label('deadline','Deadline', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 <input type="date" name="deadline" class="deadline">
+                 {{Form::input('date','deadline','', array('class'=>'lastname'))}}
              </div>
          </div>    
         </div>

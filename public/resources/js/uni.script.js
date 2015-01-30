@@ -6,5 +6,12 @@ $(document).ready( function () {
 		e.preventDefault();
 		$('.div-drop').toggleClass('dropdown');
 	});
+
+	if($('.datepicker').length)
+    {
+    	if (!Modernizr.inputtypes.date) {
+		    $('.datepicker').datepicker();
+		}
+    }
 });
 
