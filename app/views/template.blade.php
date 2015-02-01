@@ -14,7 +14,7 @@
     {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
-    {{HTML::style('//cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.css.')}}
+    {{HTML::style('//cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.css')}}
     @yield('head')
 </head>
 <body>  
@@ -24,7 +24,7 @@
                     {{HTML::image('resources/images/no-image.jpg');}}
                   </div>
                    <h6 class="title name no-margin">
-                        <strong>Patrick James G. Lim</strong>
+                        <strong>{{Sentry::getUser()->first_name . Sentry::getUser()->last_name}}</strong>
                     </h6>
 
                     <h6 class="title user-type no-margin">

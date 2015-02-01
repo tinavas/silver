@@ -21,4 +21,9 @@ class Project extends Eloquent
 	{
 		return $this->belongsToMany('User','user_load');
 	}
+
+	public function subscribers()
+	{
+		return $this->belongsToMany('User','user_load')->with('architect')->first();
+	}
 }
