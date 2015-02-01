@@ -1,4 +1,8 @@
-.content {height: 100%;}
+.content {height: auto;}
 
-div.dashboard .view-box > .chart-container {margin: 0 0 0 10px;}
-div.dashboard .view-box > .chart-container:after{ content: ' '; display: block; clear: both;}
+div.dashboard .view-box {margin: 40px 0 20px;}
+div.dashboard .view-box > .chart-container:after,
+div.dashboard .view-box > .chart-container > .chart-sub-container:after { content: ' '; display: block; clear: both;}
+div.dashboard .view-box > .chart-container > .chart-sub-container {margin: 0 0 20px;}
+div.dashboard .view-box > .chart-container > .chart-sub-container > div > canvas {padding: 0 20px;}
+div.dashboard .view-box > .chart-container > .chart-sub-container > select {width: 10em; display: block; margin: 5px 0; font-size: 14px;}

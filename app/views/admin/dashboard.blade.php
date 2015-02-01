@@ -8,20 +8,33 @@
 
 <div class="row dashboard">
     <div class="medium-12 large-centered column">
-
         <div class="view-box">
             <div class="chart-container">
-                <div class="charts-content column medium-6">
-                    <!-- charts here -->
+                <div class="chart-sub-container">
+                    <h4>Earnings</h4>
+                    {{Form::select('summary-earnings', array('M' => 'Monthly', 'Y' => 'Yearly'), 'M');}}
+                    <div class="column medium-6">
+                        <canvas id="line-status" style="height: 300px; width: 50%;"></canvas>
+                    </div>
+                    <div class="column medium-6">
+                        <canvas id="bar-status" style="height: 300px; width: 50%;" ></canvas>
+                    </div>
                 </div>
-                <div class="charts-content column medium-6">
-                    <!-- charts here -->
+                <div class="chart-sub-container">
+                    <h4>Expenses</h4>
+                    {{Form::select('summary-expenses', array('M' => 'Monthly', 'Y' => 'Yearly'), 'M');}}
+                    <div class="column medium-6">
+                        <canvas id="line2-status" style="height: 300px; width: 50%;"></canvas>
+                    </div>
+                    <div class="column medium-6">
+                        <canvas id="bar2-status" style="height: 300px; width: 50%;"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="view-box">
-          <table>
+            <table>
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -46,7 +59,7 @@
                     </td>
                   </tr>
                 </tbody>
-          </table>
+            </table>
         </div>
     </div>
 </div>
