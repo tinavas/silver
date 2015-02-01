@@ -35,6 +35,8 @@ Route::get('/admin/project/{projectId}/user/{userId}/delete','ProjectController@
 
 Route::get('/logout','LoginController@logout');
 
+Route::get('/architect','ArchitectController@showProjects');
+
 /* for design */
 $template = 'template';
 Route::get('/admin/quotation/create', function() use ($template)

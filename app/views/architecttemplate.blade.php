@@ -34,12 +34,18 @@
                <div class="sidenav-container">
                    
                     <ul class="side-nav">
-                      <li><a href="{{url('')}}">
+                      <li><a href="{{url('/architect')}}">
                       <i class="fa fa-building fa-2x"> </i> 
                           <span class="title">Projects</span> 
                       </a>
                       </li>
+                      <li><a href="{{url('')}}">
+                      <i class="fa fa-building fa-2x"> </i> 
+                          <span class="title">Quotations</span> 
+                      </a>
+                      </li>
                     </ul>
+
             
                </div>
                 
@@ -47,7 +53,7 @@
             
             <div class="medium-10 column no-padding right-side">
                 
-                <a href="#" class="icon logout">
+                <a href="{{URL::to('/logout')}}" class="icon logout">
                     <i class="fa fa-power-off"></i>
                 </a>
                  <a href="#" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
