@@ -39,6 +39,14 @@ Route::get('/admin/quotation/create', function() use ($template)
 	return $layout->nest('content', 'admin.quotation.create');
 });
 
+$template = 'template';
+Route::get('/admin/dashboard', function() use ($template)
+{
+	View::name($template, 'admin.dashboard');
+	$layout = View::of('admin.dashboard');
+	return $layout->nest('content', 'admin.dashboard');
+});
+
 $archtemplate = 'architecttemplate';
 Route::get('/architect/create', function() use ($archtemplate)
 {

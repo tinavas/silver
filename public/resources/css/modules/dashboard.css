@@ -1,0 +1,4 @@
+.content {height: 100%;}
+
+div.dashboard .view-box > .chart-container {margin: 0 0 0 10px;}
+div.dashboard .view-box > .chart-container:after{ content: ' '; display: block; clear: both;}
