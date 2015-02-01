@@ -7,7 +7,6 @@ class BagitoServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->app->bind('Bagito\Auth\AuthRepository','Bagito\Auth\SentryAuthRepository');
-		$this->app->bind('Bagito\Auth\AuthFilterRepository','Bagito\Auth\SentryAuthFilterRepository');
 		$this->app->bind('Bagito\Storage\UserRepository','Bagito\Storage\EloquentUserRepository');
 		$this->app->bind('Bagito\Storage\ProjectRepository','Bagito\Storage\EloquentProjectRepository');
 		$this->app->bind('Bagito\Storage\UserLoadRepository','Bagito\Storage\EloquentUserLoadRepository');

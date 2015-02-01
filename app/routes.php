@@ -11,6 +11,11 @@
 |
 */
 
+Route::filter('admin','AuthFilter@admin');
+
+Route::when('admin/*','admin');
+Route::when('admin','admin');
+
 /* Login Controller */
 Route::get('/','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
