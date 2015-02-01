@@ -18,4 +18,6 @@ interface UserRepository{
 
 	public function getAllArchitects();
 
+	public function getProjects($userId);
+
 }

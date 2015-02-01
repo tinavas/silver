@@ -65,24 +65,10 @@ class EloquentProjectRepository implements ProjectRepository
 	}
 
 	public function getNonSubscribers($projectId)
-	{
-		$subs = Project::find($projectId)->users()->get();
-		$array = [];
-		foreach($subs as $sub)
-		{
-			$array[] = $sub->id;
-		}
-
-		if(count($array) == 0){
-			$users = User::whereHas('roles',function($q) {
-				$q->where('group_id',2);
-			})->get();
-		}else{
-			$users = User::whereHas('roles',function($q) {
-				$q->where('group_id',2);
-			})->whereNotIn('id', $array)->get();
-		}
-		
+	{	
+		$users = User::whereHas('architect',function() use ($projectId){
+				
+		})->get();
 		return $users;
 	}
 

@@ -11,6 +11,11 @@
 |
 */
 
+Route::filter('admin','AuthFilter@admin');
+
+Route::when('admin/*','admin');
+Route::when('admin','admin');
+
 /* Login Controller */
 Route::get('/','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
@@ -29,6 +34,8 @@ Route::get('/admin/project/{projectId}/user/{userId}','ProjectController@storeUs
 Route::get('/admin/project/{projectId}/user/{userId}/delete','ProjectController@removeUser');
 
 Route::get('/logout','LoginController@logout');
+
+Route::get('/architect','ArchitectController@showProjects');
 
 /* for design */
 $template = 'template';

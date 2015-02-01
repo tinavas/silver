@@ -123,4 +123,9 @@ class EloquentUserRepository implements UserRepository
 
 		return  $users;
 	}
+
+	public function getProjects($user)
+	{
+		return $user->project()->get();
+	}
 }

@@ -49,5 +49,16 @@ class UsersTableSeeder extends Seeder {
 			'activated' => true
 		]);
 		$user->addGroup($adminGroup);
+
+		$user = Sentry::createUser([
+			"email" => 'ramosjosemari@gmail.com',
+			'password' => 'test',
+			'first_name' => 'Jose Mari',
+			'last_name' => 'Ramos',
+			'address' => '110 brgy Coloong II Valenzuela City',
+			'contact_number' => '+639054704478',
+			'activated' => true
+		]);
+		$user->addGroup($architectGroup);
 	}
 }
