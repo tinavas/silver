@@ -64,7 +64,7 @@
             </table>
         </div>
 
-        <div class="quotation-container table-title">
+        <div class="admin-quotation-container table-title">
             <h4>Quotations</h4>
             <table>
                   <thead>

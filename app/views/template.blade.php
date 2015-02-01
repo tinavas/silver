@@ -88,7 +88,6 @@
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.js')}}
     {{HTML::script('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js')}}
-    {{HTML::script('//cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.js')}}
     {{HTML::script('resources/js/chart.js')}}
     {{HTML::script('resources/js/uni.script.js')}}
     
