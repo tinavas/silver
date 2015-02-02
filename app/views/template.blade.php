@@ -14,6 +14,7 @@
     {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
+    {{HTML::style('resources/libraries/jqueryui/css/jquery.ui.all.css');}}
     {{HTML::style('//cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.css')}}
     @yield('head')
 </head>
@@ -82,6 +83,8 @@
         </section>
     </div>
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/jquery.js')}}
+    {{HTML::script('resources/libraries/jqueryui/js/jquery.ui.core.js')}}
+    {{HTML::script('resources/libraries/jqueryui/js/jquery.ui.widget.js')}}
     {{HTML::script('resources/libraries/jqueryui/js/jquery.ui.datepicker.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
