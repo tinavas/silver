@@ -26,4 +26,9 @@ class Project extends Eloquent
 	{
 		return $this->belongsToMany('User','user_load')->with('architect')->first();
 	}
+
+	public function quotations()
+	{
+		return $this->hasMany('Quotation');
+	}
 }

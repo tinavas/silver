@@ -35,7 +35,11 @@ Route::get('/admin/project/{projectId}/user/{userId}/delete','ProjectController@
 
 Route::get('/logout','LoginController@logout');
 
-Route::get('/architect','ArchitectController@showProjects');
+/*Architect*/
+
+Route::get('/architect','QuotationController@showProjects');
+Route::get('/architect/quotation','QuotationController@showProjects');
+Route::get('/architect/quotation/create/{id}','QuotationController@create');
 
 /* for design */
 $template = 'template';

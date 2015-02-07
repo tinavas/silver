@@ -4,7 +4,7 @@ use Bagito\Storage\UserRepository as User;
 use Bagito\Storage\ProjectRepository as Project;
 use Bagito\Auth\AuthRepository as Auth;
 
-class ArchitectController extends BaseController
+class QuotationController extends BaseController
 {
 
 	public function __construct(User $user, Project $project, Auth $auth)
@@ -13,6 +13,12 @@ class ArchitectController extends BaseController
 		$this->project = $project;
 		$this->auth = $auth;
 	}
+
+	public function create($id)
+	{
+		return View::make('architect.quotation.create',compact('id'));
+	}
+
 	public function showProjects()
 	{
 		//get auth version of user

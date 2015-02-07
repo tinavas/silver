@@ -5,9 +5,9 @@ class Entry extends Eloquent
 	/* Custom table name */
 	protected $table = "entries";
 
-	public function project()
+	public function quotation()
 	{
-		return $this->belongsTo('Project');
+		return $this->belongsTo('Quotation');
 	}
 
 }

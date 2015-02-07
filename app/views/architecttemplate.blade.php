@@ -20,14 +20,13 @@
             <div class="medium-2 column no-padding left-side">
               <div class="user-info-container">
                   <div class="avatar-container">
-                    {{HTML::image('resources/images/Pic.jpg');}}
+                    {{HTML::image('resources/images/no-image.jpg');}}
                   </div>
-                   <h6 class="title name no-margin">
-                        <strong>Patrick James G. Lim</strong>
+                    <h6 class="title name no-margin">
+                        <strong>{{Sentry::getUser()->first_name . Sentry::getUser()->last_name}}</strong>
                     </h6>
-
                     <h6 class="title user-type no-margin">
-                        Architect
+                        {{Sentry::getUser()->getGroups()[0]->name}}
                     </h6>
               </div>
               
