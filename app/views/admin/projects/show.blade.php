@@ -54,7 +54,7 @@
                         <td>{{$user->contact_number}}</td>
                         <td>{{$user->email}}</td>
                         <td>
-                          <a href="{{URL::to('/admin/project/' . $project->id . '/user/' . $user->id . '/delete')}}">Remove</a>
+                          <a href="{{URL::to('/admin/project/' . $project->id . '/user/' . $user->id . '/delete')}}"></a>
                         </td>
                       </tr>
                     @endforeach
