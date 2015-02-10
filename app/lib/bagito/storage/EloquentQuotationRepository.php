@@ -13,6 +13,7 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation->user_id = $userId;
 		$quotation->remarks = $inputs['remarks'];
 		$quotation->title = $inputs['title'];
+		$quotation->quotation_code = $this->nextQuotationCode($userId, $projectId);
 		$quotation->status = 0;
 		$quotation->save();
 
@@ -44,7 +45,7 @@ class EloquentQuotationRepository implements QuotationRepository
 		return $quotation;
 	}
 
-	public function getApproved()
+	public function getAllApproved()
 	{
 		$quotations = Quotation::where('status',2)->get();
 		return $quotations;
@@ -56,7 +57,7 @@ class EloquentQuotationRepository implements QuotationRepository
 		return $quotations;	
 	}
 
-	public function getOngoing()
+	public function getAllOngoing()
 	{
 		$quotations = Quotation::where('status',0)->get();
 		return $quotations;
@@ -68,7 +69,7 @@ class EloquentQuotationRepository implements QuotationRepository
 		return $quotation;
 	}
 
-	public function getActive()
+	public function getAllActive()
 	{
 		$quotations = Quotation::where('status',1)->get();
 		return $quotations;
@@ -81,11 +82,16 @@ class EloquentQuotationRepository implements QuotationRepository
 
 	public function getAllEntries($id)
 	{
-		return Quotation::find($id)->
+		return Quotation::find($id)->entries()->get();
 	}
 
-	public function countQuotation($projectId)
+	private function nextQuotationCode($userId,$projectId)
 	{
-		return Project::find($projectId)->quotation()->count();	
+		return Quotation::where('project_id',$projectId)->count() + 1;
+	}
+
+	public function getActive($projectId)
+	{
+		return Project::find($projectId)->quotations()->where('status',1)->get();
 	}
 }

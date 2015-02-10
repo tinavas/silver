@@ -1,4 +1,4 @@
-@extends('template')
+@extends('architecttemplate')
 
 @section('head')
 {{HTML::style('resources/css/modules/quotation/quotation-create.css');}}
@@ -9,6 +9,13 @@
 <div class="row quotation">
     <div class="medium-10 large-centered column">
       <h4 class="view-header"><i class="fa fa-user"></i> Quotation Information</h4>
+        @if($errors->has())
+            <span class = "error">
+                @foreach($errors->all() as $error)
+                    {{$error}} <br>
+                @endforeach
+            </span>
+        @endif
       <div class="view-box">
             {{Form::open(array('url' => '/architect/quotation/create/' . $id,'method' => 'POST'))}}
          <div class="row">

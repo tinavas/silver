@@ -21,7 +21,7 @@ interface QuotationRepository
 
 	public function getAllQuotation($projectid); 
 
-	public function create($inputs);
+	public function create($userId,$projectId,$inputs);
 
 	public function delete($id);
 
@@ -30,5 +30,7 @@ interface QuotationRepository
 	public function changeStatus($id, $status);
 
 	public function getAllEntries($id);
+
+	public function getActive($projectId);
 
 }

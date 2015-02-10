@@ -40,6 +40,8 @@ Route::get('/logout','LoginController@logout');
 Route::get('/architect','QuotationController@showProjects');
 Route::get('/architect/quotation','QuotationController@showProjects');
 Route::get('/architect/quotation/create/{id}','QuotationController@create');
+Route::post('/architect/quotation/create/{id}','QuotationController@store');
+Route::get('/architect/quotation/view-project/{id}','QuotationController@viewProject');
 
 /* for design */
 $template = 'template';

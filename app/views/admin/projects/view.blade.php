@@ -67,7 +67,7 @@
                                 <i class="fa fa-pencil fa-2x"></i>
                          </a>
                         <a href="{{URL::to('admin/projects/' . $project->id)}}">
-                           <i class="fa fa-icon-eye-open fa-2x"></i> View Project
+                           <i class="fa fa-eye fa-2x"></i>
                         </a>
                       </td>
                     </tr>
