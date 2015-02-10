@@ -17,7 +17,7 @@
 						<th>Project Description</th>
 						<th>Deadline</th>
 						<th>Create Quotation</th>
-						<th>View Quotations</th>
+						<th>More Details</th>
 					</thead>
 					<tbody>
 					@foreach($projects as $project)
@@ -27,7 +27,7 @@
 							<td>{{$project->description}}</td>
 							<td>{{$project->deadline}}</td>
 							<td><a href="{{URL::to('/architect/quotation/create/' . $project->id)}}">Create</a></td>
-							<td><a href="">View</a></td>
+							<td><a href="{{URL::to('/architect/quotation/view-project/' . $project->id)}}">View</a></td>
 						</tr>
 					@endforeach
 					</tbody>

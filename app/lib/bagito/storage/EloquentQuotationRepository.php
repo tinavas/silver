@@ -92,6 +92,6 @@ class EloquentQuotationRepository implements QuotationRepository
 
 	public function getActive($projectId)
 	{
-		return Project::find($projectId)->quotations()->where('status',1)->get();
+		return Project::find($projectId)->quotations()->where('status','1')->get();
 	}
 }
