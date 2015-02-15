@@ -64,6 +64,38 @@ class QuotationController extends BaseController
 	{
 		$user = $this->auth->getCurrentUser();	
 		$quotations = $this->quotation->getAllQuotationByUser($user->id);
-		return View::make('architect.quotation.index',compact('quotations','projects'));
+		return View::make('architect.quotation.index',compact('quotations'));
+	}
+
+	public function edit($id)
+	{
+		$quotation = $this->quotation->find($id);
+		return View::make('architect.quotation.edit',compact('quotation'));
+	}
+
+	public function update($id)
+	{
+		$rules = array(
+			'title' => 'required',
+			'remarks' => 'required',
+		);
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+
+		$this->quotation->update($id,Input::all());
+
+		return Redirect::to('/architect/quotations');
+
+	}
+
+	public function view($id)
+	{
+		$quotation = $this->quotation->find($id);
+		$project = $quotation->project()->first();
+		return View::make('architect.quotation.view-quotations',compact('quotation','project'));
 	}
 }

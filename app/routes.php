@@ -42,6 +42,9 @@ Route::get('/architect/quotations','QuotationController@showQuotations');
 Route::get('/architect/quotation/create/{id}','QuotationController@create');
 Route::post('/architect/quotation/create/{id}','QuotationController@store');
 Route::get('/architect/quotation/view-project/{id}','QuotationController@viewProject');
+Route::get('/architect/quotation/edit/{id}','QuotationController@edit');
+Route::post('/architect/quotation/edit/{id}','QuotationController@update');
+Route::get('/architect/quotation/view/{id}','QuotationController@view');
 
 /* for design */
 $template = 'template';

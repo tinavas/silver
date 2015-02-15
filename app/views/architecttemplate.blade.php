@@ -14,6 +14,7 @@
    {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
+    {{HTML::style('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.css')}}
     @yield('head')
 </head>
 <body>  
