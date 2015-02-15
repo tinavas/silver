@@ -94,4 +94,9 @@ class EloquentQuotationRepository implements QuotationRepository
 	{
 		return Project::find($projectId)->quotations()->where('status','1')->get();
 	}
+
+	public function getAllQuotationByUser($userId)
+	{
+		return Quotation::where('user_id',$userId)->get();
+	}
 }

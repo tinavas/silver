@@ -32,6 +32,8 @@
 					@endforeach
 					</tbody>
 				</table>
+			@else
+        		<h6>You have do not belong to any project!</h6>
 			@endif
       </div>
     </div>

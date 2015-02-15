@@ -33,4 +33,6 @@ interface QuotationRepository
 
 	public function getActive($projectId);
 
+	public function getAllQuotationByUser($userId);
+
 }

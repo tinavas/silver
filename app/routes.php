@@ -38,7 +38,7 @@ Route::get('/logout','LoginController@logout');
 /*Architect*/
 
 Route::get('/architect','QuotationController@showProjects');
-Route::get('/architect/quotation','QuotationController@showProjects');
+Route::get('/architect/quotations','QuotationController@showQuotations');
 Route::get('/architect/quotation/create/{id}','QuotationController@create');
 Route::post('/architect/quotation/create/{id}','QuotationController@store');
 Route::get('/architect/quotation/view-project/{id}','QuotationController@viewProject');

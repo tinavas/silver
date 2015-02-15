@@ -1,75 +1,55 @@
 @extends('architecttemplate')
 
 @section('head')
-{{HTML::style('resources/css/modules/quotation/quotation-show.css');}}
+{{HTML::style('resources/css/modules/quotation/quotation-create.css');}}
 @endsection
 
 @section('content')
-
 <div class="row quotation">
-    <div class="medium-12 large-centered column view-box">
-        <div class="project-container table-title">
-          <h4>Projects</h4>
-          <table>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Budget</th>
-                    <th>Deadline</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>00001</td>
-                    <td>Bagito Express Building</td>
-                    <td>sa PUSO mo!!</td>
-                    <td>1,000,000</td>
-                    <td>2015-01-15</td>
-                    <td>
-                      <a href="#">
-                        <i class="fa fa-eye fa-2x div-toggle"></i>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-          </table>
-        </div>
-        <div class="quotation-container table-title div-drop">
-            <h4>Quotations</h4>
-            <table>
-                  <thead>
-                    <tr>
-                      <th>Status</th>
-                      <th>Quotation ID</th>
-                      <th>Date Added</th>
-                      <th>Subject</th>
-                      <th>Name</th>
-                      <th>Contact No.</th>
-                      <th>Email</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Rejected</td>
-                      <td>0001</td>
-                      <td>{{date('F d, Y')}}</td>
-                      <td>Cost of Construction([labor, materials])</td>
-                      <td>Turingan, Joshua B.</td>
-                      <td>09054005755</td>
-                      <th>turingan.joshua@gmail.com</th>
-                      <td>
-                        <a href="{{URL::to('')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
-                    </tr>
-                  </tbody>
-            </table>
-        </div>
+    <div class="medium-10 large-centered column">
+      <h4 class="view-header"><i class="fa fa-user"></i>Your Quotations:</h4>
+      <div class="view-box">
+      @if(count($quotations) != 0)
+        <table class = "data-table">
+          <thead>
+            <th>Quotation ID</th>
+            <th>Project Name</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Remarks</th>
+            <th>Status</th>
+            <th>More Details</th>
+            <th>Edit</th>
+          </thead>
+          <tbody>
+          @foreach($quotations as $quotation)
+            <tr>
+              <td>{{str_pad($quotation->project()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
+              <td>{{$quotation->title}}</td>
+              <td>{{date('F j, Y',strtotime($quotation->created_at))}}</td>
+              <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
+              <td>{{$quotation->remarks}}</td>
+              <td>
+                @if($quotation->status == 0)
+                  On-Going
+                @elseif($quotation->status == 1)
+                  Active (For approval)
+                @elseif($quotation->status == -1)
+                  Rejected
+                @elseif($quotation->status == 2)
+                  Done
+                @endif
+              </td>
+              <td><a href="">View</a></td>
+              <td><a href="">Edit</a></td>
+            </tr>
+          @endforeach
+          </tbody>
+        </table>
+      @else
+        <h6>You have no quotations contributed!</h6>
+      @endif
+      </div>
     </div>
 </div>
 @endsection

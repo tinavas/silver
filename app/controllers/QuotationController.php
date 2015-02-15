@@ -57,6 +57,13 @@ class QuotationController extends BaseController
 		$quotations = $this->quotation->getActive($id);
 		$project = $this->project->find($id);
 		$users = $this->project->getSubscribers($id)->get();
-		return View::make('architect.quotation.show',compact('quotations','project','users'));
+		return View::make('<architect class="qu"></architect>otation.show',compact('quotations','project','users'));
+	}
+
+	public function showQuotations()
+	{
+		$user = $this->auth->getCurrentUser();	
+		$quotations = $this->quotation->getAllQuotationByUser($user->id);
+		return View::make('architect.quotation.index',compact('quotations','projects'));
 	}
 }

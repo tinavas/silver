@@ -45,7 +45,6 @@ class ProjectController extends \BaseController {
 	{
 		//
 		$rules = array(
-			'code' => 'required',
 			'title' => 'required',
 			'description' => 'required',
 			'location' => 'required',

@@ -25,7 +25,7 @@
                     {{HTML::image('resources/images/no-image.jpg');}}
                   </div>
                    <h6 class="title name no-margin">
-                        <strong>{{Sentry::getUser()->first_name . Sentry::getUser()->last_name}}</strong>
+                        <strong>{{Sentry::getUser()->first_name . ' ' . Sentry::getUser()->last_name}}</strong>
                     </h6>
                     <h6 class="title user-type no-margin">
                         {{Sentry::getUser()->getGroups()[0]->name}}

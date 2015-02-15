@@ -45,12 +45,12 @@
                    
                    @foreach($projects as $project)
                     <tr>
-                      <td>{{str_pad($project->id, 5, "0", STR_PAD_LEFT)}}</td>
+                      <td>{{str_pad($project->id, 5, "00", STR_PAD_LEFT)}}</td>
                       <td>{{$project->title}}</td>
                       <td>{{$project->location}}</td>
                       <td>{{number_format($project->budget,2)}}</td>
                       <td>{{$repo->getNumberOfSubscribers($project->id)}}</td>
-                      <td>{{$project->deadline}}</td>
+                      <td>{{date('F j, Y',strtotime($project->deadline))}}</td>
                       <td>
                         @if($project->status == 0)
                           Pending
