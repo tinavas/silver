@@ -28,7 +28,7 @@ class EloquentProjectRepository implements ProjectRepository
 		$project->description = $inputs['description'];
 		$project->location = $inputs['location'];
 		$project->budget = $inputs['budget'];
-		$project->deadline = strtotime($inputs['deadline']);
+		$project->deadline = date('Y-m-d',strtotime($inputs['deadline']));
 
 		$project->save();
 		return $project;
@@ -41,7 +41,7 @@ class EloquentProjectRepository implements ProjectRepository
 		$project->description = $inputs['description'];
 		$project->location = $inputs['location'];
 		$project->budget = $inputs['budget'];
-		$project->deadline = strtotime($inputs['deadline']);
+		$project->deadline = date('Y-m-d',strtotime($inputs['deadline']));
 		$project->save();
 		return $project;
 	}

@@ -23,16 +23,6 @@
             {{Form::open(array('url' => '/admin/projects','method' => 'POST'))}}
          <div class="row">
              <div class="medium-2 column">
-                {{Form::label('code','Code', array('class' => 'inline right'))}}
-             </div>
-             
-             <div class="medium-10 column">
-                  {{Form::text('code','',array('class'=> 'lastname'))}}
-             </div>
-         </div>
-         
-         <div class="row">
-             <div class="medium-2 column">
                  {{Form::label('title','Title', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
