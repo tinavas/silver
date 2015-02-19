@@ -60,5 +60,16 @@ class UsersTableSeeder extends Seeder {
 			'activated' => true
 		]);
 		$user->addGroup($architectGroup);
+
+		$user = Sentry::createUser([
+			"email" => 'turingan.joshua@gmail.com',
+			'password' => 'test',
+			'first_name' => 'Joshua',
+			'last_name' => 'Turingan',
+			'address' => '983 metom st. brgy. comm. q.c',
+			'contact_number' => '+639054005755',
+			'activated' => true
+		]);
+		$user->addGroup($architectGroup);
 	}
 }
