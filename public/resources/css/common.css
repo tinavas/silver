@@ -99,6 +99,9 @@ a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button, label {
     font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.child-entry, .sub-header-entry{
+    display:none;
+}
 
 div.quotation-container { height: 0; transition: 0.5; -webkit-transition: 0.5; -moz-transition: 0.5; overflow: hidden; }
 div.dropdown {height: 100%;}

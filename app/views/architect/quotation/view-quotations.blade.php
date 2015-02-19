@@ -32,6 +32,7 @@
             <h6>Date Created: {{date('F j, Y, g:i a',strtotime($project->created_at))}}</h6>
         </div>
         <h4 class="view-header"><i class="fa fa-building"></i>Entries</h4>
+          <a href="{{URL::to('/architect/entry/create/' . $quotation->id)}}">Add New Entry</a>
         <div class="project-collab-container table-title">
     </div>
 </div>

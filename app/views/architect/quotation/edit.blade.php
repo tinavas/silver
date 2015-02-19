@@ -36,7 +36,7 @@
          </div>
         <div class="row">
             <div class="medium-12 column">
-                {{Form::submit('update', array('class'=>'right button submit'))}}
+                {{Form::submit('Update', array('class'=>'right button submit'))}}
                 {{Form::close()}}
             </div>
         </div>

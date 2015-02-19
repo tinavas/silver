@@ -14,12 +14,20 @@ $(document).ready( function () {
 		}
     }
 
+    $('.type').change(function(){
+    	$option = $('.type').val();
 
-
-
-
-
-
+    	if($option == 1){
+    		$('.child-entry').hide();
+    		$('.sub-header-entry').hide();
+    	}else if($option == 2){
+    		$('.child-entry').hide();
+    		$('.sub-header-entry').slideToggle();
+    	}else{
+    		$('.child-entry').slideToggle();
+    		$('.sub-header-entry').hide();
+    	}
+    });
 
     /* CHARTS */
 

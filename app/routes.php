@@ -46,6 +46,8 @@ Route::get('/architect/quotation/edit/{id}','QuotationController@edit');
 Route::post('/architect/quotation/edit/{id}','QuotationController@update');
 Route::get('/architect/quotation/view/{id}','QuotationController@view');
 
+Route::get('/architect/entry/create/{id}','EntryController@create');
+
 /* for design */
 $template = 'template';
 Route::get('/admin/quotation/create', function() use ($template)
