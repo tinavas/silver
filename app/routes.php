@@ -47,6 +47,8 @@ Route::post('/architect/quotation/edit/{id}','QuotationController@update');
 Route::get('/architect/quotation/view/{id}','QuotationController@view');
 
 Route::get('/architect/entry/create/{id}','EntryController@create');
+Route::post('/architect/entry/create/{id}','EntryController@store');
+Route::get('/architect/entry/delete/{id}','EntryController@remove');
 
 /* for design */
 $template = 'template';

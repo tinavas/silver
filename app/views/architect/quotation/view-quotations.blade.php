@@ -14,6 +14,9 @@
           <h6>Created At: {{date('F j, Y',strtotime($quotation->created_at))}}</h6>
           <h6>Last Update: {{date('F j, Y',strtotime($quotation->updated_at))}}</h6>
           <h6>Remarks: {{$quotation->remarks}}</h6>
+            <div class="medium-10">
+                <a href="{{URL::to('/architect/entry/create/' . $quotation->id)}}" class = "button">Open Quotation Entries Editor</a>
+            </div>
         </div>
         <h4 class="view-header"><i class="fa fa-building"></i> Project Information</h4>
         <div class="project-desc">
@@ -31,9 +34,6 @@
             <h6>Description: {{$project->description}}</h6>
             <h6>Date Created: {{date('F j, Y, g:i a',strtotime($project->created_at))}}</h6>
         </div>
-        <h4 class="view-header"><i class="fa fa-building"></i>Entries</h4>
-          <a href="{{URL::to('/architect/entry/create/' . $quotation->id)}}">Add New Entry</a>
-        <div class="project-collab-container table-title">
     </div>
 </div>
 @endsection

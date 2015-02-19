@@ -18,14 +18,14 @@ $(document).ready( function () {
     	$option = $('.type').val();
 
     	if($option == 1){
-    		$('.child-entry').hide();
-    		$('.sub-header-entry').hide();
+    		$('.child-entry').slideUp();
+    		$('.sub-header-entry').slideUp();
     	}else if($option == 2){
-    		$('.child-entry').hide();
+    		$('.child-entry').slideUp();
     		$('.sub-header-entry').slideToggle();
     	}else{
     		$('.child-entry').slideToggle();
-    		$('.sub-header-entry').hide();
+    		$('.sub-header-entry').slideUp();
     	}
     });
 
