@@ -97,6 +97,14 @@ class EloquentQuotationRepository implements QuotationRepository
 
 	public function getAllQuotationByUser($userId)
 	{
-		return Quotation::where('user_id',$userId)->get();
+		return Quotation::where('user_id',$userId)->where('for_approval',0)->get();
 	}
+
+	public function tagAsForApproval($id)
+	{
+		$quotation = Quotation::find($id);
+		$quotation->for_approval = 1;
+		$quotation->save();
+	}
+
 }

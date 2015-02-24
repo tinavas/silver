@@ -4,6 +4,7 @@ use Bagito\Storage\UserRepository as User;
 use Bagito\Storage\ProjectRepository as Project;
 use Bagito\Auth\AuthRepository as Auth;
 use Bagito\Storage\QuotationRepository as Quotation;
+use Bagito\Utilities\BagitoException;
 
 class QuotationController extends BaseController
 {
@@ -96,6 +97,26 @@ class QuotationController extends BaseController
 	{
 		$quotation = $this->quotation->find($id);
 		$project = $quotation->project()->first();
-		return View::make('architect.quotation.view-quotations',compact('quotation','project'));
+		return View::make('architect.quotation.view-quotations',compact('quotation','project','id'));
 	}
+
+	public function changeStatus($id)
+	{
+		try 
+		{
+			$user = $this->auth->getCurrentUser();
+			$username = $user->email;
+			$password = Input::get('password');
+			$user = $this->auth->authenticate($username, $password);
+		} 
+		catch (BagitoException $e) 
+		{
+			Session::flash('errorMessage',$e->getMessage());
+			return Redirect::back();
+		}
+		Session::flash('notification','Quotation Updated Successfuly');
+		$this->quotation->tagAsForApproval($id);
+		return Redirect::back();
+	}
+
 }

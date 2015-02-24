@@ -45,6 +45,7 @@ Route::get('/architect/quotation/view-project/{id}','QuotationController@viewPro
 Route::get('/architect/quotation/edit/{id}','QuotationController@edit');
 Route::post('/architect/quotation/edit/{id}','QuotationController@update');
 Route::get('/architect/quotation/view/{id}','QuotationController@view');
+Route::post('/architect/quotation/tag-as-for-approval/{id}', 'QuotationController@changeStatus');
 
 Route::get('/architect/entry/create/{id}','EntryController@create');
 Route::post('/architect/entry/create/{id}','EntryController@store');

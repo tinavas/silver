@@ -35,4 +35,6 @@ interface QuotationRepository
 
 	public function getAllQuotationByUser($userId);
 
+	public function tagAsForApproval($id);
+
 }
