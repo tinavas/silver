@@ -113,3 +113,6 @@ a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button, label {
 }
 div.quotation-container { height: 0; transition: 0.5; -webkit-transition: 0.5; -moz-transition: 0.5; overflow: hidden; }
 div.dropdown {height: 100%;}
+#DataTables_Table_0_paginate a{
+    margin-left:5px;
+}

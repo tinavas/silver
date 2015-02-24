@@ -1,4 +1,4 @@
-@extends('architecttemplate')
+@extends('entry-template')
 
 @section('head')
 {{HTML::style('resources/css/modules/quotation/quotation-create.css')}}
@@ -8,7 +8,6 @@
     }   
 </style>
 @endsection
-
 @section('content')
 <div class="row quotation">
     <div class="medium-10 large-centered column">
@@ -20,7 +19,8 @@
             <a href = "#" class = "close">&times;</a>
         </span>
     @endif
-      <a href="#" data-reveal-id="myModal" class = "button">Add New Entry</a>
+        <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button">Return</a>
+        <a href="#" data-reveal-id="myModal" class = "button right">Add New Entry</a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else
@@ -37,8 +37,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $superTotal = 0 ?>
                 @foreach($entries as $entry)
-                    <tr class = "header"><td colspan = "6"><h5><b>{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}" style="color:white">Remove</a></span></h5></td></tr>
+                    <tr><td colspan = "6"><h5><b>{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></h5></td></tr>
                     <?php $parentSum = 0 ?>
                     @foreach($entry->child() as $subHeader)
                         <tr>
@@ -71,8 +72,10 @@
                         @endforeach
                         </tr>
                     @endforeach
-                     <tr class = "header"><td colspan = "6"><h5><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></h5></td></tr>
+                     <tr><td colspan = "6" class = "left"><h5><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></h5></td></tr>
+                     <?php $superTotal += $parentSum ?>
                 @endforeach
+                <tr><td colspan = "6"> <h2 class = "right">Total: {{number_format($superTotal,2)}}</h2></td></tr>
                 </tbody>
                 </table>
             </div>
