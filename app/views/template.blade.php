@@ -12,9 +12,9 @@
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
    <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
     {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
+    {{HTML::style('resources/libraries/jqueryui/css/jquery.ui.all.css')}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
-    {{HTML::style('resources/libraries/jqueryui/css/jquery.ui.all.css')}}
     {{HTML::style('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.css')}}
     @yield('head')
 </head>
@@ -43,14 +43,21 @@
                       </li>
                       <li>
                           <a href = "{{url('/admin')}}">
-                          <i class="fa fa-user fa-2x"></i> 
-                          <span class="title">Users</span>
+                            <i class="fa fa-user fa-2x"></i> 
+                            <span class="title">Users</span>
                           </a>
                       </li>
-                      <li><a href="{{url('/admin/projects')}}">
-                      <i class="fa fa-building fa-2x"> </i> 
+                      <li>
+                        <a href="{{url('/admin/projects')}}">
+                          <i class="fa fa-building fa-2x"> </i> 
                           <span class="title">Projects</span> 
-                      </a>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{{url('/admin/budgets')}}">
+                          <i class="fa fa-money fa-2x"> </i> 
+                          <span class="title">Budgets</span> 
+                        </a>
                       </li>
                     </ul>
             

@@ -2,6 +2,12 @@
 
 class BudgetsController extends \BaseController {
 
+	function __construct(){
+		$this->layout = 'template';
+		$this->beforeFilter('csrf', array('only' =>
+                    array('store', 'update', 'destroy')));
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /budgets
@@ -11,6 +17,7 @@ class BudgetsController extends \BaseController {
 	public function index()
 	{
 		//
+		$this->layout->content = View::make('admin.budgets.index');
 	}
 
 	/**
@@ -22,6 +29,7 @@ class BudgetsController extends \BaseController {
 	public function create()
 	{
 		//
+		
 	}
 
 	/**

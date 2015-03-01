@@ -57,6 +57,9 @@ Route::post('/architect/entry/create/{id}','EntryController@store');
 Route::get('/architect/entry/delete/{id}','EntryController@remove');
 Route::get('/architect/viewer','QuotationController@viewOtherQuotations');
 
+Route::resource('/admin/budgets','BudgetsController');
+Route::resource('/admin/budgets/create','BudgetsController');
+
 /* for design */
 $template = 'template';
 Route::get('/admin/quotation/create', function() use ($template)
@@ -66,7 +69,20 @@ Route::get('/admin/quotation/create', function() use ($template)
 	return $layout->nest('content', 'admin.quotation.create');
 });
 
-$template = 'template';
+/*Route::get('/admin/budgets', function() use ($template)
+{
+	View::name($template, 'admin.budgets.index');
+	$layout = View::of('admin.budgets.index');
+	return $layout->nest('content', 'admin.budgets.index');
+});*/
+
+Route::get('/admin/budgets/create', function() use ($template)
+{
+	View::name($template, 'admin.budgets.create');
+	$layout = View::of('admin.budgets.create');
+	return $layout->nest('content', 'admin.budgets.create');
+});
+
 Route::get('/admin/dashboard', function() use ($template)
 {
 	View::name($template, 'admin.dashboard');
@@ -75,12 +91,6 @@ Route::get('/admin/dashboard', function() use ($template)
 });
 
 $archtemplate = 'architecttemplate';
-Route::get('/architect/create', function() use ($archtemplate)
-{
-	View::name($archtemplate, 'architect.quotation.create');
-	$layout = View::of('architect.quotation.create');
-	return $layout->nest('content', 'architect.quotation.create');
-});
 
 Route::get('/architect/index', function() use ($archtemplate)
 {

@@ -1,4 +1,4 @@
-.content { height: auto;}
+.content { min-height: 600px;}
 
 #projects .search-box-container {
     margin-top: 56px;
