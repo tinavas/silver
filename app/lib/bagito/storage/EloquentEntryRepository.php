@@ -61,4 +61,18 @@ class EloquentEntryRepository implements EntryRepository
 		$entry->childWithThrashed()->delete();
 		$entry->delete();
 	}
+
+	public function verifyEntry($userId, $entryId)
+	{
+		$result = Entry::find($entryId);
+		$quotation = $result->quotation()->first();
+		if(count($quotation) != 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

@@ -11,4 +11,8 @@ class Quotation extends Eloquent
 	{
 		return $this->hasMany('Entry');
 	}
+	public function user()
+	{
+		return $this->belongsTo('User');
+	}
 }

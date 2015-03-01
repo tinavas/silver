@@ -16,6 +16,11 @@ Route::filter('admin','AuthFilter@admin');
 Route::when('admin/*','admin');
 Route::when('admin','admin');
 
+Route::filter('architect','AuthFilter@architect');
+
+Route::when('architect/*','architect');
+Route::when('architect/','architect');
+
 /* Login Controller */
 Route::get('/','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
@@ -50,6 +55,7 @@ Route::post('/architect/quotation/tag-as-for-approval/{id}', 'QuotationControlle
 Route::get('/architect/entry/create/{id}','EntryController@create');
 Route::post('/architect/entry/create/{id}','EntryController@store');
 Route::get('/architect/entry/delete/{id}','EntryController@remove');
+Route::get('/architect/viewer','QuotationController@viewOtherQuotations');
 
 /* for design */
 $template = 'template';

@@ -2,6 +2,7 @@
 
 use Quotation;
 use Project;
+use UserLoad;
 
 class EloquentQuotationRepository implements QuotationRepository
 {
@@ -107,4 +108,38 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation->save();
 	}
 
+	public function verifyQuotation($userId, $quotationId)
+	{
+		$result = Quotation::where('user_id',$userId)->where('id',$quotationId);
+		if(count($result) != 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function getOtherQuotation($id)
+	{
+		$some = array();
+		$load = UserLoad::where('user_id',$id)->get();
+		foreach($load as $l)
+		{
+			$some[] = $l->project_id;
+		}
+		if(count($some) != 0)
+		{
+
+			return Quotation::where('user_id', '!=' , $id)
+							->where('for_approval', 1)
+							->where('status',0)
+							->whereIn('project_id',$some)->get();
+		}
+		else
+		{
+			return null;
+		}
+	}
 }

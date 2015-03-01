@@ -24,7 +24,6 @@ class EntryController extends BaseController
 		$parentsArray = $this->entry->getHeaders($id);
 		return View::make('architect.entry.create',compact('parents','id','subs'))->with('entries',$parentsArray);
 	}
-
 	public function store($id){
 		$rules = array();
 		$option = Input::get('type');

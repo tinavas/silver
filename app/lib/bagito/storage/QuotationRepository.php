@@ -37,4 +37,8 @@ interface QuotationRepository
 
 	public function tagAsForApproval($id);
 
+	public function verifyQuotation($userId, $quotationId);
+
+	public function getOtherQuotation($id);
+
 }

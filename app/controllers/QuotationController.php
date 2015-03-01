@@ -48,8 +48,8 @@ class QuotationController extends BaseController
 		else
 		{
 			$user = $this->auth->getCurrentUser();
-			$this->quotation->create($user->id, $id, Input::all());
-			return 'YEHEY';
+			$quotation = $this->quotation->create($user->id, $id, Input::all());
+			return Redirect::to('architect/quotation/view/' . $quotation->id);
 		}
 	}
 
@@ -117,6 +117,14 @@ class QuotationController extends BaseController
 		Session::flash('notification','Quotation Updated Successfuly');
 		$this->quotation->tagAsForApproval($id);
 		return Redirect::back();
+	}
+
+	public function viewOtherQuotations()
+	{
+		$user = $this->auth->getCurrentUser();
+		$quotations = $this->quotation->getOtherQuotation($user->id);
+		//return var_dump($quotations);
+		return View::make('architect.approve.index',compact('quotations'));
 	}
 
 }

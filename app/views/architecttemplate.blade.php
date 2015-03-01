@@ -41,16 +41,17 @@
                       </li>
                       <li><a href="{{url('/architect/quotations')}}">
                       <i class="fa fa-building fa-2x"> </i> 
-                          <span class="title">Quotations</span> 
+                          <span class="title">My Quotations</span> 
+                      </a>
+                      </li>
+                      <li><a href="{{url('/architect/viewer')}}">
+                      <i class="fa fa-building fa-2x"> </i> 
+                          <span class="title">Quotation Viewer</span> 
                       </a>
                       </li>
                     </ul>
-
-            
                </div>
-                
             </div>
-            
             <div class="medium-10 column no-padding right-side">
                 
                 <a href="{{URL::to('/logout')}}" class="icon logout">
