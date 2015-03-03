@@ -66,4 +66,24 @@ class EntryController extends BaseController
 		$this->entry->remove($id);
 		return Redirect::back();
 	}
+
+	public function show($id)
+	{
+
+		$parentsArray = $this->entry->getParents($id);
+		$subsArray = $this->entry->getSubHeaders($id);
+		$subs = array();
+		$parents = array();
+		foreach($parentsArray as $parent)
+		{
+			$parents[$parent->id] = $parent->description;
+		}
+
+		foreach($subsArray as $sub)
+		{
+			$subs[$sub->id] = $sub->description;
+		}
+		$parentsArray = $this->entry->getHeaders($id);
+		return View::make('architect.approve.show',compact('parents','id','subs'))->with('entries',$parentsArray);
+	}
 }

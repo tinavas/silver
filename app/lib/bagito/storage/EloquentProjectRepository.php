@@ -99,4 +99,11 @@ class EloquentProjectRepository implements ProjectRepository
 		$load = UserLoad::where('user_id' , '=' , $userId)->where('project_id', '=' , $projectId)->first();
 		$load->delete();
 	}
+
+
+	public function inProject($userId, $projectId)
+	{
+		$load =  UserLoad::where('user_id' , '=' , $userId)->where('project_id', '=' , $projectId)->get();
+		return (count($load) != 0) ? true : false;
+	}
 }

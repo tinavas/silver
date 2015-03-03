@@ -24,4 +24,6 @@ interface ProjectRepository
 
 	public function removeUser($userId, $projectId);
 
+	public function inProject($userId, $projectId);
+
 }

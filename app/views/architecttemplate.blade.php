@@ -40,13 +40,13 @@
                       </a>
                       </li>
                       <li><a href="{{url('/architect/quotations')}}">
-                      <i class="fa fa-building fa-2x"> </i> 
+                      <i class="fa fa-book fa-2x"> </i> 
                           <span class="title">My Quotations</span> 
                       </a>
                       </li>
                       <li><a href="{{url('/architect/viewer')}}">
-                      <i class="fa fa-building fa-2x"> </i> 
-                          <span class="title">Quotation Viewer</span> 
+                      <i class="fa fa-binoculars fa-2x"> </i> 
+                          <span class="title">Other Quotations</span> 
                       </a>
                       </li>
                     </ul>

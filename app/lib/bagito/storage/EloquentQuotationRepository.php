@@ -3,6 +3,7 @@
 use Quotation;
 use Project;
 use UserLoad;
+use Approval;
 
 class EloquentQuotationRepository implements QuotationRepository
 {
@@ -124,18 +125,34 @@ class EloquentQuotationRepository implements QuotationRepository
 	public function getOtherQuotation($id)
 	{
 		$some = array();
+		$hahaha = array();
 		$load = UserLoad::where('user_id',$id)->get();
+		$approved = Approval::distinct()->select('quotation_id')->where('user_id',$id)->groupBy('quotation_id')->get();
 		foreach($load as $l)
 		{
 			$some[] = $l->project_id;
 		}
+
+		foreach($approved as $a)
+		{
+			$hahaha[] = $a->quotation_id;
+		}
 		if(count($some) != 0)
 		{
+			if(count($approved) != 0){
 
-			return Quotation::where('user_id', '!=' , $id)
-							->where('for_approval', 1)
-							->where('status',0)
-							->whereIn('project_id',$some)->get();
+				return Quotation::where('user_id', '!=' , $id)
+								->where('for_approval', 1)
+								->where('status',0)
+								->whereIn('project_id',$some)
+								->whereNotIn('id',$hahaha)
+								->get();
+			}else{
+				return Quotation::where('user_id', '!=' , $id)
+								->where('for_approval', 1)
+								->where('status',0)
+								->whereIn('project_id',$some)->get();
+			}
 		}
 		else
 		{
