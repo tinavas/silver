@@ -2,15 +2,16 @@
 
 use Bagito\Storage\ProjectRepository as Project;
 use Bagito\Storage\UserRepository as User;
+use Bagito\Storage\QuotationRepository as Quotation;
 
 class ProjectController extends \BaseController {
 
 	private $pages = 10;
 
-	public function __construct(Project $project, User $user)
-	{
+	public function __construct(Project $project, User $user, Quotation $quotation){
 		$this->project = $project;
 		$this->user = $user;
+		$this->quotation = $quotation;
 	}
 
 	/**
@@ -73,7 +74,8 @@ class ProjectController extends \BaseController {
 	{
 		$project = $this->project->find($id);
 		$users = $this->project->getSubscribers($id);
-		return View::make('admin.projects.show',compact('project'))->with('users',$users->get());
+		$quotations = $this->project->getForApprovalQuotations($project->id);
+		return View::make('admin.projects.show',compact('project','quotations'))->with('users',$users->get());
 	}
 
 

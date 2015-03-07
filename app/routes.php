@@ -58,6 +58,9 @@ Route::post('/architect/entry/create/{id}','EntryController@store');
 Route::get('/architect/entry/delete/{id}','EntryController@remove');
 Route::get('/architect/viewer','QuotationController@viewOtherQuotations');
 Route::get('/architect/viewer/disapprove/{id}', 'QuotationController@disapprove');
+Route::get('/architect/viewer/approve/{id}','QuotationController@approve');
+
+Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
 
 
 Route::resource('/admin/budgets','BudgetsController');

@@ -6,8 +6,9 @@
 	"type": "project",
 	"require": {
 		"cartalyst/sentry": "2.1.*",
-		 "fzaninotto/faker": "1.5.*@dev",
+		"fzaninotto/faker": "1.5.*@dev",
 		"way/generators" : "~2.0",
+		"anouar/fpdf": "dev-master",
 		"laravel/framework": "4.2.*"
 	},
 	"autoload": {

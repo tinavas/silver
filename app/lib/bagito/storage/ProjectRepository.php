@@ -1,7 +1,6 @@
 <?php namespace Bagito\Storage;
 
-interface ProjectRepository
-{
+interface ProjectRepository{
 	public function find($id);
 
 	public function all();
@@ -25,5 +24,9 @@ interface ProjectRepository
 	public function removeUser($userId, $projectId);
 
 	public function inProject($userId, $projectId);
+
+	public function getQuotations($projectId);
+
+	public function getForApprovalQuotations($projectId);
 
 }

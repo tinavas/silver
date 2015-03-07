@@ -15,7 +15,7 @@
              @if($project->status == 0)
                 <h6>Status: Pending</h6>
              @elseif($project->status == 1)
-                <h6>Status: Approved</h6>
+                <h6>Status: Started</h6>
              @elseif($project->status == -1)
                 <h6>Status: Cancelled</h6>
              @else
@@ -28,7 +28,7 @@
         <div class="proj-func">
             <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}" class="small button proj-func-button"><i class="fa fa-pencil"></i>Edit</a>
         </div>
-        <h4 class="view-header"><i class="fa fa-building"></i> Project Collaborators</h4>
+        <h4 class="view-header"><i class="fa fa-user"></i> Project Collaborators</h4>
         <div class="project-collab-container table-title">
             <div class="proj-btn-container right">
                 <a href="{{URL::to('admin/projects/add/users/' . $project->id)}}" class="small button create-quot"><i class="fa fa-plus"></i>Add New Collaborator</a>
@@ -62,39 +62,37 @@
                   </tbody>
             </table>
         </div>
+        @if($project->status == 1)
 
-        <div class="admin-quotation-container table-title">
-            <h4>Quotations</h4>
-            <table>
-                  <thead>
-                    <tr>
-                      <th>Status</th>
-                      <th>Quotation ID</th>
-                      <th>Date Added</th>
-                      <th>Subject</th>
-                      <th>Name</th>
-                      <th>Contact No.</th>
-                      <th>Email</th>
-                      <th colspan="2">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Rejected</td>
-                      <td>0001</td>
-                      <td>{{date('F d, Y')}}</td>
-                      <td>Cost of Construction([labor, materials])</td>
-                      <td>Turingan, Joshua B.</td>
-                      <td>09054005755</td>
-                      <th>turingan.joshua@gmail.com</th>
-                      <td>
-                        <a href="{{URL::to('')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
-                          </a>
-                      </td>
-                    </tr>
-                  </tbody>
+        @elseif($project->status == 0)
+          <h4 class="view-header"><i class="fa fa-book"></i>Quotations</h4>
+            @if(count($quotations) != 0)
+            <table class = "data-table">
+              <thead>
+                <th>Quotation ID</th>
+                <th>Quotation Title</th>
+                <th>Author</th>
+                <th>Date Created</th>
+                <th>Date Updated</th>
+                <th>More Details</th>
+              </thead>
+              <tbody>
+              @foreach($quotations as $quotation)
+                <tr>
+                  <td>{{str_pad($project->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
+                  <td>{{$quotation->title}}</td>
+                  <td>{{$quotation->user()->first()->first_name}}</td>
+                  <td>{{date('F j, Y',strtotime($quotation->created_at))}}</td>
+                  <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
+                  <td><a href="{{URL::to('/admin/quotation/view/' . $quotation->id)}}">View</a></td>
+                </tr>
+              @endforeach
+              </tbody>
             </table>
+          @else
+            <h6>You have no quotations contributed!</h6>
+          @endif
+        @endif
         </div>
     </div>
 </div>

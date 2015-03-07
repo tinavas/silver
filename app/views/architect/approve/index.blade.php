@@ -31,7 +31,7 @@
                   <td>{{$quotation->user()->first()->last_name . ', ' . $quotation->user()->first()->first_name}}</td>
                   <td>{{$quotation->project()->first()->title}}</td>
                   <td><a href="{{URL::to('/architect/viewer/view-other/' . $quotation->id)}}">View</a></td>
-                  <td><a href="">Approve</a></td>
+                  <td><a href="{{URL::to('/architect/viewer/approve/' . $quotation->id)}}">Approve</a></td>
                   <td><a href="{{URL::to('/architect/viewer/disapprove/' . $quotation->id)}}">Disapprove</a></td>
                 </tr>
               @endforeach
