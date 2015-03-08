@@ -29,4 +29,8 @@ interface ProjectRepository{
 
 	public function getForApprovalQuotations($projectId);
 
+	public function changeStatus($id, $status);
+
+	public function addActiveQuotation($projectId, $quotationId);
+
 }

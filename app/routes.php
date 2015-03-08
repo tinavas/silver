@@ -61,7 +61,8 @@ Route::get('/architect/viewer/disapprove/{id}', 'QuotationController@disapprove'
 Route::get('/architect/viewer/approve/{id}','QuotationController@approve');
 
 Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
-
+Route::get('/admin/project/add-active-quotation/{projectId}/{quotationId}','ProjectController@setAsActiveQuotation');
+Route::post('/admin/project/change-status/{id}','ProjectController@changeStatus');
 
 Route::resource('/admin/budgets','BudgetsController');
 Route::resource('/admin/budgets/create','BudgetsController');

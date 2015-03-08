@@ -116,5 +116,18 @@ class EloquentProjectRepository implements ProjectRepository
 		return $project->quotations()->where('status',1)->get();
 	}
 
+	public function changeStatus($id,$status){
+		$project = Project::find($id);
+		$project->status = $status;
+		$project->save();
+	}
+
+	public function addActiveQuotation($projectId, $quotationId){
+		$project = Project::find($projectId);
+		$project->active_quotation_id = $quotationId;
+		$project->status = 1;
+		$project->save();
+	}
+
 
 }
