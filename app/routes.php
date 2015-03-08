@@ -64,8 +64,7 @@ Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
 Route::get('/admin/project/add-active-quotation/{projectId}/{quotationId}','ProjectController@setAsActiveQuotation');
 Route::post('/admin/project/change-status/{id}','ProjectController@changeStatus');
 
-Route::resource('/admin/budgets','BudgetsController');
-Route::resource('/admin/budgets/create','BudgetsController');
+Route::get('/admin/budget/{id}','BudgetController@index');
 
 /* for design */
 $template = 'template';

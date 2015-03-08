@@ -53,12 +53,6 @@
                           <span class="title">Projects</span> 
                         </a>
                       </li>
-                      <li>
-                        <a href="{{url('/admin/budgets')}}">
-                          <i class="fa fa-money fa-2x"> </i> 
-                          <span class="title">Budgets</span> 
-                        </a>
-                      </li>
                     </ul>
             
                </div>

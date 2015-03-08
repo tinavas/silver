@@ -14,10 +14,11 @@ class BudgetsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-		//
+		
 		$this->layout->content = View::make('admin.budgets.index');
+		
 	}
 
 	/**
