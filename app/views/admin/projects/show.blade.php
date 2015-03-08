@@ -33,6 +33,7 @@
         <div class="proj-func">
             <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}" class="small button proj-func-button"><i class="fa fa-pencil"></i>Edit</a>
             <a href="#" data-reveal-id="myModal" class="small button proj-func-button"><i class="fa fa-pencil"></i>  Change Status</a>
+            <a href="{{URL::to('/admin/budget/' . $project->id)}}" class="small button proj-func-button"><i class = "fa fa-money"></i>View Budget</a>
         </div>
         <h4 class="view-header"><i class="fa fa-user"></i> Project Collaborators</h4>
         <div class="project-collab-container table-title">

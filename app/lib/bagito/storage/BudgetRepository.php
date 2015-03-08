@@ -10,6 +10,6 @@ interface BudgetRepository{
 
 	public function update($id, $inputs);
 
-	public function delete($id, $inputs);
+	public function delete($id);
 	
 }

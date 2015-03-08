@@ -12,4 +12,6 @@ interface AuthRepository{
 
 	public function getGroup($user);
 
+	public function updatePassword($id, $password);
+
 }

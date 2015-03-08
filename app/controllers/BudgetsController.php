@@ -1,11 +1,15 @@
 <?php
 
+use Bagito\Storage\BudgetRepository as Budget;
+use Bagito\Storage\ProjectRepository as Project;
+
 class BudgetsController extends \BaseController {
 
-	function __construct(){
+	function __construct(Budget $budget, Project $project){
 		$this->layout = 'template';
-		$this->beforeFilter('csrf', array('only' =>
-                    array('store', 'update', 'destroy')));
+
+		$this->budget = $budget;
+		$this->project = $project;
 	}
 
 	/**
@@ -16,8 +20,9 @@ class BudgetsController extends \BaseController {
 	 */
 	public function index($id)
 	{
-		
-		$this->layout->content = View::make('admin.budgets.index');
+		$budgets = $this->budget->getAllByProject($id);
+		$project = $this->project->find($id);
+		$this->layout->content = View::make('admin.budgets.index',compact('budgets','project'));
 		
 	}
 
@@ -27,10 +32,9 @@ class BudgetsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
-		//
-		
+		return View::make('admin.budgets.create',compact('id'));
 	}
 
 	/**
@@ -39,9 +43,18 @@ class BudgetsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($id)
 	{
-		//
+		$rules = [
+					'description' => 'required',
+					'amount'	  => 'required|numeric'
+				 ];
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails()){
+			return Redirect::back()->withErrors($validator);
+		}
+		$this->budget->add($id,Input::all());
+		return Redirect::to('/admin/budget/' . $id);
 	}
 
 	/**
@@ -65,7 +78,8 @@ class BudgetsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$budget = $this->budget->find($id);
+		return View::make('admin.budgets.edit',compact('budget'));
 	}
 
 	/**
@@ -77,7 +91,16 @@ class BudgetsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$rules = [
+					'description' => 'required',
+					'amount'	  => 'required|numeric'
+				 ];
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails()){
+			return Redirect::back()->withErrors($validator);
+		}
+		$this->budget->add($id,Input::all());
+		return Redirect::to('/admin/budget/' . $id);
 	}
 
 	/**
@@ -89,7 +112,8 @@ class BudgetsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$this->budget->delete($id);
+		return Redirect::back();
 	}
 
 }

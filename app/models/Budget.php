@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Budget extends \Eloquent {
 
-	use SoftDeletes;
-	public $timestamps = false;
+	use SoftDeletingTrait;
 	protected $dates = ['deleted_at'];
 
 	public function project(){

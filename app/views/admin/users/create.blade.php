@@ -93,7 +93,7 @@
              </div>
              
              <div class="medium-10 column">
-                 {{ Form::select('role', ['Administrator', 'Architect', 'Secretary']) }}
+                 {{ Form::select('role', ['Administrator', 'Architect']) }}
              </div>
          </div>
          

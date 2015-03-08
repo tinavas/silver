@@ -64,7 +64,17 @@ Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
 Route::get('/admin/project/add-active-quotation/{projectId}/{quotationId}','ProjectController@setAsActiveQuotation');
 Route::post('/admin/project/change-status/{id}','ProjectController@changeStatus');
 
-Route::get('/admin/budget/{id}','BudgetController@index');
+Route::get('/admin/budget/{id}','BudgetsController@index');
+Route::get('/admin/budget/create/{id}','BudgetsController@create');
+Route::post('/admin/budget/{id}','BudgetsController@store');
+Route::get('/admin/budget/delete/{id}', 'BudgetsController@destroy');
+Route::get('/admin/budget/update/{id}','BudgetsController@edit');
+
+Route::get('/architect/change-password','LoginController@changeArchitectPassword');
+Route::get('/admin/change-password','LoginController@changeAdminPassword');
+
+Route::post('/architect/change-password','LoginController@updateArchitectPassword');
+Route::post('/admin/change-password','LoginController@updateAdminPassword');
 
 /* for design */
 $template = 'template';

@@ -38,7 +38,7 @@
                       <th>Collaborators</th>
                       <th>Deadline</th>
                       <th>Status</th>
-                      <th colspan="3">Actions</th>
+                      <th colspan="2">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -68,9 +68,6 @@
                          </a>
                         <a href="{{URL::to('admin/projects/' . $project->id)}}">
                            <i class="fa fa-eye fa-2x"></i>
-                        </a>
-                        <a href="#">
-                          <i class="fa fa-money fa-2x"></i>
                         </a>
                       </td>
                     </tr>
