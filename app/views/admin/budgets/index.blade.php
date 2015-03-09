@@ -18,26 +18,6 @@
         </div>
 		
       	<div class="medium-12 column view-box">
-<<<<<<< HEAD
-			<table class="table table-bordered responsive dataTable dynamictable">
-				<thead>
-					<th>Project ID</th>
-					<th>Amount</th>
-					<th>Description</th>
-					<th>Remarks</th>
-					<th>More Actions</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td><a href=""><i class="fa fa-pencil fa-2x"></i></a></td>
-					</tr>
-				</tbody>
-			</table>
-=======
       	<h1>Budget Information for: {{$project->title}}</h1>
 	        @if(count($budgets))
 				<table class="data-table">
@@ -65,7 +45,6 @@
 			@else
 				<h3>No Budget Entries Yet!</h3>
 	        @endif
->>>>>>> 9ea1d1571b9d888885429731ccc05759f4eacc32
       </div>
     </div>
 </div>

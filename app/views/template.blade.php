@@ -89,13 +89,10 @@
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.js')}}
-<<<<<<< HEAD
-    {{HTML::script('resources/libraries/jqueryui/js/jquery.dataTables.min.js')}}
-=======
+    <!-- {{HTML::script('resources/libraries/jqueryui/js/jquery.dataTables.min.js')}} -->
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.alert.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.reveal.js')}}
     {{HTML::script('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js')}}
->>>>>>> 9ea1d1571b9d888885429731ccc05759f4eacc32
     {{HTML::script('resources/js/chart.js')}}
     {{HTML::script('resources/js/uni.script.js')}}
     
