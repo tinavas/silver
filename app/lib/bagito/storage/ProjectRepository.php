@@ -1,7 +1,6 @@
 <?php namespace Bagito\Storage;
 
-interface ProjectRepository
-{
+interface ProjectRepository{
 	public function find($id);
 
 	public function all();
@@ -23,5 +22,15 @@ interface ProjectRepository
 	public function addUser($userId, $projectId);
 
 	public function removeUser($userId, $projectId);
+
+	public function inProject($userId, $projectId);
+
+	public function getQuotations($projectId);
+
+	public function getForApprovalQuotations($projectId);
+
+	public function changeStatus($id, $status);
+
+	public function addActiveQuotation($projectId, $quotationId);
 
 }

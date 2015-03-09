@@ -22,16 +22,6 @@
             {{Form::model($project, array('url' => '/admin/projects/' . $project->id,'method' => 'put'))}}
          <div class="row">
              <div class="medium-2 column">
-                {{Form::label('code','Code', array('class' => 'inline right'))}}
-             </div>
-             
-             <div class="medium-10 column">
-                  {{Form::text('code',$project->code,array('class'=> 'lastname'))}}
-             </div>
-         </div>
-         
-         <div class="row">
-             <div class="medium-2 column">
                  {{Form::label('title','Title', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
@@ -69,7 +59,7 @@
                  {{Form::label('deadline','Deadline', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                 <input type="date" name="deadline" class="deadline">
+                  {{Form::input('date','deadline','', array('class'=>'lastname datepicker'))}}
              </div>
          </div>    
         </div>

@@ -52,9 +52,6 @@
                   </tbody>
             </table>
         </div>
-        <h4 class="view-header"><i class="fa fa-building"></i>Quotations</h4>
-        <div class="project-collab-container table-title">
-        </div>
     </div>
 </div>
 @endsection

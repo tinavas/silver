@@ -39,24 +39,25 @@
                       </a>
                       </li>
                       <li><a href="{{url('/architect/quotations')}}">
-                      <i class="fa fa-building fa-2x"> </i> 
-                          <span class="title">Quotations</span> 
+                      <i class="fa fa-book fa-2x"> </i> 
+                          <span class="title">My Quotations</span> 
+                      </a>
+                      </li>
+                      <li><a href="{{url('/architect/viewer')}}">
+                      <i class="fa fa-binoculars fa-2x"> </i> 
+                          <span class="title">Other Quotations</span> 
                       </a>
                       </li>
                     </ul>
-
-            
                </div>
-                
             </div>
-            
             <div class="medium-10 column no-padding right-side">
                 
                 <a href="{{URL::to('/logout')}}" class="icon logout">
                     <i class="fa fa-power-off"></i>
                 </a>
-                 <a href="#" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
-                <a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>
+                 <a href="{{URL::to('/architect/change-password')}}" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
+                <!--<a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>-->
                 </a>
                 
             </div>

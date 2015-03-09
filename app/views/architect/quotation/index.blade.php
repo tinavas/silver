@@ -13,10 +13,10 @@
         <table class = "data-table">
           <thead>
             <th>Quotation ID</th>
+            <th>Quotation Title</th>
             <th>Project Name</th>
             <th>Date Created</th>
             <th>Date Updated</th>
-            <th>Quotation Title</th>
             <th>Status</th>
             <th>More Details</th>
             <th>Edit</th>
@@ -25,10 +25,10 @@
           @foreach($quotations as $quotation)
             <tr>
               <td>{{str_pad($quotation->project()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
+              <td>{{$quotation->title}}</td>
               <td>{{$quotation->project()->first()->title}}</td>
               <td>{{date('F j, Y',strtotime($quotation->created_at))}}</td>
               <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
-              <td>{{$quotation->title}}</td>
               <td>
                 @if($quotation->status == 0)
                   On-Going

@@ -2,15 +2,19 @@
 
 use Bagito\Storage\ProjectRepository as Project;
 use Bagito\Storage\UserRepository as User;
+use Bagito\Storage\QuotationRepository as Quotation;
+use Bagito\Auth\AuthRepository as Auth;
+use Bagito\Utilities\BagitoException;
 
 class ProjectController extends \BaseController {
 
 	private $pages = 10;
 
-	public function __construct(Project $project, User $user)
-	{
+	public function __construct(Project $project, User $user, Quotation $quotation, Auth $auth){
 		$this->project = $project;
 		$this->user = $user;
+		$this->quotation = $quotation;
+		$this->auth = $auth;
 	}
 
 	/**
@@ -71,9 +75,18 @@ class ProjectController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		$quotation = null;
 		$project = $this->project->find($id);
 		$users = $this->project->getSubscribers($id);
-		return View::make('admin.projects.show',compact('project'))->with('users',$users->get());
+		$quotations = $this->project->getForApprovalQuotations($project->id);
+		$status = [
+					-1 => 'Cancelled',
+					2 => 'Done'
+				  ];
+		if(!is_null($project->active_quotation_id)){
+			$quotation = $this->quotation->find($project->active_quotation_id);
+		}
+		return View::make('admin.projects.show',compact('project','quotations','quotation','status'))->with('users',$users->get());
 	}
 
 
@@ -150,9 +163,38 @@ class ProjectController extends \BaseController {
 		return Redirect::to('admin/projects/' . $projectId);
 	}
 
-	public function removeUser($projectId, $userId)
-	{
+	public function removeUser($projectId, $userId){
 		$this->project->removeUser($userId,$projectId);
+		return Redirect::back();
+	}
+
+	/*public function showChangeStatus($id){
+		$quotations = $this->project->getForApprovalQuotations($project->id);
+		$quotations = $quotations->lists('');
+	}*/
+
+	public function setAsActiveQuotation($projectId, $quotationId){
+
+		$this->project->addActiveQuotation($projectId, $quotationId);
+		return Redirect::back();
+	}
+
+	public function changeStatus($id){
+		try 
+		{
+			$user = $this->auth->getCurrentUser();
+			$username = $user->email;
+			$password = Input::get('password');
+			$user = $this->auth->authenticate($username, $password);
+		} 
+		catch (BagitoException $e) 
+		{
+			Session::flash('errorMessage',$e->getMessage());
+			return Redirect::back();
+		}
+		Session::flash('notification','Project Updated Successfuly');
+		$status = Input::get('status');
+		$this->project->changeStatus($id,$status);
 		return Redirect::back();
 	}
 }

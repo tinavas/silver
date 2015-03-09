@@ -98,4 +98,10 @@ class SentryAuthRepository implements  AuthRepository{
 	public function check(){
 		return Sentry::check();
 	}
+
+	public function updatePassword($id, $password){
+		$user = Sentry::findUserById($id);
+		$user->password = $password;
+		$user->save();
+	}
 }

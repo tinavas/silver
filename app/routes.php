@@ -16,6 +16,11 @@ Route::filter('admin','AuthFilter@admin');
 Route::when('admin/*','admin');
 Route::when('admin','admin');
 
+Route::filter('architect','AuthFilter@architect');
+
+Route::when('architect/*','architect');
+Route::when('architect/','architect');
+
 /* Login Controller */
 Route::get('/','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
@@ -46,13 +51,30 @@ Route::get('/architect/quotation/edit/{id}','QuotationController@edit');
 Route::post('/architect/quotation/edit/{id}','QuotationController@update');
 Route::get('/architect/quotation/view/{id}','QuotationController@view');
 Route::post('/architect/quotation/tag-as-for-approval/{id}', 'QuotationController@changeStatus');
+Route::get('/architect/viewer/view-other/{id}','EntryController@show');
 
 Route::get('/architect/entry/create/{id}','EntryController@create');
 Route::post('/architect/entry/create/{id}','EntryController@store');
 Route::get('/architect/entry/delete/{id}','EntryController@remove');
+Route::get('/architect/viewer','QuotationController@viewOtherQuotations');
+Route::get('/architect/viewer/disapprove/{id}', 'QuotationController@disapprove');
+Route::get('/architect/viewer/approve/{id}','QuotationController@approve');
 
-Route::resource('/admin/budgets','BudgetsController');
-Route::resource('/admin/budgets/create','BudgetsController');
+Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
+Route::get('/admin/project/add-active-quotation/{projectId}/{quotationId}','ProjectController@setAsActiveQuotation');
+Route::post('/admin/project/change-status/{id}','ProjectController@changeStatus');
+
+Route::get('/admin/budget/{id}','BudgetsController@index');
+Route::get('/admin/budget/create/{id}','BudgetsController@create');
+Route::post('/admin/budget/{id}','BudgetsController@store');
+Route::get('/admin/budget/delete/{id}', 'BudgetsController@destroy');
+Route::get('/admin/budget/update/{id}','BudgetsController@edit');
+
+Route::get('/architect/change-password','LoginController@changeArchitectPassword');
+Route::get('/admin/change-password','LoginController@changeAdminPassword');
+
+Route::post('/architect/change-password','LoginController@updateArchitectPassword');
+Route::post('/admin/change-password','LoginController@updateAdminPassword');
 
 /* for design */
 $template = 'template';

@@ -20,16 +20,7 @@
         @endif
 
         <div class="view-box">
-            {{Form::open(array('url' => '/admin/budgets','method' => 'POST'))}}
-                <div class="row">
-                    <div class="medium-2 column">
-                        {{Form::label('project','Project', array('class' => 'inline right'))}}
-                    </div>
-
-                    <div class="medium-10 column">
-                        {{ Form::select('project', ['1', '2', '3']) }}
-                    </div>
-                </div>
+            {{Form::open(array('url' => '/admin/budget/' . $id,'method' => 'POST'))}}
 
                 <div class="row">
                     <div class="medium-2 column">

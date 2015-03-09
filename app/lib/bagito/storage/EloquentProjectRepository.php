@@ -99,4 +99,35 @@ class EloquentProjectRepository implements ProjectRepository
 		$load = UserLoad::where('user_id' , '=' , $userId)->where('project_id', '=' , $projectId)->first();
 		$load->delete();
 	}
+
+
+	public function inProject($userId, $projectId){
+		$load =  UserLoad::where('user_id' , '=' , $userId)->where('project_id', '=' , $projectId)->get();
+		return (count($load) != 0) ? true : false;
+	}
+
+	public function getQuotations($projectId){
+		$project = Project::find($projectId);
+		return $project->quotations()->get();
+	}
+
+	public function getForApprovalQuotations($projectId){
+		$project = Project::find($projectId);
+		return $project->quotations()->where('status',1)->get();
+	}
+
+	public function changeStatus($id,$status){
+		$project = Project::find($id);
+		$project->status = $status;
+		$project->save();
+	}
+
+	public function addActiveQuotation($projectId, $quotationId){
+		$project = Project::find($projectId);
+		$project->active_quotation_id = $quotationId;
+		$project->status = 1;
+		$project->save();
+	}
+
+
 }

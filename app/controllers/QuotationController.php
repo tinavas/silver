@@ -4,21 +4,20 @@ use Bagito\Storage\UserRepository as User;
 use Bagito\Storage\ProjectRepository as Project;
 use Bagito\Auth\AuthRepository as Auth;
 use Bagito\Storage\QuotationRepository as Quotation;
+use Bagito\Storage\ApprovalRepository as Approval;
 use Bagito\Utilities\BagitoException;
 
-class QuotationController extends BaseController
-{
+class QuotationController extends BaseController{
 
-	public function __construct(User $user, Project $project, Auth $auth, Quotation $quotation)
-	{
+	public function __construct(User $user, Project $project, Auth $auth, Quotation $quotation, Approval $approval){
 		$this->user = $user;
 		$this->project = $project;
 		$this->auth = $auth;
 		$this->quotation = $quotation;
+		$this->approval = $approval;
 	}
 
-	public function create($id)
-	{
+	public function create($id){
 		return View::make('architect.quotation.create',compact('id'));
 	}
 
@@ -48,8 +47,8 @@ class QuotationController extends BaseController
 		else
 		{
 			$user = $this->auth->getCurrentUser();
-			$this->quotation->create($user->id, $id, Input::all());
-			return 'YEHEY';
+			$quotation = $this->quotation->create($user->id, $id, Input::all());
+			return Redirect::to('architect/quotation/view/' . $quotation->id);
 		}
 	}
 
@@ -117,6 +116,52 @@ class QuotationController extends BaseController
 		Session::flash('notification','Quotation Updated Successfuly');
 		$this->quotation->tagAsForApproval($id);
 		return Redirect::back();
+	}
+
+	public function viewOtherQuotations()
+	{
+		$user = $this->auth->getCurrentUser();
+		$quotations = $this->quotation->getOtherQuotation($user->id);
+		//return var_dump($quotations);
+		return View::make('architect.approve.index',compact('quotations'));
+	}
+
+
+	public function disapprove($id)
+	{
+		$user = $this->auth->getCurrentUser();
+		$quotation = $this->quotation->find($id);
+		$bool = $this->project->inProject($user->id, $quotation->project_id);
+		
+		if($bool)
+		{
+			
+			$this->approval->disapprove($user->id,$id);
+			Session::flash('notification','Quotation Disapproved');
+			return Redirect::back();
+		}
+		else
+		{
+			return App::abort(403, 'Unauthorized action.');
+		}
+	}
+
+	public function approve($id){
+		$user = $this->auth->getCurrentUser();
+		$quotation = $this->quotation->find($id);
+		$bool = $this->project->inProject($user->id, $quotation->project_id);
+		
+		if($bool)
+		{
+			
+			$this->approval->approve($user->id,$id);
+			Session::flash('notification','Quotation Approved');
+			return Redirect::back();
+		}
+		else
+		{
+			return App::abort(403, 'Unauthorized action.');
+		}
 	}
 
 }

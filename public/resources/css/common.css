@@ -79,7 +79,7 @@ margin-top: 15px;
     transform:scale(0.8);
 }
 
-.view-box table tbody tr td a i.fa-pencil, .view-box table tbody tr td a i.fa-eye {
+.view-box table tbody tr td a i.fa-pencil, .view-box table tbody tr td a i.fa-eye, .view-box table tbody tr td a i.fa-money {
     color: #d66214;
 }
 
