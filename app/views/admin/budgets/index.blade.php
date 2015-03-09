@@ -1,6 +1,7 @@
 @extends('template')
 
 @section('head')
+{{HTML::style('resources/css/modules/datatable.css');}}
 {{HTML::style('resources/css/modules/budgets/budget-view.css');}}
 @endsection
 
@@ -16,7 +17,7 @@
         </div>
 
       	<div class="medium-12 column view-box">
-			<table class="data-table">
+			<table class="table table-bordered responsive dataTable dynamictable">
 				<thead>
 					<th>Project ID</th>
 					<th>Amount</th>

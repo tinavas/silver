@@ -15,7 +15,6 @@
     {{HTML::style('resources/libraries/jqueryui/css/jquery.ui.all.css')}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
-    {{HTML::style('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/foundation/dataTables.foundation.css')}}
     @yield('head')
 </head>
 <body>  
@@ -96,7 +95,7 @@
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation.min.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.js')}}
-    {{HTML::script('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js')}}
+    {{HTML::script('resources/libraries/jqueryui/js/jquery.dataTables.min.js')}}
     {{HTML::script('resources/js/chart.js')}}
     {{HTML::script('resources/js/uni.script.js')}}
     

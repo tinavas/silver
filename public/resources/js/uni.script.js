@@ -29,6 +29,17 @@ $(document).ready( function () {
     	}
     });
 
+    
+    if($('.dynamictable').length){
+	   	$('.dynamictable').dataTable({
+            "sPaginationType": "full_numbers",
+            "aaSortingFixed": [[0,'asc']]
+        });
+        $(".dynamictable tbody td:last-child").css({width:"100px"})
+    }
+
+    
+
     /* CHARTS */
 
     var ctx = document.getElementById("bar-status").getContext("2d");
