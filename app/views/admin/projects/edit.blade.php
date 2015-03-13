@@ -43,24 +43,6 @@
              <div class="medium-10 column">
                  {{Form::text('location',$project->location,array('class'=> 'lastname'))}}
              </div>
-         </div>
-         
-         <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('budget','Budget', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                 {{Form::text('budget',$project->budget,array('class'=> 'lastname'))}}
-             </div>
-         </div>
-         
-         <div class="row">
-             <div class="medium-2 column">
-                 {{Form::label('deadline','Deadline', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                  {{Form::input('date','deadline','', array('class'=>'lastname datepicker'))}}
-             </div>
          </div>    
         </div>
          

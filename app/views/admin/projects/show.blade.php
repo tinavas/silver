@@ -16,23 +16,12 @@
         <h4 class="view-header"><i class="fa fa-building"></i> Project Information</h4>
         <div class="project-desc">
              <h3>{{$project->title}}</h3>
-             <h5>{{'Project ID: ' . $project->id}}</h5>
-             @if($project->status == 0)
-                <h6>Status: Pending</h6>
-             @elseif($project->status == 1)
-                <h6>Status: Started</h6>
-             @elseif($project->status == -1)
-                <h6>Status: Cancelled</h6>
-             @else
-                <h6>Status: Done</h6>
-             @endif
             <h6>Location: {{$project->location}}</h6>
             <h6>Description: {{$project->description}}</h6>
             <h6>Date Created: {{date('F j, Y, g:i a',strtotime($project->created_at))}}</h6>
         </div>
         <div class="proj-func">
             <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}" class="small button proj-func-button"><i class="fa fa-pencil"></i>Edit</a>
-            <a href="#" data-reveal-id="myModal" class="small button proj-func-button"><i class="fa fa-pencil"></i>  Change Status</a>
             <a href="{{URL::to('/admin/budget/' . $project->id)}}" class="small button proj-func-button"><i class = "fa fa-money"></i>View Budget</a>
         </div>
         <h4 class="view-header"><i class="fa fa-user"></i> Project Collaborators</h4>
@@ -124,18 +113,5 @@
         @endif
         </div>
     </div>
-</div>
-
-<div id="myModal" class="reveal-modal" data-reveal>
-  {{Form::open(['url' => '/admin/project/change-status/' . $project->id])}}
-    <h1>To continue, please enter your credentials</h1>
-    {{Form::label('password','Password')}}
-    {{Form::password('password')}}
-    {{Form::label('status','Status')}}
-    {{Form::select('status',$status)}}
-    <br>
-    <br>
-    {{Form::submit('Submit',array('class' => 'button right'))}}
-  {{Form::close()}}
 </div>
 @endsection

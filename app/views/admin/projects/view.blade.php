@@ -1,6 +1,4 @@
 @extends('template')
-
-
 @section('head')
 {{HTML::style('resources/css/modules/projects/projects-view.css');}}
 @endsection
@@ -34,10 +32,7 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Location</th>
-                      <th>Budget</th>
                       <th>Collaborators</th>
-                      <th>Deadline</th>
-                      <th>Status</th>
                       <th colspan="2">Actions</th>
                     </tr>
                   </thead>
@@ -45,23 +40,10 @@
                    
                    @foreach($projects as $project)
                     <tr>
-                      <td>{{str_pad($project->id, 5, "00", STR_PAD_LEFT)}}</td>
+                      <td>{{str_pad($project->id, 3, "0", STR_PAD_LEFT)}}</td>
                       <td>{{$project->title}}</td>
                       <td>{{$project->location}}</td>
-                      <td>{{number_format($project->budget,2)}}</td>
                       <td>{{$repo->getNumberOfSubscribers($project->id)}}</td>
-                      <td>{{date('F j, Y',strtotime($project->deadline))}}</td>
-                      <td>
-                        @if($project->status == 0)
-                          Pending
-                        @elseif($project->status == 1)
-                          Approved
-                        @elseif($project->status == -1)
-                          Cancelled
-                        @else
-                          Done
-                        @endif
-                      </td>
                       <td>
                         <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}">
                           <i class="fa fa-pencil fa-2x"></i>

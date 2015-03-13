@@ -27,8 +27,6 @@ class EloquentProjectRepository implements ProjectRepository
 		$project->title = $inputs['title'];
 		$project->description = $inputs['description'];
 		$project->location = $inputs['location'];
-		$project->budget = $inputs['budget'];
-		$project->deadline = date('Y-m-d',strtotime($inputs['deadline']));
 
 		$project->save();
 		return $project;
@@ -40,8 +38,6 @@ class EloquentProjectRepository implements ProjectRepository
 		$project->title = $inputs['title'];
 		$project->description = $inputs['description'];
 		$project->location = $inputs['location'];
-		$project->budget = $inputs['budget'];
-		$project->deadline = date('Y-m-d',strtotime($inputs['deadline']));
 		$project->save();
 		return $project;
 	}
@@ -116,17 +112,11 @@ class EloquentProjectRepository implements ProjectRepository
 		return $project->quotations()->where('status',1)->get();
 	}
 
-	public function changeStatus($id,$status){
-		$project = Project::find($id);
-		$project->status = $status;
-		$project->save();
-	}
-
 	public function addActiveQuotation($projectId, $quotationId){
-		$project = Project::find($projectId);
+		/*$project = Project::find($projectId);
 		$project->active_quotation_id = $quotationId;
 		$project->status = 1;
-		$project->save();
+		$project->save();*/
 	}
 
 

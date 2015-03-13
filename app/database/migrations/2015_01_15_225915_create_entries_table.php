@@ -17,7 +17,7 @@ class CreateEntriesTable extends Migration {
 			$table->increments('id');
 			$table->string('material');
 			$table->string('description');
-			$table->integer('quantity');
+			$table->decimal('quantity',16,2);
 			$table->integer('project_id')->unsigned();
 			$table->foreign('project_id')->references('id')->on('projects');
 			$table->timestamps();

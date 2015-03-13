@@ -51,9 +51,7 @@ class ProjectController extends \BaseController {
 		$rules = array(
 			'title' => 'required',
 			'description' => 'required',
-			'location' => 'required',
-			'budget' => 'numeric|required',
-			'deadline' => 'date|required'
+			'location' => 'required'
 		);
 
 		$validator = Validator::make(Input::all(),$rules);
@@ -116,9 +114,7 @@ class ProjectController extends \BaseController {
 		$rules = array(
 			'title' => 'required',
 			'description' => 'required',
-			'location' => 'required',
-			'budget' => 'numeric|required',
-			'deadline' => 'date|required'
+			'location' => 'required'
 		);
 
 		$validator = Validator::make(Input::all(),$rules);
