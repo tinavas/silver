@@ -52,6 +52,12 @@
                           <span class="title">Projects</span> 
                         </a>
                       </li>
+                      <li>
+                        <a href="{{url('/admin/suppliers')}}">
+                          <i class="fa fa-briefcase fa-2x"> </i> 
+                          <span class="title">Suppliers</span> 
+                        </a>
+                      </li>
                     </ul>
             
                </div>

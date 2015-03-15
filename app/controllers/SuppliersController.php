@@ -1,6 +1,16 @@
 <?php
 
+use Bagito\Auth\AuthRepository as Auth;
+use Bagito\Storage\SupplierRepository as Supplier;
+
 class SuppliersController extends \BaseController {
+
+	public function __construct(Auth $auth, Supplier $supplier){
+		$this->layout = 'template';
+
+		$this->auth 	= $auth;
+		$this->supplier = $supplier
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -11,6 +21,9 @@ class SuppliersController extends \BaseController {
 	public function index()
 	{
 		//
+		$suppliers = $this->supplier->all();
+		print_r($suppliers);die;
+		$this->layout->content = View::make('admin.suppliers.index',compact('suppliers'));
 	}
 
 	/**

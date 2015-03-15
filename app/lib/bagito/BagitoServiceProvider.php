@@ -14,5 +14,6 @@ class BagitoServiceProvider extends ServiceProvider
 		$this->app->bind('Bagito\Storage\EntryRepository','Bagito\Storage\EloquentEntryRepository');
 		$this->app->bind('Bagito\Storage\ApprovalRepository','Bagito\Storage\EloquentApprovalRepository');
 		$this->app->bind('Bagito\Storage\BudgetRepository','Bagito\Storage\EloquentBudgetRepository');
+		$this->app->bind('Bagito\Storage\SupplierRepository','Bagito\Storage\EloquentSupplierRepository');
 	}
 }
