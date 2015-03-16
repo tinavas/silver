@@ -63,7 +63,7 @@ class SuppliersController extends \BaseController {
 		{
 			$user = $this->auth->getCurrentUser();
 			$supplier = $this->supplier->add(Input::all());
-			return Redirect::to('admin/suppliers/index');
+			return Redirect::to('admin/suppliers');
 		}
 	}
 
