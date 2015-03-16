@@ -38,6 +38,9 @@ Route::get('/admin/projects/add/users/{id}','ProjectController@addUser');
 Route::get('/admin/project/{projectId}/user/{userId}','ProjectController@storeUserToProject');
 Route::get('/admin/project/{projectId}/user/{userId}/delete','ProjectController@removeUser');
 
+Route::resource('/admin/suppliers', 'SuppliersController');
+Route::get('/admin/suppliers/search/supplier','SuppliersController@search');
+
 Route::get('/logout','LoginController@logout');
 
 /*Architect*/

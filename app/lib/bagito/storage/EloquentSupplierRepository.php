@@ -34,4 +34,17 @@ class EloquentSupplierRepository implements SupplierRepository{
 		 $supplier = Supplier::find($id);
 		 $supplier->delete();
 	}
+
+	public function paginate($pages)
+	{
+		return Supplier::paginate($pages);
+	}
+
+	public function search($keyword,$pages)
+	{
+		return Supplier::where('supplier_name', 'LIKE' , "%$keyword%")
+					->orWhere('description', 'LIKE', "%$keyword%")
+					->orWhere('address','LIKE',"%$keyword%")
+					->orWhere('remarks','LIKE',"%$keyword%")->paginate($pages);
+	}
 }

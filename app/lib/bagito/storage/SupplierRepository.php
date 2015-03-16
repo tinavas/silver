@@ -11,5 +11,9 @@ interface SupplierRepository{
 	public function update($id, $inputs);
 
 	public function delete($id);
+
+	public function paginate($number);
+
+	public function search($keyword,$pages);
 	
 }

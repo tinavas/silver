@@ -5,11 +5,13 @@ use Bagito\Storage\SupplierRepository as Supplier;
 
 class SuppliersController extends \BaseController {
 
+	private $pages = 6;
+
 	public function __construct(Auth $auth, Supplier $supplier){
 		$this->layout = 'template';
 
 		$this->auth 	= $auth;
-		$this->supplier = $supplier
+		$this->supplier = $supplier;
 	}
 
 	/**
@@ -21,9 +23,8 @@ class SuppliersController extends \BaseController {
 	public function index()
 	{
 		//
-		$suppliers = $this->supplier->all();
-		print_r($suppliers);die;
-		$this->layout->content = View::make('admin.suppliers.index',compact('suppliers'));
+		$suppliers = $this->supplier->paginate($this->pages);
+		$this->layout->content = View::make('admin.suppliers.index',compact('suppliers'))->with('repo',$this->supplier)->with('keyword', '');
 	}
 
 	/**
@@ -35,6 +36,7 @@ class SuppliersController extends \BaseController {
 	public function create()
 	{
 		//
+		$this->layout->content = View::make('admin.suppliers.create');
 	}
 
 	/**
@@ -46,6 +48,23 @@ class SuppliersController extends \BaseController {
 	public function store()
 	{
 		//
+		$rules = [
+					'supplier_name' => 'required', 
+					'address' => 'required'
+				 ];
+
+		$validator = Validator::make(Input::all(),$rules);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$user = $this->auth->getCurrentUser();
+			$supplier = $this->supplier->add(Input::all());
+			return Redirect::to('admin/suppliers/index');
+		}
 	}
 
 	/**
@@ -70,6 +89,8 @@ class SuppliersController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$supplier = $this->supplier->find($id);
+		return View::make('admin.suppliers.edit',compact('supplier'));
 	}
 
 	/**
@@ -82,6 +103,21 @@ class SuppliersController extends \BaseController {
 	public function update($id)
 	{
 		//
+		$rules = [
+					'supplier_name' => 'required', 
+					'address' => 'required'
+				 ];
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$this->supplier->update($id, Input::all());
+			return Redirect::to('admin/suppliers');
+		}
 	}
 
 	/**
@@ -94,6 +130,15 @@ class SuppliersController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+		$this->supplier->delete($id);
+		return Redirect::back();
+	}
+
+	public function search()
+	{
+		$keyword = Input::get('keyword');
+		$users = $this->supplier->search($keyword,$this->pages);
+		return View::make('admin.suppliers.index', compact('suppliers'))->with('repo',$this->supplier)->with('keyword', $keyword);
 	}
 
 }
