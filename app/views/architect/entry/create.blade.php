@@ -10,7 +10,7 @@
 @endsection
 @section('content')
 <div class="row quotation">
-    <div class="medium-10 large-centered column">
+    <div class="medium-12 large-centered column">
       <h4 class="view-header"><i class="fa fa-user"></i>Quotation Entry Editor</h4>
       <div class="view-box">
       @if(Session::has('message'))
@@ -25,32 +25,42 @@
         <h1>No Entries Yet</h1>
         @else
             <div class = "pagination pagination-centered hide-if-no-paging">
-            <table class = "footable">
+            <table class = "footable bagito-table">
                 <thead>
                 <tr>
                     <th>Description</th>
                     <th>Quantity</th>
                     <th>Unit</th>
-                    <th>Price</th>
-                    <th>Total Price</th>
+                    <th>Unit Material</th>
+                    <th>Total Material</th>
+                    <th>Unit Labor</th>
+                    <th>Total Labor</th>
+                    <th>Direct Cost</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php $superTotal = 0 ?>
                 @foreach($entries as $entry)
-                    <tr><td colspan = "6"><h5><b>{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></h5></td></tr>
-                    <?php $parentSum = 0 ?>
+                    <tr><td colspan = "9"><h5><b  class = "left">{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></h5></td></tr>
+                    <?php 
+                            $parentSum = 0;  
+                            $totalUm = 0; 
+                            $totalUl = 0;
+                    ?>
                     @foreach($entry->child() as $subHeader)
                         <tr>
                         @foreach($subHeader->entry() as $child)
                         <tr> 
                             <?php $subHeaderSum = 0 ?>
-                            <td class = "left"><b class="sub-header">{{$child->description}}</b></td>
+                            <td class = "left"><b class="sub-header" style = "color:#F9690E;">{{$child->description}}</b></td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td></td>
                             <td><a href="{{URL::to('/architect/entry/delete/' . $child->id)}}">Remove</a></td>
                         </tr> 
                             @foreach($child->child() as $childEntry)
@@ -59,23 +69,39 @@
                                         <td class = "left"><span class="entry">{{$last->description}}</span></td>
                                         <td><span class="entry">{{$last->quantity}}</span></td>
                                         <td><span class="entry">{{$last->unit}}</span></td>
-                                        <td><span class="entry">{{number_format($last->price,2)}}</span></td>
-                                        <td>{{number_format($last->quantity * $last->price,2)}}</td>
+                                        <td><span class="entry">{{number_format($last->um,2)}}</span></td>
+                                        <td><span class="entry">{{number_format($last->tm,2)}}</span></td>
+                                        <td><span class="entry">{{number_format($last->ul,2)}}</span></td>
+                                        <td><span class="entry">{{number_format($last->tl,2)}}</span></td>
+                                        <td><span class = "entry">{{number_format($last->dc,2)}}</span></td>
                                         <td><a href="{{URL::to('/architect/entry/delete/' . $last->id)}}">Remove</a></td>
                                     </tr>
-                                     <?php $subHeaderSum +=  ($last->quantity * $last->price)?>
+                                     <?php 
+                                        $subHeaderSum +=  ($last->dc);
+                                        $totalUm += $last->um;
+                                        $totalUl += $last->ul;
+                                     ?>
                                 @endforeach
                             @endforeach
                         <?php $parentSum += $subHeaderSum?>
-                        <tr class><td colspan="6" class = "left"><b>Total {{$child->description}}: {{number_format($subHeaderSum,2)}}</b>
-                        </td></tr>
+                        <tr>
+                        <td><span class="left" style = "color:#F9690E">Subtotal</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><b style = "color:#F9690E">{{number_format($totalUm,2)}}</b></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><b style = "color:#F9690E">{{number_format($totalUl,2)}}</b></td>
+                        <td class = "right" style = "color:#F9690E;"><b>{{number_format($subHeaderSum,2)}}</b>
+                        </td>
+                        </tr>
                         @endforeach
                         </tr>
                     @endforeach
                      <tr><td colspan = "6" class = "left"><h5><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></h5></td></tr>
                      <?php $superTotal += $parentSum ?>
                 @endforeach
-                <tr><td colspan = "6"> <h2 class = "right">Total: {{number_format($superTotal,2)}}</h2></td></tr>
+                <tr><td colspan = "9"> <h2 class = "right">Total: {{number_format($superTotal,2)}}</h2></td></tr>
                 </tbody>
                 </table>
             </div>
@@ -119,10 +145,18 @@
              </div>
              <div class="row">
                  <div class="medium-2 column">
-                    {{Form::label('price','Price', array('class' => 'inline right'))}}
+                    {{Form::label('um','Unit Material', array('class' => 'inline right'))}}
                  </div>
                  <div class="medium-10 column">
-                    {{Form::text('price',null,array('class'=>'inline right'))}}
+                    {{Form::text('um',null,array('class'=>'inline right'))}}
+                 </div>
+             </div>
+            <div class="row">
+                 <div class="medium-2 column">
+                    {{Form::label('ul','Unit Labor', array('class' => 'inline right'))}}
+                 </div>
+                 <div class="medium-10 column">
+                    {{Form::text('ul',null,array('class'=>'inline right'))}}
                  </div>
              </div>
              <div class="row">

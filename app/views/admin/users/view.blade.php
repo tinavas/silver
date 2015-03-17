@@ -42,7 +42,7 @@
                   <tbody>
                    @foreach($users as $user)
                       <tr>
-                        <td>{{str_pad($user->id,8,"0",STR_PAD_LEFT)}}</td>
+                        <td>{{str_pad($user->id,3,"0",STR_PAD_LEFT)}}</td>
                         <td>{{$user->last_name}}</td>
                         <td>{{$user->first_name}}</td>
                         <td>{{$repo->getRole($user->id)->name}}</td>

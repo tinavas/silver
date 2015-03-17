@@ -16,9 +16,8 @@ class EloquentProjectRepository implements ProjectRepository
 		return Project::all();
 	}
 
-	public function paginate($pages)
-	{
-		return Project::paginate($pages);
+	public function paginate($pages){
+		return Project::orderBy('title','asc')->paginate($pages);
 	}
 
 	public function create($inputs)
@@ -42,26 +41,22 @@ class EloquentProjectRepository implements ProjectRepository
 		return $project;
 	}
 
-	public function search($keyword, $pages)
-	{
+	public function search($keyword, $pages) {
 		return Project::where('title','LIKE', "%$keyword%")
 						->orWhere('description', 'LIKE', "%$keyword%")
 						->orWhere('location', 'LIKE', "")->paginate($pages);
 	}
 
-	public function getNumberOfSubscribers($id)
-	{
+	public function getNumberOfSubscribers($id) {
 		return Project::find($id)->users()->count();
 	}
 
-	public function getSubscribers($projectId)
-	{
+	public function getSubscribers($projectId) {
 		$project = Project::find($projectId);
 		return $project->users();
 	}
 
-	public function getNonSubscribers($projectId)
-	{
+	public function getNonSubscribers($projectId) {
 		$subs = Project::find($projectId)->users()->get();
 		$array = [];
 		foreach($subs as $sub)
@@ -82,22 +77,20 @@ class EloquentProjectRepository implements ProjectRepository
 		return $users;
 	}
 
-	public function addUser($userId, $projectId)
-	{
+	public function addUser($userId, $projectId) {
 		$load = new UserLoad;
 		$load->user_id = $userId;
 		$load->project_id = $projectId;
 		$load->save();
 	}
 
-	public function removeUser($userId, $projectId)
-	{
+	public function removeUser($userId, $projectId) {
 		$load = UserLoad::where('user_id' , '=' , $userId)->where('project_id', '=' , $projectId)->first();
 		$load->delete();
 	}
 
 
-	public function inProject($userId, $projectId){
+	public function inProject($userId, $projectId) {
 		$load =  UserLoad::where('user_id' , '=' , $userId)->where('project_id', '=' , $projectId)->get();
 		return (count($load) != 0) ? true : false;
 	}
@@ -107,17 +100,15 @@ class EloquentProjectRepository implements ProjectRepository
 		return $project->quotations()->get();
 	}
 
-	public function getForApprovalQuotations($projectId){
+	public function getForApprovalQuotations($projectId) {
 		$project = Project::find($projectId);
 		return $project->quotations()->where('status',1)->get();
 	}
 
-	public function addActiveQuotation($projectId, $quotationId){
-		/*$project = Project::find($projectId);
-		$project->active_quotation_id = $quotationId;
-		$project->status = 1;
-		$project->save();*/
+	public function addActiveQuotation($projectId, $quotationId) {
+		$project = new ProjectLoad;
+		$project->quotation_id = $quotationId;
+		$project->project_id = $projectId;
+		$project->save();
 	}
-
-
 }

@@ -23,8 +23,12 @@ class EloquentEntryRepository implements EntryRepository
 		$entry->quantity = $inputs['quantity'];
 		$entry->level = $inputs['type'];
 		$entry->unit = $inputs['unit'];
+		$entry->um = $inputs['um'];
+		$entry->ul = $inputs['ul'];
+		$entry->tm = $inputs['um'] * $inputs['quantity'];
+		$entry->tl = $inputs['ul'] * $inputs['quantity'];
+		$entry->dc = $entry->tm + $entry->tl;
 		$entry->quotation_id = $quotation_id;
-		$entry->price = $inputs['price'];
 		$entry->save();
 	
 		if($entry->level == 2)

@@ -15,7 +15,6 @@
 						<th>Project ID</th>
 						<th>Project Name</th>
 						<th>Project Description</th>
-						<th>Deadline</th>
 						<th>Create Quotation</th>
 						<th>More Details</th>
 					</thead>
@@ -25,7 +24,6 @@
 							<td>{{$project->id}}</td>
 							<td>{{$project->title}}</td>
 							<td>{{$project->description}}</td>
-							<td>{{$project->deadline}}</td>
 							<td><a href="{{URL::to('/architect/quotation/create/' . $project->id)}}">Create</a></td>
 							<td><a href="{{URL::to('/architect/quotation/view-project/' . $project->id)}}">View</a></td>
 						</tr>

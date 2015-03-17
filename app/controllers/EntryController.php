@@ -46,7 +46,8 @@ class EntryController extends BaseController
 					 	'type' => 'required',
 					 	'parent_id' => 'required',
 					 	'quantity'=> 'required|numeric',
-					 	'price' => 'required|numeric'
+					 	'um' => 'numeric',
+					 	'ul' => 'numeric'
 					 ];
 		}
 
