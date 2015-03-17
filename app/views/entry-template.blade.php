@@ -19,9 +19,7 @@
 <body>    
         <!-- Main Content Goes Here --> 
         <section>
-            <div class="medium-12 column content">
                 @yield('content')
-            </div>
         </section>     
         <!-- End of Main Content -->
         

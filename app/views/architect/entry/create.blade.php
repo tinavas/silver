@@ -9,7 +9,6 @@
 </style>
 @endsection
 @section('content')
-<div class="row quotation">
     <div class="medium-12 large-centered column">
       <h4 class="view-header"><i class="fa fa-user"></i>Quotation Entry Editor</h4>
       <div class="view-box">
@@ -21,6 +20,7 @@
     @endif
         <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button">Return</a>
         <a href="#" data-reveal-id="myModal" class = "button right">Add New Entry</a>
+        <a href="#" data-reveal-id="modal2" class = "button"> Add Adjustments </a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else
@@ -31,10 +31,10 @@
                     <th>Description</th>
                     <th>Quantity</th>
                     <th>Unit</th>
-                    <th>Unit Material</th>
-                    <th>Total Material</th>
-                    <th>Unit Labor</th>
-                    <th>Total Labor</th>
+                    <th>UM</th>
+                    <th>TL</th>
+                    <th>UL</th>
+                    <th>TL</th>
                     <th>Direct Cost</th>
                     <th>Remove</th>
                 </tr>
@@ -42,17 +42,18 @@
                 <tbody>
                 <?php $superTotal = 0 ?>
                 @foreach($entries as $entry)
-                    <tr><td colspan = "9"><h5><b  class = "left">{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></h5></td></tr>
+                    <tr><td colspan = "9"><b  class = "left">{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></td></tr>
                     <?php 
                             $parentSum = 0;  
-                            $totalUm = 0; 
-                            $totalUl = 0;
                     ?>
                     @foreach($entry->child() as $subHeader)
                         <tr>
                         @foreach($subHeader->entry() as $child)
                         <tr> 
-                            <?php $subHeaderSum = 0 ?>
+                            <?php $subHeaderSum = 0;
+                                  $totalUm = 0; 
+                                  $totalUl = 0; 
+                            ?>
                             <td class = "left"><b class="sub-header" style = "color:#F9690E;">{{$child->description}}</b></td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -98,7 +99,7 @@
                         @endforeach
                         </tr>
                     @endforeach
-                     <tr><td colspan = "6" class = "left"><h5><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></h5></td></tr>
+                     <tr><td colspan = "6" class = "left"><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></td></tr>
                      <?php $superTotal += $parentSum ?>
                 @endforeach
                 <tr><td colspan = "9"> <h2 class = "right">Total: {{number_format($superTotal,2)}}</h2></td></tr>
@@ -196,6 +197,14 @@
         </div>
     </div>
     </div>
+    <div id="modal2" class="reveal-modal" data-reveal>
+        <h1>Add Other Expenses</h1>
+        {{Form::open(['url' => ''])}}
+           {{Form::label('description','Description')}}
+           {{Form::text('description')}}
+           {{Form::label('cost','Cost')}}
+           {{Form::text('cost','')}} 
+        {{Form::close()}}
+    </div>
     <div style="clear:both"></div>
-</div>
 @endsection
