@@ -17,7 +17,7 @@
     @yield('head')
 </head>
 <body>  
-            <div class="medium-2 column no-padding left-side">
+  <div class="medium-2 column no-padding left-side">
               <div class="user-info-container">
                   <div class="avatar-container">
                     {{HTML::image('resources/images/no-image.jpg');}}
@@ -75,11 +75,6 @@
             
         </section>
     </div>
-    
-
-    
-    
-
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/jquery.js')}}
     {{HTML::script('resources/libraries/jqueryui/js/jquery.ui.datepicker.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/modernizr.js')}}

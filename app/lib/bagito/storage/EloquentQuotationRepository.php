@@ -4,6 +4,7 @@ use Quotation;
 use Project;
 use UserLoad;
 use Approval;
+use OtherExpense;
 
 class EloquentQuotationRepository implements QuotationRepository
 {
@@ -158,5 +159,23 @@ class EloquentQuotationRepository implements QuotationRepository
 		{
 			return null;
 		}
+	}
+
+	public function addExpenses($id, $inputs){
+		$expense = new OtherExpense();
+		$expense->quotation_id = $id;
+		$expense->description = $inputs['description'];
+		$expense->cost = $inputs['cost'];
+
+		$expense->save();
+	}
+
+	public function getExpensesById($id){
+		return OtherExpense::where('quotation_id',$id)->get();
+	}
+
+	public function removeExpenses($id){
+		$expense = OtherExpense::find($id);
+		$expense->delete();
 	}
 }

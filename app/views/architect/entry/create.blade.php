@@ -1,3 +1,4 @@
+
 @extends('entry-template')
 
 @section('head')
@@ -14,13 +15,13 @@
       <div class="view-box">
       @if(Session::has('message'))
         <span data-alert class = "alert-box">
-                {{Session::get('message')}}
+                <b>{{Session::get('message')}}</b>
             <a href = "#" class = "close">&times;</a>
         </span>
     @endif
         <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button">Return</a>
         <a href="#" data-reveal-id="myModal" class = "button right">Add New Entry</a>
-        <a href="#" data-reveal-id="modal2" class = "button"> Add Adjustments </a>
+        <a href="#" data-reveal-id="modal2" class = "button"> View Other Expenses </a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else
@@ -35,16 +36,23 @@
                     <th>TL</th>
                     <th>UL</th>
                     <th>TL</th>
-                    <th>Direct Cost</th>
+                    <th>DC</th>
+                    <th>Material</th>
+                    <th>Labor</th>
+                    <th>Total</th>
+                    <th>Gross Amount</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php $superTotal = 0 ?>
+                <?php $superTotal = 0;
+                        $netTotal = 0;
+                 ?>
                 @foreach($entries as $entry)
-                    <tr><td colspan = "9"><b  class = "left">{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></td></tr>
+                    <tr><td colspan = "13"><b  class = "left">{{$entry->description}}</b> <span class = "right"><a href="{{URL::to('architect/entry/delete/' . $entry->id)}}">Remove</a></span></td></tr>
                     <?php 
-                            $parentSum = 0;  
+                            $parentSum = 0;
+                            
                     ?>
                     @foreach($entry->child() as $subHeader)
                         <tr>
@@ -61,7 +69,11 @@
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                             <td><a href="{{URL::to('/architect/entry/delete/' . $child->id)}}">Remove</a></td>
                         </tr> 
                             @foreach($child->child() as $childEntry)
@@ -70,12 +82,17 @@
                                         <td class = "left"><span class="entry">{{$last->description}}</span></td>
                                         <td><span class="entry">{{$last->quantity}}</span></td>
                                         <td><span class="entry">{{$last->unit}}</span></td>
-                                        <td><span class="entry">{{number_format($last->um,2)}}</span></td>
-                                        <td><span class="entry">{{number_format($last->tm,2)}}</span></td>
-                                        <td><span class="entry">{{number_format($last->ul,2)}}</span></td>
-                                        <td><span class="entry">{{number_format($last->tl,2)}}</span></td>
-                                        <td><span class = "entry">{{number_format($last->dc,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format($last->um,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format($last->tm,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format($last->ul,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format($last->tl,2)}}</span></td>
+                                        <td><span class = "entry right">{{number_format($last->dc,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format($last->um / $grandTotal * $divisor,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format($last->ul / $grandTotal * $divisor,2)}}</span></td>
+                                        <td><span class="entry right">{{number_format(($last->um / $grandTotal * $divisor)+($last->ul / $grandTotal * $divisor),2)}}</span></td>
+                                        <td><span class="entry right">{{number_format((($last->um / $grandTotal * $divisor)+($last->ul / $grandTotal * $divisor)) * $last->quantity ,2)}}</span></td>
                                         <td><a href="{{URL::to('/architect/entry/delete/' . $last->id)}}">Remove</a></td>
+                                    <?php $netTotal += (($last->um / $grandTotal * $divisor)+($last->ul / $grandTotal * $divisor)) * $last->quantity;?>
                                     </tr>
                                      <?php 
                                         $subHeaderSum +=  ($last->dc);
@@ -89,20 +106,62 @@
                         <td><span class="left" style = "color:#F9690E">Subtotal</span></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td><b style = "color:#F9690E">{{number_format($totalUm,2)}}</b></td>
+                        <td><b style = "color:#F9690E" class = "right">{{number_format($totalUm,2)}}</b></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td><b style = "color:#F9690E">{{number_format($totalUl,2)}}</b></td>
+                        <td><b style = "color:#F9690E" class = "right">{{number_format($totalUl,2)}}</b></td>
                         <td class = "right" style = "color:#F9690E;"><b>{{number_format($subHeaderSum,2)}}</b>
                         </td>
                         </tr>
                         @endforeach
                         </tr>
                     @endforeach
-                     <tr><td colspan = "6" class = "left"><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></td></tr>
+                     <tr><td colspan = "10" class = "left"><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></td></tr>
                      <?php $superTotal += $parentSum ?>
                 @endforeach
-                <tr><td colspan = "9"> <h2 class = "right">Total: {{number_format($superTotal,2)}}</h2></td></tr>
+                <?php $superSum = $grandTotal;?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>DC:</td>
+                    <td>{{number_format($grandTotal,2)}}</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><b>Net Total<b></td>
+                    <td><b>{{number_format($netTotal,2)}}</b></td>
+                </tr>
+                <tr>
+                    <td>CONT:</h6></td>
+                    <td>{{number_format($grandTotal * 0.03,2)}}</td>
+                    <td>&nbsp;</td>
+                    <?php $superSum += $grandTotal * 0.03?>
+                    <td>{{number_format($superSum,2)}}</td>
+                </tr>
+                <?php $superSum += $totalExpenses?>
+                <tr>
+                    <td>OH:</h6></td>
+                    <td>{{number_format($totalExpenses,2)}}</td>
+                    <td>&nbsp;</td>
+                    <td>{{number_format($superSum,2)}}</td>
+                </tr>
+                <tr>
+                    <td>PROF:</h6></td>
+                    <td>{{number_format($superSum * 0.15,2)}}</td>
+                    <td>&nbsp;</td>
+                    <?php $superSum += $superSum * 0.15?>
+                    <td>{{number_format($superSum,2)}}</td>
+                </tr>
+                <tr>
+                    <td>TAX:</h6></td>
+                    <td>{{number_format($superSum * 0.1,2)}}</td>
+                    <td>&nbsp;</td>
+                    <?php $superSum += $superSum * 0.1?>
+                    <td>{{number_format($superSum,2)}}</td>
+                </tr>
                 </tbody>
                 </table>
             </div>
@@ -198,13 +257,43 @@
     </div>
     </div>
     <div id="modal2" class="reveal-modal" data-reveal>
-        <h1>Add Other Expenses</h1>
-        {{Form::open(['url' => ''])}}
-           {{Form::label('description','Description')}}
-           {{Form::text('description')}}
-           {{Form::label('cost','Cost')}}
-           {{Form::text('cost','')}} 
-        {{Form::close()}}
+        <div class="row">
+            <div class="medium-6 column">
+            <h3>Add Expenses</h3>
+            {{Form::open(['url' => '/architect/entry/add-expenses/' . $id])}}
+               {{Form::label('description','Description')}}
+               {{Form::text('description')}}
+               {{Form::label('cost','Cost')}}
+               {{Form::text('cost','')}} 
+               {{Form::submit('Add', array('class'=>'right button submit'))}}
+            {{Form::close()}}
+            </div>
+            <div class="medium-6 column">
+               <h3>Expenses</h3>
+                @if(count($expenses) != 0)
+                <table class = "data-table footable">
+                    <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Cost</th>
+                        <th>Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($expenses as $expense)
+                        <tr>
+                            <td>{{$expense->description}}</td>
+                            <td>{{number_format($expense->cost,2)}}</td>
+                            <td><a href="{{URL::to('/architect/entry/remove-expenses/' . $expense->id)}}">Remove</a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                @else
+                    <h6 class = "center">No Expenses Yet</h6>
+                @endif  
+            </div>
+        </div>
     </div>
     <div style="clear:both"></div>
 @endsection

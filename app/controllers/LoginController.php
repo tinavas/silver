@@ -11,7 +11,20 @@ class LoginController extends BaseController{
 
 	public function showLogin()
 	{
-		return View::make('index');
+		if(!Sentry::check()){
+			return View::make('index');	
+		}else{
+			$user = $this->auth->getCurrentUser();
+
+			if($this->auth->getCurrentUserGroup($user)->name == "Administrator")
+			{
+				return Redirect::to('/admin');
+			}
+			else
+			{
+				return Redirect::to('/architect');
+			}
+		}
 	}
 
 	public function login()

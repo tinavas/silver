@@ -3,6 +3,7 @@
 use Entry; 
 use Quotation;
 use ChildEntry;
+use OtherExpense;
 
 class EloquentEntryRepository implements EntryRepository
 {
@@ -18,6 +19,7 @@ class EloquentEntryRepository implements EntryRepository
 
 	public function store($quotation_id, $inputs)
 	{
+		$quotation = Quotation::find($quotation_id);
 		$entry = new Entry();
 		$entry->description = $inputs['description'];
 		$entry->quantity = $inputs['quantity'];
@@ -30,6 +32,8 @@ class EloquentEntryRepository implements EntryRepository
 		$entry->dc = $entry->tm + $entry->tl;
 		$entry->quotation_id = $quotation_id;
 		$entry->save();
+
+		$quotation->save();
 	
 		if($entry->level == 2)
 		{
@@ -57,13 +61,22 @@ class EloquentEntryRepository implements EntryRepository
 	public function remove($id)
 	{
 		$entry = Entry::find($id);
+		$quotation = Quotation::find($entry->quotation_id);
 		$children = $entry->child();
-		foreach($children as $e)
-		{	
-			$e->entry()->delete();	
+		foreach($children as $e) {
+			foreach($e->entry() as $child) {
+				foreach($child->child() as $h) {
+					foreach($h->entry() as $last){
+						$last->delete();
+					}
+				}
+				$child->childWithThrashed()->delete();
+				$child->delete();
+			}
 		}
 		$entry->childWithThrashed()->delete();
 		$entry->delete();
+		$quotation->save();
 	}
 
 	public function verifyEntry($userId, $entryId)
@@ -78,5 +91,13 @@ class EloquentEntryRepository implements EntryRepository
 		{
 			return false;
 		}
+	}
+
+	public function getSum($id){
+		return Entry::where('quotation_id',$id)->sum('dc');
+	}
+
+	public function getExpensesSum($id){
+		return OtherExpense::where('quotation_id',$id)->sum('cost');
 	}
 }

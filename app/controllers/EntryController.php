@@ -8,10 +8,43 @@ class EntryController extends BaseController
 		$this->entry = $entry;
 		$this->quotation = $quotation;
 	}
-	
+
+	public function addOtherExpenses($id){
+		$rules = [
+					'cost' => 'required|numeric',
+					'description' => 'required'
+				 ];
+
+		$validator = Validator::make(Input::all(),$rules);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$this->quotation->addExpenses($id, Input::all());
+			Session::flash('message','Expenses Added');
+			return Redirect::back();
+		}
+	}
+	public function removeExpenses($id){
+		$this->quotation->removeExpenses($id);
+		Session::flash('message','Record Removed');
+		return Redirect::back();
+	}
 	public function create($id){
+		$quotation = $this->quotation->find($id);
 		$parentsArray = $this->entry->getParents($id);
 		$subsArray = $this->entry->getSubHeaders($id);
+		$expenses = $this->quotation->getExpensesById($id);
+		$grandTotal = $this->entry->getSum($id);
+		$totalExpenses = $this->entry->getExpensesSum($id);
+
+		$divisor = $grandTotal + ($grandTotal * 0.03);
+		$divisor += $totalExpenses;
+		$divisor += $divisor * 0.15;
+		$divisor += $divisor * 0.1;
 		$subs = array();
 		$parents = array();
 		foreach($parentsArray as $parent)
@@ -24,7 +57,7 @@ class EntryController extends BaseController
 			$subs[$sub->id] = $sub->description;
 		}
 		$parentsArray = $this->entry->getHeaders($id);
-		return View::make('architect.entry.create',compact('parents','id','subs'))->with('entries',$parentsArray);
+		return View::make('architect.entry.create',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
 	}
 	public function store($id){
 		$rules = array();
