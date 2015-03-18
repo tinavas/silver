@@ -16,6 +16,9 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation->user_id = $userId;
 		$quotation->remarks = $inputs['remarks'];
 		$quotation->title = $inputs['title'];
+		$quotation->cont = $inputs['cont'];
+		$quotation->others = $inputs['others'];
+		$quotation->tax = $inputs['tax'];
 		$quotation->quotation_code = $this->nextQuotationCode($userId, $projectId);
 		$quotation->status = 0;
 		$quotation->save();
@@ -29,6 +32,9 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation = Quotation::find($id);
 		$quotation->remarks = $inputs['remarks'];
 		$quotation->title = $inputs['title'];
+		$quotation->cont = $inputs['cont'];
+		$quotation->others = $inputs['others'];
+		$quotation->tax = $inputs['tax'];
 		$quotation->save();
 
 		return $quotation;

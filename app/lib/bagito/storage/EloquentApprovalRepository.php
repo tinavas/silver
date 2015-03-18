@@ -17,7 +17,7 @@ class EloquentApprovalRepository implements ApprovalRepository
 		$quotation = Quotation::find($quotationId);
 		$project = $quotation->project()->first();
 
-		$total = ceil(count(UserLoad::where('project_id',$project->id)->get()) / 2);
+		$total = floor(count(UserLoad::where('project_id',$project->id)->get()) / 2);
 		$currentApprovals = count(Approval::where('quotation_id',$quotationId)->where('approval_status',1)->get());
 	
 		if($currentApprovals >= $total){

@@ -57,7 +57,7 @@
                     <i class="fa fa-power-off"></i>
                 </a>
                  <a href="{{URL::to('/architect/change-password')}}" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
-                <!--<a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>-->
+                 <a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>
                 </a>
                 
             </div>
@@ -72,7 +72,6 @@
         
     <div class="row">
         <section class="footer">
-            
         </section>
     </div>
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/jquery.js')}}

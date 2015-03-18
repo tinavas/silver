@@ -23,7 +23,7 @@
                 {{Form::label('title','Title', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                  {{Form::text('title','',array('class'=> ''))}}
+                  {{Form::text('title','',array('class'=> 'inline right'))}}
              </div>
          </div>
          <div class="row">
@@ -31,7 +31,31 @@
                 {{Form::label('remarks','Remarks', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                {{Form::textarea('remarks','',array('class'=>''))}}
+                {{Form::text('remarks','',array('class'=>'inline right'))}}
+             </div>
+         </div>
+         <div class="row">
+             <div class="medium-2 column">
+                {{Form::label('cont','Contingencies', array('class' => 'inline right'))}}
+             </div>
+             <div class="medium-10 column">
+                {{Form::text('cont','',array('class'=>'inline right'))}}
+             </div>
+         </div>
+         <div class="row">
+             <div class="medium-2 column">
+                {{Form::label('others','Others', array('class' => 'inline right'))}}
+             </div>
+             <div class="medium-10 column">
+                {{Form::text('others','0.02',array('class'=>'inline right'))}}
+             </div>
+         </div>
+         <div class="row">
+             <div class="medium-2 column">
+                {{Form::label('tax','Tax', array('class' => 'inline right'))}}
+             </div>
+             <div class="medium-10 column">
+                {{Form::text('tax','0.10',array('class'=>'inline right'))}}
              </div>
          </div>
         <div class="row">

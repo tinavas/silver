@@ -36,7 +36,12 @@ class QuotationController extends BaseController{
 
 	public function store($id)
 	{
-		$rules = ['title' => 'required'];
+		$rules = [
+					'title' => 'required',
+					'others'	=> 'required|numeric',
+					'cont'	=> 'required|numeric',
+					'tax'	=> 'required|numeric'
+				 ];
 
 		$validator = Validator::make(Input::all(),$rules);
 
@@ -75,10 +80,12 @@ class QuotationController extends BaseController{
 
 	public function update($id)
 	{
-		$rules = array(
-			'title' => 'required',
-			'remarks' => 'required',
-		);
+		$rules = [
+					'title' => 'required',
+					'others'	=> 'required|numeric',
+					'cont'	=> 'required|numeric',
+					'tax'	=> 'required|numeric'
+				 ];
 
 		$validator = Validator::make(Input::all(),$rules);
 		if($validator->fails())

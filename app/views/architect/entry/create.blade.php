@@ -1,4 +1,3 @@
-
 @extends('entry-template')
 
 @section('head')
@@ -136,9 +135,9 @@
                 </tr>
                 <tr>
                     <td>CONT:</h6></td>
-                    <td>{{number_format($grandTotal * 0.03,2)}}</td>
+                    <td>{{number_format($grandTotal * $quotation->cont,2)}}</td>
                     <td>&nbsp;</td>
-                    <?php $superSum += $grandTotal * 0.03?>
+                    <?php $superSum += $grandTotal * $quotation->cont?>
                     <td>{{number_format($superSum,2)}}</td>
                 </tr>
                 <?php $superSum += $totalExpenses?>
@@ -148,18 +147,19 @@
                     <td>&nbsp;</td>
                     <td>{{number_format($superSum,2)}}</td>
                 </tr>
+                <?php $superSum += $totalExpenses * $quotation->others ?>
                 <tr>
-                    <td>PROF:</h6></td>
-                    <td>{{number_format($superSum * 0.15,2)}}</td>
+                    <td>OTHERS:</h6></td>
+                    <td>{{number_format($totalExpenses * $quotation->others ,2)}}</td>
                     <td>&nbsp;</td>
-                    <?php $superSum += $superSum * 0.15?>
                     <td>{{number_format($superSum,2)}}</td>
                 </tr>
+
                 <tr>
                     <td>TAX:</h6></td>
-                    <td>{{number_format($superSum * 0.1,2)}}</td>
+                    <td>{{number_format($superSum * $quotation->tax,2)}}</td>
                     <td>&nbsp;</td>
-                    <?php $superSum += $superSum * 0.1?>
+                    <?php $superSum += $superSum * $quotation->tax?>
                     <td>{{number_format($superSum,2)}}</td>
                 </tr>
                 </tbody>

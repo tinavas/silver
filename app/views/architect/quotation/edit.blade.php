@@ -16,28 +16,53 @@
                 @endforeach
             </span>
         @endif
-      <div class="view-box">
-            {{Form::model($quotation,array('url' => '/architect/quotation/edit/' . $quotation->id))}}
-         <div class="row">
-             <div class="medium-2 column">
-                {{Form::label('title','Title', array('class' => 'inline right'))}}
+          <div class="view-box">
+                {{Form::model($quotation,array('url' => '/architect/quotation/edit/' . $quotation->id))}}
+             <div class="row">
+                 <div class="medium-2 column">
+                    {{Form::label('title','Title', array('class' => 'inline right'))}}
+                 </div>
+                 <div class="medium-10 column">
+                      {{Form::text('title',null,array('class'=> 'inline right'))}}
+                 </div>
              </div>
-             <div class="medium-10 column">
-                  {{Form::text('title',null,array('class'=> ''))}}
+            <div class="row">
+                 <div class="medium-2 column">
+                    {{Form::label('cont','Contingencies', array('class' => 'inline right'))}}
+                 </div>
+                 <div class="medium-10 column">
+                    {{Form::text('cont',null,array('class'=>'inline right'))}}
+                 </div>
              </div>
-         </div>
-         <div class="row">
-             <div class="medium-2 column">
-                {{Form::label('remarks','Remarks', array('class' => 'inline right'))}}
+             <div class="row">
+                 <div class="medium-2 column">
+                    {{Form::label('prof','Others', array('class' => 'inline right'))}}
+                 </div>
+                 <div class="medium-10 column">
+                    {{Form::text('prof',null,array('class'=>'inline right'))}}
+                 </div>
              </div>
-             <div class="medium-10 column">
-                {{Form::textarea('remarks',null,array('class'=>''))}}
+             <div class="row">
+                 <div class="medium-2 column">
+                    {{Form::label('tax',null, array('class' => 'inline right'))}}
+                 </div>
+                 <div class="medium-10 column">
+                    {{Form::text('tax','0.10',array('class'=>'inline right'))}}
+                 </div>
              </div>
-         </div>
-        <div class="row">
-            <div class="medium-12 column">
-                {{Form::submit('Update', array('class'=>'right button submit'))}}
-                {{Form::close()}}
+             <div class="row">
+                 <div class="medium-2 column">
+                    {{Form::label('remarks','Remarks', array('class' => 'inline right'))}}
+                 </div>
+                 <div class="medium-10 column">
+                    {{Form::text('remarks',null,array('class'=>'inline right','style' => 'width:90%; height:50%;'))}}
+                 </div>
+             </div>
+            <div class="row">
+                <div class="medium-12 column">
+                    {{Form::submit('Update', array('class'=>'right button submit'))}}
+                    {{Form::close()}}
+                </div>
             </div>
         </div>
     </div>
