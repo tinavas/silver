@@ -120,4 +120,12 @@ Route::get('/architect/index', function() use ($archtemplate)
 	return $layout->nest('content', 'architect.quotation.index');
 });
 
+$sectemplate = 'secretarytemplate';
+Route::get('/secretary/test', function() use ($sectemplate)
+{
+	View::name($sectemplate, 'secretary.materials.index');
+	$layout = View::of('secretary.materials.index');
+	return $layout->nest('content', 'secretary.materials.index');
+});
+
 /* END */
