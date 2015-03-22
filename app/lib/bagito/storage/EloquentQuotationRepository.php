@@ -184,4 +184,10 @@ class EloquentQuotationRepository implements QuotationRepository
 		$expense = OtherExpense::find($id);
 		$expense->delete();
 	}
+
+	public function updateAdjustment($id,$amount){
+		$quotation = Quotation::find($id);
+		$quotation->adjustments = $amount;
+		$quotation->save();
+	}
 }

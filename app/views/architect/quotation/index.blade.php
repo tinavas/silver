@@ -14,10 +14,9 @@
           <thead>
             <th>Quotation ID</th>
             <th>Quotation Title</th>
-            <th>Project Name</th>
+            <th>Project</th>
             <th>Date Created</th>
             <th>Date Updated</th>
-            <th>Status</th>
             <th>More Details</th>
             <th>Edit</th>
           </thead>
@@ -29,17 +28,6 @@
               <td>{{$quotation->project()->first()->title}}</td>
               <td>{{date('F j, Y',strtotime($quotation->created_at))}}</td>
               <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
-              <td>
-                @if($quotation->status == 0)
-                  On-Going
-                @elseif($quotation->status == 1)
-                  Active (For approval)
-                @elseif($quotation->status == -1)
-                  Rejected
-                @elseif($quotation->status == 2)
-                  Done
-                @endif
-              </td>
               <td><a href="{{URL::to('/architect/quotation/view/' . $quotation->id)}}">View</a></td>
               <td><a href="{{URL::to('/architect/quotation/edit/' . $quotation->id)}}">Edit</a></td>
             </tr>

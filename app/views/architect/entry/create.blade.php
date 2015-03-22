@@ -17,10 +17,18 @@
                 <b>{{Session::get('message')}}</b>
             <a href = "#" class = "close">&times;</a>
         </span>
-    @endif
-        <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button">Return</a>
-        <a href="#" data-reveal-id="myModal" class = "button right">Add New Entry</a>
-        <a href="#" data-reveal-id="modal2" class = "button"> View Other Expenses </a>
+        @if($errors->has())
+            <span class = "error">
+                @foreach($errors->all() as $error)
+                    {{$error}} <br>
+                @endforeach
+            </span>
+        @endif
+      @endif
+        <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
+        <a href="#" data-reveal-id="myModal" class = "button right"> <i class="fa fa-plus"></i>Add New Entry</a>
+        <a href="#" data-reveal-id="modal2" class = "button"><i class="fa fa-dollar"></i> View Other Expenses </a>
+        <a href="#" data-reveal-id="modalAdj" class = "button"><i class="fa fa-arrows-h"></i>View Adjustment</a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else
@@ -130,8 +138,8 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><b>Net Total<b></td>
-                    <td><b>{{number_format($netTotal,2)}}</b></td>
+                    <td><b class = "right">Net Total<b></td>
+                    <td><b class = "right">{{number_format($netTotal + $quotation->adjustments,2)}}</b></td>
                 </tr>
                 <tr>
                     <td>CONT:</h6></td>
@@ -165,13 +173,6 @@
                 </tbody>
                 </table>
             </div>
-        @endif
-      @if($errors->has())
-            <span class = "error">
-                @foreach($errors->all() as $error)
-                    {{$error}} <br>
-                @endforeach
-            </span>
         @endif
         <div id="myModal" class="reveal-modal" data-reveal>
         <h4>Add New Entry</h4>
@@ -221,7 +222,7 @@
              </div>
              <div class="row">
                 <div class="medium-2 column">
-                    {{Form::label('parent_id','Parent', array('class' => 'inline right'))}}
+                    {{Form::label('parent_id','Sub Category', array('class' => 'inline right', 'id' => 'subCategory'))}}
                  </div>
                  <div class="medium-10 column">
                     {{Form::select('parent_id',$subs,array('class'=>'inline right'))}}
@@ -291,7 +292,19 @@
                 </table>
                 @else
                     <h6 class = "center">No Expenses Yet</h6>
-                @endif  
+                @endif
+            </div>
+        </div>
+    </div>
+    <div id = "modalAdj" class="reveal-modal tiny" data-reveal>
+        <div class="row">
+            <div class="medium-12 column">
+                <h3>Adjustment</h3>
+                {{Form::model($quotation,['url' => '/architect/quotation/updateAdjustment/' . $id])}}
+                    {{Form::label('adjustments','Value')}}
+                    {{Form::text('adjustments')}}
+                    {{Form::submit('Update',['class' => 'button'])}}
+                {{Form::close()}}  
             </div>
         </div>
     </div>

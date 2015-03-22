@@ -47,4 +47,6 @@ interface QuotationRepository
 
 	public function removeExpenses($id);
 
+	public function updateAdjustment($id,$amount);
+
 }

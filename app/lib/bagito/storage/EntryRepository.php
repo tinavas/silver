@@ -9,4 +9,5 @@
  	public function verifyEntry($userId, $entryId);
  	public function getSum($id);
  	public function getExpensesSum($id);
+ 	public function getSubs($id);
  }

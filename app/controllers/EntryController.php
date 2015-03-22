@@ -143,10 +143,10 @@ class EntryController extends BaseController
 		$entries = $parentsArray;
 		$fpdf = new Fpdf();
         $fpdf->AddPage();
-        $fpdf->SetFont('Helvetica','B',18);
+        $fpdf->SetFont('Helvetica','B',12);
         $fpdf->Cell(40,10,'Silver Leisure');
         $fpdf->Ln();
-        $fpdf->SetFont('Helvetica','',9);
+        $fpdf->SetFont('Helvetica','',7);
         $fpdf->Cell(30,5,'2/F Silverado Hardware and Const. Supply, Marcos Highway, Antipolo City.');
         $fpdf->Ln();
         $fpdf->Cell(30,5,'Email: silverleisure@yahoo.com');
@@ -164,31 +164,31 @@ class EntryController extends BaseController
         $fpdf->Ln();
         $fpdf->Ln();
         $superTotal = 0 ;
-        $fpdf->Cell(50,5,'Description',1,0,'C');
+        $fpdf->Cell(100,5,'Description',1,0,'C');
         $fpdf->Cell(20,5,'Quantity',1,0,'C');
         $fpdf->Cell(20,5,'Unit',1,0,'C');
-        $fpdf->Cell(50,5,'Price',1,0,'C');
-        $fpdf->Cell(50,5,'Total Price',1,0,'C');
+        $fpdf->Cell(25,5,'Price',1,0,'C');
+        $fpdf->Cell(25,5,'Total Price',1,0,'C');
         $fpdf->Ln();
         foreach($entries as $entry){
-        	$fpdf->SetFont('Helvetica','B',14);
+        	$fpdf->SetFont('Helvetica','B',10);
         	$fpdf->Cell(0,10,$entry->description,1,0,'L');
         	$fpdf->ln();
         	$parentSum = 0;
         	foreach($entry->child() as $subHeader){
         		 foreach($subHeader->entry() as $child){
         		 	$subHeaderSum = 0;
-        		 	$fpdf->SetFont('Helvetica','B',10);
+        		 	$fpdf->SetFont('Helvetica','B',7);
         		 	$fpdf->Cell(0,10,$child->description,1,0,'L');
         		 	$fpdf->ln();
         		 	foreach($child->child() as $childEntry){
         		 		foreach($childEntry->entry() as $last){
-        		 			$fpdf->SetFont('Helvetica','',10);
-        		 			$fpdf->Cell(50,5,$last->description,1,0,'C');
-                            $fpdf->Cell(20,5,$last->quantity,1,0,'C');
-                            $fpdf->Cell(20,5,$last->unit,1,0,'C');
-                            $fpdf->Cell(50,5,number_format($last->price,2),1,0,'C');
-                            $fpdf->Cell(50,5,number_format($last->quantity * $last->price,2),1,0,'C');
+        		 			$fpdf->SetFont('Helvetica','',7);
+        		 			$fpdf->Cell(100,5,$last->description,1,0,'L');
+                            $fpdf->Cell(20,5,$last->quantity,1,0,'L');
+                            $fpdf->Cell(20,5,$last->unit,1,0,'L');
+                            $fpdf->Cell(25,5,number_format($last->price,2),1,0,'L');
+                            $fpdf->Cell(25,5,number_format($last->quantity * $last->price,2),1,0,'L');
                             $fpdf->Ln();
                             $subHeaderSum +=  ($last->quantity * $last->price);
         		 		}
@@ -208,5 +208,10 @@ class EntryController extends BaseController
         $fpdf->Output();
         exit;
 
+	}
+
+	public function getAllSubHeaders($id){
+		
+		return Response::json();
 	}
 }

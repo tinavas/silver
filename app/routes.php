@@ -80,6 +80,7 @@ Route::post('/architect/change-password','LoginController@updateArchitectPasswor
 Route::post('/admin/change-password','LoginController@updateAdminPassword');
 Route::post('/architect/entry/add-expenses/{id}','EntryController@addOtherExpenses');
 Route::get('/architect/entry/remove-expenses/{id}','EntryController@removeExpenses');
+Route::post('/architect/quotation/updateAdjustment/{id}','QuotationController@updateAdjustment');
 
 /* for design */
 $template = 'template';

@@ -57,7 +57,6 @@
                   </tbody>
             </table>
             {{$projects->appends(['keyword' => $keyword])->links()}}
-
             @if($keyword != '')
               {{HTML::link('/admin/projects','Back',['class' => 'left button'])}}
             @endif

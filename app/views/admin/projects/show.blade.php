@@ -18,11 +18,10 @@
              <h3>{{$project->title}}</h3>
             <h6>Location: {{$project->location}}</h6>
             <h6>Description: {{$project->description}}</h6>
-            <h6>Date Created: {{date('F j, Y, g:i a',strtotime($project->created_at))}}</h6>
         </div>
         <div class="proj-func">
             <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}" class="small button proj-func-button"><i class="fa fa-pencil"></i>Edit</a>
-            <a href="{{URL::to('/admin/budget/' . $project->id)}}" class="small button proj-func-button"><i class = "fa fa-money"></i>View Budget</a>
+            <!--<a href="{{URL::to('/admin/budget/' . $project->id)}}" class="small button proj-func-button"><i class = "fa fa-money"></i>View Budget</a>-->
         </div>
         <h4 class="view-header"><i class="fa fa-user"></i> Project Collaborators</h4>
         <div class="project-collab-container table-title">
@@ -62,7 +61,7 @@
           <h4 class="view-header"><i class="fa fa-book"></i>Active Quotation</h4>
           <table>
               <thead>
-                <th>Quotation ID</th>
+                <th>Control Number</th>
                 <th>Quotation Title</th>
                 <th>Author</th>
                 <th>Date Created</th>
@@ -91,7 +90,9 @@
                 <th>Date Created</th>
                 <th>Date Updated</th>
                 <th>More Details</th>
-                <th>Set as active quotation</th>
+                <th>Approve</th>
+                <th>Disapprove</th>
+                <th>Request For Update</th>
               </thead>
               <tbody>
               @foreach($quotations as $quotation)
@@ -102,7 +103,9 @@
                   <td>{{date('F j, Y',strtotime($quotation->created_at))}}</td>
                   <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
                   <td><a href="{{URL::to('/admin/quotation/view/' . $quotation->id)}}">View</a></td>
-                  <td><a href="{{URL::to('/admin/project/add-active-quotation/' . $project->id . '/' . $quotation->id)}}">Set</a></td>
+                  <td><a href="{{URL::to('/admin/project/add-active-quotation/' . $project->id . '/' . $quotation->id)}}">Approve</a></td>
+                  <td><a href="#">Disapprove</a></td>
+                  <td><a href="#">Request for Update</a></td>
                 </tr>
               @endforeach
               </tbody>

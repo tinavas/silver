@@ -20,8 +20,8 @@
           <h6>Last Update: {{date('F j, Y',strtotime($quotation->updated_at))}}</h6>
           <h6>Remarks: {{$quotation->remarks}}</h6>
             <div class="medium-12">
-                <a href="{{URL::to('/architect/entry/create/' . $quotation->id)}}" class = "button">Open Quotation Entries Editor</a>
-                <a href="#" data-reveal-id="myModal" class = "button right">Tag as finish</a>
+                <a href="{{URL::to('/architect/entry/create/' . $quotation->id)}}" class = "button"><i class="fa fa-folder-open"></i>Open Quotation Entry Editor</a>
+                <a href="#" data-reveal-id="myModal" class = "button right"><i class="fa fa-check-square"></i>Tag as finished</a>
             </div>
         </div>
         <h4 class="view-header"><i class="fa fa-building"></i> Project Information</h4>

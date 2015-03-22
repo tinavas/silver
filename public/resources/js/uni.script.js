@@ -38,6 +38,10 @@ $(document).ready( function () {
         $(".dynamictable tbody td:last-child").css({width:"100px"})
     }
 
+    $('#ajax_header').change(function(){
+    	
+    });
+
     
 
     /* CHARTS */

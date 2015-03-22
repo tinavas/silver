@@ -41,7 +41,7 @@
                   <tbody>
                    @foreach($suppliers as $supplier)
                       <tr>
-                        <td>{{str_pad($supplier->id,8,"0",STR_PAD_LEFT)}}</td>
+                        <td>{{str_pad($supplier->id,3,"0",STR_PAD_LEFT)}}</td>
                         <td>{{$supplier->supplier_name}}</td>
                         <td>{{$supplier->description}}</td>
                         <td>{{$supplier->address}}</td>

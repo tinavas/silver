@@ -17,6 +17,7 @@
             </span>
         @endif
       <div class="view-box">
+            <h3>Creating Quotation for Project : {{$name}}</h3>
             {{Form::open(array('url' => '/architect/quotation/create/' . $id,'method' => 'POST'))}}
          <div class="row">
              <div class="medium-2 column">
@@ -39,7 +40,7 @@
                 {{Form::label('cont','Contingencies', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
-                {{Form::text('cont','',array('class'=>'inline right'))}}
+                {{Form::text('cont','0.05',array('class'=>'inline right'))}}
              </div>
          </div>
          <div class="row">

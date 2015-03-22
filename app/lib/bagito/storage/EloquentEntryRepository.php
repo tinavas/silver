@@ -100,4 +100,8 @@ class EloquentEntryRepository implements EntryRepository
 	public function getExpensesSum($id){
 		return OtherExpense::where('quotation_id',$id)->sum('cost');
 	}
+
+	public function getSubs($id){
+		return ChildEntry::where('parent_id' , $id);
+	}
 }

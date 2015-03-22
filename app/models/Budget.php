@@ -9,5 +9,5 @@ class Budget extends \Eloquent {
 
 	public function project() {
 		return $this->belongsTo('Project');
-	}	
+	}
 }

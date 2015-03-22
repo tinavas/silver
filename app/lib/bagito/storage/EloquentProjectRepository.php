@@ -4,24 +4,21 @@ use Project;
 use UserLoad;
 use User;
 
-class EloquentProjectRepository implements ProjectRepository
-{
-	public function find($id)
-	{
+class EloquentProjectRepository implements ProjectRepository{
+	
+	public function find($id) {
 		return Project::find($id);
 	}
 
-	public function all()
-	{
+	public function all() {
 		return Project::all();
 	}
 
-	public function paginate($pages){
+	public function paginate($pages) {
 		return Project::orderBy('title','asc')->paginate($pages);
 	}
 
-	public function create($inputs)
-	{
+	public function create($inputs) {
 		$project = new Project;
 		$project->title = $inputs['title'];
 		$project->description = $inputs['description'];
@@ -31,8 +28,7 @@ class EloquentProjectRepository implements ProjectRepository
 		return $project;
 	}
 
-	public function update($id, $inputs)
-	{
+	public function update($id, $inputs) {
 		$project = Project::find($id);
 		$project->title = $inputs['title'];
 		$project->description = $inputs['description'];

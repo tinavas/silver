@@ -18,7 +18,9 @@ class QuotationController extends BaseController{
 	}
 
 	public function create($id){
-		return View::make('architect.quotation.create',compact('id'));
+		$project = $this->project->find($id);
+		$name = $project->title;
+		return View::make('architect.quotation.create',compact('id','name'));
 	}
 
 	public function showProjects()
@@ -158,16 +160,36 @@ class QuotationController extends BaseController{
 		$quotation = $this->quotation->find($id);
 		$bool = $this->project->inProject($user->id, $quotation->project_id);
 		
-		if($bool)
-		{
+		if($bool){
 			
 			$this->approval->approve($user->id,$id);
 			Session::flash('notification','Quotation Approved');
 			return Redirect::back();
-		}
-		else
-		{
+		}else{
 			return App::abort(403, 'Unauthorized action.');
+		}
+	}
+
+	public function updateAdjustment($id){
+
+		$rules = ['adjustments' => 'required|numeric'];
+
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}else{
+			$user = $this->auth->getCurrentUser();
+			$quotation = $this->quotation->find($id);
+			$bool = $this->project->inProject($user->id, $quotation->project_id);
+			if($bool){
+				$amount = Input::get('adjustments');
+				$this->quotation->updateAdjustment($id, $amount);
+				Session::flash('message','Adjustment Updated');
+				return Redirect::back();
+			}else{
+				return App::abort(403, 'Unauthorized action.');
+			}
 		}
 	}
 
