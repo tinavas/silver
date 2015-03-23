@@ -3,6 +3,7 @@
 use Project;
 use UserLoad;
 use User;
+use QuotationLoad;
 
 class EloquentProjectRepository implements ProjectRepository{
 	
@@ -102,9 +103,22 @@ class EloquentProjectRepository implements ProjectRepository{
 	}
 
 	public function addActiveQuotation($projectId, $quotationId) {
-		$project = new ProjectLoad;
+		$project = new QuotationLoad;
 		$project->quotation_id = $quotationId;
 		$project->project_id = $projectId;
 		$project->save();
+	}
+
+	public function getApprovedQuotationByProject($projectId){
+		return QuotationLoad::where('project_id',$projectId)->get();
+	}
+
+	public function findQuotationLoad($id){
+		return QuotationLoad::find($id);
+	}
+
+	public function deleteQuotationLoad($id){
+		$record = QuotationLoad::find($id);
+		$record->delete();
 	}
 }

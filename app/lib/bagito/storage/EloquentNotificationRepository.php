@@ -1,12 +1,14 @@
 <?php namespace Bagito\Storage;
 
+use Notification;
+
 class EloquentNotificationRepository implements NotificationRepository{
 
 	public function create($id,$inputs){
 		$notif = new Notification();
 
 		$notif->user_id = $id;
-		$notif->description = $inputs['description'];
+		$notif->description = $inputs;
 		$notif->is_read = 0;
 
 		$notif->save();

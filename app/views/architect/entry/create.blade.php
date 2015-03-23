@@ -17,14 +17,14 @@
                 <b>{{Session::get('message')}}</b>
             <a href = "#" class = "close">&times;</a>
         </span>
-        @if($errors->has())
+      @endif
+      @if($errors->has())
             <span class = "error">
                 @foreach($errors->all() as $error)
                     {{$error}} <br>
                 @endforeach
             </span>
         @endif
-      @endif
         <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
         <a href="#" data-reveal-id="myModal" class = "button right"> <i class="fa fa-plus"></i>Add New Entry</a>
         <a href="#" data-reveal-id="modal2" class = "button"><i class="fa fa-dollar"></i> View Other Expenses </a>
@@ -221,8 +221,16 @@
                  </div>
              </div>
              <div class="row">
+                    <div class="medium-2 column">
+                        {{Form::label('ajax_header','Category', array('class' => 'inline right'))}}
+                     </div>
+                    <div class="medium-10 column">
+                        {{Form::select('ajax_header',$parents,array('class'=>'inline right'))}}
+                    </div>
+                 </div>
+             <div class="row huehue">
                 <div class="medium-2 column">
-                    {{Form::label('parent_id','Sub Category', array('class' => 'inline right', 'id' => 'subCategory'))}}
+                    {{Form::label('parent_id','Sub Category', array('class' => 'inline right'))}}
                  </div>
                  <div class="medium-10 column">
                     {{Form::select('parent_id',$subs,array('class'=>'inline right'))}}
@@ -243,9 +251,9 @@
                     <div class="medium-2 column">
                         {{Form::label('parent_id_sub','Parent', array('class' => 'inline right'))}}
                      </div>
-                     <div class="medium-10 column">
+                    <div class="medium-10 column">
                         {{Form::select('parent_id_sub',$parents,array('class'=>'inline right'))}}
-                         </div>
+                    </div>
                  </div>
          </div>
         <div class="row">

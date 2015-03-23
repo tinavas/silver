@@ -2,6 +2,11 @@
 
 @section('head')
 {{HTML::style('resources/css/modules/projects/projects-show.css');}}
+<style>
+  .data-table{
+    width:100%;
+  }
+</style>
 @endsection
 
 @section('content')
@@ -11,7 +16,9 @@
         @if(Session::has('errorMessage'))
             <span class="error">{{Session::get('errorMessage')}}</span>
         @elseif(Session::has('notification'))
-            <span class="alert-box">{{Session::get('notification')}}</span>
+            <span class="alert-box">
+              <b>{{Session::get('notification')}}</b>
+            </span>
         @endif
         <h4 class="view-header"><i class="fa fa-building"></i> Project Information</h4>
         <div class="project-desc">
@@ -21,7 +28,7 @@
         </div>
         <div class="proj-func">
             <a href="{{URL::to('admin/projects/' . $project->id . '/edit')}}" class="small button proj-func-button"><i class="fa fa-pencil"></i>Edit</a>
-            <!--<a href="{{URL::to('/admin/budget/' . $project->id)}}" class="small button proj-func-button"><i class = "fa fa-money"></i>View Budget</a>-->
+            <a href="#" class="small button proj-func-button" data-reveal-id="approved-quotations"><i class = "fa fa-check"></i>View Approved Quotations</a>
         </div>
         <h4 class="view-header"><i class="fa fa-user"></i> Project Collaborators</h4>
         <div class="project-collab-container table-title">
@@ -80,7 +87,7 @@
               </tbody>
             </table>
         @elseif($project->status == 0)
-          <h4 class="view-header"><i class="fa fa-book"></i>Quotations</h4>
+          <h4 class="view-header"><i class="fa fa-book"></i>For Approval Quotations</h4>
             @if(count($quotations) != 0)
             <table class = "data-table">
               <thead>
@@ -92,7 +99,6 @@
                 <th>More Details</th>
                 <th>Approve</th>
                 <th>Disapprove</th>
-                <th>Request For Update</th>
               </thead>
               <tbody>
               @foreach($quotations as $quotation)
@@ -105,7 +111,6 @@
                   <td><a href="{{URL::to('/admin/quotation/view/' . $quotation->id)}}">View</a></td>
                   <td><a href="{{URL::to('/admin/project/add-active-quotation/' . $project->id . '/' . $quotation->id)}}">Approve</a></td>
                   <td><a href="#">Disapprove</a></td>
-                  <td><a href="#">Request for Update</a></td>
                 </tr>
               @endforeach
               </tbody>
@@ -115,6 +120,42 @@
           @endif
         @endif
         </div>
+    </div>
+</div>
+
+<div id = "approved-quotations" class = "reveal-modal xlarge" data-reveal>
+    <div class="row">
+      <div class="medium-12">
+            <h4 class="view-header"><i class="fa fa-book"></i>Approved Quotations</h4>
+            @if(count($approved) != 0)
+            <table class = "data-table">
+              <thead>
+                <th>Quotation ID</th>
+                <th>Quotation Title</th>
+                <th>Author</th>
+                <th>Date Created</th>
+                <th>Date Updated</th>
+                <th>More Details</th>
+                <th>Request For Update</th>
+              </thead>
+              <tbody>
+              @foreach($approved as $a)
+                <tr>
+                  <td>{{str_pad($project->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($a->quotation()->first()->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
+                  <td>{{$a->quotation()->first()->title}}</td>
+                  <td>{{$a->quotation()->first()->user()->first()->first_name}}</td>
+                  <td>{{date('F j, Y',strtotime($a->quotation()->first()->created_at))}}</td>
+                  <td>{{date('F j, Y',strtotime($a->quotation()->first()->updated_at))}}</td>
+                  <td><a href="{{URL::to('/admin/quotation/view/' . $a->quotation()->first()->id)}}">View</a></td>
+                  <td><a href="{{URL::to('/admin/quotation/request-for-update/' . $a->id)}}">Update</a></td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          @else
+            <h6>No Approved Yet!</h6>
+          @endif
+      </div>
     </div>
 </div>
 @endsection

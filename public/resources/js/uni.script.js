@@ -1,5 +1,6 @@
 /* MAIN JS */
 $(document).ready( function () {
+
 	$('.data-table').DataTable();
 
 	$('.div-toggle').click(function(e) {
@@ -39,14 +40,34 @@ $(document).ready( function () {
     }
 
     $('#ajax_header').change(function(){
-    	
+    	var id = $("#ajax_header").val();
+    	$("#parent_id").attr('disabled',true);
+    	$("#parent_id").empty();
+    	$.ajax({
+    		type : 'GET',
+    		url  : '/ajax/get-subs',
+    		data : {id : id}
+    	}).done(function(msg){
+    		$.each(msg, function(i, obj){
+    			$('#parent_id').append($("<option></option>").attr("value",obj.id).text(obj.description));
+    		});
+			$("#parent_id").attr('disabled',false);
+    	});
     });
-
-    
-
+    var id = $("#ajax_header").val();
+    	$("#parent_id").empty();
+    	$.ajax({
+    		type : 'GET',
+    		url  : '/ajax/get-subs',
+    		data : {id : id}
+    	}).done(function(msg){
+    		$.each(msg, function(i, obj){
+    			$('#parent_id').append($("<option></option>").attr("value",obj.id).text(obj.description));
+    		});
+    	});
     /* CHARTS */
 
-    var ctx = document.getElementById("bar-status").getContext("2d");
+    /*var ctx = document.getElementById("bar-status").getContext("2d");
     var ctx2 = document.getElementById("bar2-status").getContext("2d");
 
     var data = {

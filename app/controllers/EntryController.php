@@ -1,6 +1,7 @@
 <?php
 use Bagito\Storage\EntryRepository as Entry;
 use Bagito\Storage\QuotationRepository as Quotation;
+
 class EntryController extends BaseController
 {
 	public function __construct(Entry $entry, Quotation $quotation)
@@ -41,10 +42,11 @@ class EntryController extends BaseController
 		$grandTotal = $this->entry->getSum($id);
 		$totalExpenses = $this->entry->getExpensesSum($id);
 
-		$divisor = $grandTotal + ($grandTotal * 0.03);
+
+		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
 		$divisor += $totalExpenses;
-		$divisor += $divisor * 0.15;
-		$divisor += $divisor * 0.1;
+		$divisor += $divisor * $quotation->others;
+		$divisor += $divisor * $quotation->tax;
 		$subs = array();
 		$parents = array();
 		foreach($parentsArray as $parent)
@@ -128,8 +130,15 @@ class EntryController extends BaseController
 		$project = $quotation->project()->first();
 		$parentsArray = $this->entry->getParents($id);
 		$subsArray = $this->entry->getSubHeaders($id);
+		$grandTotal = $this->entry->getSum($id);
+		$totalExpenses = $this->entry->getExpensesSum($id);
 		$subs = array();
 		$parents = array();
+		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
+		$divisor += $totalExpenses;
+		$divisor += $divisor * $quotation->others;
+		$divisor += $divisor * $quotation->tax;
+		$netTotal = 0;
 		foreach($parentsArray as $parent)
 		{
 			$parents[$parent->id] = $parent->description;
@@ -142,7 +151,7 @@ class EntryController extends BaseController
 		$parentsArray = $this->entry->getHeaders($id);
 		$entries = $parentsArray;
 		$fpdf = new Fpdf();
-        $fpdf->AddPage();
+        $fpdf->AddPage('L');
         $fpdf->SetFont('Helvetica','B',12);
         $fpdf->Cell(40,10,'Silver Leisure');
         $fpdf->Ln();
@@ -158,60 +167,68 @@ class EntryController extends BaseController
         $fpdf->Ln();
         $fpdf->Cell(30,5,'Project Title: ' . $project->title);
         $fpdf->Ln();
+        $fpdf->Cell(30,5,'Quotation Title: ' . $quotation->title);
+        $fpdf->Ln();
         $fpdf->Cell(30,5,'Author: ' . $quotation->user()->first()->first_name . ' ' . $quotation->user()->first()->last_name);
         $fpdf->Ln();
         $fpdf->Cell(30,5,'Quotation Code: ' . str_pad($quotation->project()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT));
         $fpdf->Ln();
         $fpdf->Ln();
         $superTotal = 0 ;
-        $fpdf->Cell(100,5,'Description',1,0,'C');
+        $fpdf->SetFont('Courier','B',9);
+        $fpdf->Cell(162,5,'Description',1,0,'C');
         $fpdf->Cell(20,5,'Quantity',1,0,'C');
         $fpdf->Cell(20,5,'Unit',1,0,'C');
-        $fpdf->Cell(25,5,'Price',1,0,'C');
+        $fpdf->Cell(25,5,'Material',1,0,'C');
+        $fpdf->Cell(25,5,'Labor',1,0,'C');
         $fpdf->Cell(25,5,'Total Price',1,0,'C');
         $fpdf->Ln();
         foreach($entries as $entry){
-        	$fpdf->SetFont('Helvetica','B',10);
+        	$fpdf->SetFont('Courier','B',14);
         	$fpdf->Cell(0,10,$entry->description,1,0,'L');
         	$fpdf->ln();
         	$parentSum = 0;
         	foreach($entry->child() as $subHeader){
         		 foreach($subHeader->entry() as $child){
         		 	$subHeaderSum = 0;
-        		 	$fpdf->SetFont('Helvetica','B',7);
+        		 	$fpdf->SetFont('Courier','I',8);
         		 	$fpdf->Cell(0,10,$child->description,1,0,'L');
         		 	$fpdf->ln();
         		 	foreach($child->child() as $childEntry){
         		 		foreach($childEntry->entry() as $last){
-        		 			$fpdf->SetFont('Helvetica','',7);
-        		 			$fpdf->Cell(100,5,$last->description,1,0,'L');
+        		 			$um = ($last->um / $grandTotal * $divisor) * $last->quantity;
+							$ul = ($last->ul / $grandTotal * $divisor) * $last->quantity;
+        		 			$fpdf->SetFont('Courier','',8);
+        		 			$fpdf->Cell(162,5,$last->description,1,0,'C');
                             $fpdf->Cell(20,5,$last->quantity,1,0,'L');
                             $fpdf->Cell(20,5,$last->unit,1,0,'L');
-                            $fpdf->Cell(25,5,number_format($last->price,2),1,0,'L');
-                            $fpdf->Cell(25,5,number_format($last->quantity * $last->price,2),1,0,'L');
+                            $fpdf->Cell(25,5,number_format($um,2),1,0,'L');
+                            $fpdf->Cell(25,5,number_format($ul,2),1,0,'L');
+                            $fpdf->Cell(25,5,number_format($um + $ul,2),1,0,'L');
+                            $netTotal += $um + $ul;
                             $fpdf->Ln();
-                            $subHeaderSum +=  ($last->quantity * $last->price);
+                            $subHeaderSum +=  ($um + $ul);
         		 		}
         		 	}
-        		 	$fpdf->SetFont('Helvetica','B',10);
+        		 	$fpdf->SetFont('Courier','I',8);
         		 	$parentSum += $subHeaderSum;
         		 	$fpdf->Cell(0,10,$child->description . ' : ' . number_format($subHeaderSum,2),1,0,'L');
         		 	$fpdf->Ln();
         		 }
         	}
-        	$fpdf->SetFont('Helvetica','B',14);
-        	$fpdf->Cell(0,10, $entry->description . ' : ' . number_format($parentSum,2),1,0,'R');
+        	$fpdf->SetFont('Courier','B',14);
+        	$fpdf->Cell(0,10, $entry->description . ' : ' . number_format($parentSum,2),1,0,'L');
         	$fpdf->Ln();
         	$superTotal += $parentSum;
         }
-        $fpdf->Cell(0,10,'Total: P' . number_format($superTotal,2));
+        $fpdf->Cell(0,10,'Total: P' . number_format($netTotal,2),0,0,'R');
         $fpdf->Output();
         exit;
 
 	}
 
-	public function getAllSubHeaders($id){
-		
-		return Response::json();
+	public function getAllSubHeaders(){
+		$id = Input::get('id');
+		return Response::json($this->entry->getSubs($id));
 	}
 }

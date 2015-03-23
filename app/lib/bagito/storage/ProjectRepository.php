@@ -33,4 +33,10 @@ interface ProjectRepository{
 
 	public function addActiveQuotation($projectId, $quotationId);
 
+	public function getApprovedQuotationByProject($projectId);
+
+	public function findQuotationLoad($id);
+
+	public function deleteQuotationLoad($id);
+
 }

@@ -4,6 +4,6 @@ interface NotificationRepository {
 
 	public function create($id,$inputs);
 
-	public function updatedRead($notificationId);
+	public function updateRead($notificationId);
 
 }

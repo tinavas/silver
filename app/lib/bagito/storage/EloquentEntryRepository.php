@@ -4,6 +4,7 @@ use Entry;
 use Quotation;
 use ChildEntry;
 use OtherExpense;
+use Illuminate\Database\Eloquent\Collection;
 
 class EloquentEntryRepository implements EntryRepository
 {
@@ -102,6 +103,17 @@ class EloquentEntryRepository implements EntryRepository
 	}
 
 	public function getSubs($id){
-		return ChildEntry::where('parent_id' , $id);
+		$child =  ChildEntry::where('parent_id' , $id)->get();
+		$parentArray = array();
+		foreach($child as $c){
+			$item = Entry::find($c->child_id);
+			if(count($item) != 0){
+				$array = array();
+				$array['id'] = $item->id;
+				$array['description'] = $item->description;
+				$parentArray[] = $array;
+			}
+		}
+		return Collection::make($parentArray);
 	}
 }

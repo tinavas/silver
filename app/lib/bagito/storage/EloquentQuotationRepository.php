@@ -51,6 +51,7 @@ class EloquentQuotationRepository implements QuotationRepository
 	{
 		$quotation = Quotation::find($id);
 		$quotation->status = $status;
+		$quotation->save();
 		return $quotation;
 	}
 

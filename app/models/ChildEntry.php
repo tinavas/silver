@@ -8,13 +8,15 @@ class ChildEntry extends Eloquent
 	protected $table = "child_entries";
     protected $dates = ['deleted_at'];
 
-	public function entry()
-	{
-		return $this->belongsTo('Entry','child_id')->get();
+	public function entry() {
+		return $this->belongsTo('Entry','child_id')->get();	
 	}
 
-	public function entryWithTrashed()
-	{
+	public function entryWithTrashed() {
 		return $this->belongsTo('Entry','child_id')->withTrashed();
+	}
+
+	public function rawEntry(){
+		return $this->belongsTo('Entry','child_id');
 	}
 }

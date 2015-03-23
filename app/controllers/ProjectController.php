@@ -5,16 +5,18 @@ use Bagito\Storage\UserRepository as User;
 use Bagito\Storage\QuotationRepository as Quotation;
 use Bagito\Auth\AuthRepository as Auth;
 use Bagito\Utilities\BagitoException;
+use Bagito\Storage\NotificationRepository as  Notification;
 
 class ProjectController extends \BaseController {
 
 	private $pages = 10;
 
-	public function __construct(Project $project, User $user, Quotation $quotation, Auth $auth){
+	public function __construct(Project $project, User $user, Quotation $quotation, Auth $auth, Notification $notification){
 		$this->project = $project;
 		$this->user = $user;
 		$this->quotation = $quotation;
 		$this->auth = $auth;
+		$this->notification = $notification;
 	}
 
 	/**
@@ -77,6 +79,7 @@ class ProjectController extends \BaseController {
 		$project = $this->project->find($id);
 		$users = $this->project->getSubscribers($id);
 		$quotations = $this->project->getForApprovalQuotations($project->id);
+		$approved = $this->project->getApprovedQuotationByProject($project->id);
 		$status = [
 					-1 => 'Cancelled',
 					2 => 'Done'
@@ -84,7 +87,7 @@ class ProjectController extends \BaseController {
 		if(!is_null($project->active_quotation_id)){
 			$quotation = $this->quotation->find($project->active_quotation_id);
 		}
-		return View::make('admin.projects.show',compact('project','quotations','quotation','status'))->with('users',$users->get());
+		return View::make('admin.projects.show',compact('project','quotations','quotation','status','approved'))->with('users',$users->get());
 	}
 
 
@@ -172,6 +175,7 @@ class ProjectController extends \BaseController {
 	public function setAsActiveQuotation($projectId, $quotationId){
 
 		$this->project->addActiveQuotation($projectId, $quotationId);
+		$this->quotation->changeStatus($quotationId,2);
 		return Redirect::back();
 	}
 
@@ -193,4 +197,16 @@ class ProjectController extends \BaseController {
 		$this->project->changeStatus($id,$status);
 		return Redirect::back();
 	}
+
+	public function requestForUpdate($id){
+		$record = $this->project->findQuotationLoad($id);
+		$quotation = $record->quotation()->first();
+		$message = "Administrator Requests for an update on your quotation for " . $quotation->title;
+		$receiver = $quotation->user_id;
+		$this->notification->create($receiver, $message);
+		//$this->project->deleteQuotationLoad($id);
+		Session::flash('notification','Notification Sent');
+		return Redirect::back();
+	}
+
 }

@@ -34,12 +34,12 @@
                <div class="sidenav-container">
                    
                     <ul class="side-nav">
-                      <!--<li>
+                      <li>
                           <a href="#">
                           <i class="fa fa-pie-chart fa-2x"></i> 
                           <span class="title">Dashboard</span>
                           </a>
-                      </li>-->
+                      </li>
                       <li>
                           <a href = "{{url('/admin')}}">
                             <i class="fa fa-user fa-2x"></i> 
