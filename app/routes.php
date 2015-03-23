@@ -32,7 +32,7 @@ Route::get('/admin','UserController@index');
 Route::resource('/admin/users', 'UserController');
 Route::get('/admin/users/search/user','UserController@search');
 
-Route::get('/admin/notifications', 'NotificationsController@index');
+Route::get('/admin/notifications', 'NotificationsController@indexAdminNotif');
 
 Route::resource('/admin/projects', 'ProjectController');
 Route::get('/admin/projects/search/project','ProjectController@search');
@@ -47,7 +47,7 @@ Route::get('/logout','LoginController@logout');
 
 /*Architect*/
 
-Route::get('/architect/notifications', 'NotificationsController@index');
+Route::get('/architect/notifications', 'NotificationsController@indexArchitectNotif');
 
 Route::get('/architect','QuotationController@showProjects');
 Route::get('/architect/quotations','QuotationController@showQuotations');

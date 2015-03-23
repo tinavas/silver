@@ -16,12 +16,20 @@ class NotificationsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function indexAdminNotif()
 	{
 		//
 		$notifications = $this->notification->paginate($this->pages);
-		return View::make('notifications',compact('notifications'))->with('repo', $this->notification)->with('keyword','');
+		return View::make('admin.notifications',compact('notifications'))->with('repo', $this->notification)->with('keyword','');
 	}
+
+	public function indexArchitectNotif()
+	{
+		//
+		$notifications = $this->notification->paginate($this->pages);
+		return View::make('architect.notifications',compact('notifications'))->with('repo', $this->notification)->with('keyword','');
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.
