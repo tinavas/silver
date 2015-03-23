@@ -83,6 +83,7 @@ Route::get('/architect/entry/remove-expenses/{id}','EntryController@removeExpens
 Route::post('/architect/quotation/updateAdjustment/{id}','QuotationController@updateAdjustment');
 Route::get('/ajax/get-subs','EntryController@getAllSubHeaders');
 Route::get('/admin/quotation/request-for-update/{id}','ProjectController@requestForUpdate');
+Route::get('/admin/materials','MaterialsController@index');
 
 /* for design */
 $template = 'template';

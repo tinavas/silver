@@ -5,6 +5,7 @@ use Project;
 use UserLoad;
 use Approval;
 use OtherExpense;
+use QuotationLoad;
 
 class EloquentQuotationRepository implements QuotationRepository
 {
@@ -190,5 +191,9 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation = Quotation::find($id);
 		$quotation->adjustments = $amount;
 		$quotation->save();
+	}
+
+	public function allQuotationLoad(){
+		return QuotationLoad::all();
 	}
 }

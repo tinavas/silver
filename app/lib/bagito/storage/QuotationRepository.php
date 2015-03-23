@@ -49,4 +49,6 @@ interface QuotationRepository
 
 	public function updateAdjustment($id,$amount);
 
+	public function allQuotationLoad();
+
 }

@@ -34,12 +34,12 @@
                <div class="sidenav-container">
                    
                     <ul class="side-nav">
-                      <li>
+                      <!--<li>
                           <a href="#">
                           <i class="fa fa-pie-chart fa-2x"></i> 
                           <span class="title">Dashboard</span>
                           </a>
-                      </li>
+                      </li>-->
                       <li>
                           <a href = "{{url('/admin')}}">
                             <i class="fa fa-user fa-2x"></i> 
@@ -58,6 +58,12 @@
                           <span class="title">Suppliers</span> 
                         </a>
                       </li>
+                      <li>
+                          <a href = "{{url('/admin/materials')}}">
+                            <i class="fa fa-wrench fa-2x"></i> 
+                            <span class="title">Materials</span>
+                          </a>
+                      </li>
                     </ul>
             
                </div>
@@ -70,7 +76,7 @@
                     <i class="fa fa-power-off"></i>
                 </a>
                  <a href="{{URL::to('/admin/change-password')}}" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
-                <!--<a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>-->
+                <a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>
                 </a>
                 
             </div>
