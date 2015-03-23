@@ -32,6 +32,8 @@ Route::get('/admin','UserController@index');
 Route::resource('/admin/users', 'UserController');
 Route::get('/admin/users/search/user','UserController@search');
 
+Route::get('/admin/notifications', 'NotificationsController@index');
+
 Route::resource('/admin/projects', 'ProjectController');
 Route::get('/admin/projects/search/project','ProjectController@search');
 Route::get('/admin/projects/add/users/{id}','ProjectController@addUser');
@@ -100,22 +102,15 @@ Route::get('/admin/quotation/create', function() use ($template)
 	return $layout->nest('content', 'admin.budgets.index');
 });*/
 
-Route::get('/admin/budgets/create', function() use ($template)
-{
-	View::name($template, 'admin.budgets.create');
-	$layout = View::of('admin.budgets.create');
-	return $layout->nest('content', 'admin.budgets.create');
-});
 
-Route::get('/admin/dashboard', function() use ($template)
+Route::get('/admin/messages', function() use ($template)
 {
-	View::name($template, 'admin.dashboard');
-	$layout = View::of('admin.dashboard');
-	return $layout->nest('content', 'admin.dashboard');
+	View::name($template, 'messages');
+	$layout = View::of('messages');
+	return $layout->nest('content', 'messages');
 });
 
 $archtemplate = 'architecttemplate';
-
 Route::get('/architect/index', function() use ($archtemplate)
 {
 	View::name($archtemplate, 'architect.quotation.index');

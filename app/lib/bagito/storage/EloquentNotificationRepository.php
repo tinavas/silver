@@ -4,6 +4,14 @@ use Notification;
 
 class EloquentNotificationRepository implements NotificationRepository{
 
+	public function all() {
+		return Notification::all();
+	}
+
+	public function paginate($pages) {
+		return Notification::paginate($pages);
+	}
+
 	public function create($id,$inputs){
 		$notif = new Notification();
 
