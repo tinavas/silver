@@ -47,6 +47,8 @@ Route::get('/logout','LoginController@logout');
 
 /*Architect*/
 
+Route::get('/architect/notifications', 'NotificationsController@index');
+
 Route::get('/architect','QuotationController@showProjects');
 Route::get('/architect/quotations','QuotationController@showQuotations');
 Route::get('/architect/quotation/create/{id}','QuotationController@create');
