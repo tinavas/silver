@@ -110,7 +110,7 @@
                   <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
                   <td><a href="{{URL::to('/admin/quotation/view/' . $quotation->id)}}">View</a></td>
                   <td><a href="{{URL::to('/admin/project/add-active-quotation/' . $project->id . '/' . $quotation->id)}}">Approve</a></td>
-                  <td><a href="#">Disapprove</a></td>
+                  <td><a href="{{URL::to('/admin/project/disapprove/' . $quotation->id)}}">Disapprove</a></td>
                 </tr>
               @endforeach
               </tbody>

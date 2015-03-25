@@ -4,6 +4,7 @@ use Project;
 use UserLoad;
 use User;
 use QuotationLoad;
+use Quotation;
 
 class EloquentProjectRepository implements ProjectRepository{
 	
@@ -121,4 +122,11 @@ class EloquentProjectRepository implements ProjectRepository{
 		$record = QuotationLoad::find($id);
 		$record->delete();
 	}
+
+	public function disapprove($quotationId){
+		$quotation = Quotation::find($quotationId);
+		$quotation->status = -1;
+		$quotation->save();
+		return $quotation;
+	} 
 }

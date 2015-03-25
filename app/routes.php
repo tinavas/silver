@@ -91,6 +91,7 @@ Route::get('/admin/materials','MaterialsController@index');
 Route::get('/admin/materials/{id}','MaterialsController@show');
 Route::post('admin/materials/add/{id}','MaterialsController@store');
 Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
+Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
 
 /* for design */
 $template = 'template';

@@ -176,7 +176,7 @@ class ProjectController extends \BaseController {
 
 		$this->project->addActiveQuotation($projectId, $quotationId);
 		$quotation = $this->quotation->changeStatus($quotationId,2);
-		$this->notification->create($quotation->id,'Your Quotation: "' . $quotation->title . '" has been Approved by the Client');
+		$this->notification->create($quotation->user()->first()->id,'Your Quotation: "' . $quotation->title . '" has been Approved by the Client');
 		return Redirect::back();
 	}
 
@@ -207,6 +207,12 @@ class ProjectController extends \BaseController {
 		$this->notification->create($receiver, $message);
 		//$this->project->deleteQuotationLoad($id);
 		Session::flash('notification','Notification Sent');
+		return Redirect::back();
+	}
+
+	public function disapprove($id){
+		$quotation = $this->project->disapprove($id);
+		$this->notification->create($quotation->user()->first()->id,'Your Quotation: "' . $quotation->title . '" has been Approved by the Client');
 		return Redirect::back();
 	}
 

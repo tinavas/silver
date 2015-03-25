@@ -39,4 +39,6 @@ interface ProjectRepository{
 
 	public function deleteQuotationLoad($id);
 
+	public function disapprove($quotationId);
+
 }
