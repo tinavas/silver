@@ -28,14 +28,14 @@
         border-radius:50%;
         background-color:red;
         color:white;
-        padding-left:5px;
+        padding-left:6px;
         padding-right:6px;
         font-size:10px;
         padding-top:2px;
         padding-bottom:2px;
         position:relative;
         top:20%;
-        left:80%;
+        left:82%;
       }
     </style>
     @yield('head')

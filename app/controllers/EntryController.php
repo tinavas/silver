@@ -47,6 +47,9 @@ class EntryController extends BaseController
 		$divisor += $totalExpenses;
 		$divisor += $divisor * $quotation->others;
 		$divisor += $divisor * $quotation->tax;
+		if($grandTotal == 0){
+			$grandTotal = 1;
+		}
 		$subs = array();
 		$parents = array();
 		foreach($parentsArray as $parent)
@@ -113,6 +116,7 @@ class EntryController extends BaseController
 		$subsArray = $this->entry->getSubHeaders($id);
 		$expenses = $this->quotation->getExpensesById($id);
 		$grandTotal = $this->entry->getSum($id);
+
 		$totalExpenses = $this->entry->getExpensesSum($id);
 
 

@@ -126,7 +126,11 @@
                      <tr><td colspan = "10" class = "left"><b>Total {{$entry->description}} : {{number_format($parentSum,2)}}</b></td></tr>
                      <?php $superTotal += $parentSum ?>
                 @endforeach
-                <?php $superSum = $grandTotal;?>
+                <?php
+                      if($grandTotal == 1){
+                        $grandTotal = 0;
+                      }
+                $superSum = $grandTotal;?>
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>

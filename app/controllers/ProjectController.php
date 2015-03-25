@@ -175,7 +175,8 @@ class ProjectController extends \BaseController {
 	public function setAsActiveQuotation($projectId, $quotationId){
 
 		$this->project->addActiveQuotation($projectId, $quotationId);
-		$this->quotation->changeStatus($quotationId,2);
+		$quotation = $this->quotation->changeStatus($quotationId,2);
+		$this->notification->create($quotation->id,'Your Quotation: "' . $quotation->title . '" has been Approved by the Client');
 		return Redirect::back();
 	}
 

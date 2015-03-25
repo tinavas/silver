@@ -4,14 +4,16 @@ use Bagito\Storage\QuotationRepository as Quotation;
 use Bagito\Storage\BudgetRepository as Budget;
 use Bagito\Storage\UserRepository as User;
 use Bagito\Storage\NotificationRepository as Notification;
+use Bagito\Storage\SupplierRepository as Supplier;
 
 class MaterialsController extends BaseController{
 
-	public function __construct(Quotation $quotation, Budget $budget, User $user, Notification $notification){
+	public function __construct(Quotation $quotation, Budget $budget, User $user, Notification $notification, Supplier $supplier){
 		$this->quotation = $quotation;
 		$this->budget = $budget;
 		$this->user = $user;
 		$this->notification = $notification;
+		$this->supplier = $supplier;
 	}
 
 	public function index(){
@@ -25,12 +27,13 @@ class MaterialsController extends BaseController{
 		$quotation = $this->quotation->find($id);
 		$totalTm = $this->budget->getTotalMaterialsByQuotationId($id);
 		$totalAmount = $this->budget->getSumOfBudgetByQuotationId($id);
-		return View::make('admin.materials.show',compact('budgets','items','quotation','totalTm','totalAmount'));
+		$suppliers = $this->supplier->all()->lists('supplier_name','id');
+		return View::make('admin.materials.show',compact('budgets','items','quotation','totalTm','totalAmount','suppliers'));
 	}
 
 	public function store($quotationId){
 		$entryId = Input::get('entry_id');
-		$rules = ['quantity' => 'required|numeric','unit_price' => 'required|numeric','entry_id' => 'required'];
+		$rules = ['quantity' => 'required|numeric','unit_price' => 'required|numeric','entry_id' => 'required','supplier_id' => 'required'];
 		
 		$validator = Validator::make(Input::all(),$rules);
 		if($validator->fails())

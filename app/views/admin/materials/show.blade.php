@@ -2,7 +2,6 @@
 @section('head')
 {{HTML::style('resources/css/modules/projects/projects-view.css');}}
 @endsection
-
 @section('content')
     <section class="projects">
     <div class="row">
@@ -66,6 +65,8 @@
           {{Form::label('remarks','Remarks')}}
           {{Form::text('remarks')}}
 
+          {{Form::label('supplier_id','Supplier')}}
+          {{Form::select('supplier_id',$suppliers)}}
           {{Form::submit('Submit',['class' => 'button right'])}}
         {{Form::close()}}
     </div>

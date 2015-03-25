@@ -1,6 +1,6 @@
 @extends('template')
 @section('head')
-{{HTML::style('resources/css/modules/projects/projects-view.css');}}
+{{HTML::style('resources/css/modules/projects/projects-view.css')}}
 @endsection
 
 @section('content')
@@ -24,7 +24,7 @@
                     <tr>
                       <td>{{str_pad($loads->quotation()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($loads->quotation()->first()->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
                       <td>{{$loads->quotation()->first()->title}}</td>
-                      <td>{{$loads->quotation()->first()->id}}</td>
+                      <td>{{$loads->quotation()->first()->project()->first()->title}}</td>
                       <td>
                         <a href="{{URL::to('/admin/materials/' . $loads->quotation->first()->id)}}">
                           <i class="fa fa-folder-open fa-2x" style="color:orange"></i>
