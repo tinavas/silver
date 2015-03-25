@@ -128,4 +128,24 @@ class EloquentUserRepository implements UserRepository
 	{
 		return $user->project()->get();
 	}
+
+	public function getAllAdmins(){
+		$results =  UserGroup::where('group_id' , '=' , 1)->get();
+		$ids = array();
+		foreach($results as $result)
+		{
+			array_push($ids,$result->user_id);
+		}
+
+		if(count($ids) != 0)
+		{
+			$users = User::whereIn('id', $ids)->get();
+		}
+		else
+		{
+			$users = null;
+		}
+
+		return  $users;
+	}
 }

@@ -108,8 +108,18 @@ class EntryController extends BaseController
 	public function show($id)
 	{
 
+		$quotation = $this->quotation->find($id);
 		$parentsArray = $this->entry->getParents($id);
 		$subsArray = $this->entry->getSubHeaders($id);
+		$expenses = $this->quotation->getExpensesById($id);
+		$grandTotal = $this->entry->getSum($id);
+		$totalExpenses = $this->entry->getExpensesSum($id);
+
+
+		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
+		$divisor += $totalExpenses;
+		$divisor += $divisor * $quotation->others;
+		$divisor += $divisor * $quotation->tax;
 		$subs = array();
 		$parents = array();
 		foreach($parentsArray as $parent)
@@ -122,7 +132,7 @@ class EntryController extends BaseController
 			$subs[$sub->id] = $sub->description;
 		}
 		$parentsArray = $this->entry->getHeaders($id);
-		return View::make('architect.approve.show',compact('parents','id','subs'))->with('entries',$parentsArray);
+		return View::make('architect.approve.show',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
 	}
 
 	public function showPrinterFriendly($id){

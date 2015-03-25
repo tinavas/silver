@@ -124,7 +124,7 @@ class QuotationController extends BaseController{
 		}
 		Session::flash('notification','Quotation Updated Successfuly');
 		$this->quotation->tagAsForApproval($id);
-		return Redirect::back();
+		return Redirect::to('architect/quotations');
 	}
 
 	public function viewOtherQuotations()

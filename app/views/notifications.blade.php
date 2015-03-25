@@ -11,7 +11,6 @@
               <div class="medium-1 column no-padding">
                <i class="fa fa-search fa-2x"> </i>   
               </div>
-            
             <div class="medium-11 column">
             {{Form::open(['method' => 'get', 'url' => '/admin/users/search/user'])}}
               {{Form::text('keyword','', array('class' => 'search-box'));}}
@@ -42,9 +41,6 @@
                         <td>{{$notification->description}}</td>
                         <td>{{$notification->user_id}}</td>
                         <td> 
-                          <a href="{{URL::to('admin/users/' . $user->id . '/edit')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
-                          </a>
                         </td>
                       </tr>
                    @endforeach

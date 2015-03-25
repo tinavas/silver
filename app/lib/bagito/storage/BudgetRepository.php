@@ -4,9 +4,9 @@ interface BudgetRepository{
 
 	public function find($id);
 
-	public function getAllByProject($id);
+	public function getAllByQuotation($id);
 
-	public function add($projectId, $inputs);
+	public function add($quotationId, $entryId, $inputs);
 
 	public function update($id, $inputs);
 

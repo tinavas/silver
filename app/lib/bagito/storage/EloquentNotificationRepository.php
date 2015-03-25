@@ -27,4 +27,8 @@ class EloquentNotificationRepository implements NotificationRepository{
 		$notif->is_read = 1;
 		$notif->save();
 	}
+
+	public function getNotifications($id){
+		return Notification::where('user_id',$id)->orderBy('id','desc')->get();
+	}
 }

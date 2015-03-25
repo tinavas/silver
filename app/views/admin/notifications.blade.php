@@ -7,54 +7,40 @@
 @section('content')
 <div class="row">
     <div class="medium-12 column">
-        <div class="medium-5 column search-box-container no-padding">
-              <div class="medium-1 column no-padding">
-               <i class="fa fa-search fa-2x"> </i>   
-              </div>
-            
-            <div class="medium-11 column">
-            {{Form::open(['method' => 'get', 'url' => '/admin/users/search/user'])}}
-              {{Form::text('keyword','', array('class' => 'search-box'));}}
-              {{Form::submit('Submit',['style' => 'display:none'])}}    
-            {{Form::close()}}
-            </div>  
-           
-        </div>
-        
-        <div class="medium-7 column create-new-container no-padding">
-            <a href="{{url('archictect/messages')}}" class="small button"><i class="fa fa-plus"></i> Create New Notification</a>
-        </div>
-        
+        <h4 class="view-header"><i class="fa fa-building"></i>Notifications</h4>
         <div class="medium-12 column view-box">
-            <table>
+            <table class = "data-table">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Date</th>
                       <th>Description</th>
-                      <th>User</th>
-                      <th colspan="2">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                    @foreach($notifications as $notification)
                       <tr>
-                        <td>{{str_pad($notification->id,3,"0",STR_PAD_LEFT)}}</td>
-                        <td>{{$notification->description}}</td>
-                        <td>{{$notification->user_id}}</td>
-                        <td> 
-                          <a href="{{URL::to('archictect/users/' . $user->id . '/edit')}}">
-                                <i class="fa fa-pencil fa-2x"></i>
-                          </a>
+                        <td>{{date('F j, Y',strtotime($notification->created_at))}}</td>
+                        
+                        <td>
+                        @if($notification->is_read == 0)
+                          <b>{{$notification->description}}</b>
+                        @else
+                          {{$notification->description}}
+                        @endif
                         </td>
+                        @if($notification->is_read == 0)
+                        @endif
                       </tr>
+
+                      <?php 
+                        //I have to do this also. Sorry. you may not forgive me for doing this
+                        $blue = Notification::find($notification->id);
+                        $blue->is_read = 1;
+                        $blue->save();
+                      ?>
                    @endforeach
                   </tbody>
             </table>
-            {{$notifications->appends(['keyword' => $keyword])->links()}}
-
-            @if($keyword != '')
-              {{HTML::link('/archictect/notifications','Back',['class' => 'left button'])}}
-            @endif
         </div>
     </div>
 </div>

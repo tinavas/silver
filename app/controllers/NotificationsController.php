@@ -1,13 +1,13 @@
 <?php
 
 use Bagito\Storage\NotificationRepository as Notification;
+use Bagito\Auth\AuthRepository as Auth;
 
 class NotificationsController extends \BaseController {
 
-	private $pages = 10;
-	
-	public function __construct(Notification $notification){
+	public function __construct(Notification $notification, Auth $auth){
 		$this->notification = $notification;
+		$this->auth = $auth;
 	}
 
 	/**
@@ -19,14 +19,15 @@ class NotificationsController extends \BaseController {
 	public function indexAdminNotif()
 	{
 		//
-		$notifications = $this->notification->paginate($this->pages);
+		$user = $this->auth->getCurrentUser();
+		$notifications = $this->notification->getNotifications($user->id);
 		return View::make('admin.notifications',compact('notifications'))->with('repo', $this->notification)->with('keyword','');
 	}
 
 	public function indexArchitectNotif()
 	{
-		//
-		$notifications = $this->notification->paginate($this->pages);
+		$user = $this->auth->getCurrentUser();
+		$notifications = $this->notification->getNotifications($user->id);
 		return View::make('architect.notifications',compact('notifications'))->with('repo', $this->notification)->with('keyword','');
 	}
 

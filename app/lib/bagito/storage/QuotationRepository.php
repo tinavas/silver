@@ -51,4 +51,6 @@ interface QuotationRepository
 
 	public function allQuotationLoad();
 
+	public function getAllEntryByQuotationId($id);
+
 }

@@ -36,10 +36,10 @@
              </div>
              <div class="row">
                  <div class="medium-2 column">
-                    {{Form::label('prof','Others', array('class' => 'inline right'))}}
+                    {{Form::label('others','Others', array('class' => 'inline right'))}}
                  </div>
                  <div class="medium-10 column">
-                    {{Form::text('prof',null,array('class'=>'inline right'))}}
+                    {{Form::text('others',null,array('class'=>'inline right'))}}
                  </div>
              </div>
              <div class="row">

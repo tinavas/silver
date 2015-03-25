@@ -15,10 +15,11 @@ class CreateBudgetsTable extends Migration {
 		Schema::create('budgets', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('project_id')->unsigned();
+			$table->integer('quotation_id')->unsigned();
+			$table->integer('entry_id')->unsigned();
+			$table->decimal('quantity',16,2);
+			$table->decimal('unit_price',16,2);
 			$table->decimal('amount',16,2);
-			$table->string('remarks');
-			$table->string('description');
 			$table->timestamps();
 		});
 	}

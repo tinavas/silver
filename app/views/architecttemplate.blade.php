@@ -3,6 +3,14 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<?php
+
+  //SORRY I HAVE TO DO THIS TO BEAT THE DEADLINE
+
+  $user = Sentry::getUser();
+  $count = Notification::where('user_id',$user->id)->where('is_read',0)->count();
+?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +22,21 @@
     {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
+    <style>
+      .notif{
+        border-radius:50%;
+        background-color:red;
+        color:white;
+        padding-left:5px;
+        padding-right:6px;
+        font-size:10px;
+        padding-top:2px;
+        padding-bottom:2px;
+        position:relative;
+        top:20%;
+        left:80%;
+      }
+    </style>
     @yield('head')
 </head>
 <body>  
@@ -52,7 +75,9 @@
                </div>
             </div>
             <div class="medium-10 column no-padding right-side">
-                
+                @if($count != 0)                
+                    <b class="notif">{{$count}}</b>
+                @endif
                 <a href="{{URL::to('/logout')}}" class="icon logout">
                     <i class="fa fa-power-off"></i>
                 </a>
@@ -84,7 +109,6 @@
     {{HTML::script('resources/js/uni.script.js')}}
     {{HTML::script('resources/js/footable.js')}}
     {{HTML::script('resources/js/footer.paginate.js')}}
-    
     <script>
         $(document).foundation();
     </script>

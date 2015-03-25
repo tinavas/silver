@@ -6,6 +6,7 @@ use UserLoad;
 use Approval;
 use OtherExpense;
 use QuotationLoad;
+use Entry;
 
 class EloquentQuotationRepository implements QuotationRepository
 {
@@ -195,5 +196,9 @@ class EloquentQuotationRepository implements QuotationRepository
 
 	public function allQuotationLoad(){
 		return QuotationLoad::all();
+	}
+
+	public function getAllEntryByQuotationId($id){
+		return Entry::where('quotation_id',$id)->where('level',3)->get();
 	}
 }

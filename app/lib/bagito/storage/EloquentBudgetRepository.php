@@ -1,6 +1,7 @@
 <?php namespace Bagito\Storage;
 
 use Budget;
+use Entry;
 
 class EloquentBudgetRepository implements BudgetRepository{
 
@@ -8,20 +9,25 @@ class EloquentBudgetRepository implements BudgetRepository{
 		return Budget::find($id);
 	}
 
-	public function add($projectId, $inputs){
+	public function add($quotationId, $entryId, $inputs){
 		$budget = new Budget();
-		$budget->project_id = $projectId;
-		$budget->amount = $inputs['amount'];
+		$budget->quotation_id = $quotationId;
+		$budget->entry_id = $entryId;
 		$budget->remarks = $inputs['remarks'];
-		$budget->description = $inputs['description'];
+		$budget->quantity = $inputs['quantity'];
+		$budget->unit_price = $inputs['unit_price'];
+		$budget->amount = $budget->unit_price * $budget->quantity;
 		$budget->save();
+		return $budget;
 	}
 
 	public function update($id, $inputs){
 		$budget = Budget::find($id);
 		$budget->amount = $inputs['amount'];
 		$budget->remarks = $inputs['remarks'];
-		$budget->description = $inputs['description'];
+		$budget->quantity = $inputs['quantity'];
+		$budget->unit_price = $inputs['unit_price'];
+		$budget->amount = $budget->unit_price * $budget->quantity;
 		$budget->save();
 	}
 
@@ -30,7 +36,18 @@ class EloquentBudgetRepository implements BudgetRepository{
 		 $budget->delete();
 	}
 
-	public function getAllByProject($id){
-		return Budget::where('project_id', $id)->get();
+	public function getAllByQuotation($id){
+		return Budget::where('quotation_id', $id)->get();
+	}
+
+	public function getTotalMaterialsByQuotationId($id){
+		return Entry::where('quotation_id', $id)->sum('tm');
+	}
+
+	public function getSumOfBudgetByQuotationId($id){
+		return Budget::where('quotation_id',$id)->sum('amount');
+	}
+	public function getEntryTotalQuantity($id, $entryId){
+		return Budget::where('quotation_id',$id)->where('entry_id',$entryId)->sum('quantity');
 	}
 }

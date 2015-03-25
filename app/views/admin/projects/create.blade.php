@@ -10,7 +10,6 @@
 <div class="row">
     <div class="medium-10 large-centered column personal-info-container">
         <h4 class="view-header"><i class="fa fa-building"></i> Project Information</h4>
-
         @if($errors->has())
             <span class = "error">
                 @foreach($errors->all() as $error)
@@ -18,7 +17,6 @@
                  @endforeach
             </span>
         @endif
-
         <div class="view-box">
             {{Form::open(array('url' => '/admin/projects','method' => 'POST'))}}
          <div class="row">

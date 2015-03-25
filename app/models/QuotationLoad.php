@@ -11,4 +11,8 @@ class QuotationLoad extends Eloquent{
 	public function quotation() {
 		return $this->belongsTo('Quotation');
 	}
+
+	public function quotations() {
+		return $this->belongsTo('Quotation');
+	}
 }
