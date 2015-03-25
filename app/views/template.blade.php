@@ -104,7 +104,7 @@
                  <a href="{{URL::to('/admin/change-password')}}" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
 
                 <a href="/admin/notifications" class="icon">                
-                <i class="fa fa-envelope"><span><h6>Messages</h6>   </span></i>
+                <i class="fa fa-bell"><span><h6>Notifications</h6>   </span></i>
                 </a>
             </div>
             
