@@ -128,7 +128,7 @@ div.dropdown {height: 100%;}
 
 .dataTables_filter label input {
     width: 300px;
-    height: 20px;
+    height: 20px !important;
 }
 
 #DataTables_Table_0_filter {
@@ -136,6 +136,6 @@ div.dropdown {height: 100%;}
 }
 
 #DataTables_Table_0_filter label input{
-    height:35.5px;
+    height:35.5px !important;
     width: 350px;
 }

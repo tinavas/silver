@@ -1,6 +1,7 @@
 @extends('template')
 @section('head')
 {{HTML::style('resources/css/modules/projects/projects-view.css')}}
+{{HTML::style('resources/css/modules/materials.css')}}
 @endsection
 
 @section('content')
