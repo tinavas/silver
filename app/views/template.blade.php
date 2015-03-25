@@ -35,7 +35,7 @@
         padding-bottom:2px;
         position:relative;
         top:20%;
-        left:82%;
+        left:81%;
       }
     </style>
     @yield('head')
