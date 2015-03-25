@@ -1,3 +1,7 @@
+section.content {
+    height: 100% !important;
+}
+
 .gender label {
     display: inline-block;
     cursor: pointer;
