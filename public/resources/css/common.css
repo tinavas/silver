@@ -119,3 +119,23 @@ div.dropdown {height: 100%;}
 #DataTables_Table_0_paginate a{
     margin-left:5px;
 }
+
+.dataTables_length label {
+    float:left;
+    margin-right:20px;
+    margin-bottom: 20px;
+}
+
+.dataTables_filter label input {
+    width: 300px;
+    height: 20px;
+}
+
+#DataTables_Table_0_filter {
+    display:inline-block;
+}
+
+#DataTables_Table_0_filter label input{
+    height:35.5px;
+    width: 350px;
+}

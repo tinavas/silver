@@ -1,0 +1,19 @@
+.medium-10.column.content {
+    height: auto !important;
+}
+
+table tbody tr td {
+    font-size: 0.65rem;
+    text-align: left !important;
+}
+
+.dataTables_length label {
+    float:left;
+    margin-right:20px;
+    margin-bottom: 20px;
+}
+
+.dataTables_filter label input {
+    width: 300px;
+    height: 20px;
+}

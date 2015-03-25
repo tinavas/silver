@@ -2,6 +2,7 @@
 
 @section('head')
 {{HTML::style('resources/css/modules/users/users-view.css');}}
+{{HTML::style('resources/css/modules/notifications.css')}}
 @endsection
 
 @section('content')
