@@ -125,6 +125,13 @@ Route::get('/architect/index', function() use ($archtemplate)
 	return $layout->nest('content', 'architect.quotation.index');
 });
 
+Route::get('/architect/entryeditor', function() use ($archtemplate)
+{
+	View::name($archtemplate, 'architect.entry.entryeditor');
+	$layout = View::of('architect.entry.entryeditor');
+	return $layout->nest('content', 'architect.entry.entryeditor');
+});
+
 $sectemplate = 'secretarytemplate';
 Route::get('/secretary/test', function() use ($sectemplate)
 {

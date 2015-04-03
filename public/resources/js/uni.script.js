@@ -1,15 +1,103 @@
 /* MAIN JS */
 $(document).ready( function () {
+	var doc = document,
+		e = doc.getElementById('add-new-option');
+		ex = doc.getElementById('add-new-to');
 
 	$('.data-table').DataTable();
+
+	$('.editTable').editableTableWidget();
+
+	$('#add-new-option').change(function(){
+		var selected = e.options[e.selectedIndex].value,
+			items = [];
+
+		if (selected === 'sub-header') {
+			$('#add-new-to').children('option').remove();
+
+			var	header = $('tr.table-td-header').children('td:first-child');
+	    	for (var i = 0; i < header.length; i++) {
+	    		items[i] = header[i].innerHTML;
+	    	};
+
+	    	$.each(items, function(val, text){
+	        	$('#add-new-to').append(
+	            	$('<option></option>').html(text)
+	        	);
+	        });
+		} else if (selected === 'item') {
+			$('#add-new-to').children('option').remove();
+			var	sub_header = $('tr.table-sub-header').children('td:first-child');
+	    	for (var i = 0; i < sub_header.length; i++) {
+	    		items[i] = sub_header[i].innerHTML;
+	    	};
+
+	    	for (var i = items.length - 1; i >= 0; i--) {
+	    		$('#add-new-to').append('<option>' + items[i] + '</option');
+	    	};
+
+		} else if (selected === 'header') {
+			$('#add-new-to').children('option').remove();
+			$.each(items, function(val, text){
+	        	$('#add-new-to').append(
+	            	$('<option></option>').html(text)
+	        	);
+	        });
+		}
+
+	});
+
+
+
+    $('#add-new-row').click(function(){
+    	var selected = e.options[e.selectedIndex].value;
+
+    	if (selected === 'header') {
+    		var header = $('.table-td-header').length;
+    		$('.editTable tbody')
+            .append('<tr class="table-td-header" id="td-header-' + header +'">' +
+                    "<td>&nbsp;</td>" +
+                    "<td>&nbsp;</td>" +
+                    "</tr>");
+
+    	} else if (selected === 'sub-header') {
+    		var add_selected = ex.selectedIndex,
+    			sub_header = $('.table-sub-header').length;
+    			
+    		$('#td-header-' + add_selected)
+    		.after('<tr class="table-sub-header" id="td-sub-' + sub_header +'">' +
+                    "<td>&nbsp;</td>" +
+                    "<td>&nbsp;</td>" +
+                    "</tr>");
+
+    		
+
+    		sub_header_el = $('table-sub-header');
+    		for (var i = 0; i < sub_header_el.length; i++) {
+    			sub_header_el[i].id = 'td-sub-' + i;
+    		};
+
+    	} else if (selected === 'item') {
+    		var add_selected = ex.selectedIndex;
+    		
+    		$('#td-sub-' + add_selected)
+    		.after('<tr class="table-td-content">' +
+                    "<td>&nbsp;</td>" +
+                    "<td>&nbsp;</td>" +
+                    "</tr>");
+    		
+    	}
+
+    	$(".editTable").editableTableWidget();
+        
+    });
 
 	$('.div-toggle').click(function(e) {
 		e.preventDefault();
 		$('.div-drop').toggleClass('dropdown');
 	});
 
-	if($('.datepicker').length)
-    {
+	if ($('.datepicker').length) {
     	if (!Modernizr.inputtypes.date) {
 		    $('.datepicker').datepicker();
 		}

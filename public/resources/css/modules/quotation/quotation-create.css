@@ -1,4 +1,4 @@
-.content { height: 100%; }
+.content { height: auto; min-height: 550px; padding-bottom: 40px;}
 
 div.quotation .view-box input[type="text"] {width: 90%;}
 div.quotation .view-box input[type="file"] {
@@ -9,3 +9,11 @@ div.quotation .view-box input[type="file"] {
 	padding: 7px;
 	color: rgba(0,0,0,0.75);;
 }
+
+div.quotation-entryeditor div table thead th { text-align: center; border-left: 4px solid #fff;}
+div.quotation-entryeditor div table tbody td { text-align: left;}
+div.quotation-entryeditor div table tbody tr.table-td-header td:first-child { font-weight: bold;}
+div.quotation-entryeditor div table tbody tr.table-sub-header td:first-child { padding-left: 40px;}
+div.quotation-entryeditor div table tbody tr.table-td-content td:first-child { padding-left: 60px;}
+div.quotation-entryeditor button {padding: 10px 20px; margin-top: 15px; color: #fff;}
+div.quotation-entryeditor select {width: 400px;}
