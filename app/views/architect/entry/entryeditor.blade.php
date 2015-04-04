@@ -12,11 +12,11 @@
             <th>Description</th>
             <th>Units</th>
           </thead>
-          <tbody>
-            <tr class="table-td-header" id="td-header-0">
+          <tbody id="block-0">
+            <tr class="table-td-header">
               <td>Preliminaries</td>
             </tr>
-            <tr class="table-sub-header" id="td-sub-1">
+            <tr class="table-sub-header" id="td-block-0-sub-0">
               <td>Sub-Header</td>
               <td>&nbsp;</td>
             </tr>
@@ -32,7 +32,40 @@
               <td>Blue Chair</td>
               <td>&nbsp;</td>
             </tr>
-            <tr class="table-sub-header" id="td-sub-0">
+            <tr class="table-sub-header" id="td-block-0-sub-1">
+              <td>Sub-Header 2</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="table-td-content">
+              <td>Korean Steelipipe</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="table-td-content">
+              <td>Spark Tables</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+          <tbody id="block-1">
+            <tr class="table-td-header">
+              <td>Secondary</td>
+            </tr>
+            <tr class="table-sub-header" id="td-block-1-sub-0">
+              <td>Sub-Header</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="table-td-content">
+              <td>Tiger Woods</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="table-td-content">
+              <td>Steel Phoenix</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="table-td-content">
+              <td>Blue Chair</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="table-sub-header" id="td-block-1-sub-1">
               <td>Sub-Header 2</td>
               <td>&nbsp;</td>
             </tr>

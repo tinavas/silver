@@ -10,41 +10,29 @@ $(document).ready( function () {
 
 	$('#add-new-option').change(function(){
 		var selected = e.options[e.selectedIndex].value,
-			items = [];
+			items = {};
+		$('#add-new-to').children('option').remove();
 
-		if (selected === 'sub-header') {
-			$('#add-new-to').children('option').remove();
-
-			var	header = $('tr.table-td-header').children('td:first-child');
-	    	for (var i = 0; i < header.length; i++) {
-	    		items[i] = header[i].innerHTML;
-	    	};
-
-	    	$.each(items, function(val, text){
-	        	$('#add-new-to').append(
-	            	$('<option></option>').html(text)
-	        	);
-	        });
-		} else if (selected === 'item') {
-			$('#add-new-to').children('option').remove();
-			var	sub_header = $('tr.table-sub-header').children('td:first-child');
-	    	for (var i = 0; i < sub_header.length; i++) {
-	    		items[i] = sub_header[i].innerHTML;
-	    	};
-
-	    	for (var i = items.length - 1; i >= 0; i--) {
-	    		$('#add-new-to').append('<option>' + items[i] + '</option');
-	    	};
-
-		} else if (selected === 'header') {
-			$('#add-new-to').children('option').remove();
+		if (selected === 'header') {
 			$.each(items, function(val, text){
 	        	$('#add-new-to').append(
 	            	$('<option></option>').html(text)
 	        	);
 	        });
-		}
+		} else if (selected === 'sub-header') {
+			var header = $('tbody');
 
+			for (var i = 0 ; i < header.length; i++) {
+				$('#add-new-to').append('<option value="' + header[i].id + '">' + header[i]['children'][0]['children'][0].innerHTML + '</option>');
+			};			
+				
+		} else if (selected === 'item') {
+			var sub_header = $('tbody tr.table-sub-header');
+
+			for (var i = 0 ; i < sub_header.length; i++) {
+				$('#add-new-to').append('<option value="' + sub_header[i].id + '">' + sub_header[i]['children'][0].innerHTML + '</option>');
+			};
+		}
 	});
 
 
@@ -54,38 +42,29 @@ $(document).ready( function () {
 
     	if (selected === 'header') {
     		var header = $('.table-td-header').length;
-    		$('.editTable tbody')
-            .append('<tr class="table-td-header" id="td-header-' + header +'">' +
-                    "<td>&nbsp;</td>" +
-                    "<td>&nbsp;</td>" +
-                    "</tr>");
-
+    		$('.editTable tbody:last-child')
+            .after('<tbody id="block-' + header + '">' +
+            		'<tr class="table-td-header">' +
+                    '<td>&nbsp;</td>' +
+                    '<td>&nbsp;</td>' +
+                    '</tr></tbody>');
     	} else if (selected === 'sub-header') {
-    		var add_selected = ex.selectedIndex,
-    			sub_header = $('.table-sub-header').length;
-    			
-    		$('#td-header-' + add_selected)
-    		.after('<tr class="table-sub-header" id="td-sub-' + sub_header +'">' +
-                    "<td>&nbsp;</td>" +
-                    "<td>&nbsp;</td>" +
-                    "</tr>");
-
-    		
-
-    		sub_header_el = $('table-sub-header');
-    		for (var i = 0; i < sub_header_el.length; i++) {
-    			sub_header_el[i].id = 'td-sub-' + i;
-    		};
-
+    		var header = ex.options[ex.selectedIndex].value,
+    			sub_header = $('#' + header + ' .table-sub-header').length
+    			tbody = $('#' + header + ' tr:last-child');
+    			console.log(tbody);
+    		tbody.after('<tr class="table-sub-header" id="td-' + header + '-sub-' + sub_header + '">' +
+						'<td></td>' +
+						'<td>&nbsp;</td>' +
+    					'</tr>');
     	} else if (selected === 'item') {
-    		var add_selected = ex.selectedIndex;
-    		
-    		$('#td-sub-' + add_selected)
-    		.after('<tr class="table-td-content">' +
-                    "<td>&nbsp;</td>" +
-                    "<td>&nbsp;</td>" +
-                    "</tr>");
-    		
+    		var sub_header = ex.options[ex.selectedIndex].value,
+    			item = $('#' + sub_header);
+    			
+    		item.after('<tr class="table-td-content">' +
+    				   '<td></td' +
+    				   '<td>&nbsp;</td' +
+    				   '</tr>');	
     	}
 
     	$(".editTable").editableTableWidget();
