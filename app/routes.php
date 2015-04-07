@@ -92,6 +92,7 @@ Route::get('/admin/materials/{id}','MaterialsController@show');
 Route::post('admin/materials/add/{id}','MaterialsController@store');
 Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
 Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
+Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
 
 /* for design */
 $template = 'template';
@@ -125,12 +126,12 @@ Route::get('/architect/index', function() use ($archtemplate)
 	return $layout->nest('content', 'architect.quotation.index');
 });
 
-Route::get('/architect/entryeditor', function() use ($archtemplate)
+/*Route::get('/architect/entryeditor', function() use ($archtemplate)
 {
 	View::name($archtemplate, 'architect.entry.entryeditor');
 	$layout = View::of('architect.entry.entryeditor');
 	return $layout->nest('content', 'architect.entry.entryeditor');
-});
+});*/
 
 $sectemplate = 'secretarytemplate';
 Route::get('/secretary/test', function() use ($sectemplate)

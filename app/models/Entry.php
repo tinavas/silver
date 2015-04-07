@@ -13,19 +13,9 @@ class Entry extends Eloquent
 	{
 		return $this->belongsTo('Quotation');
 	}
-
-	public function child()
-	{
-		return $this->hasMany('ChildEntry','parent_id')->get();
-	}
-
-	public function childWithThrashed()
-	{
-		return $this->hasMany('ChildEntry','parent_id')->withTrashed();
-	}
-
+	
 	public function children()
 	{
-		return $this->hasMany('ChildEntry','parent_id');
+		return $this->hasMany('Entry','parent_id');
 	}
 }

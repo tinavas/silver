@@ -1,4 +1,4 @@
-@extends('entry-template')
+@extends('architecttemplate')
 
 @section('head')
 {{HTML::style('resources/css/modules/quotation/quotation-create.css')}}
@@ -7,78 +7,34 @@
     <div class="medium-12 large-centered column quotation-entryeditor">
       <h4 class="view-header"><i class="fa fa-user"></i>Quotation Entry Editor</h4>
       <div class="view-box">
+
+      @if(count($headers) != 0)
         <table class="editTable">
           <thead>
             <th>Description</th>
             <th>Units</th>
           </thead>
           <tbody id="block-0">
-            <tr class="table-td-header">
-              <td>Preliminaries</td>
-            </tr>
-            <tr class="table-sub-header" id="td-block-0-sub-0">
-              <td>Sub-Header</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Tiger Woods</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Steel Phoenix</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Blue Chair</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-sub-header" id="td-block-0-sub-1">
-              <td>Sub-Header 2</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Korean Steelipipe</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Spark Tables</td>
-              <td>&nbsp;</td>
-            </tr>
-          </tbody>
-          <tbody id="block-1">
-            <tr class="table-td-header">
-              <td>Secondary</td>
-            </tr>
-            <tr class="table-sub-header" id="td-block-1-sub-0">
-              <td>Sub-Header</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Tiger Woods</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Steel Phoenix</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Blue Chair</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-sub-header" id="td-block-1-sub-1">
-              <td>Sub-Header 2</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Korean Steelipipe</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr class="table-td-content">
-              <td>Spark Table</td>
-              <td>&nbsp;</td>
-            </tr>
+            @foreach($headers as $header)
+              <tr class = "table-td-header">
+                <td>{{$header->description}}</td>
+              </tr>
+              @foreach($header->children()->get() as $subs)
+                <tr class = "table-sub-header">
+                  <td>{{$subs->description}}</td>
+                </tr>
+                @foreach($subs->children()->get() as  $child)
+                  <tr class = "table-td-content">
+                    <td>{{$child->description}}</td>
+                    <td>{{$child->unit}}</td>
+                  </tr>
+                @endforeach
+              @endforeach
+            @endforeach
           </tbody>
         </table>
+      @endif
+        
         <div>
           <button class="btn btn-primary" id="add-new-row">Add New</button>
           <select id="add-new-option">

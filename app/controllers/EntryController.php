@@ -246,4 +246,9 @@ class EntryController extends BaseController
 		$id = Input::get('id');
 		return Response::json($this->entry->getSubs($id));
 	}
+
+	public function showEntryTemplateEditor(){
+		$headers = $this->entry->getParents();
+		return View::make('architect.entry.entryeditor',compact('headers'));
+	}
 }
