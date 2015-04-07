@@ -27,6 +27,7 @@
                       <th>Quantity</th>
                       <th>Amount</th>
                       <th>Quotation Amount</th>
+                      <th>Supplier Name</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -40,6 +41,7 @@
                       <td>{{$budget->quantity}}</td>
                       <td>{{number_format($budget->amount,2)}}</td>
                       <td>{{number_format($budget->entry()->first()->tm,2)}}</td>
+                      <td>{{$budget->supplier()->first()->supplier_name}}</td>
                       <td><a href="{{URL::to('/admin/materials/delete/' . $budget->id)}}">Delete</a></td>
                     </tr>
                    @endforeach

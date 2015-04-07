@@ -45,11 +45,12 @@ class EntryController extends BaseController
 
 		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
 		$divisor += $totalExpenses;
-		$divisor += $divisor * $quotation->others;
+		$divisor += $totalExpenses * $quotation->others;
 		$divisor += $divisor * $quotation->tax;
 		if($grandTotal == 0){
 			$grandTotal = 1;
 		}
+		//return $divisor;
 		$subs = array();
 		$parents = array();
 		foreach($parentsArray as $parent)

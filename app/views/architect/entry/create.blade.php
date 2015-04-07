@@ -149,7 +149,7 @@
                     <td>CONT:</h6></td>
                     <td>{{number_format($grandTotal * $quotation->cont,2)}}</td>
                     <td>&nbsp;</td>
-                    <?php $superSum += $grandTotal * $quotation->cont?>
+                    <?php $superSum += ($grandTotal * $quotation->cont)?>
                     <td>{{number_format($superSum,2)}}</td>
                 </tr>
                 <?php $superSum += $totalExpenses?>

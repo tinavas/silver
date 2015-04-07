@@ -23,15 +23,15 @@ class EloquentEntryRepository implements EntryRepository
 		$quotation = Quotation::find($quotation_id);
 		$entry = new Entry();
 		$entry->description = $inputs['description'];
-		$entry->quantity = $inputs['quantity'];
+		//$entry->quantity = $inputs['quantity'];
 		$entry->level = $inputs['type'];
 		$entry->unit = $inputs['unit'];
-		$entry->um = $inputs['um'];
+		/*$entry->um = $inputs['um'];
 		$entry->ul = $inputs['ul'];
 		$entry->tm = $inputs['um'] * $inputs['quantity'];
 		$entry->tl = $inputs['ul'] * $inputs['quantity'];
 		$entry->dc = $entry->tm + $entry->tl;
-		$entry->quotation_id = $quotation_id;
+		$entry->quotation_id = $quotation_id;*/
 		$entry->save();
 
 		$quotation->save();
