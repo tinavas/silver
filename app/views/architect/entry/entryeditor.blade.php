@@ -7,7 +7,7 @@
     <div class="medium-12 large-centered column quotation-entryeditor">
       <h4 class="view-header"><i class="fa fa-user"></i>Quotation Entry Editor</h4>
       <div class="view-box">
-        <div>
+        <div class="add-row-container">
           <button class="btn btn-primary" id="add-new-row">Add New</button>
           <select id="add-new-option">
             <option value="header">Header</option>
@@ -19,7 +19,6 @@
             
           </select>
         </div>
-
       @if(count($headers) != 0)
         <table class="editTable">
           <thead>
@@ -45,23 +44,7 @@
             @endforeach
           </tbody>
         </table>
-<<<<<<< HEAD
-=======
       @endif
-        
-        <div>
-          <button class="btn btn-primary" id="add-new-row">Add New</button>
-          <select id="add-new-option">
-            <option value="header">Header</option>
-            <option value="sub-header">Sub Header</option>
-            <option value="item">Item</option>
-          </select>
-          <span>in</span>
-          <select id="add-new-to">
-            
-          </select>
-        </div>
->>>>>>> f9d2092f35a5ddacad918e11db4c343548c339dd
       </div>
     </div>
 @endsection
