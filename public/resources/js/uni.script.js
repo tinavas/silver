@@ -1,75 +1,79 @@
 /* MAIN JS */
 $(document).ready( function () {
-	var doc = document,
-		e = doc.getElementById('add-new-option');
-		ex = doc.getElementById('add-new-to');
 
 	$('.data-table').DataTable();
 
-	$('.editTable').editableTableWidget();
+	(function(){
+		
+		var doc = document,
+		e = doc.getElementById('add-new-option');
+		ex = doc.getElementById('add-new-to');
 
-	$('#add-new-option').change(function(){
-		var selected = e.options[e.selectedIndex].value,
-			items = {};
-		$('#add-new-to').children('option').remove();
+		$('.editTable').editableTableWidget();
 
-		if (selected === 'header') {
-			$.each(items, function(val, text){
-	        	$('#add-new-to').append(
-	            	$('<option></option>').html(text)
-	        	);
-	        });
-		} else if (selected === 'sub-header') {
-			var header = $('tbody');
+		$('#add-new-option').change(function(){
+			var selected = e.options[e.selectedIndex].value,
+				items = {};
+			$('#add-new-to').children('option').remove();
 
-			for (var i = 0 ; i < header.length; i++) {
-				$('#add-new-to').append('<option value="' + header[i].id + '">' + header[i]['children'][0]['children'][0].innerHTML + '</option>');
-			};			
-				
-		} else if (selected === 'item') {
-			var sub_header = $('tbody tr.table-sub-header');
+			if (selected === 'header') {
+				$.each(items, function(val, text){
+		        	$('#add-new-to').append(
+		            	$('<option></option>').html(text)
+		        	);
+		        });
+			} else if (selected === 'sub-header') {
+				var header = $('tbody');
 
-			for (var i = 0 ; i < sub_header.length; i++) {
-				$('#add-new-to').append('<option value="' + sub_header[i].id + '">' + sub_header[i]['children'][0].innerHTML + '</option>');
-			};
-		}
-	});
+				for (var i = 0 ; i < header.length; i++) {
+					$('#add-new-to').append('<option value="' + header[i].id + '">' + header[i]['children'][0]['children'][0].innerHTML + '</option>');
+				};			
+					
+			} else if (selected === 'item') {
+				var sub_header = $('tbody tr.table-sub-header');
+
+				for (var i = 0 ; i < sub_header.length; i++) {
+					$('#add-new-to').append('<option value="' + sub_header[i].id + '">' + sub_header[i]['children'][0].innerHTML + '</option>');
+				};
+			}
+		});
 
 
 
-    $('#add-new-row').click(function(){
-    	var selected = e.options[e.selectedIndex].value;
+	    $('#add-new-row').click(function(){
+	    	var selected = e.options[e.selectedIndex].value;
 
-    	if (selected === 'header') {
-    		var header = $('.table-td-header').length;
-    		$('.editTable tbody:last-child')
-            .after('<tbody id="block-' + header + '">' +
-            		'<tr class="table-td-header">' +
-                    '<td>&nbsp;</td>' +
-                    '<td>&nbsp;</td>' +
-                    '</tr></tbody>');
-    	} else if (selected === 'sub-header') {
-    		var header = ex.options[ex.selectedIndex].value,
-    			sub_header = $('#' + header + ' .table-sub-header').length
-    			tbody = $('#' + header + ' tr:last-child');
-    			console.log(tbody);
-    		tbody.after('<tr class="table-sub-header" id="td-' + header + '-sub-' + sub_header + '">' +
-						'<td></td>' +
-						'<td>&nbsp;</td>' +
-    					'</tr>');
-    	} else if (selected === 'item') {
-    		var sub_header = ex.options[ex.selectedIndex].value,
-    			item = $('#' + sub_header);
-    			
-    		item.after('<tr class="table-td-content">' +
-    				   '<td></td' +
-    				   '<td>&nbsp;</td' +
-    				   '</tr>');	
-    	}
+	    	if (selected === 'header') {
+	    		var header = $('.table-td-header').length;
+	    		$('.editTable tbody:last-child')
+	            .after('<tbody id="block-' + header + '">' +
+	            		'<tr class="table-td-header">' +
+	                    '<td>&nbsp;</td>' +
+	                    '<td>&nbsp;</td>' +
+	                    '</tr></tbody>');
+	    	} else if (selected === 'sub-header') {
+	    		var header = ex.options[ex.selectedIndex].value,
+	    			sub_header = $('#' + header + ' .table-sub-header').length
+	    			tbody = $('#' + header + ' tr:last-child');
+	    			console.log(tbody);
+	    		tbody.after('<tr class="table-sub-header" id="td-' + header + '-sub-' + sub_header + '">' +
+							'<td></td>' +
+							'<td>&nbsp;</td>' +
+	    					'</tr>');
+	    	} else if (selected === 'item') {
+	    		var sub_header = ex.options[ex.selectedIndex].value,
+	    			item = $('#' + sub_header);
+	    			
+	    		item.after('<tr class="table-td-content">' +
+	    				   '<td></td' +
+	    				   '<td>&nbsp;</td' +
+	    				   '</tr>');	
+	    	}
 
-    	$(".editTable").editableTableWidget();
-        
-    });
+	    	$(".editTable").editableTableWidget();
+	        
+	    });
+	})();
 
 	$('.div-toggle').click(function(e) {
 		e.preventDefault();
