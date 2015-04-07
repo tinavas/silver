@@ -2,7 +2,7 @@
 
  interface EntryRepository
  {
- 	public function getParents($quotation_id);
+ 	public function getParents();
  	public function store($quotation_id, $inputs);
  	public function getHeaders($quotation_id);
  	public function remove($id);

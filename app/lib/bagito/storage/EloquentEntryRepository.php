@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class EloquentEntryRepository implements EntryRepository
 {
-	public function	getParents($quotation_id)
+	public function	getParents()
 	{
-		return Entry::where('quotation_id',$quotation_id)->where('level',1)->get();
+		return Entry::where('level',1)->get();
 	}
 
 	public function getSubHeaders($quotation_id)
