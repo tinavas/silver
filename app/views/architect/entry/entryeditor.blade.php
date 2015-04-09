@@ -34,7 +34,6 @@
           </tbody>
         </table>
       @endif
-        
         <div>
           <button class="btn btn-primary" id="add-new-row">Add New</button>
           <select id="add-new-option">
