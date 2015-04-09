@@ -25,15 +25,18 @@
             <th>Description</th>
             <th>Units</th>
           </thead>
-          <tbody id="block-0">
+          <?php $block = 0; ?>
             @foreach($headers as $header)
+              <tbody id="block-{{$block}}">
               <tr class = "table-td-header">
                 <td>{{$header->description}}</td>
               </tr>
               @foreach($header->children()->get() as $subs)
-                <tr class = "table-sub-header">
+                <?php $sub = 0; ?> 
+                <tr class = "table-sub-header" id = "td-block-{{$block}}-sub-{{$sub}}">
                   <td>{{$subs->description}}</td>
                 </tr>
+                <?php $sub++?>
                 @foreach($subs->children()->get() as  $child)
                   <tr class = "table-td-content">
                     <td>{{$child->description}}</td>
@@ -41,22 +44,11 @@
                   </tr>
                 @endforeach
               @endforeach
+              <?php $block++; ?>
+              </tbody>
             @endforeach
-          </tbody>
         </table>
       @endif
-        <div>
-          <button class="btn btn-primary" id="add-new-row">Add New</button>
-          <select id="add-new-option">
-            <option value="header">Header</option>
-            <option value="sub-header">Sub Header</option>
-            <option value="item">Item</option>
-          </select>
-          <span>in</span>
-          <select id="add-new-to">
-            
-          </select>
-        </div>
       </div>
     </div>
 @endsection
