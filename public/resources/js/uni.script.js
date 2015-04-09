@@ -57,7 +57,7 @@ $(document).ready( function () {
 	    			tbody = $('#' + header + ' tr:last-child');
 	    			console.log(tbody);
 	    		tbody.after('<tr class="table-sub-header" id="td-' + header + '-sub-' + sub_header + '">' +
-							'<td></td>' +
+							'<td>&nbsp;</td>' +
 							'<td>&nbsp;</td>' +
 	    					'</tr>');
 	    	} else if (selected === 'item') {
@@ -65,8 +65,8 @@ $(document).ready( function () {
 	    			item = $('#' + sub_header);
 	    			
 	    		item.after('<tr class="table-td-content">' +
-	    				   '<td></td' +
-	    				   '<td>&nbsp;</td' +
+	    				   '<td>&nbsp;</td>' +
+	    				   '<td>&nbsp;</td>' +
 	    				   '</tr>');	
 	    	}
 
