@@ -61,7 +61,7 @@ Route::post('/architect/quotation/tag-as-for-approval/{id}', 'QuotationControlle
 Route::get('/architect/viewer/view-other/{id}','EntryController@show');
 
 Route::get('/architect/entry/create/{id}','EntryController@create');
-Route::post('/architect/entry/create/{id}','EntryController@store');
+Route::post('/architect/entry-template/create/','EntryController@store');
 Route::get('/architect/entry/delete/{id}','EntryController@remove');
 Route::get('/architect/viewer','QuotationController@viewOtherQuotations');
 Route::get('/architect/viewer/disapprove/{id}', 'QuotationController@disapprove');

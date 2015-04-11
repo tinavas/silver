@@ -3,6 +3,10 @@ $(document).ready( function () {
 
 	$('.data-table').DataTable();
 
+	$('table td').on('change', function(evt, newValue) {
+		var id = alert($(this).attr('id'));
+	});
+
 	(function(){
 		
 		var doc = document,

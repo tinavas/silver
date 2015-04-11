@@ -24,7 +24,7 @@
                     {{$error}} <br>
                 @endforeach
             </span>
-        @endif
+      @endif
         <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
         <a href="#" data-reveal-id="myModal" class = "button right"> <i class="fa fa-plus"></i>Add New Entry</a>
         <a href="#" data-reveal-id="modal2" class = "button"><i class="fa fa-dollar"></i> View Other Expenses </a>

@@ -65,7 +65,7 @@ class EntryController extends BaseController
 		$parentsArray = $this->entry->getHeaders($id);
 		return View::make('architect.entry.create',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
 	}
-	public function store($id){
+	public function store(){
 		$rules = array();
 		$option = Input::get('type');
 		if($option == 1){
@@ -84,9 +84,6 @@ class EntryController extends BaseController
 					 	'description' => 'required', 
 					 	'type' => 'required',
 					 	'parent_id' => 'required',
-					 	'quantity'=> 'required|numeric',
-					 	'um' => 'numeric',
-					 	'ul' => 'numeric'
 					 ];
 		}
 
@@ -98,7 +95,7 @@ class EntryController extends BaseController
 		}
 		else
 		{
-			$this->entry->store($id, Input::all());
+			$this->entry->store(Input::all());
 			Session::flash('message','Entry Added');
 			return Redirect::back();
 		}
@@ -249,6 +246,14 @@ class EntryController extends BaseController
 
 	public function showEntryTemplateEditor(){
 		$headers = $this->entry->getParents();
-		return View::make('architect.entry.entryeditor',compact('headers'));
+		$parents = $this->entry->getParentList();
+		return View::make('architect.entry.entryeditor',compact('headers','parents'));
+	}
+
+	public function saveTemplateEntry(){
+		$some = Input::get('id');
+		$value = Input::get('value');
+		$type = explode("-",$some);
+		//call repository for saving
 	}
 }

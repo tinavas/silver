@@ -13,49 +13,32 @@ class EloquentEntryRepository implements EntryRepository
 		return Entry::where('level',1)->get();
 	}
 
+	public function getParentList(){
+		return Entry::where('level',1)->lists('description','id');
+	}
+
 	public function getSubHeaders($quotation_id)
 	{
 		return Entry::where('quotation_id',$quotation_id)->where('level','=',2)->get();
 	}
 
-	public function store($quotation_id, $inputs)
+	public function store($inputs)
 	{
-		$quotation = Quotation::find($quotation_id);
 		$entry = new Entry();
 		$entry->description = $inputs['description'];
-		//$entry->quantity = $inputs['quantity'];
 		$entry->level = $inputs['type'];
 		$entry->unit = $inputs['unit'];
-		/*$entry->um = $inputs['um'];
-		$entry->ul = $inputs['ul'];
-		$entry->tm = $inputs['um'] * $inputs['quantity'];
-		$entry->tl = $inputs['ul'] * $inputs['quantity'];
-		$entry->dc = $entry->tm + $entry->tl;
-		$entry->quotation_id = $quotation_id;*/
+		if($entry->level == 2) {
+			$entry->parent_id = $inputs['parent_id_sub'];
+		}else if($entry->level == 3) {
+			$entry->parent_id = $inputs['parent_id'];
+			$entry->save();
+		}
+
 		$entry->save();
-
-		$quotation->save();
-	
-		if($entry->level == 2)
-		{
-			$child = new ChildEntry();
-
-			$child->child_id = $entry->id;
-			$child->parent_id = $inputs['parent_id_sub'];
-			$child->save();
-		}
-		else if($entry->level == 3)
-		{
-			$child = new ChildEntry();
-
-			$child->child_id = $entry->id;
-			$child->parent_id = $inputs['parent_id'];
-			$child->save();
-		}
 	}
 
-	public function getHeaders($quotation_id)
-	{
+	public function getHeaders($quotation_id){
 		return Entry::where('quotation_id',$quotation_id)->where('level',1)->get();
 	}
 
@@ -103,17 +86,15 @@ class EloquentEntryRepository implements EntryRepository
 	}
 
 	public function getSubs($id){
-		$child =  ChildEntry::where('parent_id' , $id)->get();
+		$child =  Entry::where('parent_id',$id)->get();
 		$parentArray = array();
 		foreach($child as $c){
-			$item = Entry::find($c->child_id);
-			if(count($item) != 0){
-				$array = array();
-				$array['id'] = $item->id;
-				$array['description'] = $item->description;
-				$parentArray[] = $array;
-			}
+			$array = array();
+			$array['id'] = $c->id;
+			$array['description'] = $c->description;
+			$parentArray[] = $array;
 		}
 		return Collection::make($parentArray);
 	}
+
 }
