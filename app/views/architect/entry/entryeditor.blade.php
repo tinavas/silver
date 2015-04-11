@@ -68,7 +68,7 @@
 
     <div id="myModal" class="reveal-modal" data-reveal>
         <h4>Add New Entry</h4>
-
+        <?php $subs = $header->children()->get(); ?>
         {{Form::open(array('url' => '/architect/entry-template/create/'))}}
          <div class="row">
              <div class="medium-2 column">
