@@ -20,19 +20,9 @@
                 @endforeach
             </span>
       @endif
-        <!--<div class="add-row-container">
-          <button class="btn btn-primary" id="add-new-row">Add New</button>
-          <select id="add-new-option">
-            <option value="header">Header</option>
-            <option value="sub-header">Sub Header</option>
-            <option value="item">Item</option>
-          </select>
-          <span>in</span>
-          <select id="add-new-to">
-            
-          </select>
-        </div> -->
       <a href="#" data-reveal-id="myModal" class = "button right"> <i class="fa fa-plus"></i>Add New Entry</a>
+      <a href="#" data-reveal-id="modal2" class = "button "> <i class="fa fa-dollar"></i>Expenses</a>
+      
       @if(count($headers) != 0)
         <table class="editTable">
           <thead>
@@ -131,5 +121,40 @@
         </div>
         {{Form::close()}}
         </div>
+        <div id="modal2" class="reveal-modal" data-reveal>
+          <div class="row">
+              <div class="medium-12 column">
+              <h3>Add Expenses</h3>
+              {{Form::open(['url' => '/architect/entry/add-expenses/'])}}
+                 {{Form::label('description','Description')}}
+                 {{Form::text('description')}}
+                 {{Form::submit('Add', array('class'=>'right button submit'))}}
+              {{Form::close()}}
+              <br>
+              <br>
+              <h3>Expenses</h3>
+                  @if(count($expenses) != 0)
+                  <table class = "editTable data-table" style = "width:100%;">
+                      <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($expenses as $expense)
+                          <tr>
+                              <th>{{$expense->id}}</th>
+                              <td id = "expense-{{$expense->id}}">{{$expense->description}}</td>
+                          </tr>
+                      @endforeach
+                      </tbody>
+                  </table>
+                  @else
+                      <h6 class = "center">No Expenses Yet</h6>
+                  @endif
+              </div>
+          </div>
+      </div>
     </div>
 @endsection

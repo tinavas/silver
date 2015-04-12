@@ -82,7 +82,7 @@ Route::get('/admin/change-password','LoginController@changeAdminPassword');
 
 Route::post('/architect/change-password','LoginController@updateArchitectPassword');
 Route::post('/admin/change-password','LoginController@updateAdminPassword');
-Route::post('/architect/entry/add-expenses/{id}','EntryController@addOtherExpenses');
+Route::post('/architect/entry/add-expenses/','EntryController@addOtherExpenses');
 Route::get('/architect/entry/remove-expenses/{id}','EntryController@removeExpenses');
 Route::post('/architect/quotation/updateAdjustment/{id}','QuotationController@updateAdjustment');
 Route::get('/ajax/get-subs','EntryController@getAllSubHeaders');

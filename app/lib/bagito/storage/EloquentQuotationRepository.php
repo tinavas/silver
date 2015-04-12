@@ -170,17 +170,15 @@ class EloquentQuotationRepository implements QuotationRepository
 		}
 	}
 
-	public function addExpenses($id, $inputs){
+	public function addExpenses($inputs){
 		$expense = new OtherExpense();
-		$expense->quotation_id = $id;
 		$expense->description = $inputs['description'];
-		$expense->cost = $inputs['cost'];
-
 		$expense->save();
 	}
 
-	public function getExpensesById($id){
-		return OtherExpense::where('quotation_id',$id)->get();
+	public function getExpenses(){
+
+		return OtherExpense::all();
 	}
 
 	public function removeExpenses($id){

@@ -10,9 +10,8 @@ class EntryController extends BaseController
 		$this->quotation = $quotation;
 	}
 
-	public function addOtherExpenses($id){
+	public function addOtherExpenses(){
 		$rules = [
-					'cost' => 'required|numeric',
 					'description' => 'required'
 				 ];
 
@@ -24,8 +23,8 @@ class EntryController extends BaseController
 		}
 		else
 		{
-			$this->quotation->addExpenses($id, Input::all());
-			Session::flash('message','Expenses Added');
+			$this->quotation->addExpenses(Input::all());
+			Session::flash('message','Expense Added');
 			return Redirect::back();
 		}
 	}
@@ -38,7 +37,7 @@ class EntryController extends BaseController
 		$quotation = $this->quotation->find($id);
 		$parentsArray = $this->entry->getParents($id);
 		$subsArray = $this->entry->getSubHeaders($id);
-		$expenses = $this->quotation->getExpensesById($id);
+		//$expenses = $this->quotation->getExpensesById($id);
 		$grandTotal = $this->entry->getSum($id);
 		$totalExpenses = $this->entry->getExpensesSum($id);
 
@@ -246,8 +245,9 @@ class EntryController extends BaseController
 
 	public function showEntryTemplateEditor(){
 		$headers = $this->entry->getParents();
+		$expenses = $this->quotation->getExpenses();
 		$parents = $this->entry->getParentList();
-		return View::make('architect.entry.entryeditor',compact('headers','parents'));
+		return View::make('architect.entry.entryeditor',compact('headers','parents','expenses'));
 	}
 
 	public function saveTemplateEntry(){

@@ -41,9 +41,9 @@ interface QuotationRepository
 
 	public function getOtherQuotation($id);
 
-	public function addExpenses($id, $inputs);
+	public function addExpenses($inputs);
 
-	public function getExpensesById($id);
+	public function getExpenses();
 
 	public function removeExpenses($id);
 

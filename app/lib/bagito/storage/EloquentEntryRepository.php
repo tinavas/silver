@@ -98,14 +98,20 @@ class EloquentEntryRepository implements EntryRepository
 	}
 
 	public function update($type, $id, $value){
-		$entry = Entry::find($id);
 		if($type == "parent" || $type == "subheader" || $type == "child"){
+			$entry = Entry::find($id);
 			$entry->description = $value;
-		}else{
-			//kase unit na sya. DUHH
+			$entry->save();
+		}else if($type == "unit"){
+			$entry = Entry::find($id);
 			$entry->unit = $value;
+			$entry->save();
+		}else if($type == "expense"){
+			$expense = OtherExpense::find($id);
+			$expense->description = $value;
+			$expense->save();
 		}
-		$entry->save();
+		
 	}
 
 }
