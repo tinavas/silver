@@ -97,4 +97,15 @@ class EloquentEntryRepository implements EntryRepository
 		return Collection::make($parentArray);
 	}
 
+	public function update($type, $id, $value){
+		$entry = Entry::find($id);
+		if($type == "parent" || $type == "subheader" || $type == "child"){
+			$entry->description = $value;
+		}else{
+			//kase unit na sya. DUHH
+			$entry->unit = $value;
+		}
+		$entry->save();
+	}
+
 }

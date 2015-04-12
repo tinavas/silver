@@ -255,5 +255,9 @@ class EntryController extends BaseController
 		$value = Input::get('value');
 		$type = explode("-",$some);
 		//call repository for saving
+
+		$this->entry->update($type[0], $type[1], $value);
+
+		return Response::json(array('status' => 'Success'));
 	}
 }

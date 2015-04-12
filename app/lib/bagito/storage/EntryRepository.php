@@ -11,4 +11,5 @@
  	public function getExpensesSum($id);
  	public function getSubs($id);
  	public function getParentList();
+ 	public function update($type, $id, $value);
  }

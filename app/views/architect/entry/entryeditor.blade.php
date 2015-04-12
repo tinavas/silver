@@ -53,8 +53,8 @@
                 <?php $sub++?>
                 @foreach($subs->children()->get() as  $child)
                   <tr class = "table-td-content">
-                    <td id = "child-{{$subs->id}}">{{$child->description}}</td>
-                    <td id = "unit-{{$subs->id  }}">{{$child->unit}}</td>
+                    <td id = "child-{{$child->id}}">{{$child->description}}</td>
+                    <td id = "unit-{{$child->id}}">{{$child->unit}}</td>
                   </tr>
                 @endforeach
               @endforeach

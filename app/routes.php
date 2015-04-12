@@ -86,6 +86,7 @@ Route::post('/architect/entry/add-expenses/{id}','EntryController@addOtherExpens
 Route::get('/architect/entry/remove-expenses/{id}','EntryController@removeExpenses');
 Route::post('/architect/quotation/updateAdjustment/{id}','QuotationController@updateAdjustment');
 Route::get('/ajax/get-subs','EntryController@getAllSubHeaders');
+Route::get('/ajax/update-entry-template','EntryController@saveTemplateEntry');
 Route::get('/admin/quotation/request-for-update/{id}','ProjectController@requestForUpdate');
 Route::get('/admin/materials','MaterialsController@index');
 Route::get('/admin/materials/{id}','MaterialsController@show');
