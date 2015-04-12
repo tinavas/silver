@@ -1,6 +1,6 @@
 <?php
 
-class ChildTableSeeder extends Seeder{
+class OtherExpenseTableSeeder extends Seeder{
 
 	public function run(){
 
