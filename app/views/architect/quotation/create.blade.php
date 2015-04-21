@@ -8,7 +8,7 @@
 
 <div class="row quotation">
     <div class="medium-10 large-centered column">
-      <h4 class="view-header"><i class="fa fa-user"></i> Quotation Information</h4>
+      <h4 class="view-header"><i class="fa fa-book"></i> Quotation Information</h4>
         @if($errors->has())
             <span class = "error">
                 @foreach($errors->all() as $error)
@@ -21,7 +21,7 @@
             {{Form::open(array('url' => '/architect/quotation/create/' . $id,'method' => 'POST'))}}
          <div class="row">
              <div class="medium-2 column">
-                {{Form::label('title','Title', array('class' => 'inline right'))}}
+                {{Form::label('title','Subject', array('class' => 'inline right'))}}
              </div>
              <div class="medium-10 column">
                   {{Form::text('title','',array('class'=> 'inline right'))}}
@@ -43,7 +43,7 @@
                 {{Form::text('cont','0.05',array('class'=>'inline right'))}}
              </div>
          </div>
-         <div class="row">
+         <!--<div class="row">
              <div class="medium-2 column">
                 {{Form::label('others','Others', array('class' => 'inline right'))}}
              </div>
@@ -58,7 +58,7 @@
              <div class="medium-10 column">
                 {{Form::text('tax','0.10',array('class'=>'inline right'))}}
              </div>
-         </div>
+         </div>-->
         <div class="row">
             <div class="medium-12 column">
                 {{Form::submit('Create', array('class'=>'right button submit'))}}

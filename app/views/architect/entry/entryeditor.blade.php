@@ -134,7 +134,7 @@
               <br>
               <h3>Expenses</h3>
                   @if(count($expenses) != 0)
-                  <table class = "editTable data-table" style = "width:100%;">
+                  <table class = "editTable" style = "width:100%;">
                       <thead>
                       <tr>
                         <th>ID</th>

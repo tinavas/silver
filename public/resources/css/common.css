@@ -108,8 +108,17 @@ a, h1, h2, h3, h4, h5, h6, input[type="text"],th, td, .button, label {
     color:white;
 }
 
+.sub-header{
+    padding-left:20px;
+}
+
+.editTable th{
+    font-size:9px;
+    font-weight:normal;
+}
+
 .entry{
-    padding-left:15px;
+    padding-left:50px;
 }
 .bagito-table td{
     font-size:10px;

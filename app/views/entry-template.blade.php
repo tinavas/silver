@@ -36,6 +36,7 @@
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.alert.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.reveal.js')}}
     {{HTML::script('resources/libraries/jqueryui/js/jquery.dataTables.min.js')}}
+    {{HTML::script('resources/libraries/mindmup/mindmup-editabletable.js')}}
     {{HTML::script('resources/js/uni.script.js')}}
     {{HTML::script('resources/js/footable.js')}}
     {{HTML::script('resources/js/footer.paginate.js')}}

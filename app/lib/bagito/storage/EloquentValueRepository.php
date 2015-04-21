@@ -3,7 +3,7 @@
 use Value;
 use Entry;
 
-class EloquentValuesRepository implements ValuesRepository{
+class EloquentValueRepository implements ValueRepository{
 
 	public function find($id) {
 		return Value::find($id);

@@ -5,16 +5,20 @@ use Bagito\Storage\ProjectRepository as Project;
 use Bagito\Auth\AuthRepository as Auth;
 use Bagito\Storage\QuotationRepository as Quotation;
 use Bagito\Storage\ApprovalRepository as Approval;
+use Bagito\Storage\ValueRepository as Value;
+use Bagito\Storage\ExpensesValueRepository as ExpensesValue;
 use Bagito\Utilities\BagitoException;
 
 class QuotationController extends BaseController{
 
-	public function __construct(User $user, Project $project, Auth $auth, Quotation $quotation, Approval $approval){
+	public function __construct(User $user, Project $project, Auth $auth, Quotation $quotation, Approval $approval, Value $value, ExpensesValue $ev){
 		$this->user = $user;
 		$this->project = $project;
 		$this->auth = $auth;
 		$this->quotation = $quotation;
 		$this->approval = $approval;
+		$this->value = $value;
+		$this->ev = $ev;
 	}
 
 	public function create($id){
@@ -41,9 +45,9 @@ class QuotationController extends BaseController{
 	{
 		$rules = [
 					'title' => 'required',
-					'others'	=> 'required|numeric',
-					'cont'	=> 'required|numeric',
-					'tax'	=> 'required|numeric'
+					//'others'	=> 'required|numeric',
+					//'cont'	=> 'required|numeric',
+					//'tax'	=> 'required|numeric'
 				 ];
 
 		$validator = Validator::make(Input::all(),$rules);
@@ -56,6 +60,8 @@ class QuotationController extends BaseController{
 		{
 			$user = $this->auth->getCurrentUser();
 			$quotation = $this->quotation->create($user->id, $id, Input::all());
+			$this->value->newQuotation($quotation->id);
+			$this->ev->newQuotation($quotation->id);
 			return Redirect::to('architect/quotation/view/' . $quotation->id);
 		}
 	}

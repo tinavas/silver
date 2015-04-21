@@ -1,13 +1,15 @@
 <?php
 use Bagito\Storage\EntryRepository as Entry;
 use Bagito\Storage\QuotationRepository as Quotation;
+use Bagito\Storage\OtherExpensesRepository as OtherExpenses;
 
 class EntryController extends BaseController
 {
-	public function __construct(Entry $entry, Quotation $quotation)
+	public function __construct(Entry $entry, Quotation $quotation, OtherExpenses $otherExpenses)
 	{
 		$this->entry = $entry;
 		$this->quotation = $quotation;
+		$this->expenses = $otherExpenses;
 	}
 
 	public function addOtherExpenses(){
@@ -35,34 +37,9 @@ class EntryController extends BaseController
 	}
 	public function create($id){
 		$quotation = $this->quotation->find($id);
-		$parentsArray = $this->entry->getParents($id);
-		$subsArray = $this->entry->getSubHeaders($id);
-		//$expenses = $this->quotation->getExpensesById($id);
-		$grandTotal = $this->entry->getSum($id);
-		$totalExpenses = $this->entry->getExpensesSum($id);
-
-
-		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
-		$divisor += $totalExpenses;
-		$divisor += $totalExpenses * $quotation->others;
-		$divisor += $divisor * $quotation->tax;
-		if($grandTotal == 0){
-			$grandTotal = 1;
-		}
-		//return $divisor;
-		$subs = array();
-		$parents = array();
-		foreach($parentsArray as $parent)
-		{
-			$parents[$parent->id] = $parent->description;
-		}
-
-		foreach($subsArray as $sub)
-		{
-			$subs[$sub->id] = $sub->description;
-		}
-		$parentsArray = $this->entry->getHeaders($id);
-		return View::make('architect.entry.create',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
+		$expenses = $this->expenses->all();
+		$entries = $this->entry->getParents();
+		return View::make('architect.entry.create',compact('id','expenses','quotation','entries'));
 	}
 	public function store(){
 		$rules = array();
