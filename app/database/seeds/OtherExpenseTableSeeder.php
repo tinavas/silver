@@ -2,7 +2,7 @@
 
 class OtherExpenseTableSeeder extends Seeder{
 
-	public function run(){
+	public function run() {
 
 		$otherexp = new OtherExpense();
 		$otherexp->description = 'Mobilization';
@@ -136,7 +136,7 @@ class OtherExpenseTableSeeder extends Seeder{
 		$otherexp->description = 'Signboards';
 		$otherexp->save();
 
-		$otherexp = new OtherExpenseTableSeedernse();
+		$otherexp = new OtherExpense();
 		$otherexp->description = 'Signals & warnings';
 		$otherexp->save();
 
