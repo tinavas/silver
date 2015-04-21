@@ -136,7 +136,7 @@ class OtherExpenseTableSeeder extends Seeder{
 		$otherexp->description = 'Signboards';
 		$otherexp->save();
 
-		$otherexp = new OtherExpense();
+		$otherexp = new OtherExpenseTableSeedernse();
 		$otherexp->description = 'Signals & warnings';
 		$otherexp->save();
 
