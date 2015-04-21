@@ -6,6 +6,7 @@ use ChildEntry;
 use OtherExpense;
 use Illuminate\Database\Eloquent\Collection;
 use Value;
+use ExpensesValue;
 
 class EloquentEntryRepository implements EntryRepository
 {
@@ -133,6 +134,10 @@ class EloquentEntryRepository implements EntryRepository
 			$expense = OtherExpense::find($id);
 			$expense->description = $value;
 			$expense->save();
+		}else if($type == "expensevalue"){
+			$exx = ExpensesValue::find($id);
+			$exx->cost = $value; 
+			$exx->save();
 		}
 		
 	}

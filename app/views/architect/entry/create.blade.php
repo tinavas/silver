@@ -89,7 +89,7 @@
                     @foreach($expenses as $expense)
                         <tr>
                             <th>{{$expense->description}}</th>
-                            <td>{{$expense->value($quotation->id)->first()->cost}}</td>
+                            <td id = "expensevalue-{{$expense->value($quotation->id)->first()->id}}">{{$expense->value($quotation->id)->first()->cost}}</td>
                         </tr>
                     @endforeach
                     </tbody>
