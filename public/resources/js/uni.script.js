@@ -5,13 +5,22 @@ $(document).ready( function () {
 
 	$('table td').on('change', function(evt, newValue) {
 		var hoho = $(this).attr('id');
-		$.ajax({
-			type : 'GET',
-			dataType : 'json',
-    		url  : '/ajax/update-entry-template',
-    		data : {value : newValue, id : hoho}
-		});
+		if(isNumber(newValue)){
+			$.ajax({
+				type : 'GET',
+				dataType : 'json',
+    			url  : '/ajax/update-entry-template',
+    			data : {value : newValue, id : hoho}
+			});
+		}else{
+			alert('Invalid Numeric Value');
+			return false;
+		}
 	});	
+
+	function isNumber(n) {
+	  return !isNaN(parseFloat(n)) && isFinite(n);
+	}
 
 	(function(){
 		

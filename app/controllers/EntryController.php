@@ -114,7 +114,7 @@ class EntryController extends BaseController
 	}
 
 	public function showPrinterFriendly($id){
-		$quotation = $this->quotation->find($id);
+		/*$quotation = $this->quotation->find($id);
 		$project = $quotation->project()->first();
 		$parentsArray = $this->entry->getParents($id);
 		$subsArray = $this->entry->getSubHeaders($id);
@@ -211,7 +211,7 @@ class EntryController extends BaseController
         }
         $fpdf->Cell(0,10,'Total: P' . number_format($netTotal,2),0,0,'R');
         $fpdf->Output();
-        exit;
+        exit;*/
 
 	}
 
