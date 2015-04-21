@@ -5,9 +5,15 @@ use Quotation;
 use ChildEntry;
 use OtherExpense;
 use Illuminate\Database\Eloquent\Collection;
+use Value;
 
 class EloquentEntryRepository implements EntryRepository
 {
+
+	public function all(){
+		return Entry::all();
+	}
+
 	public function	getParents()
 	{
 		return Entry::where('level',1)->get();
@@ -32,10 +38,23 @@ class EloquentEntryRepository implements EntryRepository
 			$entry->parent_id = $inputs['parent_id_sub'];
 		}else if($entry->level == 3) {
 			$entry->parent_id = $inputs['parent_id'];
-			$entry->save();
 		}
 
 		$entry->save();
+
+		$quotations = Quotation::all();
+		foreach($quotations as $quotation){
+			$value = new Value();
+			$value->quantity = 0;
+			$value->ul = 0;
+			$value->um = 0;
+			$value->tl = 0;
+			$value->tm = 0;
+			$value->dc = 0;
+			$value->entry_id = $entry->id;
+			$value->quotation_id = $quotation->id;
+			$value->save();
+		}
 	}
 
 	public function getHeaders($quotation_id){
@@ -98,7 +117,11 @@ class EloquentEntryRepository implements EntryRepository
 	}
 
 	public function update($type, $id, $value){
-		if($type == "parent" || $type == "subheader" || $type == "child"){
+		if($type == "parent" || $type == "subheader"){
+			$entry = Entry::find($id);
+			$entry->description = $value;
+			$entry->save();
+		}else if($type == "child"){
 			$entry = Entry::find($id);
 			$entry->description = $value;
 			$entry->save();

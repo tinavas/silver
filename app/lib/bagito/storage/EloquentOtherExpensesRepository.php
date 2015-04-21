@@ -24,4 +24,8 @@ class EloquentOtherExpensesRepository implements OtherExpensesRepository{
 
 		$value->save();
 	}
+
+	public function all(){
+		return OtherExpense::all();
+	}
 }

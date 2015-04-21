@@ -7,6 +7,7 @@ use Approval;
 use OtherExpense;
 use QuotationLoad;
 use Entry;
+use ExpensesValue;
 
 class EloquentQuotationRepository implements QuotationRepository
 {
@@ -19,8 +20,8 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation->remarks = $inputs['remarks'];
 		$quotation->title = $inputs['title'];
 		$quotation->cont = $inputs['cont'];
-		$quotation->others = $inputs['others'];
-		$quotation->tax = $inputs['tax'];
+		$quotation->others = 0.02;
+		$quotation->tax = 0.10;
 		$quotation->quotation_code = $this->nextQuotationCode($userId, $projectId);
 		$quotation->status = 0;
 		$quotation->save();
@@ -174,6 +175,14 @@ class EloquentQuotationRepository implements QuotationRepository
 		$expense = new OtherExpense();
 		$expense->description = $inputs['description'];
 		$expense->save();
+		$quotations = Quotation::all();
+		foreach($quotations as $quotation){
+			$v = new ExpensesValue();
+			$v->quotation_id = $quotation->id;
+			$v->cost = 0;
+			$v->save();
+		}
+		return $expense;
 	}
 
 	public function getExpenses(){
