@@ -128,5 +128,9 @@ class EloquentProjectRepository implements ProjectRepository{
 		$quotation->status = -1;
 		$quotation->save();
 		return $quotation;
-	} 
+	}
+
+	public function getProjectByUser($user){
+		return $user->project()->get();
+	}
 }

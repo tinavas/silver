@@ -39,6 +39,7 @@ class EntryController extends BaseController
 		$quotation = $this->quotation->find($id);
 		$expenses = $this->expenses->all();
 		$entries = $this->entry->getParents();
+		
 		return View::make('architect.entry.create',compact('id','expenses','quotation','entries'));
 	}
 	public function store(){

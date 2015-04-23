@@ -36,7 +36,7 @@ class QuotationController extends BaseController{
 		$user = $this->user->find($authUser->id);
 
 
-		$projects = $this->project->all($user);
+		$projects = $this->project->getProjectByUser($user);
 
 		return View::make('architect.index',compact('projects'));
 	}

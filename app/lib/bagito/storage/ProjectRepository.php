@@ -41,4 +41,6 @@ interface ProjectRepository{
 
 	public function disapprove($quotationId);
 
+	public function getProjectByUser($user);
+
 }

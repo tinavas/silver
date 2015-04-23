@@ -5,13 +5,15 @@ $(document).ready( function () {
 
 	$('table td').on('change', function(evt, newValue) {
 		var hoho = $(this).attr('id');
-		if(isNumber(newValue)){
+		var formattedValue = numeral().unformat(newValue);
+		if(isNumber(formattedValue)){
 			$.ajax({
 				type : 'GET',
 				dataType : 'json',
     			url  : '/ajax/update-entry-template',
-    			data : {value : newValue, id : hoho}
+    			data : {value : formattedValue, id : hoho}
 			});
+			var className = $this.attr('class');
 		}else{
 			alert('Invalid Numeric Value');
 			return false;

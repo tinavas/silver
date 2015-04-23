@@ -39,7 +39,7 @@
                     <th>Quantity</th>
                     <th>Unit</th>
                     <th>UM</th>
-                    <th>TL</th>
+                    <th>TM</th>
                     <th>UL</th>
                     <th>TL</th>
                     <th>DC</th>
@@ -51,24 +51,26 @@
                 </thead>
                 <tbody>
                     @foreach($entries as $entry)
-
                         <tr><td class = "left">{{$entry->description}}</td></tr>
                         @foreach($entry->children as $sub)
                             <tr><td class = "sub-header left" style = "color:#F9690E;">{{$sub->description}}</td></tr>
+                            <?php $index = 0; ?>
                             @foreach($sub->children as $child)
                                 <tr>
                                     <th class = "entry left">{{$child->description}}</th>
-                                    <td>{{$child->value($quotation->id)->first()->quantity}}</td>
+                                    <td id = "quantity-{{$child->id}}" class = "quantity-{{$index}}">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
                                     <th>{{$child->unit}}</th>
-                                    <td>{{$child->value($quotation->id)->first()->um}}</td>
-                                    <td>{{$child->value($quotation->id)->first()->tl}}</td>
-                                    <td>{{$child->value($quotation->id)->first()->ul}}</td>
-                                    <td>{{$child->value($quotation->id)->first()->tl}}</td>
-                                    <td>{{$child->value($quotation->id)->first()->dc}}</td>
+                                    <td id = "um-{{$child->id}}" class = "um-{{$index}}">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
+                                    <th class = "tm-{{$index}}">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
+                                    <td id = "ul-{{$child->id}}" class = "ul-{{$index}}">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
+                                    <th class = "tl-{{$index}}">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
+                                    <th class = "dc-{{$index}}">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
                                 </tr>
+                                <?php ++$index ?>
                             @endforeach
                         @endforeach
                     @endforeach
+
                 </tbody>
             </table>
             </div>
@@ -113,4 +115,5 @@
         </div>
     </div>
     <div style="clear:both"></div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
 @endsection

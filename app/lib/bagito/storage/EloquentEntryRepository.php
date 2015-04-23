@@ -138,8 +138,54 @@ class EloquentEntryRepository implements EntryRepository
 			$exx = ExpensesValue::find($id);
 			$exx->cost = $value; 
 			$exx->save();
+		}else if($type == "quantity"){
+			$v = Value::where('entry_id',$id)->first();
+			$v->quantity = $value;
+			//update other fields
+			$quantity = $value;
+			$um = $v->um;
+			$ul = $v->ul;
+
+			$v->tm = $quantity * $um;
+			$v->tl = $quantity * $ul;
+			$v->dc = $v->tm + $v->tl;
+			$v->save();
+		}else if($type == "um"){
+			$v = Value::where('entry_id',$id)->first();
+			$v->um = $value;
+
+			//update other fields
+			$quantity = $v->quantity;
+			$um = $value;
+
+			$v->tm = $quantity * $um;
+			$v->dc = $v->tm + $v->tl;
+			$v->save();
+		}else if($type == "ul"){
+			$v = Value::where('entry_id',$id)->first();
+			$v->ul = $value;
+			
+			//update other fields
+			$quantity = $v->quantity;
+			$ul = $value;
+
+			$v->tl = $quantity * $ul;
+			$v->dc = $v->tm + $v->tl;
+			$v->save();
 		}
 		
+	}
+
+	function number_unformat($number, $force_number = true, $dec_point = '.', $thousands_sep = ',') {
+		if ($force_number) {
+			$number = preg_replace('/^[^\d]+/', '', $number);
+		} else if (preg_match('/^[^\d]+/', $number)) {
+			return false;
+		}
+		$type = (strpos($number, $dec_point) === false) ? 'int' : 'float';
+		$number = str_replace(array($dec_point, $thousands_sep), array('.', ''), $number);
+		settype($number, $type);
+		return $number;
 	}
 
 }
