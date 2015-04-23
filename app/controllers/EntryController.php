@@ -238,4 +238,10 @@ class EntryController extends BaseController
 
 		return Response::json(array('status' => 'Success'));
 	}
+
+	public function getEntryValues(){
+		$id = Input::get('id');
+		$entry = $this->entry->getEntryValues($id);
+		return Response::json($entry->toArray());
+	}
 }

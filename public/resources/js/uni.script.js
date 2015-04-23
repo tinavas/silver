@@ -3,6 +3,12 @@ $(document).ready( function () {
 
 	$('.data-table').DataTable();
 
+	var sum = 0;
+	$('.dc').each(function(){
+	    sum += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
+	});
+
+	$('.total').text("Net Total: " + numeral(sum).format('0,0.00'));
 	$('table td').on('change', function(evt, newValue) {
 		var hoho = $(this).attr('id');
 		var formattedValue = numeral().unformat(newValue);
@@ -12,8 +18,29 @@ $(document).ready( function () {
 				dataType : 'json',
     			url  : '/ajax/update-entry-template',
     			data : {value : formattedValue, id : hoho}
+			}).done(function(){
+				
+				//$('#' + hoho).parent();
+				var somee = hoho.split("-");
+				var myId = somee[1];
+				if(somee[0] == "quantity" || somee[0] == "ul" || somee[0] == "um"){
+					$.ajax({
+						type :'GET',
+						dataType : 'json',
+						url : '/ajax/get-entry-values',
+						data : {id : myId}
+					}).done(function(data){
+						$("#tm-" + myId).html(numeral(data.um * data.quantity).format('0,0.00'));
+						$("#tl-" + myId).html(numeral(data.ul * data.quantity).format('0,0.00'));
+						$("#dc-" + myId).html(numeral((data.um * data.quantity) + (data.ul * data.quantity)).format('0,0.00'));
+						var sum = 0;
+						$('.dc').each(function(){
+						    sum += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
+						});
+						$('.total').text("Net Total: " + numeral(sum).format('0,0.00'));
+					});
+				}
 			});
-			var className = $this.attr('class');
 		}else{
 			alert('Invalid Numeric Value');
 			return false;

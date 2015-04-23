@@ -20,7 +20,7 @@ interface ProjectRepository{
 	public function getNonSubscribers($projectId);
 
 	public function addUser($userId, $projectId);
-
+	
 	public function removeUser($userId, $projectId);
 
 	public function inProject($userId, $projectId);

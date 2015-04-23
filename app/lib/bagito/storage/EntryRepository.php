@@ -12,4 +12,5 @@
  	public function getSubs($id);
  	public function getParentList();
  	public function update($type, $id, $value);
+ 	public function getEntryValues($entryID);
  }

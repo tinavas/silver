@@ -61,18 +61,18 @@
                                     <td id = "quantity-{{$child->id}}" class = "quantity-{{$index}}">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
                                     <th>{{$child->unit}}</th>
                                     <td id = "um-{{$child->id}}" class = "um-{{$index}}">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
-                                    <th class = "tm-{{$index}}">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
+                                    <th  id = "tm-{{$child->id}}" class = "tm-{{$index}}">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
                                     <td id = "ul-{{$child->id}}" class = "ul-{{$index}}">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
-                                    <th class = "tl-{{$index}}">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
-                                    <th class = "dc-{{$index}}">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
+                                    <th id = "tl-{{$child->id}}" class = "tl-{{$index}}">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
+                                    <th id = "dc-{{$child->id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
                                 </tr>
                                 <?php ++$index ?>
                             @endforeach
                         @endforeach
                     @endforeach
-
                 </tbody>
             </table>
+            <h5 class = "total left">Net Total: </h5>
             </div>
         @endif
         <div id="modal2" class="reveal-modal" data-reveal>
@@ -115,5 +115,5 @@
         </div>
     </div>
     <div style="clear:both"></div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+    {{HTML::script('/resources/js/numeral.js')}}
 @endsection

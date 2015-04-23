@@ -176,9 +176,9 @@ class EloquentEntryRepository implements EntryRepository
 		
 	}
 
-	function number_unformat($number, $force_number = true, $dec_point = '.', $thousands_sep = ',') {
+	/*function number_unformat($number, $force_number = true, $dec_point = '.', $thousands_sep = ',') {
 		if ($force_number) {
-			$number = preg_replace('/^[^\d]+/', '', $number);
+			$number = preg_replace('/^[^\d]+/', '', $number);x
 		} else if (preg_match('/^[^\d]+/', $number)) {
 			return false;
 		}
@@ -186,6 +186,10 @@ class EloquentEntryRepository implements EntryRepository
 		$number = str_replace(array($dec_point, $thousands_sep), array('.', ''), $number);
 		settype($number, $type);
 		return $number;
+	}*/
+
+	public function getEntryValues($entryID){
+		return Value::where('entry_id',$entryID)->first();
 	}
 
 }
