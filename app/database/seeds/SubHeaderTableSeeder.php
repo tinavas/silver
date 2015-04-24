@@ -59,7 +59,7 @@ class SubHeaderTableSeeder extends Seeder{
 
 		$entry = new Entry();
 		$entry->level = 2;
-		$entry->description = 'Panel Boards';
+		$entry->description = 'Panel Boards And Breakers';
 		$entry->parent_id = 3;
 		$entry->save(); 
 
