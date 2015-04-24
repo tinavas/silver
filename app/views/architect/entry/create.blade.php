@@ -56,23 +56,57 @@
                             <tr><td class = "sub-header left" style = "color:#F9690E;">{{$sub->description}}</td></tr>
                             <?php $index = 0; ?>
                             @foreach($sub->children as $child)
-                                <tr>
+                                <tr class = "children">
                                     <th class = "entry left">{{$child->description}}</th>
-                                    <td id = "quantity-{{$child->id}}" class = "quantity-{{$index}}">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
+                                    <td id = "quantity-{{$child->id}}" class = "quantity">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
                                     <th>{{$child->unit}}</th>
-                                    <td id = "um-{{$child->id}}" class = "um-{{$index}}">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
-                                    <th  id = "tm-{{$child->id}}" class = "tm-{{$index}}">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
-                                    <td id = "ul-{{$child->id}}" class = "ul-{{$index}}">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
-                                    <th id = "tl-{{$child->id}}" class = "tl-{{$index}}">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
+                                    <td id = "um-{{$child->id}}" class = "um">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
+                                    <th  id = "tm-{{$child->id}}" class = "tm">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
+                                    <td id = "ul-{{$child->id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
+                                    <th id = "tl-{{$child->id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
                                     <th id = "dc-{{$child->id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
+                                    <th class = "material">0.00</th>
+                                    <th class="labor">0.00</th>
+                                    <th class="net-total">0.00</th>
+                                    <th class="gross-amount">0.00</th>
                                 </tr>
                                 <?php ++$index ?>
                             @endforeach
                         @endforeach
                     @endforeach
                 </tbody>
-            </table>
-            <h5 class = "total left">Net Total: </h5>
+            </table> 
+            </div>
+            <h1>Computation</h1>
+            <div class="row left">
+                <div class="col-md-6">
+                <table style = "width:30%;" class = "left">
+                    <tr>
+                        <td>DC Total:</td>
+                        <td class = "total"></td>
+                    </tr>
+                    <tr>
+                        <td>Cont</td>
+                        <td class = "cont"></td>
+                    </tr>
+                    <tr>
+                        <td>Overhead</td>
+                        <td class = "oh"></td>
+                    </tr>
+                    <tr>
+                        <td>Tax</td>
+                        <td class = "tax"></td>
+                    </tr>
+                    <tr>
+                        <td>Total after others</td>
+                        <td class = "superSum"></td>
+                    </tr>
+                    <tr>
+                        <td>Net Total:</td>
+                        <td><b class = "net"></b></td>
+                    </tr>
+                </table>  
+                </div>
             </div>
         @endif
         <div id="modal2" class="reveal-modal" data-reveal>
@@ -91,7 +125,7 @@
                     @foreach($expenses as $expense)
                         <tr>
                             <th>{{$expense->description}}</th>
-                            <td id = "expensevalue-{{$expense->value($quotation->id)->first()->id}}">{{$expense->value($quotation->id)->first()->cost}}</td>
+                            <td id = "expensevalue-{{$expense->value($quotation->id)->first()->id}}" class = "costs">{{$expense->value($quotation->id)->first()->cost}}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -115,5 +149,6 @@
         </div>
     </div>
     <div style="clear:both"></div>
+    {{Form::hidden('cont',$cont,['id' => 'cont'])}}
     {{HTML::script('/resources/js/numeral.js')}}
 @endsection

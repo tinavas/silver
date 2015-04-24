@@ -39,8 +39,9 @@ class EntryController extends BaseController
 		$quotation = $this->quotation->find($id);
 		$expenses = $this->expenses->all();
 		$entries = $this->entry->getParents();
+		$cont = $quotation->cont;
 		
-		return View::make('architect.entry.create',compact('id','expenses','quotation','entries'));
+		return View::make('architect.entry.create',compact('id','expenses','quotation','entries','cont'));
 	}
 	public function store(){
 		$rules = array();
@@ -87,133 +88,29 @@ class EntryController extends BaseController
 	{
 
 		$quotation = $this->quotation->find($id);
-		$parentsArray = $this->entry->getParents($id);
-		$subsArray = $this->entry->getSubHeaders($id);
-		$expenses = $this->quotation->getExpensesById($id);
-		$grandTotal = $this->entry->getSum($id);
-
-		$totalExpenses = $this->entry->getExpensesSum($id);
-
-
-		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
-		$divisor += $totalExpenses;
-		$divisor += $divisor * $quotation->others;
-		$divisor += $divisor * $quotation->tax;
-		$subs = array();
-		$parents = array();
-		foreach($parentsArray as $parent)
-		{
-			$parents[$parent->id] = $parent->description;
-		}
-
-		foreach($subsArray as $sub)
-		{
-			$subs[$sub->id] = $sub->description;
-		}
-		$parentsArray = $this->entry->getHeaders($id);
-		return View::make('architect.approve.show',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
+		$expenses = $this->expenses->all();
+		$entries = $this->entry->getParents();
+		$cont = $quotation->cont;
+		
+		return View::make('architect.approve.show',compact('id','expenses','quotation','entries','cont'));
+		//return View::make('architect.approve.show',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
 	}
 
 	public function showPrinterFriendly($id){
-		/*$quotation = $this->quotation->find($id);
+		$quotation = $this->quotation->find($id);
+		$expenses = $this->expenses->all();
+		$dcSum = $this->entry->getSum($id);
+
+		$expensesSum = $this->entry->getExpensesSum($id);
+		$netSum = ($dcSum * $quotation->cont);
+		$netSum += $expensesSum;
+		$netSum += ($netSum * .10);
+		$entries = $this->entry->getParents();
+		$cont = $quotation->cont;
 		$project = $quotation->project()->first();
-		$parentsArray = $this->entry->getParents($id);
-		$subsArray = $this->entry->getSubHeaders($id);
-		$grandTotal = $this->entry->getSum($id);
-		$totalExpenses = $this->entry->getExpensesSum($id);
-		$subs = array();
-		$parents = array();
-		$divisor = $grandTotal + ($grandTotal * $quotation->cont);
-		$divisor += $totalExpenses;
-		$divisor += $divisor * $quotation->others;
-		$divisor += $divisor * $quotation->tax;
-		$netTotal = 0;
-		foreach($parentsArray as $parent)
-		{
-			$parents[$parent->id] = $parent->description;
-		}
-
-		foreach($subsArray as $sub)
-		{
-			$subs[$sub->id] = $sub->description;
-		}
-		$parentsArray = $this->entry->getHeaders($id);
-		$entries = $parentsArray;
-		$fpdf = new Fpdf();
-        $fpdf->AddPage('L');
-        $fpdf->SetFont('Helvetica','B',12);
-        $fpdf->Cell(40,10,'Silver Leisure');
-        $fpdf->Ln();
-        $fpdf->SetFont('Helvetica','',7);
-        $fpdf->Cell(30,5,'2/F Silverado Hardware and Const. Supply, Marcos Highway, Antipolo City.');
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Email: silverleisure@yahoo.com');
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Tel: 681-6745');
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Mobile Number: 0917 808 7923');
-        $fpdf->Ln();
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Project Title: ' . $project->title);
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Quotation Title: ' . $quotation->title);
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Author: ' . $quotation->user()->first()->first_name . ' ' . $quotation->user()->first()->last_name);
-        $fpdf->Ln();
-        $fpdf->Cell(30,5,'Quotation Code: ' . str_pad($quotation->project()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT));
-        $fpdf->Ln();
-        $fpdf->Ln();
-        $superTotal = 0 ;
-        $fpdf->SetFont('Courier','B',9);
-        $fpdf->Cell(162,5,'Description',1,0,'C');
-        $fpdf->Cell(20,5,'Quantity',1,0,'C');
-        $fpdf->Cell(20,5,'Unit',1,0,'C');
-        $fpdf->Cell(25,5,'Material',1,0,'C');
-        $fpdf->Cell(25,5,'Labor',1,0,'C');
-        $fpdf->Cell(25,5,'Total Price',1,0,'C');
-        $fpdf->Ln();
-        foreach($entries as $entry){
-        	$fpdf->SetFont('Courier','B',14);
-        	$fpdf->Cell(0,10,$entry->description,1,0,'L');
-        	$fpdf->ln();
-        	$parentSum = 0;
-        	foreach($entry->child() as $subHeader){
-        		 foreach($subHeader->entry() as $child){
-        		 	$subHeaderSum = 0;
-        		 	$fpdf->SetFont('Courier','I',8);
-        		 	$fpdf->Cell(0,10,$child->description,1,0,'L');
-        		 	$fpdf->ln();
-        		 	foreach($child->child() as $childEntry){
-        		 		foreach($childEntry->entry() as $last){
-        		 			$um = ($last->um / $grandTotal * $divisor) * $last->quantity;
-							$ul = ($last->ul / $grandTotal * $divisor) * $last->quantity;
-        		 			$fpdf->SetFont('Courier','',8);
-        		 			$fpdf->Cell(162,5,$last->description,1,0,'C');
-                            $fpdf->Cell(20,5,$last->quantity,1,0,'L');
-                            $fpdf->Cell(20,5,$last->unit,1,0,'L');
-                            $fpdf->Cell(25,5,number_format($um,2),1,0,'L');
-                            $fpdf->Cell(25,5,number_format($ul,2),1,0,'L');
-                            $fpdf->Cell(25,5,number_format($um + $ul,2),1,0,'L');
-                            $netTotal += $um + $ul;
-                            $fpdf->Ln();
-                            $subHeaderSum +=  ($um + $ul);
-        		 		}
-        		 	}
-        		 	$fpdf->SetFont('Courier','I',8);
-        		 	$parentSum += $subHeaderSum;
-        		 	$fpdf->Cell(0,10,$child->description . ' : ' . number_format($subHeaderSum,2),1,0,'L');
-        		 	$fpdf->Ln();
-        		 }
-        	}
-        	$fpdf->SetFont('Courier','B',14);
-        	$fpdf->Cell(0,10, $entry->description . ' : ' . number_format($parentSum,2),1,0,'L');
-        	$fpdf->Ln();
-        	$superTotal += $parentSum;
-        }
-        $fpdf->Cell(0,10,'Total: P' . number_format($netTotal,2),0,0,'R');
-        $fpdf->Output();
-        exit;*/
-
+		$view =  View::make('architect.approve.print',compact('id','expenses','quotation','entries','cont','project','dcSum','netSum'))->render();
+		$pdf = PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+		return $pdf->stream('quotation.pdf');
 	}
 
 	public function getAllSubHeaders(){

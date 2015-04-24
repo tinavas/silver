@@ -3,15 +3,89 @@ $(document).ready( function () {
 
 	$('.data-table').DataTable();
 
+	updateStuff();
+
 	$('table td').on('change', function(evt, newValue) {
 		var hoho = $(this).attr('id');
-		$.ajax({
-			type : 'GET',
-			dataType : 'json',
-    		url  : '/ajax/update-entry-template',
-    		data : {value : newValue, id : hoho}
-		});
+		var formattedValue = numeral().unformat(newValue);
+		if(isNumber(formattedValue)){
+			$.ajax({
+				type : 'GET',
+				dataType : 'json',
+    			url  : '/ajax/update-entry-template',
+    			data : {value : formattedValue, id : hoho}
+			}).done(function(){
+				
+				//$('#' + hoho).parent();
+				var somee = hoho.split("-");
+				var myId = somee[1];
+				if(somee[0] == "quantity" || somee[0] == "ul" || somee[0] == "um"){
+					$.ajax({
+						type :'GET',
+						dataType : 'json',
+						url : '/ajax/get-entry-values',
+						data : {id : myId}
+					}).done(function(data){
+						$("#tm-" + myId).html(numeral(data.um * data.quantity).format('0,0.00'));
+						$("#tl-" + myId).html(numeral(data.ul * data.quantity).format('0,0.00'));
+						$("#dc-" + myId).html(numeral((data.um * data.quantity) + (data.ul * data.quantity)).format('0,0.00'));
+						updateStuff();
+					});
+				}else if(somee[0] == "expensevalue"){
+					updateStuff();
+				}
+			});
+		}else{
+			alert('Invalid Numeric Value');
+			return false;
+		}
 	});	
+
+	function updateStuff(){
+		var superSum = 0;
+		var sum = 0;
+		$('.costs').each(function(){
+			sum += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
+		});
+		$('.oh').text(numeral(sum).format('0,0.00'));
+		superSum += sum;
+		sum = 0;
+		$('.dc').each(function(){
+		    sum += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
+		});
+		superSum += sum;
+		$('.total').text(numeral(sum).format('0,0.00'));
+		var costs = parseFloat(numeral().unformat($('.total').text()));
+		var cont = parseFloat($('#cont').val());
+		superSum += costs * cont;
+		$('.cont').text(numeral(costs * cont).format('0,0.00'));
+		superSum += (superSum * .10);
+		$('.tax').text(numeral(superSum * .10).format('0,0.00'));
+
+		$('.superSum').text(numeral(superSum).format('0,0.00'));
+		var talagangAmount = 0;
+		$("tr.children").each(function() {
+		  $this = $(this)
+		  var um = parseFloat(numeral().unformat($this.find("td.um").text()));
+		  var ul = parseFloat(numeral().unformat($this.find("td.ul").text()));
+		  var quantity = parseFloat(numeral().unformat($this.find("td.quantity").text()));
+		  var tm = um / sum * superSum;
+		  var tl = ul / sum * superSum;
+		  var netTotal = tl + tm;
+		  $this.find("th.material").text('');
+		  $this.find("th.labor").text(''); 
+		  $this.find("th.material").text(numeral(tm).format('0,0.00'));
+		  $this.find("th.labor").text(numeral(tl).format('0,0.00'));
+		  $this.find('th.net-total').text(numeral(netTotal).format('0,0.00'));
+		  $this.find('th.gross-amount').text(numeral(netTotal * quantity ).format('0,0.00'));
+		  talagangAmount += (netTotal * quantity);
+		});
+		$(".net").text(numeral(talagangAmount).format('0,0.00'));
+	}
+
+	function isNumber(n) {
+	  return !isNaN(parseFloat(n)) && isFinite(n);
+	}
 
 	(function(){
 		
@@ -150,6 +224,7 @@ $(document).ready( function () {
 
     /*var ctx = document.getElementById("bar-status").getContext("2d");
     var ctx2 = document.getElementById("bar2-status").getContext("2d");
+
     var data = {
 		    labels: ["Joshua", "Patrick", "JM", "Kevin"],
 		    datasets: [
@@ -172,6 +247,7 @@ $(document).ready( function () {
 		    ]
 		};
 		var myBarChart = new Chart(ctx).Bar(data, {responsive: true});
+
 		var data = {
 				    labels: ["Joshua", "Patrick", "JM", "Kevin"],
 				    datasets: [
@@ -194,8 +270,11 @@ $(document).ready( function () {
 				    	]
 					};
 		var myBarChart2 = new Chart(ctx2).Bar(data, {responsive: true});
+
+
 	var line = document.getElementById("line-status").getContext("2d");
     var line2 = document.getElementById("line2-status").getContext("2d");
+
 	    var data = {
 			    labels: ["Joshua", "Patrick", "JM", "Kevin"],
 			    datasets: [
@@ -211,7 +290,9 @@ $(document).ready( function () {
 					        },
 					    ]
 					};
+
 		var myLineChart = new Chart(line).Line(data, {responsive: true});
+
 		var data = {
 			    labels: ["Joshua", "Patrick", "JM", "Kevin"],
 			    datasets: [
@@ -227,10 +308,13 @@ $(document).ready( function () {
 					        },
 					    ]
 					};
+
 		var myLineChart = new Chart(line2).Line(data, {responsive: true});
+
 	canvas.onclick = function(evt){
     	var activeBars = myBarChart.getBarsAtEvent(evt);
     // => activeBars is an array of bars on the canvas that are at the same position as the click event.
 	};
     /* END */
 });
+

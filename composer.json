@@ -8,7 +8,8 @@
 		"cartalyst/sentry": "2.1.*",
 		"fzaninotto/faker": "1.5.*@dev",
 		"way/generators" : "~2.0",
-		"laravel/framework": "4.2.*"
+		"laravel/framework": "4.2.*",
+		"barryvdh/laravel-dompdf": "0.4.*"
 	},
 	"autoload": {
 		"classmap": [

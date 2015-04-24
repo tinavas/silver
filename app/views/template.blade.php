@@ -134,6 +134,7 @@
     {{HTML::script('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js')}}
     {{HTML::script('resources/js/chart.js')}}
     {{HTML::script('resources/js/uni.script.js')}}
+    {{HTML::script('/resources/js/numeral.js')}}
     <script>
         $(document).foundation();
     </script>
