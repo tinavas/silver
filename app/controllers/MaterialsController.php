@@ -5,15 +5,20 @@ use Bagito\Storage\BudgetRepository as Budget;
 use Bagito\Storage\UserRepository as User;
 use Bagito\Storage\NotificationRepository as Notification;
 use Bagito\Storage\SupplierRepository as Supplier;
+use Bagito\Storage\OtherExpensesRepository as OtherExpenses;
+use Bagito\Storage\EntryRepository as Entry;
+
 
 class MaterialsController extends BaseController{
 
-	public function __construct(Quotation $quotation, Budget $budget, User $user, Notification $notification, Supplier $supplier){
+	public function __construct(Quotation $quotation, Budget $budget, User $user, Notification $notification, Supplier $supplier, OtherExpenses $otherExpenses, Entry $entry){
 		$this->quotation = $quotation;
 		$this->budget = $budget;
 		$this->user = $user;
 		$this->notification = $notification;
 		$this->supplier = $supplier;
+		$this->expenses = $otherExpenses;
+		$this->entry = $entry;
 	}
 
 	public function index(){
@@ -22,13 +27,12 @@ class MaterialsController extends BaseController{
 	}
 
 	public function show($id){
-		$budgets = $this->budget->getAllByQuotation($id);
-		$items = $this->quotation->getAllEntryByQuotationId($id)->lists('description','id');
 		$quotation = $this->quotation->find($id);
-		$totalTm = $this->budget->getTotalMaterialsByQuotationId($id);
-		$totalAmount = $this->budget->getSumOfBudgetByQuotationId($id);
-		$suppliers = $this->supplier->all()->lists('supplier_name','id');
-		return View::make('admin.materials.show',compact('budgets','items','quotation','totalTm','totalAmount','suppliers'));
+		$expenses = $this->expenses->all();
+		$entries = $this->entry->getParents();
+		$cont = $quotation->cont;
+		
+		return View::make('admin.materials.show',compact('id','expenses','quotation','entries','cont'));
 	}
 
 	public function store($quotationId){

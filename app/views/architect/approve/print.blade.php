@@ -39,6 +39,13 @@
             font-size:20px;
             text-align:left;
         }
+        th{
+            background-color:gray;
+            color:white;
+            text-align:center;
+            font-size:15px;
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
@@ -77,8 +84,8 @@
                             <tr><td class = "sub-header left">{{$sub->description}}</td></tr>
                             @foreach($sub->children as $child)
                                 <?php 
-                                    $material = $child->value($quotation->id)->first()->um / $dcSum * $netSum; 
-                                    $labor = $child->value($quotation->id)->first()->ul / $dcSum * $netSum; 
+                                    $material = ($child->value($quotation->id)->first()->um / $dcSum * $netSum); 
+                                    $labor =  ($child->value($quotation->id)->first()->ul / $dcSum * $netSum); 
                                     $net = $labor + $material;
                                     $gross = $net * $child->value($quotation->id)->first()->quantity;
                                 ?>

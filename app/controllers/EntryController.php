@@ -102,8 +102,9 @@ class EntryController extends BaseController
 		$dcSum = $this->entry->getSum($id);
 
 		$expensesSum = $this->entry->getExpensesSum($id);
-		$netSum = ($dcSum * $quotation->cont);
+		$netSum = $dcSum + ($dcSum * $quotation->cont);
 		$netSum += $expensesSum;
+		$netSum += ($netSum * .15);
 		$netSum += ($netSum * .10);
 		$entries = $this->entry->getParents();
 		$cont = $quotation->cont;
@@ -130,15 +131,19 @@ class EntryController extends BaseController
 		$value = Input::get('value');
 		$type = explode("-",$some);
 		//call repository for saving
-
-		$this->entry->update($type[0], $type[1], $value);
+		if(count($type) == 3){	
+			$this->entry->updateEntry($type[0], $type[1], $value, $type[2]);
+		}else{
+			$this->entry->update($type[0], $type[1], $value);	
+		}
 
 		return Response::json(array('status' => 'Success'));
 	}
 
 	public function getEntryValues(){
 		$id = Input::get('id');
-		$entry = $this->entry->getEntryValues($id);
+		$quotationId = Input::get('quotation_id');
+		$entry = $this->entry->getEntryValues($id, $quotationId);
 		return Response::json($entry->toArray());
 	}
 }

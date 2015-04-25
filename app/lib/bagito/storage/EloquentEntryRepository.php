@@ -138,8 +138,13 @@ class EloquentEntryRepository implements EntryRepository
 			$exx = ExpensesValue::find($id);
 			$exx->cost = $value; 
 			$exx->save();
-		}else if($type == "quantity"){
-			$v = Value::where('entry_id',$id)->first();
+		}
+		
+	}
+
+	public function updateEntry($type, $id, $value, $quotationId){
+		if($type == "quantity"){
+			$v = Value::where('entry_id',$id)->where('quotation_id',$quotationId)->first();
 			$v->quantity = $value;
 			//update other fields
 			$quantity = $value;
@@ -151,7 +156,7 @@ class EloquentEntryRepository implements EntryRepository
 			$v->dc = $v->tm + $v->tl;
 			$v->save();
 		}else if($type == "um"){
-			$v = Value::where('entry_id',$id)->first();
+			$v = Value::where('entry_id',$id)->where('quotation_id',$quotationId)->first();
 			$v->um = $value;
 
 			//update other fields
@@ -162,7 +167,7 @@ class EloquentEntryRepository implements EntryRepository
 			$v->dc = $v->tm + $v->tl;
 			$v->save();
 		}else if($type == "ul"){
-			$v = Value::where('entry_id',$id)->first();
+			$v = Value::where('entry_id',$id)->where('quotation_id',$quotationId)->first();
 			$v->ul = $value;
 			
 			//update other fields
@@ -173,11 +178,10 @@ class EloquentEntryRepository implements EntryRepository
 			$v->dc = $v->tm + $v->tl;
 			$v->save();
 		}
-		
 	}
 
-	public function getEntryValues($entryID){
-		return Value::where('entry_id',$entryID)->first();
+	public function getEntryValues($entryID,$quotationID){
+		return Value::where('entry_id',$entryID)->where('quotation_id',$quotationID)->first();
 	}
 
 }

@@ -19,7 +19,7 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation->user_id = $userId;
 		$quotation->remarks = $inputs['remarks'];
 		$quotation->title = $inputs['title'];
-		$quotation->cont = $inputs['cont'];
+		$quotation->cont = 0.05;
 		$quotation->others = 0.02;
 		$quotation->tax = 0.10;
 		$quotation->quotation_code = $this->nextQuotationCode($userId, $projectId);

@@ -58,13 +58,13 @@
                             @foreach($sub->children as $child)
                                 <tr class = "children">
                                     <th class = "entry left">{{$child->description}}</th>
-                                    <td id = "quantity-{{$child->id}}" class = "quantity">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
+                                    <td id = "quantity-{{$child->id}}-{{$id}}" class = "quantity">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
                                     <th>{{$child->unit}}</th>
-                                    <td id = "um-{{$child->id}}" class = "um">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
-                                    <th  id = "tm-{{$child->id}}" class = "tm">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
-                                    <td id = "ul-{{$child->id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
-                                    <th id = "tl-{{$child->id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
-                                    <th id = "dc-{{$child->id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
+                                    <td id = "um-{{$child->id}}-{{$id}}" class = "um">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
+                                    <th  id = "tm-{{$child->id}}-{{$id}}" class = "tm">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
+                                    <td id = "ul-{{$child->id}}-{{$id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
+                                    <th id = "tl-{{$child->id}}-{{$id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
+                                    <th id = "dc-{{$child->id}}-{{$id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
                                     <th class = "material">0.00</th>
                                     <th class="labor">0.00</th>
                                     <th class="net-total">0.00</th>
@@ -88,14 +88,22 @@
                     <tr>
                         <td>Cont</td>
                         <td class = "cont"></td>
+                        <td class="totalCont"></td>
                     </tr>
                     <tr>
                         <td>Overhead</td>
                         <td class = "oh"></td>
+                        <td class="totalOh"></td>
+                    </tr>
+                    <tr>
+                        <td>Prof:</td>
+                        <td class = "prof"></td>
+                        <td class="totalProf"></td>
                     </tr>
                     <tr>
                         <td>Tax</td>
                         <td class = "tax"></td>
+                        <td class="totalTax"></td>
                     </tr>
                     <tr>
                         <td>Total after others</td>

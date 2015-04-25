@@ -19,16 +19,17 @@ $(document).ready( function () {
 				//$('#' + hoho).parent();
 				var somee = hoho.split("-");
 				var myId = somee[1];
+				var quotationId = somee[2];
 				if(somee[0] == "quantity" || somee[0] == "ul" || somee[0] == "um"){
 					$.ajax({
 						type :'GET',
 						dataType : 'json',
 						url : '/ajax/get-entry-values',
-						data : {id : myId}
+						data : {id : myId, quotation_id : somee[2]}
 					}).done(function(data){
-						$("#tm-" + myId).html(numeral(data.um * data.quantity).format('0,0.00'));
-						$("#tl-" + myId).html(numeral(data.ul * data.quantity).format('0,0.00'));
-						$("#dc-" + myId).html(numeral((data.um * data.quantity) + (data.ul * data.quantity)).format('0,0.00'));
+						$("#tm-" + myId + "-" + quotationId).html(numeral(data.um * data.quantity).format('0,0.00'));
+						$("#tl-" + myId + "-" + quotationId).html(numeral(data.ul * data.quantity).format('0,0.00'));
+						$("#dc-" + myId + "-" + quotationId).html(numeral((data.um * data.quantity) + (data.ul * data.quantity)).format('0,0.00'));
 						updateStuff();
 					});
 				}else if(somee[0] == "expensevalue"){
@@ -44,24 +45,36 @@ $(document).ready( function () {
 	function updateStuff(){
 		var superSum = 0;
 		var sum = 0;
+		var dc = 0;
+
+		$('.dc').each(function(){
+		    dc += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
+		});
+		
+		superSum = dc;
+		var cont = parseFloat($('#cont').val());
+		$('.cont').text(numeral(superSum * cont).format('0,0.00'));
+		superSum += superSum * cont;
+		$('.totalCont').text(numeral(superSum).format('0,0.00'));
 		$('.costs').each(function(){
 			sum += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
 		});
 		$('.oh').text(numeral(sum).format('0,0.00'));
 		superSum += sum;
-		sum = 0;
-		$('.dc').each(function(){
-		    sum += parseFloat(numeral().unformat($(this).text()));  //Or this.innerHTML, this.innerText
-		});
-		superSum += sum;
-		$('.total').text(numeral(sum).format('0,0.00'));
-		var costs = parseFloat(numeral().unformat($('.total').text()));
-		var cont = parseFloat($('#cont').val());
-		superSum += costs * cont;
-		$('.cont').text(numeral(costs * cont).format('0,0.00'));
-		superSum += (superSum * .10);
-		$('.tax').text(numeral(superSum * .10).format('0,0.00'));
-
+		$('.totalOh').text(numeral(superSum).format('0,0.00'));
+		//(prof)
+		$('.prof').text(numeral(superSum * 0.15).format('0,0.00'));
+		superSum = superSum + superSum * 0.15;
+		$('.totalProf').text(numeral(superSum).format('0,0.00'));
+		$('.tax').text(numeral(superSum * .1).format('0,0.00'));
+		superSum += superSum * 0.1;
+		$('.totalTax').text(numeral(superSum).format('0,0.00'));
+		
+		//superSum += sum;
+		$('.total').text(numeral(dc).format('0,0.00'));
+		
+		//superSum += superSum *.10;
+		
 		$('.superSum').text(numeral(superSum).format('0,0.00'));
 		var talagangAmount = 0;
 		$("tr.children").each(function() {
@@ -69,8 +82,8 @@ $(document).ready( function () {
 		  var um = parseFloat(numeral().unformat($this.find("td.um").text()));
 		  var ul = parseFloat(numeral().unformat($this.find("td.ul").text()));
 		  var quantity = parseFloat(numeral().unformat($this.find("td.quantity").text()));
-		  var tm = um / sum * superSum;
-		  var tl = ul / sum * superSum;
+		  var tm = (um / dc * superSum);
+		  var tl = (ul / dc * superSum);
 		  var netTotal = tl + tm;
 		  $this.find("th.material").text('');
 		  $this.find("th.labor").text(''); 

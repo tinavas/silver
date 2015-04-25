@@ -35,14 +35,6 @@
                 {{Form::text('remarks','',array('class'=>'inline right'))}}
              </div>
          </div>
-         <div class="row">
-             <div class="medium-2 column">
-                {{Form::label('cont','Contingencies', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                {{Form::text('cont','0.05',array('class'=>'inline right'))}}
-             </div>
-         </div>
          <!--<div class="row">
              <div class="medium-2 column">
                 {{Form::label('others','Others', array('class' => 'inline right'))}}
