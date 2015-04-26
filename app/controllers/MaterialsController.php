@@ -35,6 +35,20 @@ class MaterialsController extends BaseController{
 		return View::make('admin.materials.show',compact('id','expenses','quotation','entries','cont'));
 	}
 
+	public function indexSecretary(){
+		$loadss = $this->quotation->allQuotationLoad();
+		return View::make('secretary.materials.index',compact('loadss'));
+	}
+
+	public function showSecretary($id){
+		$quotation = $this->quotation->find($id);
+		$expenses = $this->expenses->all();
+		$entries = $this->entry->getParents();
+		$cont = $quotation->cont;
+		
+		return View::make('secretary.materials.show',compact('id','expenses','quotation','entries','cont'));
+	}
+
 	public function store($quotationId){
 		$entryId = Input::get('entry_id');
 		$rules = ['quantity' => 'required|numeric','unit_price' => 'required|numeric','entry_id' => 'required','supplier_id' => 'required'];
