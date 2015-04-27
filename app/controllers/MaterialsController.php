@@ -23,24 +23,10 @@ class MaterialsController extends BaseController{
 
 	public function index(){
 		$loadss = $this->quotation->allQuotationLoad();
-		return View::make('admin.materials.index',compact('loadss'));
-	}
-
-	public function show($id){
-		$quotation = $this->quotation->find($id);
-		$expenses = $this->expenses->all();
-		$entries = $this->entry->getParents();
-		$cont = $quotation->cont;
-		
-		return View::make('admin.materials.show',compact('id','expenses','quotation','entries','cont'));
-	}
-
-	public function indexSecretary(){
-		$loadss = $this->quotation->allQuotationLoad();
 		return View::make('secretary.materials.index',compact('loadss'));
 	}
 
-	public function showSecretary($id){
+	public function show($id){
 		$quotation = $this->quotation->find($id);
 		$expenses = $this->expenses->all();
 		$entries = $this->entry->getParents();

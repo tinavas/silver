@@ -95,8 +95,8 @@ Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
 
 
 /*Secretary*/
-Route::get('/secretary','MaterialsController@indexSecretary');
-Route::get('/secretary/materials/{id}','MaterialsController@showSecretarty');
+Route::get('/secretary','MaterialsController@index');
+Route::get('/secretary/materials/{id}','MaterialsController@show');
 Route::post('secretary/materials/add/{id}','MaterialsController@store');
 Route::get('/secretary/materials/delete/{id}','MaterialsController@delete');
 
