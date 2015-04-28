@@ -1,14 +1,16 @@
 <?php
 
 use Bagito\Storage\UserRepository as User;
+use Bagito\Auth\AuthRepository as Auth;
 
 class UserController extends \BaseController {
 
 	private $pages = 6;
 
-	public function __construct(User $user)
+	public function __construct(User $user, Auth $auth)
 	{
 		$this->user = $user;
+		$this->auth = $auth;
 	}
 
 	/**
@@ -18,7 +20,14 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$users = $this->user->paginate($this->pages);
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.users.view', compact('users'))->with('repo',$this->user)->with('keyword', '');
+		}
 		return View::make('admin.users.view', compact('users'))->with('repo',$this->user)->with('keyword', '');
 	}
 
@@ -30,6 +39,12 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.users.create');
+		}
 		return View::make('admin.users.create');
 	}
 
@@ -41,6 +56,9 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		/*validation*/
 		$rules = array(
 			'firstname' => 'required',
@@ -63,6 +81,10 @@ class UserController extends \BaseController {
 		else
 		{
 			$this->user->create(Input::all());
+
+			if($accessname == 'Secretary') {
+				return Redirect::to('secretary/users');
+			}
 			return Redirect::to('admin/users');
 		}
 	}
@@ -75,7 +97,13 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		$currentuser = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($currentuser)->name;
+
 		$user = $this->user->find($id);
+		if($accessname == 'Secretary') {
+			return View::make('secretary.users.edit',compact('user'));
+		}
 		return View::make('admin.users.edit',compact('user'));
 	}
 
@@ -88,6 +116,9 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		/*validation*/
 		$rules = array(
 			'firstname' => 'required',
@@ -107,6 +138,10 @@ class UserController extends \BaseController {
 		else
 		{
 			$this->user->update($id, Input::all());
+
+			if($accessname == 'Secretary') {
+				return Redirect::to('secretary/users');
+			}
 			return Redirect::to('admin/users');
 		}
 	}
@@ -114,8 +149,15 @@ class UserController extends \BaseController {
 
 	public function search()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$keyword = Input::get('keyword');
 		$users = $this->user->search($keyword,$this->pages);
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.users.view', compact('users'))->with('repo',$this->user)->with('keyword', $keyword);
+		}
 		return View::make('admin.users.view', compact('users'))->with('repo',$this->user)->with('keyword', $keyword);
 	}
 }

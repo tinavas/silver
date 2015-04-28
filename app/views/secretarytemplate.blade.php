@@ -3,6 +3,14 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<?php
+
+  //SORRY I HAVE TO DO THIS TO BEAT THE DEADLINE
+
+  $user = Sentry::getUser();
+  $count = Notification::where('user_id',$user->id)->where('is_read',0)->count();
+?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +23,21 @@
     {{HTML::style('resources/libraries/jqueryui/css/jquery.ui.all.css')}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
+    <style>
+      .notif{
+        border-radius:50%;
+        background-color:red;
+        color:white;
+        padding-left:6px;
+        padding-right:6px;
+        font-size:10px;
+        padding-top:2px;
+        padding-bottom:2px;
+        position:relative;
+        top:20%;
+        left:81%;
+      }
+    </style>
     @yield('head')
 </head>
 <body>  
@@ -42,6 +65,18 @@
                       </li>-->
                       <li>
                           <a href = "{{url('/secretary')}}">
+                            <i class="fa fa-user fa-2x"></i> 
+                            <span class="title">Users</span>
+                          </a>
+                      </li>
+                      <li>
+                        <a href="{{url('/secretary/projects')}}">
+                          <i class="fa fa-building fa-2x"> </i> 
+                          <span class="title">Projects</span> 
+                        </a>
+                      </li>
+                      <li>
+                          <a href = "{{url('/secretary/materials')}}">
                             <i class="fa fa-wrench fa-2x"></i> 
                             <span class="title">Materials</span>
                           </a>

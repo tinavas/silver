@@ -1,4 +1,4 @@
-@extends('template')
+@extends('secretarytemplate')
 
 @section('head')
 {{HTML::style('resources/css/modules/users/users-view.css');}}

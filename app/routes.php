@@ -100,10 +100,16 @@ Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
 
 
 /*Secretary*/
-Route::get('/secretary','MaterialsController@index');
+Route::get('/secretary','UserController@index');
+Route::resource('/secretary/users', 'UserController');
+Route::get('/secretary/users/search/user','UserController@search');
+
+Route::get('/secretary/materials','MaterialsController@index');
 Route::get('/secretary/materials/{id}','MaterialsController@show');
 Route::post('secretary/materials/add/{id}','MaterialsController@store');
 Route::get('/secretary/materials/delete/{id}','MaterialsController@delete');
+
+Route::resource('/secretary/projects', 'ProjectController');
 
 /*AJAX*/
 Route::get('/ajax/get-subs','EntryController@getAllSubHeaders');

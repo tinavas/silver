@@ -26,7 +26,15 @@ class ProjectController extends \BaseController {
 	 */
 	public function index()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$projects = $this->project->paginate($this->pages);
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.projects.view',compact('projects'))->with('repo', $this->project)->with('keyword','');
+		}
+
 		return View::make('admin.projects.view',compact('projects'))->with('repo', $this->project)->with('keyword','');
 	}
 
@@ -38,6 +46,13 @@ class ProjectController extends \BaseController {
 	 */
 	public function create()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.projects.create');
+		}
+
 		return View::make('admin.projects.create');
 	}
 
@@ -49,6 +64,8 @@ class ProjectController extends \BaseController {
 	 */
 	public function store()
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
 		//
 		$rules = array(
 			'title' => 'required',
@@ -63,6 +80,11 @@ class ProjectController extends \BaseController {
 		}
 
 		$this->project->create(Input::all());
+
+		if($accessname == 'Secretary') {
+			return Redirect::to('secretary/projects');
+		}
+
 		return Redirect::to('admin/projects');
 	}
 
@@ -75,6 +97,9 @@ class ProjectController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$quotation = null;
 		$project = $this->project->find($id);
 		$users = $this->project->getSubscribers($id);
@@ -87,6 +112,11 @@ class ProjectController extends \BaseController {
 		if(!is_null($project->active_quotation_id)){
 			$quotation = $this->quotation->find($project->active_quotation_id);
 		}
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.projects.show',compact('project','quotations','quotation','status','approved'))->with('users',$users->get());
+		}
+
 		return View::make('admin.projects.show',compact('project','quotations','quotation','status','approved'))->with('users',$users->get());
 	}
 
@@ -100,7 +130,14 @@ class ProjectController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$project = $this->project->find($id);
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.projects.edit',compact('project'));
+		}
 		return View::make('admin.projects.edit',compact('project'));
 	}
 
@@ -114,6 +151,9 @@ class ProjectController extends \BaseController {
 	public function update($id)
 	{
 		//
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$rules = array(
 			'title' => 'required',
 			'description' => 'required',
@@ -127,6 +167,10 @@ class ProjectController extends \BaseController {
 		}
 
 		$this->project->update($id, Input::all());
+
+		if($accessname == 'Secretary') {
+			return Redirect::to('secretary/projects');
+		}
 		return Redirect::to('admin/projects');
 	}
 
@@ -143,22 +187,43 @@ class ProjectController extends \BaseController {
 	}
 
 	public function search()
-	{
+	{	
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$keyword = Input::get('keyword');
 		$projects = $this->project->search($keyword,$this->pages);
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.projects.view', compact('projects'))->with('repo',$this->project)->with('keyword', $keyword);
+		}
 		return View::make('admin.projects.view', compact('projects'))->with('repo',$this->project)->with('keyword', $keyword);
 	}
 
 	public function addUser($projectId)
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
 		$users = $this->project->getNonSubscribers($projectId);
+
+		if($accessname == 'Secretary') {
+			return View::make('admin.projects.add-user-to-projects', compact('users'))->with('project_id', $projectId);
+		}
 		return View::make('admin.projects.add-user-to-projects', compact('users'))->with('project_id', $projectId);
 
 	}
 
 	public function storeUserToProject($projectId, $userId)
 	{
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+		
 		$this->project->addUser($userId, $projectId);
+
+		if($accessname == 'Secretary') {
+			return Redirect::to('admin/projects/' . $projectId);
+		}
 		return Redirect::to('admin/projects/' . $projectId);
 	}
 
