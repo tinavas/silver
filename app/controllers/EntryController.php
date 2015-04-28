@@ -134,7 +134,7 @@ class EntryController extends BaseController
 		if(count($type) == 3){	
 			$this->entry->updateEntry($type[0], $type[1], $value, $type[2]);
 		}else{
-			$this->entry->update($type[0], $type[1], $value);	
+			$this->entry->update($type[0], $type[1], $value);
 		}
 
 		return Response::json(array('status' => 'Success'));

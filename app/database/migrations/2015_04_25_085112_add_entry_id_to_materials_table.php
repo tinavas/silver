@@ -15,7 +15,7 @@ class AddEntryIdToMaterialsTable extends Migration {
 		Schema::table('materials', function(Blueprint $table)
 		{
 			$table->integer('entry_id')->unsigned();
-			$table->foreign('entry_id')->references('id')->on('quotation_entries');			
+			$table->foreign('entry_id')->references('id')->on('quotation_entries');
 		});
 	}
 

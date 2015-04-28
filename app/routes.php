@@ -95,6 +95,7 @@ Route::post('admin/materials/add/{id}','MaterialsController@store');
 Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
 Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
 Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
+Route::post('/admin/materials/store/{id}','MaterialsController@storeRer');
 
 /* for design */
 $template = 'template';

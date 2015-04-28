@@ -47,4 +47,8 @@ class EloquentSupplierRepository implements SupplierRepository{
 					->orWhere('address','LIKE',"%$keyword%")
 					->orWhere('remarks','LIKE',"%$keyword%")->paginate($pages);
 	}
+
+	public function lists(){
+		return Supplier::lists('supplier_name','id');
+	}
 }

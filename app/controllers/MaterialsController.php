@@ -31,8 +31,10 @@ class MaterialsController extends BaseController{
 		$expenses = $this->expenses->all();
 		$entries = $this->entry->getParents();
 		$cont = $quotation->cont;
+		$suppliers = $this->supplier->lists();
 		
-		return View::make('admin.materials.show',compact('id','expenses','quotation','entries','cont'));
+		$childd = $this->entry->getChildList();
+		return View::make('admin.materials.show',compact('id','expenses','quotation','entries','cont','suppliers','childd'));
 	}
 
 	public function store($quotationId){
@@ -79,4 +81,55 @@ class MaterialsController extends BaseController{
 		$this->budget->delete($id);
 		return Redirect::back();
 	}
+
+	public function storeRer($id){
+
+		$rules = [
+			'amount'		=> 'required|numeric',
+			'quantity'		=> 'required|numeric',
+			'supplier_id'	=> 'required',
+			'entry_id' 		=> 'required'
+		];
+		$validator = Validator::make(Input::all(),$rules);
+		if($validator->fails()){
+			return Redirect::back()->withErrors($validator);
+		}else{
+			$rand = substr(md5(microtime()),rand(0,26),8);
+			$status = $this->uploadFiles($rand,'receipt');
+
+			if($status){
+				$supplier = Input::get('supplier_id');
+				$amount = Input::get('amount');
+				$quantity = Input::get('quantity');
+				$remarks = Input::get('remarks');
+				$entry = Input::get('entry_id');
+
+
+				for($index = 0; $index < count($supplier); ++$index){
+					$material = new Material;
+					$material->quotation_id = $id;
+					$material->supplier_id = $supplier;
+					$material->amount = $amount[$index];
+					$material->quantity = $quantity[$index];
+					$material->remarks = $remarks;
+					$material->entry_id = $entry[$index];
+					$material->filename = $rand;
+					$material->save();
+				}
+			}
+		}
+		Session::flash('message','Entries Uploaded');
+		return Redirect::back();
+	}
+
+	public function uploadFiles($filename,$name){     
+        if(Input::hasFile($name)){
+        	$location = public_path() . '/uploads/';
+            $filename .= '.'.Input::file($name)->getClientOriginalExtension();
+            if(Input::file($name)->move($location, $filename))
+                return $filename;
+            return false;
+        }
+        return false;
+    }
 }

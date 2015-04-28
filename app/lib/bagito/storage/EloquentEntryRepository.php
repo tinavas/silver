@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 use Value;
 use ExpensesValue;
 
-class EloquentEntryRepository implements EntryRepository
-{
+class EloquentEntryRepository implements EntryRepository {
+
+	public function getChildList(){
+		return Entry::where('level',3)->lists('description','id');
+	}
 
 	public function all(){
 		return Entry::all();

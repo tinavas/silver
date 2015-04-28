@@ -30,6 +30,7 @@
             </span>
       @endif
         <a href="{{URL::to('admin/materials')}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
+        <a href="#" data-reveal-id="modal2" class = "button"><i class="fa fa-dollar"></i>Expenditures</a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else
@@ -45,7 +46,8 @@
                     <th>UL</th>
                     <th>TL</th>
                     <th>DC</th>
-                    <th>Gross Amount</th>
+                    <th>Alloted Amount</th>
+                    <th>Spended Amount</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,6 +66,14 @@
                                     <td id = "ul-{{$child->id}}-{{$id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
                                     <th id = "tl-{{$child->id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
                                     <th id = "dc-{{$child->id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
+                                    <td>{{number_format($child->value($quotation->id)->first()->dc * $child->value($quotation->id)->first()->quantity)}}</td>
+                                    <td>
+                                      @if($child->material($quotation->id)->first() == null)
+                                        {{number_format(0,2)}}
+                                      @else
+                                        {{number_format($child->material($quotation->id)->first()->amount,2)}}
+                                      @endif
+                                    </td>
                                 </tr>
                                 <?php ++$index ?>
                             @endforeach
@@ -115,27 +125,33 @@
         <div id="modal2" class="reveal-modal" data-reveal>
         <div class="row">
             <div class="medium-12 column">
-               <h3>Expenses</h3>
-                @if(count($expenses) != 0)
-                <table class = "footable editTable" style = "width:100%;">
-                    <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Cost</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($expenses as $expense)
-                        <tr>
-                            <th>{{$expense->description}}</th>
-                            <td id = "expensevalue-{{$expense->value($quotation->id)->first()->id}}" class = "costs">{{$expense->value($quotation->id)->first()->cost}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                @else
-                    <h6 class = "center">No Expenses Yet</h6>
-                @endif
+               <h1>Add new entry</h1>
+               {{Form::open(['url' => '/admin/materials/store/' . $id,'files'=>'true'])}}
+                <div class="uploadElement">
+                  <fieldset>
+                    <legend>Item</legend>
+                    {{Form::label('quantity','Quantity')}}
+                    {{Form::text('quantity')}}
+                    {{Form::label('amount','Amount')}}
+                    {{Form::text('amount')}}
+                    {{Form::label('entry_id','Entry')}}
+                    {{Form::select('entry_id',$childd)}}
+                  </fieldset>
+                </div>
+                <br>
+                  {{Form::label('supplier_id','Supplier')}}
+                  {{Form::select('supplier_id',$suppliers)}}
+                <br>
+                <br>
+                {{Form::label('receipt','Attach Receipt')}}
+                {{Form::file('receipt')}}
+                <br>
+                {{Form::label('remarks','Remarks')}}
+                {{Form::textarea('remarks')}}
+                <br>
+                {{Form::submit('Submit',['class' => 'button'])}}
+                <button class = "button rigt">Add Item</button>
+               {{Form::close()}}
             </div>
         </div>
     </div>

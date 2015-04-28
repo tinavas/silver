@@ -20,4 +20,8 @@ class Entry extends Eloquent
 	public function value($id) {
 		return $this->hasMany('Value')->where('quotation_id',$id);
 	}
+
+	public function material($id){
+		return $this->hasMany('Material')->where('quotation_id',$id);
+	}
 }
