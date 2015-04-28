@@ -11,6 +11,7 @@ class UsersTableSeeder extends Seeder {
 		$faker->addProvider('Faker\Provider\en_US\PhoneNumber');
 		$adminGroup = Sentry::findGroupByName('Administrator');
 		$architectGroup = Sentry::findGroupByName('Architect');
+		$secretaryGroup = Sentry::findGroupByName('Secretary');
 		#create admins
 		foreach(range(1, 10) as $index){
 			$user = Sentry::createUser([
@@ -71,5 +72,16 @@ class UsersTableSeeder extends Seeder {
 			'activated' => true
 		]);
 		$user->addGroup($architectGroup);
+
+		$user = Sentry::createUser([
+			"email" => 'tors@gmail.com',
+			'password' => 'test',
+			'first_name' => 'Joshua',
+			'last_name' => 'Turingan',
+			'address' => '983 metom st. brgy. comm. q.c',
+			'contact_number' => '+639054005755',
+			'activated' => true
+		]);
+		$user->addGroup($secretaryGroup);
 	}
 }

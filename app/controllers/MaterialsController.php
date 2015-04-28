@@ -23,7 +23,7 @@ class MaterialsController extends BaseController{
 
 	public function index(){
 		$loadss = $this->quotation->allQuotationLoad();
-		return View::make('admin.materials.index',compact('loadss'));
+		return View::make('secretary.materials.index',compact('loadss'));
 	}
 
 	public function show($id){
@@ -33,8 +33,7 @@ class MaterialsController extends BaseController{
 		$cont = $quotation->cont;
 		$suppliers = $this->supplier->lists();
 		
-		$childd = $this->entry->getChildList();
-		return View::make('admin.materials.show',compact('id','expenses','quotation','entries','cont','suppliers','childd'));
+		return View::make('secretary.materials.show',compact('id','expenses','quotation','entries','cont'));
 	}
 
 	public function store($quotationId){

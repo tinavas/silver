@@ -16,13 +16,16 @@ class LoginController extends BaseController{
 		}else{
 			$user = $this->auth->getCurrentUser();
 
-			if($this->auth->getCurrentUserGroup($user)->name == "Administrator")
-			{
+			if($this->auth->getCurrentUserGroup($user)->name == "Administrator") {
 				return Redirect::to('/admin');
 			}
-			else
-			{
+
+			if($this->auth->getCurrentUserGroup($user)->name == "Architect") {
 				return Redirect::to('/architect');
+			}
+
+			if($this->auth->getCurrentUserGroup($user)->name == "Secretary") {
+				return Redirect::to('/secretary');
 			}
 		}
 	}
@@ -41,13 +44,16 @@ class LoginController extends BaseController{
 			return View::make('index');
 		}	
 
-		if($this->auth->getCurrentUserGroup($user)->name == "Administrator")
-		{
+		if($this->auth->getCurrentUserGroup($user)->name == "Administrator") {
 			return Redirect::to('/admin');
 		}
-		else
-		{
+
+		if ($this->auth->getCurrentUserGroup($user)->name == "Architect") {
 			return Redirect::to('/architect');
+		}
+
+		if ($this->auth->getCurrentUserGroup($user)->name == "Secretary") {
+			return Redirect::to('/secretary');
 		}
 	}
 
@@ -63,6 +69,10 @@ class LoginController extends BaseController{
 
 	public function changeArchitectPassword(){
 		return View::make('architect.change-password');
+	}
+
+	public function changeSecretaryPassword(){
+		return View::make('secretary.change-password');
 	}
 
 	public function updateAdminPassword(){
@@ -114,6 +124,32 @@ class LoginController extends BaseController{
 			}
 			$this->auth->updatePassword($user->id, Input::get('new_password'));
 			return Redirect::to('/architect');
+		}
+	}
+
+	public function updateSecretaryPassword(){
+		$rules = [
+			'password' => 'required',
+			'new_password' => 'required|confirmed',
+			'new_password_confirmation' => 'required'
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if($validator->fails()){
+			return Redirect::back()->withErrors($validator);
+		}else{
+			$user = $this->auth->getCurrentUser();
+			try{	
+				$username = $user->email;
+				$password = Input::get('password');
+				$user = $this->auth->authenticate($username, $password);	
+			}catch (BagitoException $e) {
+				Session::flash('errorMessage',$e->getMessage());
+				return Redirect::back();
+			}
+			$this->auth->updatePassword($user->id, Input::get('new_password'));
+			return Redirect::to('/secretary');
 		}
 	}
 }

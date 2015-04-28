@@ -19,6 +19,22 @@ class AuthFilterImpl implements AuthFilterRepository{
 		
 	}
 
+	public function secretary()
+	{
+		if(Sentry::check())
+		{
+			$user = Sentry::getUser();
+			$secretary = Sentry::getfindGroupByName('Secretary');
+			if(!$user->inGroup($secretary))
+			{
+				App::abort(403, 'Unauthorized action.');
+			}
+		}else{
+			App::abort(403, 'Unauthorized action.');
+		}
+		
+	}
+
 	public function admin()
 	{
 		if(Sentry::check())

@@ -21,6 +21,11 @@ Route::filter('architect','AuthFilter@architect');
 Route::when('architect/*','architect');
 Route::when('architect/','architect');
 
+Route::filter('secretary','AuthFilter@secretary');
+
+Route::when('secretary/*','secretary');
+Route::when('secretary/','secretary');
+
 /* Login Controller */
 Route::get('/','LoginController@showLogin');
 Route::get('/login','LoginController@showLogin');
@@ -45,10 +50,26 @@ Route::get('/admin/suppliers/search/supplier','SuppliersController@search');
 
 Route::get('/logout','LoginController@logout');
 
+Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
+Route::get('/admin/project/add-active-quotation/{projectId}/{quotationId}','ProjectController@setAsActiveQuotation');
+Route::post('/admin/project/change-status/{id}','ProjectController@changeStatus');
+Route::get('/admin/budget/{id}','BudgetsController@index');
+Route::get('/admin/budget/create/{id}','BudgetsController@create');
+Route::post('/admin/budget/{id}','BudgetsController@store');
+Route::get('/admin/budget/delete/{id}', 'BudgetsController@destroy');
+Route::get('/admin/budget/update/{id}','BudgetsController@edit');
+Route::get('/admin/change-password','LoginController@changeAdminPassword');
+Route::post('/admin/change-password','LoginController@updateAdminPassword');
+Route::get('/admin/quotation/request-for-update/{id}','ProjectController@requestForUpdate');
+Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
+
+Route::get('/admin/materials','MaterialsController@index');
+Route::get('/admin/materials/{id}','MaterialsController@show');
+Route::post('admin/materials/add/{id}','MaterialsController@store');
+Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
+
 /*Architect*/
-
 Route::get('/architect/notifications', 'NotificationsController@indexArchitectNotif');
-
 Route::get('/architect','QuotationController@showProjects');
 Route::get('/architect/quotations','QuotationController@showQuotations');
 Route::get('/architect/quotation/create/{id}','QuotationController@create');
@@ -59,32 +80,27 @@ Route::post('/architect/quotation/edit/{id}','QuotationController@update');
 Route::get('/architect/quotation/view/{id}','QuotationController@view');
 Route::post('/architect/quotation/tag-as-for-approval/{id}', 'QuotationController@changeStatus');
 Route::get('/architect/viewer/view-other/{id}','EntryController@show');
-
 Route::get('/architect/entry/create/{id}','EntryController@create');
 Route::post('/architect/entry-template/create/','EntryController@store');
 Route::get('/architect/entry/delete/{id}','EntryController@remove');
 Route::get('/architect/viewer','QuotationController@viewOtherQuotations');
 Route::get('/architect/viewer/disapprove/{id}', 'QuotationController@disapprove');
 Route::get('/architect/viewer/approve/{id}','QuotationController@approve');
-
-Route::get('/admin/quotation/view/{id}','EntryController@showPrinterFriendly');
-Route::get('/admin/project/add-active-quotation/{projectId}/{quotationId}','ProjectController@setAsActiveQuotation');
-Route::post('/admin/project/change-status/{id}','ProjectController@changeStatus');
-
-Route::get('/admin/budget/{id}','BudgetsController@index');
-Route::get('/admin/budget/create/{id}','BudgetsController@create');
-Route::post('/admin/budget/{id}','BudgetsController@store');
-Route::get('/admin/budget/delete/{id}', 'BudgetsController@destroy');
-Route::get('/admin/budget/update/{id}','BudgetsController@edit');
-
 Route::get('/architect/change-password','LoginController@changeArchitectPassword');
-Route::get('/admin/change-password','LoginController@changeAdminPassword');
-
 Route::post('/architect/change-password','LoginController@updateArchitectPassword');
-Route::post('/admin/change-password','LoginController@updateAdminPassword');
 Route::post('/architect/entry/add-expenses/','EntryController@addOtherExpenses');
 Route::get('/architect/entry/remove-expenses/{id}','EntryController@removeExpenses');
 Route::post('/architect/quotation/updateAdjustment/{id}','QuotationController@updateAdjustment');
+Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
+
+
+/*Secretary*/
+Route::get('/secretary','MaterialsController@index');
+Route::get('/secretary/materials/{id}','MaterialsController@show');
+Route::post('secretary/materials/add/{id}','MaterialsController@store');
+Route::get('/secretary/materials/delete/{id}','MaterialsController@delete');
+
+/*AJAX*/
 Route::get('/ajax/get-subs','EntryController@getAllSubHeaders');
 Route::get('/ajax/update-entry-template','EntryController@saveTemplateEntry');
 Route::get('/ajax/get-entry-values','EntryController@getEntryValues');

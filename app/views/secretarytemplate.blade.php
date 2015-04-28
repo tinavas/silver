@@ -24,10 +24,10 @@
                     {{HTML::image('resources/images/no-image.jpg');}}
                   </div>
                    <h6 class="title name no-margin">
-                        <strong>Test</strong>
+                        <strong>{{Sentry::getUser()->first_name . ' ' .Sentry::getUser()->last_name}}</strong>
                     </h6>
                     <h6 class="title user-type no-margin">
-                        Test
+                        {{Sentry::getUser()->getGroups()[0]->name}}
                     </h6>
               </div>
               
@@ -41,7 +41,7 @@
                           </a>
                       </li>-->
                       <li>
-                          <a href = "{{url('/admin')}}">
+                          <a href = "{{url('/secretary')}}">
                             <i class="fa fa-wrench fa-2x"></i> 
                             <span class="title">Materials</span>
                           </a>
@@ -57,7 +57,7 @@
                 <a href="{{URL::to('/logout')}}" class="icon logout">
                     <i class="fa fa-power-off"></i>
                 </a>
-                 <a href="{{URL::to('/admin/change-password')}}" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
+                 <a href="{{URL::to('/secretary/change-password')}}" class="icon"><i class="fa fa-gears"><span><h6>Settings</h6></span></i></a>
                 <!--<a href="#" class="icon"><i class="fa fa-envelope"><span><h6>Messages</h6></span></i>-->
                 </a>
                 
