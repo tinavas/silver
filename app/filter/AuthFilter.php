@@ -33,4 +33,20 @@ class AuthFilter {
 			App::abort(403, 'Unauthorized action.');
 		}
 	}
+
+	public function secretary(){
+		if(Sentry::check())
+		{
+			$user = Sentry::getUser();
+			$admin = Sentry::findGroupByName('Secretary');
+			if(!$user->inGroup($admin))
+			{
+				App::abort(403, 'Unauthorized action.');
+			}
+		}
+		else
+		{
+			App::abort(403, 'Unauthorized action.');
+		}	
+	}
 }

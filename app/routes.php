@@ -16,6 +16,11 @@ Route::filter('admin','AuthFilter@admin');
 Route::when('admin/*','admin');
 Route::when('admin','admin');
 
+
+Route::filter('secretary','AuthFilter@secretary');
+Route::when('secretary/*','secretary');
+Route::when('secretary','secretary');
+
 Route::filter('architect','AuthFilter@architect');
 
 Route::when('architect/*','architect');
@@ -161,13 +166,3 @@ Route::get('/secretary/test', function() use ($sectemplate)
 });
 
 /* END */
-
-
-/*<th class = "entry left">{{$child->description}}</th>
-                                    <td class = "quantity-{{$index}}">{{$child->value($quotation->id)->first()->quantity}}</td>
-                                    <th>{{$child->unit}}</th>
-                                    <td class = "um-{{$index}}">{{$child->value($quotation->id)->first()->um}}</td>
-                                    <th class = "tm-{{$index}}">{{$child->value($quotation->id)->first()->tm}}</th>
-                                    <td class = "ul-{{$index}}">{{$child->value($quotation->id)->first()->ul}}</td>
-                                    <th class = "tl-{{$index}}">{{$child->value($quotation->id)->first()->tl}}</th>
-                                    <td class = "dc-{{$index}}">{{$child->value($quotation->id)->first()->dc}}</td>*/
