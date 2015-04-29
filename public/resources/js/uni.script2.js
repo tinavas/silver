@@ -1,6 +1,12 @@
 /* MAIN JS */
 $(document).ready( function () {
 
+
+    $("#addItem").click(function(){
+       $('.uploadElement').clone().prependTo('.items');
+       return false;
+    });
+
 	$('.data-table').DataTable();
 
 	updateStuff();

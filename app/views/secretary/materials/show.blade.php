@@ -114,21 +114,23 @@
                 </div>
             </div>
         @endif
-        <div id="modal2" class="reveal-modal" data-reveal>
+        <div id="modal2" class="reveal-modal large" data-reveal>
         <div class="row">
             <div class="medium-12 column">
                <h1>Add new entry</h1>
                {{Form::open(['url' => '/secretary/materials/store/' . $id,'files'=>'true'])}}
-                <div class="uploadElement">
-                  <fieldset>
-                    <legend>Item</legend>
-                    {{Form::label('quantity','Quantity')}}
-                    {{Form::text('quantity[]')}}
-                    {{Form::label('amount','Unit Price')}}
-                    {{Form::text('amount[]')}}
-                    {{Form::label('entry_id','Entry')}}
-                    {{Form::select('entry_id[]',$childd)}}
-                  </fieldset>
+                <div class="items">
+                    <div class="uploadElement">
+                      <fieldset>
+                        <legend>Item</legend>
+                        {{Form::label('quantity','Quantity')}}
+                        {{Form::text('quantity[]')}}
+                        {{Form::label('amount','Unit Price')}}
+                        {{Form::text('amount[]')}}
+                        {{Form::label('entry_id','Entry')}}
+                        {{Form::select('entry_id[]',$childd)}}
+                      </fieldset>
+                    </div>
                 </div>
                 <br>
                   {{Form::label('supplier_id','Supplier')}}
@@ -142,12 +144,12 @@
                 {{Form::textarea('remarks')}}
                 <br>
                 {{Form::submit('Submit',['class' => 'button'])}}
-                <button class = "button rigt">Add Item</button>
+                <button class = "button right" id = "addItem">Add Item</button>
                {{Form::close()}}
             </div>
         </div>
     </div>
-    <div id="historyModal" class = "reveal-modal" data-reveal>
+    <div id="historyModal" class = "reveal-modal xlarge" data-reveal>
         <div class="row">
             <div class="medium-12">
                 <h1>Budget Allocation History</h1>

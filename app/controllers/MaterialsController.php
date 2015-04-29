@@ -121,9 +121,8 @@ class MaterialsController extends BaseController{
 
 				$users = $this->user->getAllAdmins();
 				$quotation = $this->quotation->find($id);
-						
 
-				for($index = 0; $index < count($supplier); ++$index){
+				for($index = 0; $index < count($quantity); ++$index){
 					$material = new Material;
 					$material->quotation_id = $id;
 					$material->supplier_id = $supplier;
@@ -139,9 +138,9 @@ class MaterialsController extends BaseController{
 					$expectedAmount = $inValue->dc;
 
 					if($expectedAmount < $entryAmount){
-						$entry = $this->entry->find($material->entry_id);
+						$noope = $this->entry->find($material->entry_id);
 						foreach($users as $user){
-							$this->notification->create($user->id,'Item :' . $entry->description . ' of Quotation ' . $quotation->title . ' of Project ' . $quotation->project()->first()->title . ' has exceeded it\'s alloted amount');
+							$this->notification->create($user->id,'Item :' . $noope->description . ' of Quotation ' . $quotation->title . ' of Project ' . $quotation->project()->first()->title . ' has exceeded it\'s alloted amount');
 						}
 					}
 					$materials = $this->value->getAllMaterialsFrom($id);
