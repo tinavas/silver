@@ -45,7 +45,7 @@
                         <td>{{$user->contact_number}}</td>
                         <td>{{$user->email}}</td>
                         <td> 
-                          <a href="{{URL::to('admin/users/' . $user->id . '/edit')}}">
+                          <a href="{{URL::to('secretary/users/' . $user->id . '/edit')}}">
                                 <i class="fa fa-pencil fa-2x"></i>
                           </a>
                         </td>
@@ -56,7 +56,7 @@
             {{$users->appends(['keyword' => $keyword])->links()}}
 
             @if($keyword != '')
-              {{HTML::link('/admin/users','Back',['class' => 'left button'])}}
+              {{HTML::link('/secretary/users','Back',['class' => 'left button'])}}
             @endif
         </div>
     </div>

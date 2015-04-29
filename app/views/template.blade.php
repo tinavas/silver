@@ -81,12 +81,12 @@
                           <span class="title">Suppliers</span> 
                         </a>
                       </li>
-                      <!-- <li>
+                      <li>
                           <a href = "{{url('/admin/materials')}}">
                             <i class="fa fa-wrench fa-2x"></i> 
                             <span class="title">Materials</span>
                           </a>
-                      </li> -->
+                      </li>
                     </ul>
             
                </div>

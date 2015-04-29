@@ -18,7 +18,7 @@
                 </span>
             @endif
         <div class="view-box">
-            {{Form::model($user, array('url' => '/admin/users/' . $user->id,'method' => 'put'))}}
+            {{Form::model($user, array('url' => '/secretary/users/' . $user->id,'method' => 'put'))}}
          <div class="row">
              <div class="medium-2 column">
                 {{Form::label('lastname','Last Name', array('class' => 'inline right'))}}

@@ -10,6 +10,10 @@ use ExpensesValue;
 
 class EloquentEntryRepository implements EntryRepository {
 
+	public function find($id){
+		return Entry::find($id);
+	}
+
 	public function getChildList(){
 		return Entry::where('level',3)->lists('description','id');
 	}

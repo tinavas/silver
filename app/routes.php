@@ -68,8 +68,6 @@ Route::post('/admin/change-password','LoginController@updateAdminPassword');
 Route::get('/admin/quotation/request-for-update/{id}','ProjectController@requestForUpdate');
 Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
 
-Route::get('/admin/materials','MaterialsController@index');
-Route::get('/admin/materials/{id}','MaterialsController@show');
 Route::post('admin/materials/add/{id}','MaterialsController@store');
 Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
 
@@ -97,6 +95,8 @@ Route::post('/architect/entry/add-expenses/','EntryController@addOtherExpenses')
 Route::get('/architect/entry/remove-expenses/{id}','EntryController@removeExpenses');
 Route::post('/architect/quotation/updateAdjustment/{id}','QuotationController@updateAdjustment');
 Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
+Route::get('/admin/materials','MaterialsController@admin');
+Route::get('/admin/materials/{id}', 'MaterialsController@adminShow');
 
 
 /*Secretary*/
@@ -108,6 +108,7 @@ Route::get('/secretary/materials','MaterialsController@index');
 Route::get('/secretary/materials/{id}','MaterialsController@show');
 Route::post('secretary/materials/add/{id}','MaterialsController@store');
 Route::get('/secretary/materials/delete/{id}','MaterialsController@delete');
+Route::post('/secretary/materials/store/{id}','MaterialsController@storeRer');
 
 Route::resource('/secretary/projects', 'ProjectController');
 
@@ -116,8 +117,6 @@ Route::get('/ajax/get-subs','EntryController@getAllSubHeaders');
 Route::get('/ajax/update-entry-template','EntryController@saveTemplateEntry');
 Route::get('/ajax/get-entry-values','EntryController@getEntryValues');
 Route::get('/admin/quotation/request-for-update/{id}','ProjectController@requestForUpdate');
-Route::get('/admin/materials','MaterialsController@index');
-Route::get('/admin/materials/{id}','MaterialsController@show');
 Route::post('admin/materials/add/{id}','MaterialsController@store');
 Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
 Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');

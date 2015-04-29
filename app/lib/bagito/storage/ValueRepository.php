@@ -7,4 +7,8 @@ interface ValueRepository{
 	public function update($id, $inputs);
 	public function newQuotation($quotation_id);
 
+	public function getValue($quotation_id, $entry_id);
+	public function getSumOfQuotation($quotation_id);
+	public function getAllMaterialsFrom($quotation_id);
+
 }

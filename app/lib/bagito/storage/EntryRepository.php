@@ -2,6 +2,7 @@
 
  interface EntryRepository
  {
+ 	public function find($id);
  	public function getParents();
  	public function getChildList();
  	public function store($inputs);

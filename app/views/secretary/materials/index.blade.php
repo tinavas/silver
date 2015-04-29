@@ -27,7 +27,7 @@
                       <td>{{$loads->quotation()->first()->title}}</td>
                       <td>{{$loads->quotation()->first()->project()->first()->title}}</td>
                       <td>
-                        <a href="{{URL::to('/admin/materials/' . $loads->quotation->first()->id)}}">
+                        <a href="{{URL::to('/secretary/materials/' . $loads->quotation->first()->id)}}">
                           <i class="fa fa-folder-open fa-2x" style="color:orange"></i>
                          </a>
                       </td>

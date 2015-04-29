@@ -83,5 +83,19 @@ class UsersTableSeeder extends Seeder {
 			'activated' => true
 		]);
 		$user->addGroup($secretaryGroup);
+	
+		#create secretary
+
+		$user = Sentry::createUser([
+				"email" => 'baba@gmail.com',
+				'password' => 'test',
+				'first_name' => 'Jeanne Ver',
+				'last_name' => 'Relatado',
+				'address' => 'Purok II Muntinlupa City',
+				'contact_number' => '+639055024485',
+				'activated' => true
+			]);
+		$user->addGroup($secretaryGroup);
+
 	}
 }

@@ -101,6 +101,7 @@
         
     <div class="row">
         <section class="footer">
+            
         </section>
     </div>
     {{HTML::script('resources/libraries/foundation5.4.7/js/vendor/jquery.js')}}

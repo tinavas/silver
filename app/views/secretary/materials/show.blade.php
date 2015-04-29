@@ -29,7 +29,9 @@
                 @endforeach
             </span>
       @endif
-        <a href="{{URL::to('admin/materials')}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
+        <a href="{{URL::to('secretary/materials')}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
+        <a href="#" data-reveal-id="modal2" class = "button"><i class="fa fa-dollar"></i>Add Entry</a>
+        <a href="#" data-reveal-id="historyModal" class = "button"> <i class="fa fa-archive"></i>View History</a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else
@@ -45,7 +47,8 @@
                     <th>UL</th>
                     <th>TL</th>
                     <th>DC</th>
-                    <th>Gross Amount</th>
+                    <th>Alloted Amount</th>
+                    <th>Spended Amount</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,6 +58,7 @@
                             <tr><td class = "sub-header left" style = "color:#F9690E;">{{$sub->description}}</td></tr>
                             <?php $index = 0; ?>
                             @foreach($sub->children as $child)
+                                <?php $alloted =  $child->value($quotation->id)->first()->dc * $child->value($quotation->id)->first()->quantity ?>
                                 <tr class = "children">
                                     <th class = "entry left">{{$child->description}}</th>
                                     <td id = "quantity-{{$child->id}}-{{$id}}" class = "quantity">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
@@ -64,6 +68,22 @@
                                     <td id = "ul-{{$child->id}}-{{$id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
                                     <th id = "tl-{{$child->id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
                                     <th id = "dc-{{$child->id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
+                                    <td>{{number_format($alloted,2)}}</td>
+                                    <td>
+                                      @if($child->material($quotation->id)->first() == null)
+                                        {{number_format(0,2)}}
+                                      @else
+                                        <?php $amounted = 0; ?>
+                                        @foreach($child->material($quotation->id)->get() as $material)
+                                            <?php $amounted += $material->amount * $material->quantity ?>
+                                        @endforeach
+                                        @if($amounted > $alloted)
+                                            <span style = "color:red"> {{number_format($amounted,2)}} </span>
+                                        @else
+                                            <span> {{number_format($amounted,2)}} </span>
+                                        @endif
+                                    @endif
+                                    </td>
                                 </tr>
                                 <?php ++$index ?>
                             @endforeach
@@ -81,32 +101,14 @@
                         <td class = "total"></td>
                     </tr>
                     <tr>
-                        <td>Cont</td>
-                        <td class = "cont"></td>
-                        <td class="totalCont"></td>
-                    </tr>
-                    <tr>
-                        <td>Overhead</td>
-                        <td class = "oh"></td>
-                        <td class="totalOh"></td>
-                    </tr>
-                    <tr>
-                        <td>Prof:</td>
-                        <td class = "prof"></td>
-                        <td class="totalProf"></td>
-                    </tr>
-                    <tr>
-                        <td>Tax</td>
-                        <td class = "tax"></td>
-                        <td class="totalTax"></td>
-                    </tr>
-                    <tr>
-                        <td>Total after others</td>
-                        <td class = "superSum"></td>
-                    </tr>
-                    <tr>
-                        <td>Net Total:</td>
-                        <td><b class = "net"></b></td>
+                        <td>Total Expenditure: </td>
+                        <td>
+                            @if($sumValue < $summer)
+                                <span style = "color:red">{{number_format($summer,2)}}</span>
+                            @else
+                                <span>{{number_format($summer,2)}}</span>
+                            @endif  
+                        </td>
                     </tr>
                 </table>  
                 </div>
@@ -115,26 +117,69 @@
         <div id="modal2" class="reveal-modal" data-reveal>
         <div class="row">
             <div class="medium-12 column">
-               <h3>Expenses</h3>
-                @if(count($expenses) != 0)
-                <table class = "footable editTable" style = "width:100%;">
-                    <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Cost</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($expenses as $expense)
+               <h1>Add new entry</h1>
+               {{Form::open(['url' => '/secretary/materials/store/' . $id,'files'=>'true'])}}
+                <div class="uploadElement">
+                  <fieldset>
+                    <legend>Item</legend>
+                    {{Form::label('quantity','Quantity')}}
+                    {{Form::text('quantity[]')}}
+                    {{Form::label('amount','Unit Price')}}
+                    {{Form::text('amount[]')}}
+                    {{Form::label('entry_id','Entry')}}
+                    {{Form::select('entry_id[]',$childd)}}
+                  </fieldset>
+                </div>
+                <br>
+                  {{Form::label('supplier_id','Supplier')}}
+                  {{Form::select('supplier_id',$suppliers)}}
+                <br>
+                <br>
+                {{Form::label('receipt','Attach Receipt')}}
+                {{Form::file('receipt')}}
+                <br>
+                {{Form::label('remarks','Remarks')}}
+                {{Form::textarea('remarks')}}
+                <br>
+                {{Form::submit('Submit',['class' => 'button'])}}
+                <button class = "button rigt">Add Item</button>
+               {{Form::close()}}
+            </div>
+        </div>
+    </div>
+    <div id="historyModal" class = "reveal-modal" data-reveal>
+        <div class="row">
+            <div class="medium-12">
+                <h1>Budget Allocation History</h1>
+                @if(count($materials) == 0)
+                    <h3>No entries yet</h3>
+                @else
+                    <table class = "data-table stretch">
+                        <thead>
                         <tr>
-                            <th>{{$expense->description}}</th>
-                            <td id = "expensevalue-{{$expense->value($quotation->id)->first()->id}}" class = "costs">{{$expense->value($quotation->id)->first()->cost}}</td>
+                            <th>Date</th>
+                            <th>Entry</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Supplier</th>
+                            <th>Total</th>
+                            <th>View Receipt</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                    @foreach($materials as $material)
+                        <tr>
+                            <td>{{date('F j, Y',strtotime($material->created_at))}}</td>
+                            <td>{{$material->entry()->first()->description}}</td>
+                            <td>{{$material->quantity}}</td>
+                            <td>{{number_format($material->amount,2)}}</td>
+                            <td>{{$material->supplier()->first()->supplier_name}}</td>
+                            <td>{{number_format($material->amount * $material->quantity,2)}}</td>
+                            <td><a href="{{URL::to('uploads/' . $material->filename . '.jpg')}}">View</a></td>
                         </tr>
                     @endforeach
                     </tbody>
-                </table>
-                @else
-                    <h6 class = "center">No Expenses Yet</h6>
+                    </table>
                 @endif
             </div>
         </div>

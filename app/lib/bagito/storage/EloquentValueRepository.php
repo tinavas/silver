@@ -2,6 +2,7 @@
 
 use Value;
 use Entry;
+use Material;
 
 class EloquentValueRepository implements ValueRepository{
 
@@ -51,5 +52,18 @@ class EloquentValueRepository implements ValueRepository{
 			$value->quotation_id = $quotation_id;
 			$value->save();
 		}
+	}
+
+	public function getValue($quotation_id, $entry_id){
+		return Value::where('quotation_id',$quotation_id)->where('entry_id',$entry_id)->first();
+	}
+
+
+	public function getSumOfQuotation($quotation_id){
+		return Value::where('quotation_id',$quotation_id)->sum('dc');
+	}
+
+	public function getAllMaterialsFrom($quotation_id){
+		return Material::where('quotation_id',$quotation_id)->get();
 	}
 }
