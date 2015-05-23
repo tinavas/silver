@@ -3,8 +3,16 @@ $(document).ready( function () {
 
 
     $("#addItem").click(function(){
-       $('.uploadElement').clone().prependTo('.items');
-       return false;
+    	var inputs = $('.uploadElement').html();
+		//alert(inputs);
+       	$('.items').append('<div> <a href = "#" class = "right remove" style = "color:red">x</a>' + inputs + '</div>');
+       	return false;
+    });
+
+    $(document).on('click','.remove',function(event){
+    	var parent = $(this).parent();
+    	parent.remove();
+    	event.preventDefault();
     });
 
 	$('.data-table').DataTable();

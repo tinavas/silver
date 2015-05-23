@@ -30,6 +30,8 @@
             </span>
       @endif
         <a href="{{URL::to('architect/viewer')}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
+        <a href="{{URL::to('/architect/viewer/approve/' . $quotation->id)}}" class = "button"> <i class="fa fa-check"></i>Approve</a>
+        <a href="{{URL::to('/architect/viewer/disapprove/' . $quotation->id)}}" class = "button"> <i class="fa fa-close"></i>Disapprove</a>
         @if(count($entries) == 0)
         <h1>No Entries Yet</h1>
         @else

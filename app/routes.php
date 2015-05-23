@@ -123,6 +123,8 @@ Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
 Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
 Route::post('/admin/materials/store/{id}','MaterialsController@storeRer');
 
+Route::get('/secretary/materials/remove/{id}', 'MaterialsController@remove');
+
 /* for design */
 $template = 'template';
 Route::get('/admin/quotation/create', function() use ($template)

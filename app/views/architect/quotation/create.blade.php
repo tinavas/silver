@@ -35,22 +35,17 @@
                 {{Form::text('remarks','',array('class'=>'inline right'))}}
              </div>
          </div>
-         <!--<div class="row">
-             <div class="medium-2 column">
-                {{Form::label('others','Others', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                {{Form::text('others','0.02',array('class'=>'inline right'))}}
-             </div>
+
+         <div class = "row">
+            <div>
+                <div class="medium-2 column">
+                    {{Form::label('type','Type', array('class' => 'inline right'))}}
+                </div>
+                <div class="medium-9 column">
+                    {{Form::select('type',['0' => 'Normal', '1' => 'Revision', '2' => 'Additional'],'',['class'=>'inline right'])}}
+                </div>
+            </div>
          </div>
-         <div class="row">
-             <div class="medium-2 column">
-                {{Form::label('tax','Tax', array('class' => 'inline right'))}}
-             </div>
-             <div class="medium-10 column">
-                {{Form::text('tax','0.10',array('class'=>'inline right'))}}
-             </div>
-         </div>-->
         <div class="row">
             <div class="medium-12 column">
                 {{Form::submit('Create', array('class'=>'right button submit'))}}

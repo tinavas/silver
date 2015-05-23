@@ -48,7 +48,6 @@ class EloquentApprovalRepository implements ApprovalRepository
 				$notif->is_read = 0;
 				$notif->save();
 			}
-
 		}
 	}
 	public function disapprove($userId, $quotationId)

@@ -8,11 +8,12 @@ use Bagito\Storage\SupplierRepository as Supplier;
 use Bagito\Storage\OtherExpensesRepository as OtherExpenses;
 use Bagito\Storage\EntryRepository as Entry;
 use Bagito\Storage\ValueRepository as Value;
+use Bagito\Storage\MaterialRepository as Material;
 
 
 class MaterialsController extends BaseController{
 
-	public function __construct(Quotation $quotation, Budget $budget, User $user, Notification $notification, Supplier $supplier, OtherExpenses $otherExpenses, Entry $entry, Value $value){
+	public function __construct(Quotation $quotation, Budget $budget, User $user, Notification $notification, Supplier $supplier, OtherExpenses $otherExpenses, Entry $entry, Value $value, Material $material){
 		$this->quotation = $quotation;
 		$this->budget = $budget;
 		$this->user = $user;
@@ -21,6 +22,7 @@ class MaterialsController extends BaseController{
 		$this->expenses = $otherExpenses;
 		$this->entry = $entry;
 		$this->value = $value;
+		$this->material = $material;
 	}
 
 	public function index(){
@@ -97,7 +99,8 @@ class MaterialsController extends BaseController{
 		$quantity = Input::get('quantity');
 		$remarks = Input::get('remarks');
 		$entry = Input::get('entry_id');
-
+		$fields = [];
+		$rules = [];
 		for($index = 0; $index < count(Input::get('supplier_id')); ++$index){
 			$fields['supplier' . $index] = $supplier[$index];
 			$fields['entry' . $index] = $entry[$index];
@@ -111,9 +114,17 @@ class MaterialsController extends BaseController{
 		}
 
 		$validator = Validator::make($fields,$rules);
-		if($validator->fails()){
+		if(count($fields) == 0 || count($rules) == 0){
+			
+			Session::flash('message','You must input atleast one entry');
+			return Redirect::back();
+
+		}else if($validator->fails()){
+			
 			return Redirect::back()->withErrors($validator);
+		
 		}else{
+			
 			$rand = substr(md5(microtime()),rand(0,26),15);
 			$status = $this->uploadFiles($rand,'receipt');
 
@@ -123,15 +134,9 @@ class MaterialsController extends BaseController{
 				$quotation = $this->quotation->find($id);
 
 				for($index = 0; $index < count($quantity); ++$index){
-					$material = new Material;
-					$material->quotation_id = $id;
-					$material->supplier_id = $supplier;
-					$material->amount = $amount[$index];
-					$material->quantity = $quantity[$index];
-					$material->remarks = $remarks;
-					$material->entry_id = $entry[$index];
-					$material->filename = $rand . Input::file('receipt')->getClientOriginalExtension();
-					$material->save();
+					$filename = $rand . '.' . Input::file('receipt')->getClientOriginalExtension();
+					$material = $this->material->create($id, $supplier,$quantity[$index], $amount[$index], $remarks, $entry[$index], $filename);
+					
 					$inValue = $this->value->getValue($id, $material->entry_id);
 
 					$entryAmount = $material->quantity * $material->amount;
@@ -156,10 +161,16 @@ class MaterialsController extends BaseController{
 						}
 						
 					}else if($sumValue / $summer * 100 >= 70){
-						$this->notification->create($user->id,'Alert! Quotation ' . $quotation->title .' of Project ' . $quotation->project()->first()->title . ' is beyond the 70% critical limit');
+						foreach($users as $user){
+							$this->notification->create($user->id,'Alert! Quotation ' . $quotation->title .' of Project ' . $quotation->project()->first()->title . ' is beyond the 70% critical limit');
+						}
+						
 					}
 				}
 
+			}else{
+				Session::flash('errorMessage','Invalid File!');
+				return Redirect::back();
 			}
 		}
 		Session::flash('message','Entries Uploaded');
@@ -196,5 +207,11 @@ class MaterialsController extends BaseController{
     public function admin(){
  		$loadss = $this->quotation->allQuotationLoad();
 		return View::make('admin.materials.index',compact('loadss'));   	
+    }
+
+    public function remove($id){
+    	Session::flash('message','Record Successfuly Deleted');
+    	$this->material->remove($id);
+    	return Redirect::back();
     }
 }

@@ -16,19 +16,20 @@
     <div class="medium-12 large-centered column">
       <h4 class="view-header"><i class="fa fa-user"></i>Materials Management</h4>
       <div class="view-box">
-      @if(Session::has('message'))
-        <span data-alert class = "alert-box">
-                <b>{{Session::get('message')}}</b>
-            <a href = "#" class = "close">&times;</a>
-        </span>
-      @endif
-      @if($errors->has())
-            <span class = "error">
-                @foreach($errors->all() as $error)
-                    {{$error}} <br>
-                @endforeach
+          @if(Session::has('message'))
+            <span data-alert class = "alert-box">
+                    <b>{{Session::get('message')}}</b>
+                <a href = "#" class = "close">&times;</a>
             </span>
-      @endif
+          @endif
+          @if($errors->has())
+                <span class = "error">
+                    @foreach($errors->all() as $error)
+                        {{$error}} <br>
+                    @endforeach
+                </span>
+          @endif
+        </div>    
         <a href="{{URL::to('admin/materials')}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
         <a href="#" data-reveal-id="historyModal" class = "button"> <i class="fa fa-archive"></i>View History</a>
         @if(count($entries) == 0)
@@ -113,40 +114,41 @@
                 </div>
             </div>
         @endif
-    <div id="historyModal" class = "reveal-modal" data-reveal>
-        <div class="row">
-            <div class="medium-12">
-                <h1>Budget Allocation History</h1>
-                @if(count($materials) == 0)
-                    <h3>No entries yet</h3>
-                @else
-                    <table class = "data-table stretch">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Entry</th>
-                            <th>Quantity</th>
-                            <th>Amount</th>
-                            <th>Supplier</th>
-                            <th>Total</th>
-                            <th>View Receipt</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                    @foreach($materials as $material)
-                        <tr>
-                            <td>{{date('F j, Y',strtotime($material->created_at))}}</td>
-                            <td>{{$material->entry()->first()->description}}</td>
-                            <td>{{$material->quantity}}</td>
-                            <td>{{number_format($material->amount,2)}}</td>
-                            <td>{{$material->supplier()->first()->supplier_name}}</td>
-                            <td>{{number_format($material->amount * $material->quantity,2)}}</td>
-                            <td><a href="{{URL::to('uploads/' . $material->filename . '.jpg')}}">View</a></td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                    </table>
-                @endif
+        <div id="historyModal" class = "reveal-modal" data-reveal>
+            <div class="row">
+                <div class="medium-12">
+                    <h1>Budget Allocation History</h1>
+                    @if(count($materials) == 0)
+                        <h3>No entries yet</h3>
+                    @else
+                        <table class = "data-table stretch">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Entry</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Supplier</th>
+                                <th>Total</th>
+                                <th>View Receipt</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        @foreach($materials as $material)
+                            <tr>
+                                <td>{{date('F j, Y',strtotime($material->created_at))}}</td>
+                                <td>{{$material->entry()->first()->description}}</td>
+                                <td>{{$material->quantity}}</td>
+                                <td>{{number_format($material->amount,2)}}</td>
+                                <td>{{$material->supplier()->first()->supplier_name}}</td>
+                                <td>{{number_format($material->amount * $material->quantity,2)}}</td>
+                                <td><a href="{{URL::to('uploads/' . $material->filename . '.jpg')}}">View</a></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        </table>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

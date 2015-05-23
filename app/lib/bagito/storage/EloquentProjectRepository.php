@@ -101,7 +101,7 @@ class EloquentProjectRepository implements ProjectRepository{
 	public function getForApprovalQuotations($projectId) {
 		$project = Project::find($projectId);
 		return $project->quotations()->where('status',1)->get();
-	}
+	}	
 
 	public function addActiveQuotation($projectId, $quotationId) {
 		$project = new QuotationLoad;

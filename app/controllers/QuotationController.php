@@ -45,7 +45,7 @@ class QuotationController extends BaseController{
 	{
 		$rules = [
 					'title' => 'required',
-					//'others'	=> 'required|numeric',
+					'type'	=> 'required',
 					//'cont'	=> 'required|numeric',
 					//'tax'	=> 'required|numeric'
 				 ];
@@ -129,6 +129,11 @@ class QuotationController extends BaseController{
 			Session::flash('errorMessage',$e->getMessage());
 			return Redirect::back();
 		}
+		$dcSum = $this->value->getSumOfQuotation($id);
+		if($dcSum == 0){
+			Session::flash('errorMessage', "Invalid Total. Please input at least one entry");
+			return Redirect::back();
+		}
 		Session::flash('notification','Quotation Updated Successfuly');
 		$this->quotation->tagAsForApproval($id);
 		return Redirect::to('architect/quotations');
@@ -154,7 +159,7 @@ class QuotationController extends BaseController{
 			
 			$this->approval->disapprove($user->id,$id);
 			Session::flash('notification','Quotation Disapproved');
-			return Redirect::back();
+			return Redirect::to('/architect/viewer');
 		}
 		else
 		{
@@ -171,7 +176,7 @@ class QuotationController extends BaseController{
 			
 			$this->approval->approve($user->id,$id);
 			Session::flash('notification','Quotation Approved');
-			return Redirect::back();
+			return Redirect::to('/architect/viewer');
 		}else{
 			return App::abort(403, 'Unauthorized action.');
 		}

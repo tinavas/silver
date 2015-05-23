@@ -60,6 +60,7 @@
     <span class="hit">Location: {{$project->location}}</span>
     <span class="hit">Date: {{date('F j, Y')}}</span>
     <span class="hit">Subject: {{$quotation->title}} </span>
+    <span class = "hit">Control Number: {{str_pad($quotation->project()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT)}}</span>
     <br>
     <br>
      <table>

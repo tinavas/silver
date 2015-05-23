@@ -22,7 +22,7 @@ class EloquentQuotationRepository implements QuotationRepository
 		$quotation->cont = 0.05;
 		$quotation->others = 0.02;
 		$quotation->tax = 0.10;
-		$quotation->quotation_code = $this->nextQuotationCode($userId, $projectId);
+		$quotation->quotation_code = $this->nextQuotationCode($userId, $projectId, $inputs['type']);
 		$quotation->status = 0;
 		$quotation->save();
 
@@ -98,9 +98,18 @@ class EloquentQuotationRepository implements QuotationRepository
 		return Quotation::find($id)->entries()->get();
 	}
 
-	private function nextQuotationCode($userId,$projectId)
+	private function nextQuotationCode($userId, $projectId, $type)
 	{
-		return Quotation::where('project_id',$projectId)->count() + 1;
+		$code = Quotation::where('project_id',$projectId)->count() + 1;
+
+		if($type == 0){
+			$code .= '-N';
+		}else if ($type == 1){
+			$code .= '-R';
+		}else{
+			$code .= '-A';
+		}
+		return $code;
 	}
 
 	public function getActive($projectId)

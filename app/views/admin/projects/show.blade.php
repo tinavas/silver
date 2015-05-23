@@ -108,7 +108,7 @@
                   <td>{{$quotation->user()->first()->first_name}}</td>
                   <td>{{date('F j, Y',strtotime($quotation->created_at))}}</td>
                   <td>{{date('F j, Y',strtotime($quotation->updated_at))}}</td>
-                  <td><a href="{{URL::to('/admin/quotation/view/' . $quotation->id)}}">View</a></td>
+                  <td><a href="{{URL::to('/admin/quotation/view/' . $quotation->id)}}" target = "_blank">View</a></td>
                   <td><a href="{{URL::to('/admin/project/add-active-quotation/' . $project->id . '/' . $quotation->id)}}">Approve</a></td>
                   <td><a href="{{URL::to('/admin/project/disapprove/' . $quotation->id)}}">Disapprove</a></td>
                 </tr>
@@ -146,7 +146,7 @@
                   <td>{{$a->quotation()->first()->user()->first()->first_name}}</td>
                   <td>{{date('F j, Y',strtotime($a->quotation()->first()->created_at))}}</td>
                   <td>{{date('F j, Y',strtotime($a->quotation()->first()->updated_at))}}</td>
-                  <td><a href="{{URL::to('/admin/quotation/view/' . $a->quotation()->first()->id)}}">View</a></td>
+                  <td><a href="{{URL::to('/admin/quotation/view/' . $a->quotation()->first()->id)}} " target = "_blank">View</a></td>
                   <td><a href="{{URL::to('/admin/quotation/request-for-update/' . $a->id)}}">Update</a></td>
                 </tr>
               @endforeach

@@ -54,6 +54,22 @@ class EloquentValueRepository implements ValueRepository{
 		}
 	}
 
+	public function rejectQuotation($new_quotation_id,$old_quotation_id){
+		$entries = Entry::where('level',3)->where('quotation_id',$old_quotation_id)->get();
+		foreach($entries as $entry){
+			$value = new Value();
+			$value->quantity = 0;
+			$value->ul = 0;
+			$value->um = 0;
+			$value->tl = 0;
+			$value->tm = 0;
+			$value->dc = 0;
+			$value->entry_id = $entry->id;
+			$value->quotation_id = $new_quotation_id;
+			$value->save();
+		}
+	}
+
 	public function getValue($quotation_id, $entry_id){
 		return Value::where('quotation_id',$quotation_id)->where('entry_id',$entry_id)->first();
 	}
