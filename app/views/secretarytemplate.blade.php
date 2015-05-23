@@ -81,6 +81,12 @@
                             <span class="title">Materials</span>
                           </a>
                       </li>
+                      <li>
+                        <a href="{{url('/secretary/entryeditor')}}">
+                        <i class="fa fa-file-text fa-2x"> </i> 
+                          <span class="title">Entry Editor</span> 
+                        </a>
+                      </li>
                     </ul>
             
                </div>

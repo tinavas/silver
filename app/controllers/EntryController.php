@@ -2,11 +2,15 @@
 use Bagito\Storage\EntryRepository as Entry;
 use Bagito\Storage\QuotationRepository as Quotation;
 use Bagito\Storage\OtherExpensesRepository as OtherExpenses;
+use Bagito\Storage\UserRepository as User;
+use Bagito\Auth\AuthRepository as Auth;
 
 class EntryController extends BaseController
 {
-	public function __construct(Entry $entry, Quotation $quotation, OtherExpenses $otherExpenses)
+	public function __construct(Entry $entry, Quotation $quotation, OtherExpenses $otherExpenses, User $user, Auth $auth)
 	{
+		$this->auth = $auth;
+		$this->user = $user;
 		$this->entry = $entry;
 		$this->quotation = $quotation;
 		$this->expenses = $otherExpenses;
@@ -123,6 +127,14 @@ class EntryController extends BaseController
 		$headers = $this->entry->getParents();
 		$expenses = $this->quotation->getExpenses();
 		$parents = $this->entry->getParentList();
+
+		$user = $this->auth->getCurrentUser();
+		$accessname = $this->auth->getCurrentUserGroup($user)->name;
+
+		if($accessname == 'Secretary') {
+			return View::make('secretary.entry.entryeditor',compact('headers','parents','expenses'));
+		}
+
 		return View::make('architect.entry.entryeditor',compact('headers','parents','expenses'));
 	}
 

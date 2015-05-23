@@ -109,6 +109,9 @@ Route::get('/secretary/materials/{id}','MaterialsController@show');
 Route::post('secretary/materials/add/{id}','MaterialsController@store');
 Route::get('/secretary/materials/delete/{id}','MaterialsController@delete');
 Route::post('/secretary/materials/store/{id}','MaterialsController@storeRer');
+Route::get('/secretary/entryeditor','EntryController@showEntryTemplateEditor');
+Route::post('/secretary/entry-template/create/','EntryController@store');
+Route::post('/secretary/entry/add-expenses/','EntryController@addOtherExpenses');
 
 Route::resource('/secretary/projects', 'ProjectController');
 
@@ -121,6 +124,7 @@ Route::post('admin/materials/add/{id}','MaterialsController@store');
 Route::get('/admin/materials/delete/{id}','MaterialsController@delete');
 Route::get('/admin/project/disapprove/{id}','ProjectController@disapprove');
 Route::get('/architect/entryeditor','EntryController@showEntryTemplateEditor');
+Route::get('/secretary/entryeditor','EntryController@showEntryTemplateEditor');
 Route::post('/admin/materials/store/{id}','MaterialsController@storeRer');
 
 Route::get('/secretary/materials/remove/{id}', 'MaterialsController@remove');
