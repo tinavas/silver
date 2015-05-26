@@ -128,7 +128,7 @@
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.alert.js')}}
     {{HTML::script('resources/libraries/foundation5.4.7/js/foundation/foundation.reveal.js')}}
     {{HTML::script('//cdn.datatables.net/1.10.4/js/jquery.dataTables.js')}}
-    {{HTML::script('resources/js/chart.js')}}
+    {{HTML::script('resources/libraries/mindmup/mindmup-editabletable.js')}}
     {{HTML::script('resources/js/uni.script.js')}}
     
     <script>

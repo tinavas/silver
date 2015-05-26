@@ -55,7 +55,7 @@
                 </thead>
                 <tbody>
                     @foreach($entries as $entry)
-                        <tr><td class = "left">{{$entry->description}}</td></tr>
+                        <tr><td class = "left"><b>{{$entry->description}}</td></b></tr>
                         @foreach($entry->children as $sub)
                             <tr><td class = "sub-header left" style = "color:#F9690E;">{{$sub->description}}</td></tr>
                             <?php 

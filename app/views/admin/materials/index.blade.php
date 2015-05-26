@@ -13,9 +13,10 @@
             <table class = "data-table">
                   <thead>
                     <tr>
+
+                      <th>Project</th>
                       <th>Quotation Code</th>
                       <th>Title</th>
-                      <th>Project</th>
                       <th>Open</th>
                     </tr>
                   </thead>
@@ -23,8 +24,8 @@
                    
                    @foreach($loadss as $loads)
                     <tr>
-                      <td>{{str_pad($loads->quotation()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($loads->quotation()->first()->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
                       <td>{{$loads->quotation()->first()->title}}</td>
+                      <td>{{str_pad($loads->quotation()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($loads->quotation()->first()->quotation_code, 3, "0", STR_PAD_LEFT)}}</td>
                       <td>{{$loads->quotation()->first()->project()->first()->title}}</td>
                       <td>
                         <a href="{{URL::to('/admin/materials/' . $loads->quotation->first()->id)}}">
