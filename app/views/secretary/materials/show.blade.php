@@ -123,26 +123,15 @@
             </table> 
             </div>
             <h1>Computation</h1>
-            <div class="row left">
-                <div class="col-md-6">
-                <table style = "width:30%;" class = "left">
-                    <tr>
-                        <td>DC Total:</td>
-                        <td class = "total"></td>
-                    </tr>
-                    <tr>
-                        <td>Total Expenditure: </td>
-                        <td>
-                            @if($sumValue < $summer)
-                                <span style = "color:red">{{number_format($summer,2)}}</span>
-                            @else
-                                <span>{{number_format($summer,2)}}</span>
-                            @endif  
-                        </td>
-                    </tr>
-                </table>  
-                </div>
-            </div>
+            <h6>DC Total:</h6>
+            <h6 class = "total" style = "font-weight:bold"></h6>
+            <br> 
+            <h6>Total Expenditure:</h6>
+            @if($sumValue < $summer)
+                <h6 style = "color:red; font-weight:bold;" >{{number_format($summer,2)}}</h6>
+            @else
+                <h6 style = "font-weight:bold;">{{number_format($summer,2)}}</h6>
+            @endif  
         @endif
         <div id="modal2" class="reveal-modal large" data-reveal>
                <h1>Add new entry</h1>

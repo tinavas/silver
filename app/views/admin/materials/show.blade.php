@@ -92,10 +92,10 @@
                 </tbody>
             </table> 
             </div>
-            <h1>Computation</h1>
             <div class="row left">
                 <div class="col-md-6">
-                <table style = "width:30%;" class = "left">
+                <h1>Computation</h1>
+                <table class = "left">
                     <tr>
                         <td>DC Total:</td>
                         <td class = "total"></td>
@@ -110,7 +110,7 @@
                             @endif  
                         </td>
                     </tr>
-                </table>  
+                </table>
                 </div>
             </div>
         @endif
@@ -152,7 +152,6 @@
             </div>
         </div>
     </div>
-    <div style="clear:both"></div>
     {{Form::hidden('cont',$cont,['id' => 'cont'])}}
     {{HTML::script('/resources/js/numeral.js')}}
 @endsection
