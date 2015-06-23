@@ -5,8 +5,9 @@
 @endsection
 
 @section('content')
-<div class="row quotation">
-    <div class="medium-10 large-centered column">
+
+<section class="row">
+    <div class="medium-12 large-centered column">
       <h4 class="view-header"><i class="fa fa-user"></i>Your Projects:</h4>
       <div class="view-box">
 			@if(count($projects) != 0)
@@ -35,5 +36,5 @@
 			@endif
       </div>
     </div>
-</div>
+</section>
 @endsection

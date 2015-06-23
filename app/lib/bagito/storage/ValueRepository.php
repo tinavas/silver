@@ -10,8 +10,6 @@ interface ValueRepository{
 
 	public function newQuotation($quotation_id);
 
-	public function rejectQuotation($new_quotation_id,$old_quotation_id);
-
 	public function getValue($quotation_id, $entry_id);
 
 	public function getSumOfQuotation($quotation_id);
