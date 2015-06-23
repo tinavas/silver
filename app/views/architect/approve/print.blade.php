@@ -85,8 +85,8 @@
                             <tr><td class = "sub-header left">{{$sub->description}}</td></tr>
                             @foreach($sub->children as $child)
                                 <?php 
-                                    $material = ($child->value($quotation->id)->first()->um / $dcSum * $netSum); 
-                                    $labor =  ($child->value($quotation->id)->first()->ul / $dcSum * $netSum); 
+                                    $material = ($child->value($quotation->id)->first()->material; 
+                                    $labor =  ($child->value($quotation->id)->first()->labor; 
                                     $net = $labor + $material;
                                     $gross = $net * $child->value($quotation->id)->first()->quantity;
                                 ?>

@@ -17,8 +17,6 @@ $(document).ready( function () {
 
 	$('.data-table').DataTable();
 
-	updateStuff();
-
 	$('table td').on('change', function(evt, newValue) {
 		var hoho = $(this).attr('id');
 		var formattedValue = numeral().unformat(newValue);
@@ -34,7 +32,7 @@ $(document).ready( function () {
 				var somee = hoho.split("-");
 				var myId = somee[1];
 				var quotationId = somee[2];
-				if(somee[0] == "quantity" || somee[0] == "ul" || somee[0] == "um"){
+				if(somee[0] == "quantity" || somee[0] == "ul" || somee[0] == "um" || somee[0] == "material" || somee[0] == "labor"){
 					$.ajax({
 						type :'GET',
 						dataType : 'json',
@@ -44,10 +42,9 @@ $(document).ready( function () {
 						$("#tm-" + myId + "-" + quotationId).html(numeral(data.um * data.quantity).format('0,0.00'));
 						$("#tl-" + myId + "-" + quotationId).html(numeral(data.ul * data.quantity).format('0,0.00'));
 						$("#dc-" + myId + "-" + quotationId).html(numeral((data.um * data.quantity) + (data.ul * data.quantity)).format('0,0.00'));
-						updateStuff();
+						$("#total-" + myId + "-" + quotationId).html(numeral(parseFloat(data.material) + parseFloat(data.labor)).format('0,0.00'));
+						
 					});
-				}else if(somee[0] == "expensevalue"){
-					updateStuff();
 				}
 			});
 		}else{
@@ -56,7 +53,7 @@ $(document).ready( function () {
 		}
 	});	
 
-	function updateStuff(){
+	/*function updateStuff(){
 		var superSum = 0;
 		var sum = 0;
 		var dc = 0;
@@ -108,7 +105,7 @@ $(document).ready( function () {
 		  talagangAmount += (netTotal * quantity);
 		});
 		$(".net").text(numeral(talagangAmount).format('0,0.00'));
-	}
+	}*/
 
 	function isNumber(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
