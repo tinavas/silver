@@ -19,9 +19,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">    
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
    <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+
     {{HTML::style('resources/libraries/foundation5.4.7/css/foundation.min.css');}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
+    {{HTML::style('resources/css/mediqueries.css');}}
     <style>
       .notif{
         border-radius:50%;

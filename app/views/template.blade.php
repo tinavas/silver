@@ -23,6 +23,7 @@
     {{HTML::style('resources/libraries/jqueryui/css/jquery.ui.all.css')}}
     {{HTML::style('resources/css/hover-min.css');}}
     {{HTML::style('resources/css/style.css');}}
+    {{HTML::style('resources/css/mediqueries.css');}}
     <style>
       .notif{
         border-radius:50%;

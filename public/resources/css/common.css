@@ -151,3 +151,14 @@ div.dropdown {height: 100%;}
 .stretch{
     width:100%;
 }
+.editTable tr {
+    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
+}
+
+.editTable td:last-child {
+    box-shadow: inset 1px 0px 0px 0 px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 1px 0px 0px 0 px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 1px 0px 0px 0    px rgba(0,0,0,0.1);
+}
