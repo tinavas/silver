@@ -18,7 +18,6 @@
               {{Form::submit('Submit',['style' => 'display:none'])}}
             {{Form::close()}}    
             </div>  
-           
         </div>
         
         <div class="medium-7 column create-new-container no-padding">
