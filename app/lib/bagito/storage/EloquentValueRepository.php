@@ -38,6 +38,7 @@ class EloquentValueRepository implements ValueRepository{
 		$value->dc = $inputs['dc'];
 		$value->save();
 	}
+	
 	public function newQuotation($quotation_id){
 		$entries = Entry::where('level',3)->get();	
 		foreach($entries as $entry){
@@ -48,24 +49,11 @@ class EloquentValueRepository implements ValueRepository{
 			$value->tl = 0;
 			$value->tm = 0;
 			$value->dc = 0;
+			$value->material = 0;
+			$value->labor = 0;
+			$value->total = 0;
 			$value->entry_id = $entry->id;
 			$value->quotation_id = $quotation_id;
-			$value->save();
-		}
-	}
-
-	public function rejectQuotation($new_quotation_id,$old_quotation_id){
-		$entries = Entry::where('level',3)->where('quotation_id',$old_quotation_id)->get();
-		foreach($entries as $entry){
-			$value = new Value();
-			$value->quantity = 0;
-			$value->ul = 0;
-			$value->um = 0;
-			$value->tl = 0;
-			$value->tm = 0;
-			$value->dc = 0;
-			$value->entry_id = $entry->id;
-			$value->quotation_id = $new_quotation_id;
 			$value->save();
 		}
 	}
