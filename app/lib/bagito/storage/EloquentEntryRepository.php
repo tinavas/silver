@@ -184,6 +184,18 @@ class EloquentEntryRepository implements EntryRepository {
 			$v->tl = $quantity * $ul;
 			$v->dc = $v->tm + $v->tl;
 			$v->save();
+		} else if($type == "material") {
+			$v = Value::where('entry_id',$id)->where('quotation_id',$quotationId)->first();
+			$v->material = $value;
+
+			$v->total = $v->material + $v->labor;
+			$v->save();
+		} else if($type == "labor") {
+			$v = Value::where('entry_id',$id)->where('quotation_id',$quotationId)->first();
+			$v->labor = $value;
+
+			$v->total = $v->material + $v->labor;
+			$v->save();
 		}
 	}
 

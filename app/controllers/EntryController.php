@@ -41,11 +41,10 @@ class EntryController extends BaseController
 	}
 	public function create($id){
 		$quotation = $this->quotation->find($id);
-		$expenses = $this->expenses->all();
+		$project = $quotation->project()->first();
 		$entries = $this->entry->getParents();
-		$cont = $quotation->cont;
 		
-		return View::make('architect.entry.create',compact('id','expenses','quotation','entries','cont'));
+		return View::make('architect.entry.create',compact('id','quotation','entries','project'));
 	}
 	public function store(){
 		$rules = array();
@@ -95,8 +94,9 @@ class EntryController extends BaseController
 		$expenses = $this->expenses->all();
 		$entries = $this->entry->getParents();
 		$cont = $quotation->cont;
+		$project = $quotation->project()->first();
 		
-		return View::make('architect.approve.show',compact('id','expenses','quotation','entries','cont'));
+		return View::make('architect.approve.show',compact('id','expenses','quotation','entries','cont','project'));
 		//return View::make('architect.approve.show',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
 	}
 

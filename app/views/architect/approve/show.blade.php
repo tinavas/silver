@@ -5,10 +5,6 @@
 <style>
     table tr:nth-of-type(2n) {
         background: none repeat scroll 0% 0% white;
-    }
-    .unit, .tm, .tl, .entry, .material, .labor, .net-total, .gross-amount, .dc{
-        font-size:9px;
-        font-weight:normal;
     }   
 </style>
 @endsection
@@ -29,6 +25,8 @@
                 @endforeach
             </span>
       @endif
+        <h1>Subject: {{$quotation->title}}</h1>
+        <h3>Project: {{$project->title}}</h3>
         <a href="{{URL::to('architect/viewer')}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
         <a href="{{URL::to('/architect/viewer/approve/' . $quotation->id)}}" class = "button"> <i class="fa fa-check"></i>Approve</a>
         <a href="{{URL::to('/architect/viewer/disapprove/' . $quotation->id)}}" class = "button"> <i class="fa fa-close"></i>Disapprove</a>
@@ -36,7 +34,7 @@
         <h1>No Entries Yet</h1>
         @else
             <div class = "pagination pagination-centered hide-if-no-paging">
-            <table class = "bagito-table">
+            <table class = "bagito-table editTable">
                 <thead>
                 <tr>
                     <th>Description</th>
@@ -62,17 +60,17 @@
                             @foreach($sub->children as $child)
                                 <tr class = "children">
                                     <th class = "entry left">{{$child->description}}</th>
-                                    <td id = "quantity-{{$child->id}}-{{$id}}" class = "quantity">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
-                                    <th class = "unit">{{$child->unit}}</th>
-                                    <td id = "um-{{$child->id}}-{{$id}}" class = "um">{{number_format($child->value($quotation->id)->first()->um,2)}}</td>
-                                    <th  id = "tm-{{$child->id}}" class = "tm">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
-                                    <td id = "ul-{{$child->id}}-{{$id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</td>
-                                    <th id = "tl-{{$child->id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
-                                    <th id = "dc-{{$child->id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
-                                    <th class="material">0.00</th>
-                                    <th class="labor">0.00</th>
-                                    <th class="net-total">0.00</th>
-                                    <th class="gross-amount">0.00</th>
+                                    <th id = "quantity-{{$child->id}}-{{$id}}" class = "quantity">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</th>
+                                    <th>{{$child->unit}}</th>
+                                    <th id = "um-{{$child->id}}-{{$id}}" class = "um">{{number_format($child->value($quotation->id)->first()->um,2)}}</th>
+                                    <th  id = "tm-{{$child->id}}-{{$id}}" class = "tm">{{number_format($child->value($quotation->id)->first()->tm,2)}}</th>
+                                    <th id = "ul-{{$child->id}}-{{$id}}" class = "ul">{{number_format($child->value($quotation->id)->first()->ul,2)}}</th>
+                                    <th id = "tl-{{$child->id}}-{{$id}}" class = "tl">{{number_format($child->value($quotation->id)->first()->tl,2)}}</th>
+                                    <th id = "dc-{{$child->id}}-{{$id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
+                                    <th id = "material-{{$child->id}}-{{$id}}" class = "material">{{number_format($child->value($quotation->id)->first()->material,2)}}</th>
+                                    <th id = "labor-{{$child->id}}-{{$id}}" class="labor">{{number_format($child->value($quotation->id)->first()->labor,2)}}</th>
+                                    <th id = "total-{{$child->id}}-{{$id}}" class="net-total">{{number_format($child->value($quotation->id)->first()->labor + $child->value($quotation->id)->first()->material,2)}}</th>
+                                    <th id = "amount-{{$child->id}}-{{$id}}" class="gross-amount">{{number_format(($child->value($quotation->id)->first()->labor + $child->value($quotation->id)->first()->material) * $child->value($quotation->id)->first()->quantity,2)}}</th>
                                 </tr>
                                 <?php ++$index ?>
                             @endforeach
@@ -81,74 +79,7 @@
                 </tbody>
             </table> 
             </div>
-            <h1>Computation</h1>
-            <div class="row left">
-                <div class="col-md-6">
-                <table style = "width:30%;" class = "left">
-                    <tr>
-                        <td>DC Total:</td>
-                        <td class = "total"></td>
-                    </tr>
-                    <tr>
-                        <td>Cont</td>
-                        <td class = "cont"></td>
-                        <td class="totalCont"></td>
-                    </tr>
-                    <tr>
-                        <td>Overhead</td>
-                        <td class = "oh"></td>
-                        <td class="totalOh"></td>
-                    </tr>
-                    <tr>
-                        <td>Prof:</td>
-                        <td class = "prof"></td>
-                        <td class="totalProf"></td>
-                    </tr>
-                    <tr>
-                        <td>Tax</td>
-                        <td class = "tax"></td>
-                        <td class="totalTax"></td>
-                    </tr>
-                    <tr>
-                        <td>Total after others</td>
-                        <td class = "superSum"></td>
-                    </tr>
-                    <tr>
-                        <td>Net Total:</td>
-                        <td><b class = "net"></b></td>
-                    </tr>
-                </table>  
-                </div>
-            </div>
         @endif
-        <div id="modal2" class="reveal-modal" data-reveal>
-        <div class="row">
-            <div class="medium-12 column">
-               <h3>Expenses</h3>
-                @if(count($expenses) != 0)
-                <table class = "footable editTable" style = "width:100%;">
-                    <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Cost</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($expenses as $expense)
-                        <tr>
-                            <th>{{$expense->description}}</th>
-                            <td id = "expensevalue-{{$expense->value($quotation->id)->first()->id}}" class = "costs">{{$expense->value($quotation->id)->first()->cost}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                @else
-                    <h6 class = "center">No Expenses Yet</h6>
-                @endif
-            </div>
-        </div>
-    </div>
     <div style="clear:both"></div>
-    {{Form::hidden('cont',$cont,['id' => 'cont'])}}
     {{HTML::script('/resources/js/numeral.js')}}
 @endsection

@@ -25,6 +25,8 @@
                 @endforeach
             </span>
       @endif
+        <h1>Subject: {{$quotation->title}}</h1>
+        <h3>Project: {{$project->title}}</h3>
         <a href="{{URL::to('architect/quotation/view/' . $id)}}" class = "button"><i class="fa fa-arrow-circle-left"></i>Return</a>
         <a href="#" data-reveal-id="modalAdj" class = "button"><i class="fa fa-arrows-h"></i>Adjustments</a>
         @if(count($entries) == 0)
@@ -66,8 +68,8 @@
                                     <th id = "dc-{{$child->id}}-{{$id}}" class = "dc">{{number_format($child->value($quotation->id)->first()->dc,2)}}</th>
                                     <td id = "material-{{$child->id}}-{{$id}}" class = "material">{{number_format($child->value($quotation->id)->first()->material,2)}}</th>
                                     <td id = "labor-{{$child->id}}-{{$id}}" class="labor">{{number_format($child->value($quotation->id)->first()->labor,2)}}</th>
-                                    <th class="net-total">{{number_format($child->value($quotation->id)->first()->labor + $child->value($quotation->id)->first()->material,2)}}</th>
-                                    <th class="gross-amount">{{number_format(($child->value($quotation->id)->first()->labor + $child->value($quotation->id)->first()->material) * $child->value($quotation->id)->first()->quantity,2)}}</th>
+                                    <th id = "total-{{$child->id}}-{{$id}}" class="net-total">{{number_format($child->value($quotation->id)->first()->labor + $child->value($quotation->id)->first()->material,2)}}</th>
+                                    <th id = "amount-{{$child->id}}-{{$id}}" class="gross-amount">{{number_format(($child->value($quotation->id)->first()->labor + $child->value($quotation->id)->first()->material) * $child->value($quotation->id)->first()->quantity,2)}}</th>
                                 </tr>
                                 <?php ++$index ?>
                             @endforeach
@@ -78,6 +80,5 @@
             </div>
         @endif
     <div style="clear:both"></div>
-    {{Form::hidden('cont',$cont,['id' => 'cont'])}}
     {{HTML::script('/resources/js/numeral.js')}}
 @endsection
