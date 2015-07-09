@@ -63,62 +63,62 @@
     <span class = "hit">Control Number: {{str_pad($quotation->project()->first()->id, 3, "0", STR_PAD_LEFT) . '-'. str_pad($quotation->quotation_code, 3, "0", STR_PAD_LEFT)}}</span>
     <br>
     <br>
-     <table>
+    <table>
         <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Unit</th>
-                    <th>Material</th>
-                    <th>Labor</th>
-                    <th>Total</th>
-                    <th>Gross Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php $grand = 0; ?>
-                    @foreach($entries as $entry)
-                        <?php $entrySum = 0 ?>
-                        <tr><td class = "description" colspan = "7">{{$entry->description}}</td></tr>
-                        @foreach($entry->children as $sub)
-                            <?php $subSum = 0 ?>
-                            <tr><td class = "sub-header left">{{$sub->description}}</td></tr>
-                            @foreach($sub->children as $child)
-                                <?php 
-                                    $material = ($child->value($quotation->id)->first()->material; 
-                                    $labor =  ($child->value($quotation->id)->first()->labor; 
-                                    $net = $labor + $material;
-                                    $gross = $net * $child->value($quotation->id)->first()->quantity;
-                                ?>
-                                <tr class = "children">
-                                    <td class = "desc entry">{{$child->description}}</td>
-                                    <td class = "entry">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
-                                    <td class = "entry">{{$child->unit}}</td>
-                                    <td class = "entry">{{number_format($material,2)}}</td>
-                                    <td class="entry">{{number_format($labor , 2)}}</td>
-                                    <td class="entry">{{number_format($net,2)}}</td>
-                                    <td class="entry">{{number_format($gross,2)}}</td>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Material</th>
+                <th>Labor</th>
+                <th>Total</th>
+                <th>Gross Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+           <?php $grand = 0; ?>
+            @foreach($entries as $entry)
+            <?php $entrySum = 0 ?>
+            <tr><td class = "description" colspan = "7">{{$entry->description}}</td></tr>
+                @foreach($entry->children as $sub)
+                    <?php $subSum = 0 ?>
+                    <tr><td class = "sub-header left">{{$sub->description}}</td></tr>
+                    @foreach($sub->children as $child)
+                        <?php 
+                            $material = ($child->value($quotation->id)->first()->material; 
+                            $labor =  ($child->value($quotation->id)->first()->labor; 
+                            $net = $labor + $material;
+                            $gross = $net * $child->value($quotation->id)->first()->quantity;
+                        ?>
+                            <tr class = "children">
+                                <td class = "desc entry">{{$child->description}}</td>
+                                <td class = "entry">{{number_format($child->value($quotation->id)->first()->quantity,2)}}</td>
+                                <td class = "entry">{{$child->unit}}</td>
+                                <td class = "entry">{{number_format($material,2)}}</td>
+                                <td class="entry">{{number_format($labor , 2)}}</td>
+                                <td class="entry">{{number_format($net,2)}}</td>
+                                <td class="entry">{{number_format($gross,2)}}</td>
                                 <?php $subSum += $gross ?>
-                                </tr>   
-                            @endforeach
-                            <tr>
-                                <td class = "sub-header left">Total {{$sub->description}} : </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td class = "entry" style = "color:#F9690E;"><b>{{number_format($subSum,2)}}</b></td>
-                                <?php $entrySum += $subSum;?>
-                            </tr>
+                            </tr>   
                         @endforeach
-                        <tr><td class = "description" colspan = "7">Total {{$entry->description}} : {{number_format($entrySum,2)}}</td></tr>
-                        <?php $grand += $entrySum ?>
+                        <tr>
+                            <td class = "sub-header left">Total {{$sub->description}} : </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td class = "entry" style = "color:#F9690E;"><b>{{number_format($subSum,2)}}</b></td>
+                            <?php $entrySum += $subSum;?>
+                        </tr>
                     @endforeach
-                    <tr>
-                         <td id="grand" colspan = "7"><h3>Total Expenses: {{number_format($grand,2)}}</h3></td>
-                    </tr>
-                </tbody>
-            </table> 
+                <tr><td class = "description" colspan = "7">Total {{$entry->description}} : {{number_format($entrySum,2)}}</td></tr>
+                <?php $grand += $entrySum ?>
+            @endforeach
+            <tr>
+                <td id="grand" colspan = "7"><h3>Total Expenses: {{number_format($grand,2)}}</h3></td>
+            </tr>
+        </tbody>
+    </table> 
 </body>
 </html>

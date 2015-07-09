@@ -94,8 +94,9 @@ class EntryController extends BaseController
 		$expenses = $this->expenses->all();
 		$entries = $this->entry->getParents();
 		$cont = $quotation->cont;
+		$project = $quotation->project()->first();
 		
-		return View::make('architect.approve.show',compact('id','expenses','quotation','entries','cont'));
+		return View::make('architect.approve.show',compact('id','expenses','quotation','entries','cont','project'));
 		//return View::make('architect.approve.show',compact('parents','id','subs','expenses','quotation','grandTotal','totalExpenses','divisor'))->with('entries',$parentsArray);
 	}
 
